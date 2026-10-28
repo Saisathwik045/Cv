@@ -1,5 +1,53 @@
 # Kaggle access checkpoint
 
+## Latest recheck — 28 October 2026, 22:58 IST
+
+This section supersedes the older access observations below; those observations
+are retained as history.
+
+- Verified project: Saisathwik045/Cv is TrustRetina. PRs #1–#3 are merged.
+  Latest remote main: cae2fbc915e52c52d571fbbe8e8551066475f39f.
+  PR #3 head c59be415ea1237fa087437db2201bd27e65f6855 has four successful
+  Python 3.11/3.12 check runs. Its submitted-review list is empty.
+- Managed runtime is running with current observations. Restricted HTTP policy is
+  enforced and includes www.kaggle.com; package/GitHub hosts are also allowed.
+  KAGGLE_API_TOKEN readiness is ready and its process presence is true.
+  No token value or secret-file content was read, logged or printed.
+- Actual access: a single bounded Kaggle request failed with curl exit 7,
+  unable to connect to proxy:8080; HTTP status 000. Git fetch failed at the
+  same proxy. This occurs before Kaggle authentication or any destination HTTP
+  response; it is not an observed token rejection or host-policy denial.
+- Client installation: one attempt for kaggle>=2.2.5,<3 with --retries 0
+  --timeout 10 returned no package candidate. No client was installed; package
+  availability on PyPI is not established by this failure. No retries followed.
+- Authentication and the actual Kaggle username could not be established.
+  GitHub identity was not substituted.
+- Receipt inspection found no verification.json, kernel-metadata.json or
+  smoke.json under /workspace/Cv, /workspace/shared or /workspace/scratch.
+  Remote job inspection is blocked, so this is not proof the account has no jobs.
+  No new submission, remote ID, polling, CUDA evidence, dataset attachment,
+  artifact retrieval, real-data validation or split publication occurred.
+  No quota was consumed by this session; no training or paid resources launched.
+- Local checkout remains the initial commit because shell fetch failed.
+  The documentation update is published through the working GitHub connector,
+  based on current remote main; completed phases are not reconstructed.
+
+**Minimum next action:** recover the managed proxy using a fresh environment or
+the Codex support flow. The user has already supplied the host rule and token
+variable; do not ask them to add those again or rotate an untested token.
+No exposed project-side setting can repair the managed proxy service. Do not
+bypass it, unset proxy variables or disable TLS.
+
+After an actual environment change, install/authenticate the supported client and
+determine its authenticated username. Inspect remote jobs before any submission,
+in addition to local receipts. Resume an existing job when present; otherwise
+the single short nontraining GPU smoke remains authorized. Attach the configured
+dataset directly. Only after successful CUDA/dataset/status/artifact verification,
+run existing full validation and patient-separated split preparation remotely.
+Retain dataset/kernel versions, source revision, reports/manifests and hashes
+outside Git. Any label, duplicate or support failure must remain a failure.
+No new permission for that already-authorized sequence is required.
+
 ## PR #2 review
 
 Reviewed exact head 6a361f2910efc8768ceae7bbde456c5539583ef1 against Phase 1
