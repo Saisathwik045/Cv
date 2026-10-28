@@ -194,6 +194,8 @@ class RunnerTests(unittest.TestCase):
         prepare_smoke(self.bundle, 'synthetic-test-owner', gpu=True, dataset=dataset)
         report = run_smoke(self.bundle, client=FakeClient(self.bundle), sleep=lambda _: None)
         self.assertFalse(report['dataset_attachment_verified'])
+        self.assertTrue(report['artifact_retrieval_verified'])
+        self.assertTrue(report['cuda_tensor_ok'])
         self.assertFalse(report['unattended_gpu_execution_verified'])
         self.assertIn('Dataset attachment', report['blocker'])
 
