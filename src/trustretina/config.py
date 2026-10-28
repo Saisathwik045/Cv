@@ -14,6 +14,8 @@ def load_config(path):
         config = tomllib.load(handle)
     if config.get("schema_version") != 1 or config.get("class_order") != CLASSES:
         raise ValueError("Require schema 1 and class order N,D,G,C,A,H,M,O")
+    if config['data'].get('kind', 'original_odir') not in ('original_odir', 'synthetic_fixture'):
+        raise ValueError('data.kind must be original_odir or synthetic_fixture')
     if config["data"]["label_source"] != "patient":
         raise ValueError("ODIR source labels must be described as patient labels")
     if Path(config["data"]["labels"]).name != "data.xlsx":

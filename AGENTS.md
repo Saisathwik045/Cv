@@ -23,6 +23,8 @@
 - Only expose working commands. Unimplemented operations must be absent or fail
   nonzero with an explicit explanation; planning must never claim execution.
 - Reuse completed stages only after verifying artifact hashes and full provenance.
+- Real ODIR validation is not established by synthetic tests. Never remove fixture
+  markers or present mocked runner transport as remote GPU evidence.
 - Run lightweight checks documented in README and git diff --check before committing;
   add meaningful tests for research-critical functionality. Update docs/STATUS.md.
 - GPU/account/network readiness requires observed evidence; never infer GPU access
