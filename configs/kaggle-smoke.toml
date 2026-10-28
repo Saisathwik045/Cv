@@ -1,0 +1,5 @@
+# Nontraining smoke only. Kaggle attaches this source directly; no reupload.
+dataset_ref = "andrewmvd/ocular-disease-recognition-odir5k"
+input_root = "/kaggle/input"
+# These describe expected original ODIR layout; their existence is NOT yet verified.
+image_directory_name = "Training Images"

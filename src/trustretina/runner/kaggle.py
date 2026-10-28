@@ -62,7 +62,46 @@ def check_runner(client=None):
     return report
 
 
-def smoke_source(nonce, gpu):
+def smoke_source(nonce, gpu, dataset=None):
+    dataset_code = ''
+    if dataset is not None:
+        dataset_code = f'''
+# Input location comes from the submitted configuration, not a Python mount constant.
+import zipfile
+import re
+from PIL import Image
+input_root = Path({dataset['input_root']!r})
+source_root = input_root / {dataset['dataset_ref'].split('/')[-1]!r}
+if not source_root.is_dir():
+    raise RuntimeError("Attached dataset mount is missing")
+workbooks = sorted(source_root.rglob("data.xlsx"))
+image_dirs = sorted(p for p in source_root.rglob({dataset['image_directory_name']!r}) if p.is_dir())
+if not workbooks or not image_dirs:
+    raise RuntimeError("Original-style data.xlsx/image directory layout not found")
+samples = []
+for folder in image_dirs:
+    for image_path in sorted(folder.iterdir()):
+        if image_path.is_file() and re.fullmatch(r"[0-9]+_(left|right)\\.(jpg|jpeg|png)", image_path.name, re.I):
+            with Image.open(image_path) as image:
+                image.verify()
+            with Image.open(image_path) as image:
+                samples.append({{"path": str(image_path.relative_to(input_root)), "width": image.width, "height": image.height}})
+            if len(samples) == 2:
+                break
+    if len(samples) == 2:
+        break
+if not samples:
+    raise RuntimeError("Original-style eye images were not found/decoded")
+workbook_records = []
+for workbook in workbooks:
+    with zipfile.ZipFile(workbook) as archive:
+        if "xl/workbook.xml" not in archive.namelist():
+            raise RuntimeError("Invalid XLSX workbook")
+    workbook_records.append({{"path": str(workbook.relative_to(input_root)), "sha256": hashlib.sha256(workbook.read_bytes()).hexdigest()}})
+report.update(dataset_ref={dataset['dataset_ref']!r}, dataset_attachment_verified=True,
+              workbooks=workbook_records, image_samples=samples,
+              content_check="original-style layout and decoded samples; full validation pending")
+'''
     return f'''# TrustRetina nontraining smoke test. No data downloads or model training.
 import hashlib
 import json
@@ -80,32 +119,44 @@ if {gpu!r}:
 else:
     if 1 + 1 != 2:
         raise RuntimeError("CPU arithmetic failed")
+{dataset_code}
 payload = json.dumps(report, sort_keys=True).encode()
 Path("smoke.json").write_bytes(payload)
 Path("smoke.sha256").write_text(hashlib.sha256(payload).hexdigest())
 '''
 
 
-def smoke_metadata(owner, nonce, gpu):
+def smoke_metadata(owner, nonce, gpu, dataset=None):
     slug = f'trustretina-smoke-{nonce}'
     return {'id': f'{owner}/{slug}', 'title': slug, 'code_file': 'smoke.py',
             'language': 'python', 'kernel_type': 'script', 'is_private': True,
             'enable_gpu': gpu, 'enable_internet': False,
-            'dataset_sources': [], 'competition_sources': [], 'kernel_sources': []}
+            'dataset_sources': [dataset['dataset_ref']] if dataset else [], 'competition_sources': [], 'kernel_sources': []}
 
 
-def prepare_smoke(destination, owner, gpu=False):
+def validate_smoke_dataset(dataset):
+    if dataset is None:
+        return
+    if (set(dataset) != {'dataset_ref', 'input_root', 'image_directory_name'}
+            or not re.fullmatch(r'[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+', dataset['dataset_ref'])
+            or not Path(dataset['input_root']).is_absolute()
+            or Path(dataset['image_directory_name']).name != dataset['image_directory_name']):
+        raise RunnerError('Invalid smoke dataset configuration')
+
+
+def prepare_smoke(destination, owner, gpu=False, dataset=None):
     if not re.fullmatch(r'[A-Za-z0-9_-]+', owner):
         raise RunnerError('Invalid Kaggle owner slug')
+    validate_smoke_dataset(dataset)
     destination = Path(destination).resolve()
     destination.mkdir(parents=True, exist_ok=False)
     nonce = uuid.uuid4().hex
-    metadata = smoke_metadata(owner, nonce, gpu)
-    (destination / 'smoke.py').write_text(smoke_source(nonce, gpu))
+    metadata = smoke_metadata(owner, nonce, gpu, dataset)
+    (destination / 'smoke.py').write_text(smoke_source(nonce, gpu, dataset))
     (destination / 'kernel-metadata.json').write_text(json.dumps(metadata, indent=2))
-    (destination / 'request.json').write_text(json.dumps({'owner': owner, 'nonce': nonce, 'gpu': gpu}))
+    (destination / 'request.json').write_text(json.dumps({'owner': owner, 'nonce': nonce, 'gpu': gpu, 'dataset': dataset}))
     return {'prepared': True, 'smoke_executed': False, 'gpu_quota_used': False,
-            'gpu_requested': gpu, 'bundle': str(destination)}
+            'gpu_requested': gpu, 'dataset_ref': dataset['dataset_ref'] if dataset else None, 'bundle': str(destination)}
 
 
 def run_smoke(bundle, timeout_seconds=600, client=None, sleep=time.sleep, clock=time.monotonic):
@@ -119,29 +170,67 @@ def run_smoke(bundle, timeout_seconds=600, client=None, sleep=time.sleep, clock=
     if (not re.fullmatch(r'[a-f0-9]{32}', nonce) or type(gpu) is not bool
             or not re.fullmatch(r'[A-Za-z0-9_-]+', owner)):
         raise RunnerError('Invalid smoke request')
-    expected = smoke_metadata(owner, nonce, gpu)
-    if ((bundle / 'smoke.py').read_text() != smoke_source(nonce, gpu)
+    dataset = request.get('dataset')
+    validate_smoke_dataset(dataset)
+    expected = smoke_metadata(owner, nonce, gpu, dataset)
+    if ((bundle / 'smoke.py').read_text() != smoke_source(nonce, gpu, dataset)
             or json.loads((bundle / 'kernel-metadata.json').read_text()) != expected):
         raise RunnerError('Bundle differs from the fixed nontraining smoke template')
     report = {'authentication_verified': False, 'submission_verified': False,
               'status_polling_verified': False, 'artifact_retrieval_verified': False,
               'unattended_gpu_execution_verified': False, 'gpu_requested': gpu,
-              'smoke_executed': False, 'gpu_quota_used': False}
-    # Exclusive receipt remains after ambiguous/failed submission; rerunning must not
-    # accidentally consume quota twice. Poll/download an existing version manually.
+              'smoke_executed': False, 'gpu_quota_used': False, 'dataset_attachment_verified': False,
+              'kernel_id': expected['id'], 'request_sha256': hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()}
     receipt = bundle / 'verification.json'
-    with receipt.open('x') as handle:
-        json.dump(report, handle)
+    def persist():
+        temporary = receipt.with_suffix('.tmp')
+        with temporary.open('w') as handle:
+            json.dump(report, handle, indent=2)
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(receipt)
+    if receipt.exists():
+        saved = json.loads(receipt.read_text())
+        if saved.get('request_sha256') != report['request_sha256'] or saved.get('kernel_id') != expected['id']:
+            raise RunnerError('Receipt belongs to different inputs or an older template; refusing submission')
+        report = saved
+        report.update(unattended_gpu_execution_verified=False, artifact_retrieval_verified=False,
+                      smoke_executed=False, dataset_attachment_verified=False)
+    else:
+        with receipt.open('x') as handle:
+            json.dump(report, handle)
+    # A concurrent verifier must never submit a second job. A stale lock requires
+    # confirming the previous local process is gone, then removing only the lock.
+    lock = bundle / 'verification.lock'
+    descriptor = os.open(lock, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     try:
+        os.write(descriptor, str(os.getpid()).encode())
+        latest = json.loads(receipt.read_text())
+        expected_key = hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
+        if latest.get('request_sha256') != expected_key or latest.get('kernel_id') != expected['id']:
+            raise RunnerError('Receipt identity changed; refusing submission')
+        report = latest
+        report.update(unattended_gpu_execution_verified=False, artifact_retrieval_verified=False,
+                      smoke_executed=False, dataset_attachment_verified=False)
+        report.pop('blocker', None)
         client.call('kernels', 'list', '--mine')
         report['authentication_verified'] = True
-        report['gpu_quota_used'] = 'unknown_after_submission' if gpu else False
-        output = client.call('kernels', 'push', '-p', str(bundle), '--timeout', '120')
-        match = re.search(r'Kernel version (\d+) successfully pushed', output, re.I)
-        if not match:
-            raise RunnerError('Submission version not verified from CLI response; do not resubmit automatically')
-        version = f"{expected['id']}/{int(match.group(1))}"
-        report.update(submission_verified=True, kernel_version=version)
+        if report.get('submission_verified'):
+            version = report.get('kernel_version', '')
+            if not re.fullmatch(re.escape(expected['id']) + r'/[0-9]+', version):
+                raise RunnerError('Saved kernel version does not match the prepared job')
+        else:
+            if report.get('submission_attempted'):
+                raise RunnerError('Submission was interrupted/ambiguous; inspect saved kernel_id, never blindly resubmit')
+            report.update(submission_attempted=True, gpu_quota_used='unknown_after_submission' if gpu else False)
+            persist()  # Kernel ID and intent must survive a process interruption.
+            output = client.call('kernels', 'push', '-p', str(bundle), '--timeout', '120')
+            match = re.search(r'Kernel version (\d+) successfully pushed', output, re.I)
+            if not match:
+                raise RunnerError('Submission version not verified from CLI response; do not resubmit automatically')
+            version = f"{expected['id']}/{int(match.group(1))}"
+            report.update(submission_verified=True, kernel_version=version)
+            persist()  # Persist the pinned version BEFORE the first status request.
         deadline = clock() + timeout_seconds
         while True:
             output = client.call('kernels', 'status', version)
@@ -158,7 +247,7 @@ def run_smoke(bundle, timeout_seconds=600, client=None, sleep=time.sleep, clock=
                 raise RunnerError('Smoke polling deadline exceeded; remote job may still run, do not resubmit')
             sleep(min(15, max(0, deadline - clock())))
         download = bundle / 'download'
-        download.mkdir(exist_ok=False)
+        download.mkdir(exist_ok=True)
         client.call('kernels', 'output', version, '-p', str(download), '--file-pattern', r'^smoke\.(json|sha256)$')
         for name in ('smoke.json', 'smoke.sha256'):
             if (download / name).is_symlink() or not (download / name).is_file():
@@ -167,8 +256,21 @@ def run_smoke(bundle, timeout_seconds=600, client=None, sleep=time.sleep, clock=
         if len(payload) > 16384 or hashlib.sha256(payload).hexdigest() != (download / 'smoke.sha256').read_text().strip():
             raise RunnerError('Smoke artifact checksum mismatch')
         remote = json.loads(payload)
+        if not isinstance(remote, dict):
+            raise RunnerError('Smoke artifact is not a JSON object')
         if remote.get('nonce') != nonce or remote.get('training') is not False or remote.get('gpu_requested') is not gpu:
             raise RunnerError('Smoke artifact identity mismatch')
+        if dataset is not None:
+            workbooks = remote.get('workbooks', [])
+            samples = remote.get('image_samples', [])
+            if (remote.get('dataset_ref') != dataset['dataset_ref']
+                    or remote.get('dataset_attachment_verified') is not True
+                    or not isinstance(workbooks, list) or not workbooks
+                    or not isinstance(samples, list) or not samples
+                    or any(not isinstance(w, dict) or Path(w.get('path', '')).name != 'data.xlsx'
+                           or not re.fullmatch('[a-f0-9]{64}', w.get('sha256', '')) for w in workbooks)):
+                raise RunnerError('Dataset attachment/workbook discovery not verified')
+            report['dataset_attachment_verified'] = True
         report.update(artifact_retrieval_verified=True, smoke_executed=True,
                       gpu_quota_used=gpu, remote_report=remote)
         report['unattended_gpu_execution_verified'] = gpu and remote.get('cuda_tensor_ok') is True
@@ -178,7 +280,7 @@ def run_smoke(bundle, timeout_seconds=600, client=None, sleep=time.sleep, clock=
         report['blocker'] = str(exc) if isinstance(exc, RunnerError) else 'Local artifact or receipt validation failed'
     finally:
         # Reports contain only structured evidence; never raw CLI stdout/stderr.
-        temporary = receipt.with_suffix('.tmp')
-        temporary.write_text(json.dumps(report, indent=2))
-        temporary.replace(receipt)
+        persist()
+        os.close(descriptor)
+        lock.unlink()
     return report
