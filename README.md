@@ -14,12 +14,12 @@ validated clinical decision system.
 ## Setup and working commands
 
 Python 3.11 or 3.12; no GPU, dataset, credentials or notebook execution needed for
-Phase 0 checks. From the repository root:
+foundation checks; Phase 1 tests additionally require the data extra. From the repository root:
 
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install -e .
+python -m pip install -e ".[data]"
 python -m unittest discover -s tests -v
 python -m compileall -q src tests
 trustretina check-env
@@ -32,7 +32,8 @@ trustretina plan --config configs/phase0.toml
 `--network` makes bounded read-only HTTPS probes. `--require-gpu` exits 1 unless a
 PyTorch CUDA device is usable. Configuration errors exit 2. `plan` prints a
 **declarative inventory**, marks jobs `not_implemented`, and never starts work.
-There is no training, validation, inference or report-generation CLI yet.
+Dataset validation/splitting and runner checks are implemented in Phase 1. Training,
+model evaluation, inference and report generation remain future implementations.
 
 For a preinstalled managed environment with unavailable package downloads, the
 verified offline installation is:
@@ -53,10 +54,13 @@ complete runner environment, and archive `pip freeze` with every run.
 
 ## Configuration and data
 
-Copy `configs/phase0.toml` to ignored `configs/local.toml` and adjust `[data]` and
+Copy `configs/phase1.toml` to ignored `configs/local.toml` and adjust `[data]` and
 `[paths]` for the original dataset. Relative paths resolve from the configuration
 file's directory, not the shell directory. Do not put Kaggle mount paths in Python.
-Configuration validation does not validate or download the dataset.
+Configuration validation does not validate or download the dataset. Run
+`trustretina discover-data --config configs/local.toml` and then
+`trustretina prepare-data --config configs/local.toml` for read-only dataset
+validation and an immutable patient split bundle. See [Data pipeline](docs/DATA_PIPELINE.md).
 
 Keep raw inputs read-only and unmodified. Do not commit data, patient manifests,
 images, predictions, weights, secrets or tokens. Existing notebooks, if added,
@@ -66,10 +70,14 @@ orchestrator entry point without manual cell execution.
 ## Project map and current scope
 
 `src/trustretina/` contains the implemented configuration, planning and capability
-checks. Subpackages reserve ownership for data, preprocessing, models, training,
+checks. The data subpackage implements workbook/image validation and immutable patient
+manifests; the runner subpackage implements connectivity and smoke checks. Remaining
+subpackages reserve ownership for preprocessing, models, training,
 evaluation, reliability, calibration, Grad-CAM, inference and the upload app;
 their module docstrings explicitly mark future implementation.
 
+- [Phase 0 review and merge](docs/PHASE0_REVIEW.md)
+- [Phase 1 data pipeline](docs/DATA_PIPELINE.md)
 - [Project context](docs/PROJECT_CONTEXT.md)
 - [Roadmap and acceptance criteria](docs/ROADMAP.md)
 - [Experiment protocol](docs/EXPERIMENT_PROTOCOL.md)
@@ -79,5 +87,8 @@ their module docstrings explicitly mark future implementation.
 - [Status and next action](docs/STATUS.md)
 - [Git workflow](docs/GIT_WORKFLOW.md)
 
-No disease metrics, trained checkpoints, calibration improvements or GPU execution
-are claimed in Phase 0.
+No disease metrics, trained checkpoints, real-data validation, calibration
+improvements or remote GPU execution are claimed in the current synthetic-only
+Phase 1 verification. `trustretina check-runner` reports observed readiness and
+exits nonzero when authentication cannot be verified. Smoke preparation never
+submits a job; execution requires the separate `run-runner-smoke` command.

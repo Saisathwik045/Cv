@@ -1,0 +1,39 @@
+schema_version = 1
+class_order = ["N", "D", "G", "C", "A", "H", "M", "O"]
+seed = 2026
+
+[data]
+# Relative paths resolve against this config's directory. Override with a local copy.
+root = "../data/raw/ODIR-5K"
+labels = "data.xlsx"
+images = "Training Images"
+label_source = "patient"
+kind = "original_odir"
+near_duplicate_hamming = 2
+# sheet = "Sheet1"  # Required only when multiple sheets have the full schema.
+
+[paths]
+artifacts = "../artifacts"
+
+[split]
+# Frozen once approved in Phase 1; never re-search using final evaluation outcomes.
+names = ["train", "validation", "calibration", "final_evaluation"]
+fractions = [0.65, 0.15, 0.10, 0.10]
+minimum_positive_patients = 1
+minimum_negative_patients = 1
+
+[experiment]
+backbones = ["efficientnet_b0", "resnet50", "densenet121", "convnext_tiny", "efficientnet_b2"]
+selection_metric = "validation_macro_f1"
+initial_threshold = 0.5
+image_size = 224
+# Shared 224 baseline; native-resolution comparisons require a separate experiment.
+max_epochs = 30
+batch_size = 16
+learning_rate = 0.0001
+loss = "BCEWithLogitsLoss"
+
+[reliability]
+mc_dropout_passes = 30
+dropout_probability = 0.2
+ablations = ["confidence", "confidence_uncertainty", "confidence_quality", "confidence_uncertainty_quality", "calibrated_combined"]

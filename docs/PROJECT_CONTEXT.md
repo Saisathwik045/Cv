@@ -13,7 +13,8 @@ must be separately specified before inspecting final results.
 
 Configuration separates data location, artifacts, partition fractions, seeds,
 training settings and reliability ablations. Phase 0 builds checks and designs the
-execution contract; later phases implement the actual pipeline. No medical result
+execution contract; Phase 1 implements data validation, grouped split bundles and runner checks with
+synthetic-only validation. Remaining phases implement model execution. No medical result
 or superiority claim is supported yet.
 
 Validation selects model weights and disease thresholds. Calibration fits

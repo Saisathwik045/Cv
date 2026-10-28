@@ -1,46 +1,55 @@
-# Status — Phase 0 foundation
+# Status — Phase 1 data and runner checks
 
 ## Completed
 
-- Inspected original Cv repository and managed environment; no source notebooks/data.
-- Added src-layout package boundaries for every pipeline component, portable TOML
-  settings and optional dependency groups.
-- Implemented check-env (optional network/GPU gate), check-config and a declarative
-  five-model plan. Future stages explicitly remain unimplemented.
-- Added README, persistent AGENTS rules, project context, roadmap/acceptance criteria,
-  experiment protocol, execution/artifact/resume contract, Git workflow and runner audit.
-- Configured CPU-only GitHub Actions for Python 3.11 and 3.12 with no credentials.
-- Local Python 3.12.14: offline editable install succeeded in workspace virtualenv;
-  10 unittest cases passed; compileall, config/plan checks and git diff --check passed.
-  Missing-config and unimplemented-training paths fail; require-gpu exits 1 as expected.
-- Read current official Kaggle CLI docs: script push/status/output supported in
-  principle. Account-backed end-to-end operation is not verified.
+- Reviewed Phase 0 PR #1 against every foundation acceptance criterion. All latest
+  push/PR checks passed on Python 3.11/3.12; local foundation tests passed. Merged
+  with expected-head protection: main ce20b940020109a4dcd37b56a106d3b11ed4ab73.
+  See PHASE0_REVIEW.md. Started phase/01-data from that merged main.
+- Implemented discovery, authoritative data.xlsx parsing and strict patient/image
+  validation. Patient-level N,D,G,C,A,H,M,O labels stay paired with both eyes.
+- Implemented deterministic multilabel patient splits, per-class support checks,
+  hashed inventories, separate persistent partition files, provenance and completion
+  checksums; atomic publication and verified immutable reuse.
+- Implemented read-only check-runner, nontraining smoke preparation and explicit
+  submission/polling/version-pinned retrieval with checksum/nonce/CUDA verification.
+  Failures cannot mark GPU automation verified; raw client output is withheld.
+- Local Python 3.12 checks: 34 automated tests passed, editable package installed,
+  compileall, Phase 0/1 config/plan checks and git diff --check passed. CI installs
+  the data extra and exercises synthetic XLSX/images plus mocked runner transport
+  on Python 3.11 and 3.12. Final remote CI status is reported in the PR/chat handoff.
 
-## Scope and blockers
+## Real-data status
 
-No training, dataset validation, split generation, checkpointing, model inference
-or comparison generation has run. Those implementations belong to later phases.
-No fabricated metrics or data artifacts were added. Phase 0 code/docs are complete;
-GPU execution is blocked by absent credentials/CLI, Kaggle network policy and broken
-shell proxy connectivity. This runtime has no verified GPU or PyTorch installation.
-The data and its actual workbook schema/support have not been inspected.
+Original ODIR-5K and data.xlsx are unavailable in the workspace/configured mount.
+**Real-data validation has NOT passed.** Tests generate clearly marked synthetic
+fixtures; their counts/support are not real ODIR findings. No production split
+manifest, patient count, disease metric or training checkpoint is claimed.
+Phase 1 code is ready for real-data acceptance once original inputs are mounted.
 
-Git publication uses phase/00-foundation against verified latest main 4cbc1b6.
-Local checks are verified on Python 3.12 only; the 3.11 and 3.12 GitHub matrix must
-run remotely after publication. A configured workflow is not an enforced required
-check; main ruleset/review settings remain account actions. The PR must remain unmerged.
-Publication URL and final local/remote commit status are reported in the chat handoff.
+## GPU automation status
+
+Unattended GPU execution is NOT verified. check-runner observed: Kaggle client not
+installed; supported credential-presence checks all false; authentication,
+submission, status and retrieval unverified. The enforced allowlist excludes
+www.kaggle.com; all shell HTTPS probes fail connecting to managed proxy:8080.
+Managed environment reports no bound secrets or outbound identity.
+
+A GPU arithmetic-only smoke bundle was prepared under ignored artifacts, with no
+submission, no training, no paid provisioning and **no GPU quota used**. Mocked
+transport tests exercise success/failure transitions but are not remote evidence.
+See GPU_RUNNER.md for exact account/settings actions and executable commands.
 
 ## Next action
 
-Review the Phase 0 PR and wait for both CI checks before merging. Configure main
-protection as documented in GIT_WORKFLOW.md. Begin Phase 1 from latest main after
-merge: provide original ODIR-5K including data.xlsx through an ignored local mount
-or accessible private dataset reference; implement validation and freeze four
-patient-separated manifests only after support/leakage checks pass.
+Review Phase 1 PR and its lightweight CI; keep it unmerged pending user review.
+Account-only prerequisites: mount original ODIR-5K with data.xlsx (accept source
+terms if needed), configure Kaggle managed secret and network allowlist, confirm
+GPU eligibility/quota. The managed proxy service must also become reachable; this
+is environment/platform configuration, not something to bypass in project code.
 
-In parallel, perform the minimal account/environment actions in GPU_RUNNER.md:
-repair proxy, allow Kaggle hosts, bind KAGGLE_API_TOKEN securely and confirm account
-GPU eligibility/quota. A tiny nontraining GPU smoke job belongs to the next runner
-verification step, followed by status polling and artifact integrity checks. Do not
-launch full training until Phase 2 prerequisites pass.
+After original data is available, run discovery, choose explicit workbook/cohort
+paths and prepare-data; adjudicate flagged source problems and verify real support.
+After runner access works, install the runner extra and use the prepared nontraining
+smoke to verify actual submission/status/retrieval/CUDA. Start Phase 2 only from
+latest merged main after real-data and runner acceptance gates pass.

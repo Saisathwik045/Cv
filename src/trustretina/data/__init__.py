@@ -1,4 +1,1 @@
-"""Authoritative workbook validation, patient manifests and dataset loading (Phase 1).
-
-No runtime implementation in Phase 0.
-"""
+"""Original ODIR validation and frozen patient-level split manifests (Phase 1)."""

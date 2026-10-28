@@ -1,12 +1,13 @@
 # Automated execution and artifact contract
 
-This document specifies later implementation. Only check-env, check-config and
-plan execute today; `plan` returns a declarative five-model inventory. No shell
+This document specifies the full later pipeline. Phase 1 implements discover-data,
+prepare-data and runner checks (see DATA_PIPELINE.md and GPU_RUNNER.md). Foundation
+check-env, check-config and plan also execute today; `plan` returns a declarative five-model inventory. No shell
 command below is presented as an implemented TrustRetina runner.
 
 ## Single-entry execution
 
-Phase 1 implements validation and splitting; Phase 2 adds one noninteractive
+Phase 1 now implements validation and splitting; Phase 2 adds one noninteractive
 orchestrator that follows a stage DAG and exits nonzero on failed/missing inputs.
 It runs validation → approved patient split → preprocessing/cache → five sequential
 model jobs → validation predictions/selection → calibration predictions → calibration

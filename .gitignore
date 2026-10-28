@@ -40,3 +40,6 @@ kaggle-access-token*
 configs/local*.toml
 .ipynb_checkpoints/
 .DS_Store
+
+# Token files must never be committed even outside .kaggle
+access_token
