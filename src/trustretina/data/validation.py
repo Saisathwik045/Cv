@@ -1,5 +1,6 @@
 """Read-only original ODIR workbook/image validation; labels remain patient-derived."""
 import hashlib
+import copy
 import json
 import math
 from pathlib import Path
@@ -148,7 +149,7 @@ def image_record(path, root):
                     'width': image.width, 'height': image.height, 'dhash': f'{dhash:016x}'}
 
 
-def validate_dataset(config):
+def validate_dataset(config, checkpoint=None):
     root = Path(config['data']['root']).resolve()
     workbook = inside(root, config['data']['labels'])
     images = inside(root, config['data']['images'])
@@ -160,7 +161,7 @@ def validate_dataset(config):
     if type(threshold) is not int or not 0 <= threshold <= 8:
         raise DataValidationError('near_duplicate_hamming must be an integer from 0 to 8')
     resolved_seen = set()
-    for patient in patients:
+    for index, patient in enumerate(patients):
         records = {}
         for eye, name in patient['eyes'].items():
             path = inside(images, name)
@@ -175,17 +176,24 @@ def validate_dataset(config):
                 raise DataValidationError(f'Image decoding failed ({type(exc).__name__})') from None
             records[eye] = record
         patient['eyes'] = records
+        if checkpoint is not None and (index + 1) % 100 == 0:
+            checkpoint('progress', {'patients_scanned': index + 1, 'total_patients': len(patients)})
     if file_hash(workbook) != before:
         raise DataValidationError('Workbook changed during validation')
     inventory = {'schema_version': 1, 'label_source': 'patient', 'class_order': CLASSES,
                  'data_kind': config['data'].get('kind', 'original_odir'),
                  'workbook': {'path': str(workbook.relative_to(root)), 'sha256': before, 'sheet': sheet},
                  'near_duplicate_hamming': threshold, 'patients': patients}
+    if checkpoint is not None:
+        checkpoint('image_inventory', copy.deepcopy(inventory))
     from .duplicates import POLICY, adjudicate
     policy = config['data'].get('duplicate_policy', 'reject')
     if policy not in ('reject', POLICY):
         raise DataValidationError('Unknown duplicate handling policy')
-    adjudication = adjudicate(patients, threshold, root)
+    def candidate_checkpoint(result):
+        checkpoint('candidate_adjudication', {**copy.deepcopy(inventory), 'duplicate_adjudication': result})
+    adjudication = adjudicate(patients, threshold, root,
+                              checkpoint=candidate_checkpoint if checkpoint is not None else None)
     if policy == 'reject' and adjudication['pairs']:
         exact = adjudication['counts']['confirmed_exact_pairs']
         message = ('Exact file/pixel duplicate requires adjudication before splitting' if exact
@@ -196,4 +204,6 @@ def validate_dataset(config):
     inventory['duplicate_policy'] = policy
     inventory['duplicate_adjudication'] = adjudication
     inventory['fingerprint'] = canonical_hash(inventory)
+    if checkpoint is not None:
+        checkpoint('validated_inventory', copy.deepcopy(inventory))
     return inventory

@@ -138,3 +138,26 @@ class DuplicateGroupsTests(unittest.TestCase):
                  {'a':{'patient_id':'b'},'b':{'patient_id':'c'}}]
         self.assertEqual(components(patients,pairs),[['a','b','c'],['d']])
         self.assertEqual(components(patients,list(reversed(pairs))),[['a','b','c'],['d']])
+
+    def test_checkpoint_cannot_mutate_live_labels_or_edges(self):
+        self.connect('0_left.png', '1_left.png')
+        expected = validate_dataset(self.config)
+        stages = []
+        def checkpoint(stage, value):
+            stages.append(stage)
+            value.clear()
+        actual = validate_dataset(self.config, checkpoint=checkpoint)
+        self.assertEqual(actual, expected)
+        self.assertIn('image_inventory', stages)
+        self.assertIn('candidate_adjudication', stages)
+        self.assertIn('validated_inventory', stages)
+
+    def test_cached_comparisons_preserve_all_numeric_evidence(self):
+        from trustretina.data.duplicates import candidates, comparison, adjudicate
+        self.connect('0_left.png','1_left.png')
+        self.connect('0_left.png','2_left.png')
+        inventory=validate_dataset(self.config)
+        pairs=candidates(inventory['patients'],2)
+        expected=[comparison(self.root,pair) for pair in pairs]
+        actual=adjudicate(inventory['patients'],2,self.root)
+        self.assertEqual(expected,[p['image_comparison'] for p in actual['pairs']])

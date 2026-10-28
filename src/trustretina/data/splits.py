@@ -132,13 +132,13 @@ def implementation_provenance():
             'packages': {name: importlib.metadata.version(name) for name in ('openpyxl', 'Pillow')}}
 
 
-def prepare_data(config, destination):
+def prepare_data(config, destination, checkpoint=None):
     """Validate every input on every call; publish a bundle only after all checks pass."""
     destination = Path(destination).resolve()
     root = Path(config['data']['root']).resolve()
     if destination.is_relative_to(root) or root.is_relative_to(destination):
         raise DataValidationError('Artifact bundle and raw dataset must have disjoint paths')
-    inventory = validate_dataset(config)
+    inventory = validate_dataset(config, checkpoint=checkpoint)
     provenance = implementation_provenance()
     key = canonical_hash({'inventory': inventory['fingerprint'], 'seed': config['seed'],
                           'split': config['split'], 'implementation': provenance['implementation_sha256'], 'algorithm': ALGORITHM})

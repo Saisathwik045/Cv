@@ -1,5 +1,6 @@
 """Versioned conservative duplicate containment; no clinical adjudication or deletion."""
 import math
+import copy
 
 POLICY = 'conservative_patient_components_v1'
 METHOD = 'dhash64-horizontal-lanczos-9x8-v1'
@@ -54,49 +55,53 @@ def components(patients, pairs):
     return sorted(groups.values(), key=lambda ids: ids[0])
 
 
-def comparison(root, pair):
+def comparison(root, pair, cache=None):
     """Descriptive aligned-thumbnail evidence; never a decision threshold."""
     from PIL import Image, ImageOps, ImageChops, ImageStat
+    import numpy as np
     from .validation import file_hash, DataValidationError
     images, metadata = [], []
+    cache = {} if cache is None else cache
     for key in ('a', 'b'):
-        if file_hash(root / pair[key]['path']) != pair[key]['sha256']:
-            raise DataValidationError('Image changed before duplicate comparison')
-        with Image.open(root / pair[key]['path']) as source:
-            rgb = ImageOps.exif_transpose(source).convert('RGB')
-            rgb = rgb.resize((64, 64), Image.Resampling.LANCZOS)
-            gray = rgb.convert('L')
-            hist = gray.histogram()
-            metadata.append({'gray_stddev_64': ImageStat.Stat(gray).stddev[0],
-                             'entropy_bits_64': gray.entropy(),
-                             'dark_fraction_64': sum(hist[:16]) / 4096})
-            images.append(rgb)
-        if file_hash(root / pair[key]['path']) != pair[key]['sha256']:
-            raise DataValidationError('Image changed during duplicate comparison')
+        record = pair[key]
+        identity = (record['path'], record['sha256'])
+        if identity not in cache:
+            if file_hash(root / record['path']) != record['sha256']:
+                raise DataValidationError('Image changed before duplicate comparison')
+            with Image.open(root / record['path']) as source:
+                rgb = ImageOps.exif_transpose(source).convert('RGB')
+                rgb = rgb.resize((64, 64), Image.Resampling.LANCZOS)
+                gray = rgb.convert('L')
+                hist = gray.histogram()
+                stats = {'gray_stddev_64': ImageStat.Stat(gray).stddev[0],
+                         'entropy_bits_64': gray.entropy(),
+                         'dark_fraction_64': sum(hist[:16]) / 4096}
+            if file_hash(root / record['path']) != record['sha256']:
+                raise DataValidationError('Image changed during duplicate comparison')
+            cache[identity] = (rgb, stats)
+        rgb, stats = cache[identity]
+        images.append(rgb)
+        metadata.append(stats)
     delta = ImageChops.difference(*images)
     stats = ImageStat.Stat(delta)
     mse = sum(stats.sum2) / (64 * 64 * 3)
-    x, y = [list(im.tobytes()) for im in images]
-    mx, my = sum(x) / len(x), sum(y) / len(y)
-    vx = sum((v - mx) ** 2 for v in x)
-    vy = sum((v - my) ** 2 for v in y)
-    correlation = (sum((a - mx) * (b - my) for a, b in zip(x, y)) / math.sqrt(vx * vy)
-                   if vx and vy else None)
+    x, y = [np.asarray(im, dtype=np.float64).ravel() for im in images]
+    x = x - x.mean()
+    y = y - y.mean()
+    vx, vy = float(np.dot(x, x)), float(np.dot(y, y))
+    correlation = float(np.dot(x, y)) / math.sqrt(vx * vy) if vx and vy else None
     return {'method': 'EXIF RGB resized independently to 64x64 LANCZOS; descriptive only',
             'rgb_mae_64': sum(stats.mean) / 3,
             'psnr_db_64': 10 * math.log10(255 ** 2 / mse) if mse else None,
-            'correlation_64': correlation, 'resized_rgb_equal_64': x == y,
+            'correlation_64': correlation, 'resized_rgb_equal_64': delta.getbbox() is None,
             'a': metadata[0], 'b': metadata[1],
             'limitations': 'No registration/crop search; entropy and contrast are descriptive, not clinical gradability or duplicate proof'}
 
 
-def adjudicate(patients, threshold, root=None):
+def adjudicate(patients, threshold, root=None, checkpoint=None):
     pairs = candidates(patients, threshold)
-    if root is not None:
-        for pair in pairs:
-            pair['image_comparison'] = comparison(root, pair)
     groups = components(patients, pairs)
-    return {'schema_version': 1, 'policy': POLICY, 'detection_method': METHOD,
+    result = {'schema_version': 1, 'policy': POLICY, 'detection_method': METHOD,
             'hamming_threshold': threshold, 'pairs': pairs, 'patient_groups': groups,
             'counts': {'candidate_pairs': len(pairs),
                        'confirmed_exact_pairs': sum(p['classification'] == 'confirmed_exact' for p in pairs),
@@ -107,6 +112,18 @@ def adjudicate(patients, threshold, root=None):
                        'largest_component_patients': max(map(len, groups), default=0)},
             'annotation_policy': 'Patient-derived labels retained independently even when connected images have different annotations; report conflicts, never infer eye-specific labels',
             'clinical_adjudication': False, 'images_deleted': 0, 'labels_changed': 0}
+    if checkpoint is not None:
+        checkpoint(copy.deepcopy(result))
+    if root is not None:
+        cache = {}
+        for pair in pairs:
+            pair['image_comparison'] = comparison(root, pair, cache)
+        # Caching must not hide mutation after the first use of a source image.
+        from .validation import file_hash, DataValidationError
+        for (path, digest) in cache:
+            if file_hash(root / path) != digest:
+                raise DataValidationError('Image changed during duplicate comparison')
+    return result
 
 
 def verified_components(inventory):
