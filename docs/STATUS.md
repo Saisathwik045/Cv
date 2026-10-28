@@ -1,4 +1,8 @@
-# Status — Phase 1 data and runner checks
+# Status — Phase 1 merged; Kaggle access blocked
+
+PR #2 was reviewed and merged after all latest checks passed. Merged main:
+16f0a5c64f991a73f383bb78d8fdfe9f1740a9d1. Real-data validation is still pending.
+See KAGGLE_ACCESS_STATUS.md for the current evidence and resume instructions.
 
 ## Completed
 
@@ -14,14 +18,16 @@
 - Implemented read-only check-runner, nontraining smoke preparation and explicit
   submission/polling/version-pinned retrieval with checksum/nonce/CUDA verification.
   Failures cannot mark GPU automation verified; raw client output is withheld.
-- Local Python 3.12 checks: 34 automated tests passed, editable package installed,
+- Local Python 3.12 checks: 38 automated tests passed, editable package installed,
   compileall, Phase 0/1 config/plan checks and git diff --check passed. CI installs
   the data extra and exercises synthetic XLSX/images plus mocked runner transport
   on Python 3.11 and 3.12. Final remote CI status is reported in the PR/chat handoff.
 
 ## Real-data status
 
-Original ODIR-5K and data.xlsx are unavailable in the workspace/configured mount.
+The user supplied the Kaggle reference andrewmvd/ocular-disease-recognition-odir5k.
+It is now configured for direct attachment; content access/discovery remains
+unverified because connectivity and authentication are blocked.
 **Real-data validation has NOT passed.** Tests generate clearly marked synthetic
 fixtures; their counts/support are not real ODIR findings. No production split
 manifest, patient count, disease metric or training checkpoint is claimed.
@@ -35,21 +41,18 @@ submission, status and retrieval unverified. The enforced allowlist excludes
 www.kaggle.com; all shell HTTPS probes fail connecting to managed proxy:8080.
 Managed environment reports no bound secrets or outbound identity.
 
-A GPU arithmetic-only smoke bundle was prepared under ignored artifacts, with no
+A GPU arithmetic and dataset-discovery smoke bundle was prepared under ignored artifacts, with no
 submission, no training, no paid provisioning and **no GPU quota used**. Mocked
 transport tests exercise success/failure transitions but are not remote evidence.
 See GPU_RUNNER.md for exact account/settings actions and executable commands.
 
 ## Next action
 
-Review Phase 1 PR and its lightweight CI; keep it unmerged pending user review.
-Account-only prerequisites: mount original ODIR-5K with data.xlsx (accept source
-terms if needed), configure Kaggle managed secret and network allowlist, confirm
-GPU eligibility/quota. The managed proxy service must also become reachable; this
-is environment/platform configuration, not something to bypass in project code.
-
-After original data is available, run discovery, choose explicit workbook/cohort
-paths and prepare-data; adjudicate flagged source problems and verify real support.
-After runner access works, install the runner extra and use the prepared nontraining
-smoke to verify actual submission/status/retrieval/CUDA. Start Phase 2 only from
-latest merged main after real-data and runner acceptance gates pass.
+Do not start Phase 2. Apply the supported environment host/secret settings described
+in KAGGLE_ACCESS_STATUS.md. No manual data download/reupload is required. Check the
+applied settings once in a fresh cloud session; do not repeat failed network probes
+in the unchanged session. Install/authenticate the real Kaggle client when possible,
+identify the actual owner and submit the single already-authorized GPU/dataset smoke.
+Resume with its saved ID rather than submitting another job. If smoke and retrieval
+succeed, run existing validation/splitting remotely and retrieve manifests with
+provenance. Keep raw images, patient manifests and credentials outside Git.

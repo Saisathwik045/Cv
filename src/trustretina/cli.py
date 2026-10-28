@@ -25,6 +25,7 @@ def main(argv=None):
     smoke = commands.add_parser('prepare-runner-smoke', help='Write a nontraining script; never submits')
     smoke.add_argument('--owner', required=True)
     smoke.add_argument('--output', required=True)
+    smoke.add_argument('--dataset-config', help='TOML with dataset_ref, input_root and image_directory_name')
     smoke.add_argument('--gpu', action='store_true', help='Prepare a CUDA arithmetic check; execution uses GPU quota')
     run = commands.add_parser('run-runner-smoke', help='Submit prepared smoke, poll and retrieve artifacts')
     run.add_argument('--bundle', required=True)
@@ -43,7 +44,12 @@ def main(argv=None):
                 result = check_runner()
                 okay = result['authentication_verified']
             elif args.command == 'prepare-runner-smoke':
-                result = prepare_smoke(args.output, args.owner, args.gpu)
+                dataset = None
+                if args.dataset_config:
+                    import tomllib
+                    with open(args.dataset_config, 'rb') as handle:
+                        dataset = tomllib.load(handle)
+                result = prepare_smoke(args.output, args.owner, args.gpu, dataset)
                 okay = result['prepared']
             else:
                 result = run_smoke(args.bundle, args.timeout_seconds)

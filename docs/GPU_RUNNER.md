@@ -1,5 +1,9 @@
 # GPU runner status and implementation
 
+Latest continuation: see [Kaggle access checkpoint](KAGGLE_ACCESS_STATUS.md).
+The configured source is andrewmvd/ocular-disease-recognition-odir5k, attached
+directly. Dataset contents and remote execution remain unverified.
+
 ## Observed Phase 1 verdict
 
 **Unattended GPU execution is NOT verified.** No remote smoke job or training was
@@ -33,9 +37,8 @@ Actual `check-runner` observations in this session:
    verification or attempt direct egress. The installed client may later expose
    additional API/artifact host requirements through policy diagnostics; only add
    those exact observed hosts. No artifact-download hostname is verified yet.
-2. Restart/recreate the managed environment using that configuration, or have its
-   environment/platform administrator repair the unavailable proxy service at
-   **`proxy:8080`**. Package-manager/GitHub hosts are already allowed; allowing
+2. Restart/recreate the managed environment using that configuration, using the available session controls. If proxy:8080 is still unreachable, report
+   the session failure through Codex support; no user proxy-repair setting is exposed. Package-manager/GitHub hosts are already allowed; allowing
    Kaggle alone does not fix a proxy service connection failure. No project-code
    change can grant egress or repair the managed sidecar.
 3. Generate an API token in [Kaggle API settings](https://www.kaggle.com/settings/api)
@@ -49,12 +52,12 @@ Actual `check-runner` observations in this session:
    configure every alternative. No Kaggle-internal secret is needed by this smoke.
 4. Check the account's verification/GPU eligibility prompts, available accelerators,
    remaining quota and session/output limits in Kaggle. No quota or accelerator
-   availability is assumed. Make the original ODIR dataset, including data.xlsx,
-   accessible privately and accept source terms if necessary.
+   availability is assumed. Use the configured Kaggle dataset attachment; no manual download/reupload is
+   needed. Accept source terms only if Kaggle actually requires it.
 
 GitHub main protection remains a separate recommended account setting; no additional
-GitHub credentials are needed for this session's working connector. PR #1 was
-reviewed and merged; Phase 1's PR must remain unmerged for review.
+GitHub credentials are needed for this session's working connector. PRs #1 and #2 were reviewed and merged with passing checks; real-data validation
+remains pending.
 
 ## Implemented checks
 
@@ -73,12 +76,12 @@ structured reasons without tokens. Missing dependencies and failures are not suc
 
 ```sh
 # Preparation only: replace the owner below with the authenticated Kaggle username.
-trustretina prepare-runner-smoke --owner Saisathwik045 --output artifacts/runner/new-gpu-smoke --gpu
+trustretina prepare-runner-smoke --owner actual-kaggle-owner --output artifacts/runner/new-gpu-smoke --gpu --dataset-config configs/kaggle-smoke.toml
 # Separate, explicit execution after connectivity/account gates pass:
 trustretina run-runner-smoke --bundle artifacts/runner/new-gpu-smoke --timeout-seconds 600
 ```
 
-The execution command submits a private Python script with no dataset sources or
+The execution command submits a private Python script with the configured dataset source and no
 runtime internet, requests a 120-second kernel runtime, parses the returned kernel
 version and polls that exact version. It retrieves smoke.json/smoke.sha256 from the
 same version, verifies checksum plus a per-request nonce and checks real CUDA tensor
@@ -89,12 +92,13 @@ Omitting --gpu during preparation provides a CPU-only smoke and can never verify
 A successful GPU smoke **uses GPU quota** even though it does no training. A failed
 or timed-out submission may have used quota and is reported as unknown, not zero.
 Polling timeout does not cancel a remote job; inspect its pinned version before any
-new submission. An exclusive verification receipt prevents accidental re-submission
-of a bundle, including after ambiguous failures. Prepared source/metadata are checked
+new submission. A durable verification receipt and local lock prevent accidental re-submission
+of a bundle. Job ID and returned version are persisted before polling; an existing
+version resumes polling/retrieval without another push. Prepared source/metadata are checked
 against the fixed nontraining template before submission, preventing the command
-from becoming a general training launcher. A future receipt-based reconnect command
-is not yet implemented; use the pinned upstream status/output commands after an
-interrupted verification. Never delete a receipt merely to retry a push.
+from becoming a general training launcher. The same run-runner-smoke command reconnects using its receipt. A submission
+interrupted before returning a version stops for inspection of the saved kernel_id,
+without automatically resubmitting. Never delete a receipt merely to retry a push.
 
 Tests use mocked CLI responses and synthetic downloaded artifacts; those tests are
 not evidence that any Kaggle operation succeeded remotely. Remote behavior, artifact

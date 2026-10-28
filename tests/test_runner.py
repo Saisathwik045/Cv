@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from trustretina.runner.kaggle import KaggleCLI, RunnerError, check_runner, prepare_smoke, run_smoke
+from trustretina.runner.kaggle import KaggleCLI, RunnerError, check_runner, prepare_smoke, run_smoke, smoke_source
 
 
 class FakeClient:
@@ -69,8 +69,7 @@ class RunnerTests(unittest.TestCase):
         for args in fake.calls:
             if args[1] in ('status', 'output'):
                 self.assertTrue(args[2].endswith('/7'))
-        with self.assertRaises(FileExistsError):
-            run_smoke(self.bundle, client=fake)
+        self.assertTrue(run_smoke(self.bundle, client=fake)['unattended_gpu_execution_verified'])
         self.assertEqual(sum(c[1] == 'push' for c in fake.calls), 1)
 
     def test_each_transport_failure_prevents_gpu_verification(self):
@@ -149,3 +148,64 @@ class RunnerTests(unittest.TestCase):
         self.assertIn('deadline', report['blocker'])
         self.assertFalse(report['unattended_gpu_execution_verified'])
         self.assertEqual(report['gpu_quota_used'], 'unknown_after_submission')
+
+    def test_dataset_attached_directly_and_generated_discovery_executes(self):
+        # Synthetic mount only: this test says nothing about real Kaggle contents.
+        import sys
+        from synthetic import make_fixture
+        config = make_fixture(self.temp.name)
+        reference = 'andrewmvd/ocular-disease-recognition-odir5k'
+        mount = Path(self.temp.name) / reference.split('/')[-1]
+        Path(config['data']['root']).rename(mount)
+        dataset = {'dataset_ref': reference, 'input_root': self.temp.name,
+                   'image_directory_name': 'Training Images'}
+        prepare_smoke(self.bundle, 'synthetic-test-owner', dataset=dataset)
+        metadata = json.loads((self.bundle / 'kernel-metadata.json').read_text())
+        self.assertEqual(metadata['dataset_sources'], [reference])
+        result = subprocess.run([sys.executable, str(self.bundle / 'smoke.py')],
+                                cwd=self.bundle, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads((self.bundle / 'smoke.json').read_text())
+        self.assertTrue(report['dataset_attachment_verified'])
+        self.assertEqual(report['dataset_ref'], reference)
+        self.assertEqual(Path(report['workbooks'][0]['path']).name, 'data.xlsx')
+        self.assertTrue(report['image_samples'])
+        self.assertFalse(report['cuda_tensor_ok'])
+
+    def test_missing_dataset_artifact_evidence_blocks_gpu_verification(self):
+        dataset = {'dataset_ref': 'andrewmvd/ocular-disease-recognition-odir5k',
+                   'input_root': '/synthetic/input', 'image_directory_name': 'Training Images'}
+        prepare_smoke(self.bundle, 'synthetic-test-owner', gpu=True, dataset=dataset)
+        report = run_smoke(self.bundle, client=FakeClient(self.bundle), sleep=lambda _: None)
+        self.assertFalse(report['dataset_attachment_verified'])
+        self.assertFalse(report['unattended_gpu_execution_verified'])
+        self.assertIn('Dataset attachment', report['blocker'])
+
+    def test_job_version_durable_before_poll_and_resumes_without_push(self):
+        prepare_smoke(self.bundle, 'synthetic-test-owner', gpu=True)
+        class Interrupted(FakeClient):
+            def call(self, *args):
+                if args[1] == 'status':
+                    receipt = json.loads((self.bundle / 'verification.json').read_text())
+                    if not receipt['kernel_version'].endswith('/7'):
+                        raise AssertionError('Version not persisted before polling')
+                    raise KeyboardInterrupt()
+                return super().call(*args)
+        first = Interrupted(self.bundle)
+        with self.assertRaises(KeyboardInterrupt):
+            run_smoke(self.bundle, client=first)
+        second = FakeClient(self.bundle)
+        report = run_smoke(self.bundle, client=second, sleep=lambda _: None)
+        self.assertTrue(report['unattended_gpu_execution_verified'])
+        self.assertFalse(any(c[1] == 'push' for c in second.calls))
+        self.assertEqual(sum(c[1] == 'push' for c in first.calls), 1)
+
+    def test_ambiguous_submission_never_retries_push(self):
+        prepare_smoke(self.bundle, 'synthetic-test-owner', gpu=True)
+        failed = FakeClient(self.bundle, failure='push')
+        report = run_smoke(self.bundle, client=failed)
+        self.assertIn('kernel_id', json.loads((self.bundle / 'verification.json').read_text()))
+        second = FakeClient(self.bundle)
+        report = run_smoke(self.bundle, client=second)
+        self.assertIn('ambiguous', report['blocker'])
+        self.assertFalse(any(c[1] == 'push' for c in second.calls))
