@@ -87,8 +87,9 @@ their module docstrings explicitly mark future implementation.
 - [Status and next action](docs/STATUS.md)
 - [Git workflow](docs/GIT_WORKFLOW.md)
 
-No disease metrics, trained checkpoints, real-data validation, calibration
-improvements or remote GPU execution are claimed in the current synthetic-only
-Phase 1 verification. `trustretina check-runner` reports observed readiness and
+Real-data validation and conservative duplicate-group split acceptance are recorded
+in [Status](docs/STATUS.md), with patient-level artifacts kept private outside Git.
+The CUDA arithmetic smoke is verified; no disease metrics, trained checkpoints or
+calibration improvements are claimed. `trustretina check-runner` reports observed readiness and
 exits nonzero when authentication cannot be verified. Smoke preparation never
 submits a job; execution requires the separate `run-runner-smoke` command.

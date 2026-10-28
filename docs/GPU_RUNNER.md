@@ -1,3 +1,13 @@
+# CUDA smoke verified; model execution remains future work
+
+Latest continuation — 29 October 2026 (IST): existing GPU smoke version 2 was
+retrieved with verified checksum and nonce. CUDA arithmetic passed on Tesla T4;
+nested original-style workbook/image discovery passed independently. No additional
+GPU smoke was submitted. Full CPU data validation and grouped split acceptance
+are now recorded in STATUS.md, including support limitations and private provenance.
+This verifies the short nontraining smoke, not model-training/checkpoint automation.
+The historical access observations below are superseded.
+
 # Mount discovery and versioned smoke continuation
 
 The smoke searches the configured input root recursively for exactly one data.xlsx
