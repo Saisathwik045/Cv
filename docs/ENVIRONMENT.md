@@ -1,31 +1,38 @@
-# Observed environment — 28 October 2026
+# Observed environment — 29 October 2026 (IST)
 
-Repository inspected: `/workspace/Cv`, initial commit 4cbc1b6, only README/.gitignore.
-Default remote branch is main (verified with GitHub connector). No dataset/notebooks.
-The other attached repository is an unrelated compiler and was not changed.
+Repository: /workspace/Cv, Saisathwik045/Cv (TrustRetina). Local main synced to
+7ab736131467f561201eee59ba1322e35bc7a52b with no local changes overwritten.
+The unrelated compiler checkout was not modified.
 
-| Capability | Actual observation |
+## Supported execution mode
+
+The managed proxy at http://proxy:8080 is reachable. Default command execution
+blocked a proxy socket with EPERM; network-enabled execution connected successfully.
+Earlier curl exit 7 / HTTP 000 results did not prove proxy infrastructure failure.
+Use exec_command with sandbox_permissions="with_additional_permissions" and
+additional_permissions.network.enabled=true for network operations, following
+its permission requirements. Retain inherited proxies, CA trust and TLS verification.
+Do not attempt direct egress or change network protections.
+
+| Capability | Current evidence |
 | --- | --- |
-| CPU | AMD EPYC 9V74; 3 logical CPUs visible; cgroup cpu.max 200000/100000 = 2 CPU quota |
-| RAM | Host-visible ~9.7 GiB; container limit 8 GiB; no swap |
-| Disk | ~31.45 GiB total, ~29.83 GiB free initially (dynamic) |
-| Python | 3.12.14, Linux x86_64 |
-| PyTorch | Not installed; no CUDA runtime test possible |
-| GPU | No nvidia-smi and no /dev/nvidia devices; usable GPU not verified |
-| Packages | NumPy, pandas, Pillow, openpyxl, sklearn and setuptools available; no Kaggle CLI |
-| Local Git | Available, author configured; branch creation and commits supported |
-| gh | Installed; auth status reports invalid GH_TOKEN; token value not inspected |
-| GitHub connector | Repository read and advertised push/admin permission verified; publication outcome recorded in STATUS |
-| Shell HTTPS | PyPI, GitHub and Kaggle probes all fail connecting to configured proxy:8080 |
-| Network policy | Enforced restricted HTTP allowlist; package/GitHub hosts listed, Kaggle absent; no VPN/TCP grants |
-| Credentials | Managed readiness reports no secret bindings/outbound identities/runtime variables; Kaggle env/legacy-file presence checks false |
+| Git | Fetch through managed proxy succeeded; PRs #1–#4 merged |
+| Python/packages | Python 3.12 virtualenv /workspace/.environment/trustretina; editable data/runner extras installed |
+| Kaggle client | Kaggle 2.2.5, kagglesdk 0.1.38 |
+| Config directory | KAGGLE_CONFIG_DIR=/workspace/.environment/trustretina-kaggle avoids read-only home |
+| Token | KAGGLE_API_TOKEN reported ready/present; value never printed |
+| HTTP policy | Current/enforced restricted policy allows www.kaggle.com, excludes api.kaggle.com |
+| API access | Client token introspection targets api.kaggle.com; proxy CONNECT denied with HTTP 403 |
+| Authentication | Not verified; no Kaggle auth response or verified username |
+| GPU/data | No remote job submitted; CUDA and original dataset validation remain unverified |
 
-Host totals do not override cgroup limits. Policy allowance does not prove working
-connectivity. The GitHub connector is a separate working network path and is not a
-Kaggle API transport. No network workaround or proxy bypass was attempted.
+The successful unauthenticated www.kaggle.com HTTP 401 was a connectivity result,
+not a credential test. The installed client's api.kaggle.com rejection is a separate
+host-policy failure. Add that exact observed host through managed configuration;
+no proxy repair or untested token rotation is indicated. No additional artifact
+host requirements are established yet. See KAGGLE_ACCESS_STATUS.md for next steps.
 
-A normal pip install could build the local package but user-site installation was
-blocked by read-only /home/agent. Installation succeeded in `.venv` under the
-workspace with system-site-packages and no build isolation/downloads. No GPU
-packages were installed. Reproduce capability observations with
-`trustretina check-env --network`; use `--require-gpu` for a failing readiness gate.
+Use a workspace virtualenv and writable KAGGLE_CONFIG_DIR; do not repurpose HOME or
+copy secrets into source/config files. Keep dependency versions and structured
+observations under ignored artifacts/runner/. Passing synthetic tests does not
+establish remote GPU access or real-data validation.
