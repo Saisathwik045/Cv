@@ -82,6 +82,22 @@ class RunnerTests(unittest.TestCase):
                 self.assertFalse(report['unattended_gpu_execution_verified'])
                 self.assertIn('blocker', report)
 
+    def test_sdk_enum_status_resumes_pinned_job_without_resubmission(self):
+        prepare_smoke(self.bundle, 'synthetic-test-owner', gpu=True)
+        first = FakeClient(self.bundle, failure='status')
+        run_smoke(self.bundle, client=first)
+        class EnumStatus(FakeClient):
+            def call(self, *args):
+                output = super().call(*args)
+                if args[1] == 'status':
+                    return output.replace('"running"', '"KernelWorkerStatus.RUNNING"').replace(
+                        '"complete"', '"KernelWorkerStatus.COMPLETE"')
+                return output
+        second = EnumStatus(self.bundle)
+        report = run_smoke(self.bundle, client=second, sleep=lambda _: None)
+        self.assertTrue(report['unattended_gpu_execution_verified'])
+        self.assertFalse(any(c[1] == 'push' for c in second.calls))
+
     def test_stale_artifact_and_missing_cuda_prevent_gpu_verification(self):
         report, _ = self.run_fake(wrong_nonce=True)
         self.assertFalse(report['artifact_retrieval_verified'])
@@ -209,3 +225,55 @@ class RunnerTests(unittest.TestCase):
         report = run_smoke(self.bundle, client=second)
         self.assertIn('ambiguous', report['blocker'])
         self.assertFalse(any(c[1] == 'push' for c in second.calls))
+
+class MountDiscoveryTests(unittest.TestCase):
+    def test_nested_mount_and_independent_cuda_evidence(self):
+        from synthetic import make_fixture
+        from trustretina.runner.smoke_runtime import run_checks
+        import os
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            nested = root / 'input' / 'datasets' / 'owner' / 'different-mount' / 'version' / 'ODIR-5K'
+            nested.mkdir(parents=True)
+            config = make_fixture(nested, count=2)
+            dataset = {'dataset_ref': 'andrewmvd/ocular-disease-recognition-odir5k',
+                       'input_root': str(root / 'input'), 'image_directory_name': 'Training Images'}
+            previous = Path.cwd()
+            os.chdir(root)
+            try:
+                report = run_checks('test', True, dataset, cuda_check=lambda: {'cuda_tensor_ok': True})
+                self.assertTrue(report['checks_passed'])
+                self.assertIn('datasets/owner/different-mount/version/ODIR-5K', report['workbooks'][0]['path'])
+                Path(config['data']['root'], 'data.xlsx').unlink()
+                report = run_checks('test', True, dataset, cuda_check=lambda: {'cuda_tensor_ok': True})
+                self.assertTrue(report['cuda_tensor_ok'])
+                self.assertFalse(report['checks_passed'])
+                self.assertIn('No original source', report['dataset_error'])
+                self.assertEqual(json.loads(Path('smoke.json').read_text()), report)
+                self.assertEqual(hashlib.sha256(Path('smoke.json').read_bytes()).hexdigest(), Path('smoke.sha256').read_text())
+            finally:
+                os.chdir(previous)
+
+    def test_ambiguous_original_sources_fail_closed(self):
+        from synthetic import make_fixture
+        from trustretina.runner.smoke_runtime import discover_source
+        with tempfile.TemporaryDirectory() as temp:
+            for name in ('one', 'two'):
+                parent = Path(temp, name)
+                parent.mkdir()
+                make_fixture(parent, count=1)
+            with self.assertRaisesRegex(RuntimeError, 'Ambiguous original sources'):
+                discover_source({'input_root': temp, 'image_directory_name': 'Training Images', 'dataset_ref': 'owner/source'})
+
+    def test_new_version_preserves_previous_receipt_and_kernel_identity(self):
+        with tempfile.TemporaryDirectory() as temp:
+            old, new = Path(temp, 'old'), Path(temp, 'new')
+            prepare_smoke(old, 'owner', gpu=True)
+            run_smoke(old, client=FakeClient(old, failure='status'))
+            before = (old / 'verification.json').read_bytes()
+            prepare_smoke(new, 'owner', gpu=True, previous_bundle=old)
+            self.assertEqual((old / 'verification.json').read_bytes(), before)
+            self.assertEqual(json.loads((new / 'kernel-metadata.json').read_text())['id'],
+                             json.loads((old / 'kernel-metadata.json').read_text())['id'])
+            self.assertNotEqual(json.loads((new / 'request.json').read_text())['nonce'],
+                                json.loads((old / 'request.json').read_text())['nonce'])

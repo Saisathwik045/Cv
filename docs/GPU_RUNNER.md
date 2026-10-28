@@ -1,3 +1,27 @@
+# Mount discovery and versioned smoke continuation
+
+The smoke searches the configured input root recursively for exactly one data.xlsx
+and one original Training Images directory. It assumes neither the dataset slug as
+mount name nor a fixed nesting depth. Missing, inaccessible and ambiguous sources
+fail closed; derived CSVs are never substituted. CUDA and discovery run independently
+and write a checksummed report even when either check fails. Read the report's
+individual results; a completed kernel alone is not successful acceptance.
+
+To prepare an explicitly authorized additional version, use a separate bundle:
+
+```sh
+trustretina prepare-runner-smoke --owner actual-kaggle-owner --gpu --dataset-config configs/kaggle-smoke.toml --previous-bundle artifacts/runner/dataset-smoke --output artifacts/runner/dataset-smoke-v2
+trustretina run-runner-smoke --bundle artifacts/runner/dataset-smoke-v2 --timeout-seconds 600
+```
+
+The previous receipt is read only. Its pinned version and request hash are checked;
+the new bundle keeps the existing kernel ID with a fresh nonce and separate receipt.
+The execution receipt prevents a repeated push of that bundle. Preparing additional
+bundles is not permission to consume more quota. Never overwrite or delete previous
+submission evidence. Status parsing supports Kaggle 2.2.5's enum-qualified output.
+
+The sections below are historical. Current remote results are in STATUS.md.
+
 # GPU runner status and implementation
 
 See [Kaggle access checkpoint](KAGGLE_ACCESS_STATUS.md) for current evidence and
