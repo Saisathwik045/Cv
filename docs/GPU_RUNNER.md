@@ -1,79 +1,44 @@
 # GPU runner status and implementation
 
-Latest continuation: see [Kaggle access checkpoint](KAGGLE_ACCESS_STATUS.md).
-The configured source is andrewmvd/ocular-disease-recognition-odir5k, attached
-directly. Dataset contents and remote execution remain unverified.
+See [Kaggle access checkpoint](KAGGLE_ACCESS_STATUS.md) for current evidence and
+resume instructions. The source andrewmvd/ocular-disease-recognition-odir5k is
+configured for direct attachment; actual remote contents remain unverified.
 
-## Current cloud-session result — 28 October 2026
+## Current result — 29 October 2026 (IST)
 
-PR #3 is merged; latest main is cae2fbc915e52c52d571fbbe8e8551066475f39f.
-The new applied policy allows www.kaggle.com and KAGGLE_API_TOKEN is ready/present.
-A bounded actual Kaggle request still fails connecting to managed proxy:8080
-(curl exit 7, HTTP 000). Client installation obtained no package candidate.
-Authentication/username and all remote acceptance gates remain unverified.
-No job was submitted. Recover the managed proxy; host/token presence setup is
-already complete. Full evidence and resume sequence are in KAGGLE_ACCESS_STATUS.md.
-The observations below describe the previous session, not the current setup.
+The managed proxy works with supported network-enabled command execution.
+Previous proxy-repair guidance was based on default-sandbox connection failures
+and is superseded. Git fetch and editable data/runner installation succeeded.
+Kaggle 2.2.5 and kagglesdk 0.1.38 are installed in
+/workspace/.environment/trustretina. Use this virtualenv's bin directory on PATH.
 
-## Historical Phase 1 verdict
+Set KAGGLE_CONFIG_DIR=/workspace/.environment/trustretina-kaggle for client commands
+because home is read-only. Keep KAGGLE_API_TOKEN supplied by the environment;
+no credential-file copy or manual token argument is needed.
 
-**Unattended GPU execution is NOT verified.** No remote smoke job or training was
-submitted; no paid resources were provisioned; **no GPU quota was used**. A fixed
-nontraining CUDA arithmetic script was prepared in ignored
-`artifacts/runner/phase1-gpu-smoke`. Preparing files does not submit or consume quota. The prepared bundle uses the
-GitHub login Saisathwik045 as an **unverified candidate owner**; GitHub identity does
-not establish Kaggle identity. Regenerate a fresh bundle with the actual Kaggle
-username after authentication, before submitting.
+Authentication is blocked by destination policy: installed SDK token introspection
+uses api.kaggle.com, but only www.kaggle.com is currently allowed. The client
+reported ProxyError; a bounded unauthenticated check confirmed proxy CONNECT
+HTTP 403, curl exit 56 and destination HTTP 000. No Kaggle authentication response
+was received; token validity and account username remain unknown. Add api.kaggle.com
+to the managed allowed HTTP hosts and apply the configuration. Do not rotate the
+untested token or request proxy service repair. Preserve proxy/TLS protections.
 
-Actual `check-runner` observations in this session:
+For exec_command network operations, request sandbox_permissions=
+"with_additional_permissions" and additional_permissions.network.enabled=true,
+following tool permission requirements. This grants command-level network use
+through the existing proxy; managed host policy still applies.
 
-- Kaggle CLI/package is not installed (client_version null).
-- KAGGLE_API_TOKEN, KAGGLE_USERNAME/KAGGLE_KEY, token-file and legacy-file presence
-  checks are false. No credential values or secret-file contents were printed.
-- Managed readiness is current and reports no bound secrets/runtime variables or
-  outbound identity. Presence alone would not establish valid authentication.
-- `/etc/codex/network-policy.json` and managed readiness both show an enforced
-  restricted allowlist without www.kaggle.com. No VPN/TCP grant is configured.
-- Requests to Kaggle, PyPI and GitHub through inherited HTTP(S)_PROXY fail connecting
-  to the managed proxy at `proxy:8080` (curl exit 7). This is a proxy transport
-  failure before receiving a Kaggle HTTP/auth response. Policy also needs updating
-  even after proxy transport recovers. The GitHub connector is a separate working
-  path; it cannot be used to proxy Kaggle requests.
-
-## Account/environment actions that require your access
-
-1. In the attached Codex cloud environment's configuration, keep restricted network
-   mode and add **`www.kaggle.com`** to allowed HTTP hosts. Do not disable security
-   controls, change credentials in code, unset HTTP_PROXY/HTTPS_PROXY, disable TLS
-   verification or attempt direct egress. The installed client may later expose
-   additional API/artifact host requirements through policy diagnostics; only add
-   those exact observed hosts. No artifact-download hostname is verified yet.
-2. Restart/recreate the managed environment using that configuration, using the available session controls. If proxy:8080 is still unreachable, report
-   the session failure through Codex support; no user proxy-repair setting is exposed. Package-manager/GitHub hosts are already allowed; allowing
-   Kaggle alone does not fix a proxy service connection failure. No project-code
-   change can grant egress or repair the managed sidecar.
-3. Generate an API token in [Kaggle API settings](https://www.kaggle.com/settings/api)
-   and use the managed environment configuration's **secret binding** to expose it
-   as environment variable **`KAGGLE_API_TOKEN`**. Do not paste it into chat or commit
-   it. There is no installed Kaggle client here, so no installed-client credential
-   contract has been empirically tested. The audited official 2.2.5 source/docs
-   support KAGGLE_API_TOKEN and `~/.kaggle/access_token`; legacy alternatives are
-   **KAGGLE_USERNAME + KAGGLE_KEY** or `~/.kaggle/kaggle.json` selected with
-   KAGGLE_CONFIG_DIR. One token secret is the minimal recommended setup; do not
-   configure every alternative. No Kaggle-internal secret is needed by this smoke.
-4. Check the account's verification/GPU eligibility prompts, available accelerators,
-   remaining quota and session/output limits in Kaggle. No quota or accelerator
-   availability is assumed. Use the configured Kaggle dataset attachment; no manual download/reupload is
-   needed. Accept source terms only if Kaggle actually requires it.
-
-GitHub main protection remains a separate recommended account setting; no additional
-GitHub credentials are needed for this session's working connector. PRs #1 and #2 were reviewed and merged with passing checks; real-data validation
-remains pending.
+No local smoke receipt was found; remote jobs cannot yet be inspected. No job was
+submitted in this continuation, so there is no job ID/version, quota use, CUDA,
+remote dataset or retrieved-artifact evidence. Full validation/splits remain pending.
+Use the actual authenticated Kaggle owner after access works; candidate GitHub owner
+names in older prepared examples are not authenticated account evidence.
 
 ## Implemented checks
 
 ```sh
-# After package/network access works; agent can install this, no token in arguments.
+# Run network commands with supported network-enabled execution; no token in arguments.
 python -m pip install -e ".[runner]"
 trustretina check-runner
 ```
@@ -127,8 +92,9 @@ to Kaggle/kaggle-cli:
 
 The audited upstream package identifies itself as 2.2.5. Its CLI documents script
 push/status/output; push runs by default (no --no-run is passed by the explicit
-smoke executor). The runner extra targets this API generation; actual package
-installation and version compatibility remain to be checked after network recovery.
+smoke executor). The runner extra targets this API generation; Kaggle 2.2.5 is now
+installed locally. Remote authentication and runner compatibility remain unverified
+until api.kaggle.com is allowed.
 No paid fallback is selected. Kaggle remains a first candidate, subject to account
 access, quota and successful smoke evidence. Model-training automation and durable
 cross-session checkpoint export remain Phase 2 work.
