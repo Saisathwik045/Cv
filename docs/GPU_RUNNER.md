@@ -4,7 +4,18 @@ Latest continuation: see [Kaggle access checkpoint](KAGGLE_ACCESS_STATUS.md).
 The configured source is andrewmvd/ocular-disease-recognition-odir5k, attached
 directly. Dataset contents and remote execution remain unverified.
 
-## Observed Phase 1 verdict
+## Current cloud-session result — 28 October 2026
+
+PR #3 is merged; latest main is cae2fbc915e52c52d571fbbe8e8551066475f39f.
+The new applied policy allows www.kaggle.com and KAGGLE_API_TOKEN is ready/present.
+A bounded actual Kaggle request still fails connecting to managed proxy:8080
+(curl exit 7, HTTP 000). Client installation obtained no package candidate.
+Authentication/username and all remote acceptance gates remain unverified.
+No job was submitted. Recover the managed proxy; host/token presence setup is
+already complete. Full evidence and resume sequence are in KAGGLE_ACCESS_STATUS.md.
+The observations below describe the previous session, not the current setup.
+
+## Historical Phase 1 verdict
 
 **Unattended GPU execution is NOT verified.** No remote smoke job or training was
 submitted; no paid resources were provisioned; **no GPU quota was used**. A fixed

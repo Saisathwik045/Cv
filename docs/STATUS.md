@@ -1,58 +1,73 @@
-# Status — Phase 1 merged; Kaggle access blocked
+# Status — Phase 1 merged; remote acceptance blocked
 
-PR #2 was reviewed and merged after all latest checks passed. Merged main:
-16f0a5c64f991a73f383bb78d8fdfe9f1740a9d1. Real-data validation is still pending.
-See KAGGLE_ACCESS_STATUS.md for the current evidence and resume instructions.
+## Cloud-session recheck — 28 October 2026, 22:58 IST
 
-## Completed
+Repository identity is confirmed: TrustRetina is the project name; the repository
+is Saisathwik045/Cv. AGENTS.md, PROJECT_CONTEXT.md, experiment protocol and PRs
+#1–#3 match this project. The unrelated compiler checkout was not modified.
 
-- Reviewed Phase 0 PR #1 against every foundation acceptance criterion. All latest
-  push/PR checks passed on Python 3.11/3.12; local foundation tests passed. Merged
-  with expected-head protection: main ce20b940020109a4dcd37b56a106d3b11ed4ab73.
-  See PHASE0_REVIEW.md. Started phase/01-data from that merged main.
-- Implemented discovery, authoritative data.xlsx parsing and strict patient/image
-  validation. Patient-level N,D,G,C,A,H,M,O labels stay paired with both eyes.
-- Implemented deterministic multilabel patient splits, per-class support checks,
-  hashed inventories, separate persistent partition files, provenance and completion
-  checksums; atomic publication and verified immutable reuse.
-- Implemented read-only check-runner, nontraining smoke preparation and explicit
-  submission/polling/version-pinned retrieval with checksum/nonce/CUDA verification.
-  Failures cannot mark GPU automation verified; raw client output is withheld.
-- Local Python 3.12 checks: 38 automated tests passed, editable package installed,
-  compileall, Phase 0/1 config/plan checks and git diff --check passed. CI installs
-  the data extra and exercises synthetic XLSX/images plus mocked runner transport
-  on Python 3.11 and 3.12. Final remote CI status is reported in the PR/chat handoff.
+PRs #1, #2 and #3 are already merged. Current remote main is
+cae2fbc915e52c52d571fbbe8e8551066475f39f (PR #3 merge). PR #3 head
+c59be415ea1237fa087437db2201bd27e65f6855 has four successful GitHub check runs
+(push/PR, Python 3.11/3.12). No additional merge was needed. Its review-submission
+list is empty; no new approval or review result is claimed.
 
-## Real-data status
+The new managed configuration is applied: observations_current=true, enforced
+restricted networking includes www.kaggle.com and package/GitHub hosts, and
+KAGGLE_API_TOKEN is reported ready. A presence-only process check confirms the
+token variable is present. No credential value or secret-file content was read
+or printed. Authentication and the actual Kaggle username remain unverified.
 
-The user supplied the Kaggle reference andrewmvd/ocular-disease-recognition-odir5k.
-It is now configured for direct attachment; content access/discovery remains
-unverified because connectivity and authentication are blocked.
-**Real-data validation has NOT passed.** Tests generate clearly marked synthetic
-fixtures; their counts/support are not real ODIR findings. No production split
-manifest, patient count, disease metric or training checkpoint is claimed.
-Phase 1 code is ready for real-data acceptance once original inputs are mounted.
+Actual shell access still fails before an HTTP response: one bounded Kaggle probe
+returned curl exit 7, "Failed to connect to proxy port 8080 ... Could not connect
+to server", HTTP status 000. Git fetch failed at the same proxy. One bounded
+installation attempt for kaggle>=2.2.5,<3 (--retries 0 --timeout 10) obtained no
+package candidate. This does not establish that the version is unavailable on
+PyPI. The Kaggle client remains unavailable. Network retries stopped.
 
-## GPU automation status
+No verification.json, kernel-metadata.json or smoke.json files were found in
+/workspace/Cv, /workspace/shared or /workspace/scratch. Prior saved evidence also
+records no submission. No remote inspection was possible, so absence of jobs on
+the Kaggle account is not established. No job was submitted in this session;
+there is no new remote job ID, GPU quota use, training or paid provisioning.
 
-Unattended GPU execution is NOT verified. check-runner observed: Kaggle client not
-installed; supported credential-presence checks all false; authentication,
-submission, status and retrieval unverified. The enforced allowlist excludes
-www.kaggle.com; all shell HTTPS probes fail connecting to managed proxy:8080.
-Managed environment reports no bound secrets or outbound identity.
+The local checkout was still at initial commit 4cbc1b6 when this session started.
+Shell fetch could not update it. This documentation continuation is based directly
+on current remote main through the working GitHub connector; it does not recreate
+completed implementation or claim local code checks against an updated checkout.
 
-A GPU arithmetic and dataset-discovery smoke bundle was prepared under ignored artifacts, with no
-submission, no training, no paid provisioning and **no GPU quota used**. Mocked
-transport tests exercise success/failure transitions but are not remote evidence.
-See GPU_RUNNER.md for exact account/settings actions and executable commands.
+## Completed implementation
 
-## Next action
+- Phase 0 foundation and Phase 1 discovery, authoritative data.xlsx parsing,
+  strict patient/image validation and deterministic patient-separated splits.
+- Per-class support/leakage checks, immutable manifests, input/source hashes,
+  provenance and output checksums.
+- Private nontraining CUDA smoke with direct attachment of
+  andrewmvd/ocular-disease-recognition-odir5k.
+- Durable submission intent, pinned job version and resumable polling/retrieval,
+  with nonce/checksum/CUDA/dataset checks before declaring success.
+- Previous evidence: 38 local synthetic/mocked tests passed. PR #3 CI passed on
+  Python 3.11/3.12. These are not real-data or remote GPU evidence.
 
-Do not start Phase 2. Apply the supported environment host/secret settings described
-in KAGGLE_ACCESS_STATUS.md. No manual data download/reupload is required. Check the
-applied settings once in a fresh cloud session; do not repeat failed network probes
-in the unchanged session. Install/authenticate the real Kaggle client when possible,
-identify the actual owner and submit the single already-authorized GPU/dataset smoke.
-Resume with its saved ID rather than submitting another job. If smoke and retrieval
-succeed, run existing validation/splitting remotely and retrieve manifests with
-provenance. Keep raw images, patient manifests and credentials outside Git.
+## Remote acceptance
+
+GPU smoke, actual CUDA execution, attached data.xlsx/original-image presence,
+remote status polling and checksum-verified artifact retrieval remain unverified.
+Full real-data validation has not run; no production split manifests, dataset
+version, remote validation reports or real-data hashes have been retrieved.
+No labels, duplicate policy or validation safeguards were changed.
+
+## Next executable step
+
+Recover the managed proxy service through the Codex environment/support flow;
+the Kaggle host rule and token presence no longer need to be added. No project
+code change can repair this transport failure. Retry only after the environment
+changes. See KAGGLE_ACCESS_STATUS.md for the preserved authorization and sequence.
+
+After connectivity works: update the checkout from latest main, install compatible
+runner dependencies, authenticate, establish the actual Kaggle username, inspect
+local receipts and remote jobs, then resume an existing smoke or submit the single
+authorized short nontraining GPU smoke. If it succeeds, run existing real-data
+validation/splitting remotely and preserve reports/manifests, dataset and kernel
+versions, source revision and hashes outside Git. Phase 2 remains gated on these
+acceptance results; do not start training.
