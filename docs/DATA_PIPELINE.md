@@ -42,14 +42,17 @@ patient and are copied honestly to both eyes; they are not verified eye diagnose
 
 Hash workbook and referenced files with SHA256 and check for mutation during reads.
 Record decoded, EXIF-oriented RGB pixel hashes, dimensions and 64-bit dHash.
-Duplicate file/pixel content or dHash distance <= data.near_duplicate_hamming
-(default 2) blocks publication, including duplicates within a patient. dHash is a
-conservative screening proxy with false positives/negatives; it does not certify
-absence of all near duplicates or assess clinical gradability. Pairwise comparison
-cost is quadratic in image count; it is suitable for ODIR-scale input, not an
-unbounded image archive. Review flagged source data with a versioned adjudication
-protocol before changing the cohort or duplicate policy; do not turn off checks
-to obtain favorable outcomes.
+Duplicate file/pixel content and dHash distance <= data.near_duplicate_hamming
+(default 2) are fully enumerated. The default for unspecified duplicate_policy is
+`reject`. Phase 1 explicitly selects `conservative_patient_components_v1`: exact
+matches and unresolved perceptual candidates are retained and connected patient
+IDs are co-grouped transitively before splitting. No image is deleted or label
+changed. Perceptual similarity does not prove duplication; paired 64x64 RGB
+comparisons and contrast/entropy are descriptive evidence, not clinical adjudication.
+Conflicting patient annotations remain visible in the private adjudication artifact.
+See the versioned policy in EXPERIMENT_PROTOCOL.md. Pairwise screening is quadratic
+and intended for ODIR-scale data. No candidate is dismissed or threshold changed
+based on disease/model results.
 
 Only workbook-referenced eyes enter the inventory. Extra/unlabeled official test
 images stay outside all labeled manifests and cannot produce test metrics. This
@@ -59,11 +62,11 @@ explicitly and preserve any external boundaries when mounting it.
 
 ## Stratification and persistence
 
-Use `trustretina-iterative-rarest-label-v1`, a local deterministic patient-level
-multilabel algorithm: allocate rarest remaining labels to the largest unfilled
+Use `trustretina-component-rarest-label-v2`, a local deterministic component-level
+multilabel algorithm: allocate indivisible connected patient groups for rarest remaining labels to the largest unfilled
 per-partition label target, use remaining partition capacity for ties, and use a
-seeded patient ordering for deterministic ties. Capacities use largest-remainder
-rounding of .65/.15/.10/.10. Never expand a patient into eyes before assigning it.
+seeded patient ordering for deterministic ties. Patient-count targets use largest-remainder
+rounding of .65/.15/.10/.10. Whole groups may change realized counts. Never expand a patient into eyes before assigning it.
 This replaces the optional external iterative-stratification dependency; no seed
 search, final outcome tuning or optimization over evaluation results is performed.
 
@@ -74,7 +77,7 @@ never silently retry seeds or publish an inadequately supported split. The initi
 minimum of one positive/negative is only a feasibility floor, not statistical power.
 Calibration's later internal fit/policy split still needs its own support audit.
 
-The published directory contains inventory.json, manifest.json, four separate
+The published directory contains inventory.json, adjudication.json, manifest.json, four separate
 partition JSON files, provenance.json and complete.json. Artifacts include relative
 paths, labels, paired eyes, data kind, workbook/file hashes, dataset fingerprint,
 algorithm/version, split settings, seed, support, implementation-source hashes,

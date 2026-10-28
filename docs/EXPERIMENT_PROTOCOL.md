@@ -24,6 +24,33 @@ Official test images lacking authoritative labels cannot contribute to metrics.
 Only labeled, eligible patients may enter the four partitions. Preserve any external
 official partition boundaries and record the source cohort; never invent labels.
 
+## Duplicate containment policy (version 1)
+
+Use `conservative_patient_components_v1` in Phase 1. Preserve the existing
+64-bit horizontal dHash detector and Hamming distance <=2, alongside raw-file and
+EXIF-oriented decoded-RGB SHA256 equality. Enumerate all pairs rather than stopping
+at the first. Exact equality confirms identical file/pixel content; a perceptual
+candidate alone remains unresolved. Aligned thumbnail MAE/PSNR/correlation,
+contrast/entropy and metadata provide descriptive technical evidence, never a
+clinical decision or a model-performance-selected threshold.
+
+Retain every image and patient-derived annotation. Co-group all candidate-linked
+patient IDs, including transitive connections, into indivisible components. Both
+eyes stay with their patient. This conservatively contains unresolved pairs and
+possible hash false positives. Conflicting annotations are recorded without
+relabeling or asserting that different patients are the same person. No candidate
+is dismissed on visual inspection alone. Within-patient duplicates remain in the
+same component. Report retained duplication and label conflicts as limitations.
+
+`trustretina-component-rarest-label-v2` assigns components using the fixed seed and
+original fractions as patient-count targets. Whole groups can change realized
+counts. No seed search occurs. Fail before publication if connected groups make
+four-partition positive/negative support infeasible, or the deterministic assignment
+fails actual support. Independently recompute all candidate edges when auditing
+manifests, check patient/content/component separation and immutable checksums.
+Keep pair identities, evidence, decisions, reasons, annotation conflicts and exact
+patient assignments in private, versioned adjudication/manifests outside Git.
+
 ## Baseline comparison
 
 All five configured models use eight independent logits with BCEWithLogitsLoss,

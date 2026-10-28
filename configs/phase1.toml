@@ -10,6 +10,8 @@ images = "Training Images"
 label_source = "patient"
 kind = "original_odir"
 near_duplicate_hamming = 2
+# Retain all candidates, images and labels; connected patients share one partition.
+duplicate_policy = "conservative_patient_components_v1"
 # sheet = "Sheet1"  # Required only when multiple sheets have the full schema.
 
 [paths]

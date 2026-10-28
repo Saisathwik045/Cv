@@ -20,6 +20,8 @@ def load_config(path):
         raise ValueError("ODIR source labels must be described as patient labels")
     if Path(config["data"]["labels"]).name != "data.xlsx":
         raise ValueError("Original data.xlsx is the authoritative label source")
+    if config['data'].get('duplicate_policy', 'reject') not in ('reject', 'conservative_patient_components_v1'):
+        raise ValueError('Unknown duplicate handling policy')
     split = config["split"]
     fractions = split["fractions"]
     if (split["names"] != PARTITIONS or len(fractions) != 4
