@@ -161,3 +161,65 @@ class DuplicateGroupsTests(unittest.TestCase):
         expected=[comparison(self.root,pair) for pair in pairs]
         actual=adjudicate(inventory['patients'],2,self.root)
         self.assertEqual(expected,[p['image_comparison'] for p in actual['pairs']])
+
+    def test_cached_comparison_detects_source_mutation(self):
+        from unittest.mock import patch
+        from trustretina.data.duplicates import comparison, adjudicate
+        self.connect('0_left.png', '1_left.png')
+        inventory = validate_dataset(self.config)
+        def mutate_after_read(root, pair, cache=None):
+            value = comparison(root, pair, cache)
+            (root / pair['a']['path']).write_bytes(b'changed after the cached read')
+            return value
+        with patch('trustretina.data.duplicates.comparison', side_effect=mutate_after_read):
+            with self.assertRaisesRegex(DataValidationError, 'changed during duplicate comparison'):
+                adjudicate(inventory['patients'], 2, self.root)
+
+    def test_fixed_seed_support_repair_moves_whole_groups_without_losing_support(self):
+        from trustretina.data.splits import repair_support
+        patients = [{'patient_id':str(i),'labels':[int(i%8==j) for j in range(8)]} for i in range(160)]
+        giant = patients[:128]
+        units = [giant] + [[p] for p in patients[128:]]
+        groups = [giant.copy(), [], [], []]
+        non_h = [p for p in patients[128:] if not p['labels'][5]]
+        h = [p for p in patients[128:] if p['labels'][5]]
+        groups[0].extend(h)
+        # Three complete non-H class cycles, leaving H absent in all three roles.
+        for k in range(1,4):groups[k]=non_h[(k-1)*7:k*7]
+        groups[0].extend(non_h[21:])
+        original = copy.deepcopy(groups)
+        rank = {i:i for i in range(len(units))}
+        moves = repair_support(groups, units, self.config['split'], [104,24,16,16], rank)
+        self.assertEqual(len(moves),3)
+        self.assertTrue(all(len(m['patient_ids'])==1 for m in moves))
+        self.assertTrue({str(i) for i in range(128)} <= {p['patient_id'] for p in groups[0]})
+        self.assertEqual(len({p['patient_id'] for rows in groups for p in rows}),160)
+        self.assertTrue(all(sum(p['labels'][j] for p in rows)>=1 and sum(not p['labels'][j] for p in rows)>=1 for rows in groups for j in range(8)))
+        repeated = copy.deepcopy(original)
+        self.assertEqual(moves, repair_support(repeated, units, self.config['split'], [104,24,16,16], rank))
+        self.assertEqual(groups,repeated)
+
+    def test_support_repair_fails_instead_of_splitting_an_indivisible_group(self):
+        from trustretina.data.splits import repair_support
+        giant=[{'patient_id':str(i),'labels':[int(i%8==j) for j in range(8)]} for i in range(80)]
+        groups=[giant.copy(),[],[],[]]
+        with self.assertRaisesRegex(DataValidationError,'No floor-preserving'):
+            repair_support(groups,[giant],self.config['split'],[52,12,8,8],{0:0})
+        self.assertEqual(groups,[giant,[],[],[]])
+
+    def test_support_repair_enforces_negative_outcome_floors(self):
+        from trustretina.data.splits import repair_support
+        normal=[1,0,0,0,0,0,0,0]
+        disease=[0,1,1,1,1,1,1,1]
+        groups=[];units=[];index=0
+        for k in range(4):
+            rows=[]
+            for labels in [normal]*(3 if k==0 else 1 if k==1 else 2)+[disease]*2:
+                patient={'patient_id':str(index),'labels':labels.copy()};index+=1
+                rows.append(patient);units.append([patient])
+            groups.append(rows)
+        settings={**self.config['split'],'minimum_negative_patients':2}
+        moves=repair_support(groups,units,settings,[8,3,3,3],{i:i for i in range(len(units))})
+        self.assertEqual(len(moves),1)
+        self.assertEqual(moves[0]['outcome'],'negative')
+        self.assertTrue(all(sum(p['labels'][j] for p in rows)>=1 and sum(not p['labels'][j] for p in rows)>=2 for rows in groups for j in range(8)))

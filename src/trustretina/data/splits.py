@@ -13,7 +13,58 @@ from trustretina.config import CLASSES, PARTITIONS
 from .validation import DataValidationError, canonical_hash, file_hash, validate_dataset
 from .duplicates import verified_components
 
-ALGORITHM = "trustretina-component-rarest-label-v2"
+ALGORITHM = "trustretina-component-rarest-label-repair-v3"
+
+
+def repair_support(groups, units, settings, targets, rank):
+    """Reduce support deficits with whole-component moves and no seed search.
+
+    Never create/increase a donor deficit. If no such move exists, fail closed;
+    this constructive method does not claim to solve all feasible assignments.
+    """
+    positive = [[sum(p['labels'][j] for p in rows) for j in range(8)] for rows in groups]
+    sizes = [len(rows) for rows in groups]
+    location = {p['patient_id']: k for k, rows in enumerate(groups) for p in rows}
+    owner = [location[unit[0]['patient_id']] for unit in units]
+    unit_pos = [[sum(p['labels'][j] for p in unit) for j in range(8)] for unit in units]
+    floors = (settings['minimum_positive_patients'], settings['minimum_negative_patients'])
+    moves = []
+    while True:
+        deficits = [(k, j, outcome) for k in range(4) for j in range(8) for outcome in (0, 1)
+                    if (positive[k][j] if outcome == 0 else sizes[k] - positive[k][j]) < floors[outcome]]
+        if not deficits:
+            return moves
+        # Fixed role/class/outcome ordering, independent of any model result.
+        target, label, outcome = deficits[0]
+        choices = []
+        for i, unit in enumerate(units):
+            donor = owner[i]
+            count = unit_pos[i][label] if outcome == 0 else len(unit) - unit_pos[i][label]
+            if donor == target or not count:
+                continue
+            after_size = sizes[donor] - len(unit)
+            after_pos = [positive[donor][j] - unit_pos[i][j] for j in range(8)]
+            if any(after_pos[j] < min(positive[donor][j], floors[0])
+                   or after_size - after_pos[j] < min(sizes[donor] - positive[donor][j], floors[1])
+                   for j in range(8)):
+                continue
+            deviation = sum(abs(sizes[k] + (len(unit) if k == target else -len(unit) if k == donor else 0) - targets[k]) for k in range(4))
+            choices.append((len(unit), deviation, rank[i], i))
+        if not choices:
+            raise DataValidationError('No floor-preserving whole-component support repair found; no manifest published')
+        i = min(choices)[-1]
+        donor = owner[i]
+        ids = {p['patient_id'] for p in units[i]}
+        groups[donor] = [p for p in groups[donor] if p['patient_id'] not in ids]
+        groups[target].extend(units[i])
+        for k, sign in ((donor, -1), (target, 1)):
+            sizes[k] += sign * len(units[i])
+            for j in range(8):
+                positive[k][j] += sign * unit_pos[i][j]
+        owner[i] = target
+        moves.append({'patient_ids': sorted(ids), 'from': PARTITIONS[donor], 'to': PARTITIONS[target],
+                      'required_class': CLASSES[label], 'outcome': 'positive' if outcome == 0 else 'negative',
+                      'reason': 'Prespecified support floor; whole component, donor support preserved; no model outcomes'})
 
 
 def make_splits(inventory, config):
@@ -69,7 +120,8 @@ def make_splits(inventory, config):
             for j in range(8):
                 need[best][j] -= sum(p['labels'][j] for p in units[i])
             remaining.remove(i)
-    manifest = {'schema_version': 1, 'algorithm': ALGORITHM,
+    repairs = repair_support(groups, units, settings, sizes, rank)
+    manifest = {'schema_version': 1, 'algorithm': ALGORITHM, 'support_repairs': repairs,
                 'dataset_fingerprint': inventory['fingerprint'], 'class_order': CLASSES,
                 'label_source': 'patient', 'seed': config['seed'], 'split_settings': settings,
                 'partitions': {name: sorted(groups[k], key=lambda p: p['patient_id'])
@@ -79,7 +131,7 @@ def make_splits(inventory, config):
 
 
 def audit_manifest(manifest, inventory):
-    if (manifest['class_order'] != CLASSES or manifest['label_source'] != 'patient'
+    if (manifest.get('algorithm') != ALGORITHM or manifest['class_order'] != CLASSES or manifest['label_source'] != 'patient'
             or set(manifest['partitions']) != set(PARTITIONS)
             or manifest['dataset_fingerprint'] != inventory['fingerprint']):
         raise DataValidationError('Manifest schema/partition/dataset mismatch')
@@ -120,7 +172,7 @@ def audit_manifest(manifest, inventory):
 
 def implementation_provenance():
     implementation = canonical_hash({name: file_hash(Path(__file__).with_name(name))
-                                     for name in ('validation.py', 'splits.py', 'duplicates.py')})
+                                     for name in ('validation.py', 'splits.py', 'duplicates.py', 'stages.py')})
     try:
         commit = subprocess.check_output(['git', '-C', str(Path(__file__).resolve().parents[3]),
                                           'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL,
@@ -139,9 +191,22 @@ def prepare_data(config, destination, checkpoint=None):
     if destination.is_relative_to(root) or root.is_relative_to(destination):
         raise DataValidationError('Artifact bundle and raw dataset must have disjoint paths')
     inventory = validate_dataset(config, checkpoint=checkpoint)
+    return _publish_validated(config, destination, inventory)
+
+
+def _publish_validated(config, destination, inventory, validation_stage=None):
+    """Internal publication after fresh validation or verified stage reuse."""
+    destination = Path(destination).resolve()
+    root = Path(config['data']['root']).resolve()
+    if destination.is_relative_to(root) or root.is_relative_to(destination):
+        raise DataValidationError('Artifact bundle and raw dataset must have disjoint paths')
+    if canonical_hash({k:v for k,v in inventory.items() if k != 'fingerprint'}) != inventory['fingerprint']:
+        raise DataValidationError('Validated inventory fingerprint mismatch')
     provenance = implementation_provenance()
+    if validation_stage is not None:
+        provenance['validation_stage'] = validation_stage
     key = canonical_hash({'inventory': inventory['fingerprint'], 'seed': config['seed'],
-                          'split': config['split'], 'implementation': provenance['implementation_sha256'], 'algorithm': ALGORITHM})
+                          'split': config['split'], 'implementation': provenance['implementation_sha256'], 'algorithm': ALGORITHM, 'validation_stage': validation_stage})
     if destination.exists():
         completion = json.loads((destination / 'complete.json').read_text())
         if completion['input_key'] != key:

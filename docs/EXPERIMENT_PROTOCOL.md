@@ -42,14 +42,23 @@ relabeling or asserting that different patients are the same person. No candidat
 is dismissed on visual inspection alone. Within-patient duplicates remain in the
 same component. Report retained duplication and label conflicts as limitations.
 
-`trustretina-component-rarest-label-v2` assigns components using the fixed seed and
+`trustretina-component-rarest-label-repair-v3` assigns components using the fixed seed and
 original fractions as patient-count targets. Whole groups can change realized
 counts. No seed search occurs. Fail before publication if connected groups make
 four-partition positive/negative support infeasible, or the deterministic assignment
-fails actual support. Independently recompute all candidate edges when auditing
+cannot repair actual support. After initial allocation, reduce support deficits in
+fixed partition/class/outcome order by moving whole components. Never create or
+increase a donor deficit. Prefer the smallest component, then least total patient
+count deviation from the fixed fraction targets, then the existing seeded rank.
+Each move strictly reduces the integer deficit; no seed search or model performance
+criterion is used. Record every move privately. If no safe move exists, fail closed;
+this constructive repair does not prove all other assignments infeasible.
+Independently recompute all candidate edges when auditing
 manifests, check patient/content/component separation and immutable checksums.
 Keep pair identities, evidence, decisions, reasons, annotation conflicts and exact
 patient assignments in private, versioned adjudication/manifests outside Git.
+Later calibration fit/policy subdivisions and uncertainty resampling must preserve
+these same connected components, including both eyes and all linked patient IDs.
 
 ## Baseline comparison
 

@@ -2,8 +2,9 @@
 
 The implemented pipeline performs discovery, original-workbook parsing, image
 validation, deterministic patient grouping/stratification and persistent manifests.
-**Only synthetic fixtures have been validated in this session. Real ODIR data is
-absent; no real-data counts, splits, support or disease results are claimed.**
+Local checks use explicitly synthetic fixtures. Current real-data CPU acceptance
+and private artifact provenance are recorded in STATUS.md; test success alone does
+not establish real-data acceptance. No disease/model performance is claimed.
 
 ## Execute
 
@@ -62,7 +63,7 @@ explicitly and preserve any external boundaries when mounting it.
 
 ## Stratification and persistence
 
-Use `trustretina-component-rarest-label-v2`, a local deterministic component-level
+Use `trustretina-component-rarest-label-repair-v3`, a local deterministic component-level
 multilabel algorithm: allocate indivisible connected patient groups for rarest remaining labels to the largest unfilled
 per-partition label target, use remaining partition capacity for ties, and use a
 seeded patient ordering for deterministic ties. Patient-count targets use largest-remainder
@@ -71,8 +72,9 @@ This replaces the optional external iterative-stratification dependency; no seed
 search, final outcome tuning or optimization over evaluation results is performed.
 
 Check global feasibility first and actual positive/negative patient support for all
-eight classes in every partition afterwards. A greedy split may fail the support
-floor even if a more elaborate allocation exists. Stop and review the protocol;
+eight classes in every partition afterwards. The allocator repairs support deficits with deterministic whole-component moves,
+never worsening donor support. It records each move, preserving the seed, targets
+and graph. If no safe move exists, stop and review the protocol;
 never silently retry seeds or publish an inadequately supported split. The initial
 minimum of one positive/negative is only a feasibility floor, not statistical power.
 Calibration's later internal fit/policy split still needs its own support audit.
@@ -108,3 +110,19 @@ corrupt images, exact/perceptual duplicates, path escapes, ambiguous sheets,
 patient leakage, support failure, deterministic publication/reuse, raw immutability,
 artifact corruption and settings changes. Passing these tests establishes code
 behavior on synthetic inputs, not ODIR provenance or real-data validation.
+
+## Verified CPU stage reuse
+
+`trustretina.data.stages.resume_validation` accepts a completed private
+validated-inventory checkpoint only with an independently verified expected SHA256,
+nonce, source commit, validation/duplicate/config source hashes and dependency
+versions. It verifies the fingerprint/settings, rehashes the workbook and every
+referenced raw image, and recomputes all candidate components. Incomplete stages,
+changed implementations/dependencies, input mutations and fixture-kind changes
+fail closed. Do not take a trust anchor from the file being accepted.
+
+The default prepare-data command always performs fresh validation. The CPU
+workflow can reuse a verified completed stage for a new splitter revision, retaining
+its full lineage in provenance; split construction, support/leakage audits and
+immutable publication execute again. No decoding stage is assumed successful from
+a filename or remote COMPLETE status.
