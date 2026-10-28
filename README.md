@@ -1,1 +1,83 @@
-# Cv
+# TrustRetina
+
+Automated retinal screening **research**, using original ODIR-5K and authoritative
+`data.xlsx` patient labels. Class order: **N, D, G, C, A, H, M, O**.
+
+Retinal image → preprocessing → eight-label classifier → confidence + MC Dropout
+uncertainty + image quality → calibration → ACCEPT / REVIEW REQUIRED → Grad-CAM.
+
+Compare EfficientNet-B0, ResNet50, DenseNet121, ConvNeXt-Tiny and EfficientNet-B2.
+An image inherits its patient's source labels; this does not establish eye-specific
+diagnosis. Both eyes always stay in the same partition. Research output is not a
+validated clinical decision system.
+
+## Setup and working commands
+
+Python 3.11 or 3.12; no GPU, dataset, credentials or notebook execution needed for
+Phase 0 checks. From the repository root:
+
+```sh
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -e .
+python -m unittest discover -s tests -v
+python -m compileall -q src tests
+trustretina check-env
+trustretina check-env --network
+trustretina check-config --config configs/phase0.toml
+trustretina plan --config configs/phase0.toml
+```
+
+`check-env` reports observations, including unknown CUDA status when torch is absent.
+`--network` makes bounded read-only HTTPS probes. `--require-gpu` exits 1 unless a
+PyTorch CUDA device is usable. Configuration errors exit 2. `plan` prints a
+**declarative inventory**, marks jobs `not_implemented`, and never starts work.
+There is no training, validation, inference or report-generation CLI yet.
+
+For a preinstalled managed environment with unavailable package downloads, the
+verified offline installation is:
+
+```sh
+python -m venv --system-site-packages .venv
+.venv/bin/python -m pip install --no-build-isolation --no-deps -e .
+```
+
+This fallback requires setuptools >=68 already installed. A source-only alternative
+is `PYTHONPATH=src python -m trustretina check-env`.
+
+Optional dependency groups in `pyproject.toml` separate `data`, `train`, `reports`,
+`app`, and `runner`. They are declarations, not a validated GPU dependency lock.
+Before Phase 2 choose a compatible torch/torchvision/CUDA combination using the
+[PyTorch installer](https://pytorch.org/get-started/locally/), resolve and freeze the
+complete runner environment, and archive `pip freeze` with every run.
+
+## Configuration and data
+
+Copy `configs/phase0.toml` to ignored `configs/local.toml` and adjust `[data]` and
+`[paths]` for the original dataset. Relative paths resolve from the configuration
+file's directory, not the shell directory. Do not put Kaggle mount paths in Python.
+Configuration validation does not validate or download the dataset.
+
+Keep raw inputs read-only and unmodified. Do not commit data, patient manifests,
+images, predictions, weights, secrets or tokens. Existing notebooks, if added,
+are reference material; all future execution must use scripts and a single
+orchestrator entry point without manual cell execution.
+
+## Project map and current scope
+
+`src/trustretina/` contains the implemented configuration, planning and capability
+checks. Subpackages reserve ownership for data, preprocessing, models, training,
+evaluation, reliability, calibration, Grad-CAM, inference and the upload app;
+their module docstrings explicitly mark future implementation.
+
+- [Project context](docs/PROJECT_CONTEXT.md)
+- [Roadmap and acceptance criteria](docs/ROADMAP.md)
+- [Experiment protocol](docs/EXPERIMENT_PROTOCOL.md)
+- [Execution and artifact contract](docs/AUTOMATION_DESIGN.md)
+- [GPU runner investigation and required actions](docs/GPU_RUNNER.md)
+- [Environment observations](docs/ENVIRONMENT.md)
+- [Status and next action](docs/STATUS.md)
+- [Git workflow](docs/GIT_WORKFLOW.md)
+
+No disease metrics, trained checkpoints, calibration improvements or GPU execution
+are claimed in Phase 0.
