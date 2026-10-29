@@ -59,3 +59,8 @@ class ValidationStagesTests(unittest.TestCase):
         self.config['data']['kind']='original_odir'
         with self.assertRaisesRegex(DataValidationError,'data settings'):
             resume_validation(self.config,self.path,**self.expected)
+
+    def test_sheet_selection_is_reparsed_even_for_unchanged_raw_bytes(self):
+        self.config['data']['sheet']='missing-sheet'
+        with self.assertRaises(DataValidationError):
+            resume_validation(self.config,self.path,**self.expected)

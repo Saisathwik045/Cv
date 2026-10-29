@@ -1,3 +1,26 @@
+# Status — reusable Phase 1 code; experimental protocol NOT approved
+
+## Protocol review — 29 October 2026 (IST)
+
+This section supersedes all earlier “accepted” or “acceptance passed” wording.
+The previous artifacts passed mechanical checks; they are preserved as historical
+sensitivity manifests and are NOT approved for training or calibration.
+The 2,638-record component is a connected component of weak dHash candidates,
+not evidence that these records are duplicate patients or photographs. The prior
+one-positive/one-negative floor is insufficient experimental/calibration approval.
+H has one calibration positive, so disjoint H-supported calibration subdivisions
+are infeasible under those manifests. No models or calibration parameters are fit.
+
+Default Phase 1 duplicate handling is restored to reject/fail closed. Historical
+conservative_patient_components_v1 is retained for reproducible sensitivity analysis.
+Independent image/bridge/rejected-candidate review and a versioned protocol revision
+are required before any new partition approval. Original files/labels/manifests stay
+unchanged and private. Five-backbone architecture remains unchanged.
+
+PR #7 is being reviewed for reusable validation/grouping/checkpoint primitives,
+not experimental readiness. Phase 2 CPU implementation is separate and must fail
+closed without an explicit, checksum-bound protocol/training authorization.
+
 # Status — real-data validation and grouped split acceptance passed
 
 ## Latest checkpoint — 29 October 2026 (IST)

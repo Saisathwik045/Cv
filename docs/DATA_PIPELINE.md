@@ -44,8 +44,8 @@ patient and are copied honestly to both eyes; they are not verified eye diagnose
 Hash workbook and referenced files with SHA256 and check for mutation during reads.
 Record decoded, EXIF-oriented RGB pixel hashes, dimensions and 64-bit dHash.
 Duplicate file/pixel content and dHash distance <= data.near_duplicate_hamming
-(default 2) are fully enumerated. The default for unspecified duplicate_policy is
-`reject`. Phase 1 explicitly selects `conservative_patient_components_v1`: exact
+(default 2) are fully enumerated. The default configuration and unspecified duplicate_policy are
+`reject` pending independent verification. The historical Phase 1 sensitivity case used `conservative_patient_components_v1`: exact
 matches and unresolved perceptual candidates are retained and connected patient
 IDs are co-grouped transitively before splitting. No image is deleted or label
 changed. Perceptual similarity does not prove duplication; paired 64x64 RGB

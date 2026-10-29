@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 
 from trustretina.config import CLASSES
-from .validation import DataValidationError, canonical_hash, file_hash, inside
+from .validation import DataValidationError, canonical_hash, file_hash, inside, parse_workbook
 from .duplicates import verified_components
 
 
@@ -14,7 +14,7 @@ def resume_validation(config, stage, *, expected_sha256, expected_nonce,
     """Trust anchors must come from a separately verified pinned execution receipt.
 
     Never obtain expected_sha256 from the same untrusted file being accepted.
-    This reuses decoding/label parsing only; every referenced raw file is rehashed.
+    This reuses image decoding only; workbook parsing and raw hashes execute again.
     Split preparation and its support/leakage audits always execute again.
     """
     if (not re.fullmatch('[a-f0-9]{64}', expected_sha256)
@@ -51,7 +51,15 @@ def resume_validation(config, stage, *, expected_sha256, expected_nonce,
     if (workbook != inside(root, config['data']['labels'])
             or file_hash(workbook) != inventory['workbook']['sha256']):
         raise DataValidationError('Raw workbook changed since validation')
+    parsed, sheet = parse_workbook(workbook, config['data'].get('sheet'), inventory['data_kind'])
+    if sheet != inventory['workbook']['sheet'] or len(parsed) != len(inventory['patients']):
+        raise DataValidationError('Workbook sheet/selection changed; fresh validation required')
     images = inside(root, config['data']['images'])
+    for original, cached in zip(parsed, inventory['patients']):
+        if (original['patient_id'] != cached['patient_id'] or original['labels'] != cached['labels']
+                or any(inside(images, original['eyes'][eye]) != inside(root, cached['eyes'][eye]['path'])
+                       for eye in ('left', 'right'))):
+            raise DataValidationError('Workbook labels/eye references changed; fresh validation required')
     for patient in inventory['patients']:
         if set(patient['eyes']) != {'left', 'right'}:
             raise DataValidationError('Cached patient is missing an eye')

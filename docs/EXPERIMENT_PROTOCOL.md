@@ -1,3 +1,14 @@
+# Experimental readiness: blocked pending duplicate/protocol review
+
+The rules below include historical Phase 1 choices. The blanket weak-candidate
+co-grouping policy and its published manifests are sensitivity cases, not approved
+experimental partitions. A dHash edge does not establish duplicate identity.
+Do not train or fit calibration/reliability thresholds under the historical
+one-H-positive calibration split. The versioned review will distinguish confirmed,
+probable, unresolved and evidence-supported false-positive relationships using
+independent image evidence; unresolved material risks need sensitivity/quarantine.
+No threshold, seed or partition may be chosen using model performance.
+
 # Experiment protocol (prespecified foundation)
 
 ## Dataset and partitions
