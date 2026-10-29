@@ -1,4 +1,5 @@
-"""MC Dropout, image quality and selective prediction ablations (Phase 3).
+"""Conservative unfitted reliability interfaces."""
 
-No runtime implementation in Phase 0.
-"""
+from .scoring import mc_dropout, quality_proxies, ReliabilityPolicy, fit_reliability
+
+__all__ = ["mc_dropout", "quality_proxies", "ReliabilityPolicy", "fit_reliability"]

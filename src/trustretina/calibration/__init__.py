@@ -1,4 +1,5 @@
-"""Calibration fitted on the reserved calibration partition (Phase 3).
+"""Calibration transforms with explicit fitting authorization."""
 
-No runtime implementation in Phase 0.
-"""
+from .temperature import TemperatureCalibration, fit_temperature
+
+__all__ = ["TemperatureCalibration", "fit_temperature"]

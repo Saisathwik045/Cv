@@ -95,3 +95,9 @@ is verified; no disease metrics, trained checkpoints or
 calibration improvements are claimed. `trustretina check-runner` reports observed readiness and
 exits nonzero when authentication cannot be verified. Smoke preparation never
 submits a job; execution requires the separate `run-runner-smoke` command.
+
+
+CPU implementation contracts and prospective protocol:
+[Phase 2 CPU modules](docs/PHASE2_CPU.md). Install the pinned CPU lock and run the
+non-fitting tests described there. Training remains blocked by duplicate/split and
+calibration protocol review; no training command is exposed.

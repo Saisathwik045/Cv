@@ -1,3 +1,17 @@
+# Phase 2 CPU modules implemented — training blocked (29 October 2026 IST)
+
+PR #7 merged as reusable Phase 1 code after corrected readiness wording and passing
+checks. The original architecture/five-backbone plan is unchanged. CPU factories,
+shared preprocessing, read-only data adapter, gated training, checkpoint/resume,
+2-D multilabel/patient evaluation and calibration/reliability interfaces now exist.
+See [PHASE2_CPU.md](PHASE2_CPU.md) for tested contracts and explicit limitations.
+No models/calibration parameters were fit. No new GPU smoke or paid resources.
+
+Historical splits remain unapproved. Independent data review and a revised,
+checksum-bound protocol release are required, as are calibration support/power and
+a prespecified reliability risk budget. Default fitting and final release fail
+closed. This status supersedes historical acceptance claims below.
+
 # Status — reusable Phase 1 code; experimental protocol NOT approved
 
 ## Protocol review — 29 October 2026 (IST)

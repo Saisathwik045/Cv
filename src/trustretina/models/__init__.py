@@ -1,4 +1,3 @@
-"""Five backbones, eight logits and explicit dropout heads (Phase 2).
+"""Non-fitting factories for the original five-backbone plan."""
 
-No runtime implementation in Phase 0.
-"""
+from .backbones import RetinalClassifier, create_backbone
