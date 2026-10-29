@@ -17,9 +17,14 @@ Independent image/bridge/rejected-candidate review and a versioned protocol revi
 are required before any new partition approval. Original files/labels/manifests stay
 unchanged and private. Five-backbone architecture remains unchanged.
 
-PR #7 is being reviewed for reusable validation/grouping/checkpoint primitives,
-not experimental readiness. Phase 2 CPU implementation is separate and must fail
-closed without an explicit, checksum-bound protocol/training authorization.
+PR #7 was merged for reusable validation/grouping/checkpoint primitives after
+62 tests and CI passed; experimental readiness was explicitly withheld.
+Independent CPU photographic evidence now supports only one probable link and two
+false positives among 302 reviewed candidates, with 232,787 candidates unresolved
+across the full inventory. Weak-edge union reproduces 2,638, but is not a confirmed
+duplicate component. Quarantine would leave 693 patients with only 11 H positives;
+no revised experimental splits were published. See [review v2](DUPLICATE_REVIEW_V2.md).
+Phase 2 CPU implementation remains a separate PR, fitting disabled.
 
 # Status — real-data validation and grouped split acceptance passed
 
