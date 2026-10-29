@@ -169,6 +169,9 @@ class DataTests(unittest.TestCase):
         inventory = validate_dataset(self.config)
         config = copy.deepcopy(self.config)
         config['split']['minimum_positive_patients'] = 3
+        repaired = make_splits(inventory, config)
+        self.assertTrue(all(min(role['positive_patients'].values()) >= 3 for role in repaired['support'].values()))
+        config['split']['minimum_positive_patients'] = 6
         with self.assertRaises(DataValidationError):
             make_splits(inventory, config)
 

@@ -1,3 +1,14 @@
+# Experimental readiness: blocked pending duplicate/protocol review
+
+The rules below include historical Phase 1 choices. The blanket weak-candidate
+co-grouping policy and its published manifests are sensitivity cases, not approved
+experimental partitions. A dHash edge does not establish duplicate identity.
+Do not train or fit calibration/reliability thresholds under the historical
+one-H-positive calibration split. The versioned review will distinguish confirmed,
+probable, unresolved and evidence-supported false-positive relationships using
+independent image evidence; unresolved material risks need sensitivity/quarantine.
+No threshold, seed or partition may be chosen using model performance.
+
 # Experiment protocol (prespecified foundation)
 
 ## Dataset and partitions
@@ -23,6 +34,42 @@ before splitting to prevent leakage. Keep both eyes in the same group.
 Official test images lacking authoritative labels cannot contribute to metrics.
 Only labeled, eligible patients may enter the four partitions. Preserve any external
 official partition boundaries and record the source cohort; never invent labels.
+
+## Duplicate containment policy (version 1)
+
+Use `conservative_patient_components_v1` in Phase 1. Preserve the existing
+64-bit horizontal dHash detector and Hamming distance <=2, alongside raw-file and
+EXIF-oriented decoded-RGB SHA256 equality. Enumerate all pairs rather than stopping
+at the first. Exact equality confirms identical file/pixel content; a perceptual
+candidate alone remains unresolved. Aligned thumbnail MAE/PSNR/correlation,
+contrast/entropy and metadata provide descriptive technical evidence, never a
+clinical decision or a model-performance-selected threshold.
+
+Retain every image and patient-derived annotation. Co-group all candidate-linked
+patient IDs, including transitive connections, into indivisible components. Both
+eyes stay with their patient. This conservatively contains unresolved pairs and
+possible hash false positives. Conflicting annotations are recorded without
+relabeling or asserting that different patients are the same person. No candidate
+is dismissed on visual inspection alone. Within-patient duplicates remain in the
+same component. Report retained duplication and label conflicts as limitations.
+
+`trustretina-component-rarest-label-repair-v3` assigns components using the fixed seed and
+original fractions as patient-count targets. Whole groups can change realized
+counts. No seed search occurs. Fail before publication if connected groups make
+four-partition positive/negative support infeasible, or the deterministic assignment
+cannot repair actual support. After initial allocation, reduce support deficits in
+fixed partition/class/outcome order by moving whole components. Never create or
+increase a donor deficit. Prefer the smallest component, then least total patient
+count deviation from the fixed fraction targets, then the existing seeded rank.
+Each move strictly reduces the integer deficit; no seed search or model performance
+criterion is used. Record every move privately. If no safe move exists, fail closed;
+this constructive repair does not prove all other assignments infeasible.
+Independently recompute all candidate edges when auditing
+manifests, check patient/content/component separation and immutable checksums.
+Keep pair identities, evidence, decisions, reasons, annotation conflicts and exact
+patient assignments in private, versioned adjudication/manifests outside Git.
+Later calibration fit/policy subdivisions and uncertainty resampling must preserve
+these same connected components, including both eyes and all linked patient IDs.
 
 ## Baseline comparison
 

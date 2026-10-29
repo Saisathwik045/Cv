@@ -27,4 +27,5 @@ def make_fixture(folder, count=160):
     config = load_config(Path(__file__).resolve().parents[1] / 'configs/phase1.toml')
     config['data']['root'] = str(root)
     config['data']['kind'] = 'synthetic_fixture'
+    config['data']['duplicate_policy'] = 'reject'
     return config

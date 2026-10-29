@@ -1,3 +1,145 @@
+# Status — reusable Phase 1 code; experimental protocol NOT approved
+
+## Protocol review — 29 October 2026 (IST)
+
+This section supersedes all earlier “accepted” or “acceptance passed” wording.
+The previous artifacts passed mechanical checks; they are preserved as historical
+sensitivity manifests and are NOT approved for training or calibration.
+The 2,638-record component is a connected component of weak dHash candidates,
+not evidence that these records are duplicate patients or photographs. The prior
+one-positive/one-negative floor is insufficient experimental/calibration approval.
+H has one calibration positive, so disjoint H-supported calibration subdivisions
+are infeasible under those manifests. No models or calibration parameters are fit.
+
+Default Phase 1 duplicate handling is restored to reject/fail closed. Historical
+conservative_patient_components_v1 is retained for reproducible sensitivity analysis.
+Independent image/bridge/rejected-candidate review and a versioned protocol revision
+are required before any new partition approval. Original files/labels/manifests stay
+unchanged and private. Five-backbone architecture remains unchanged.
+
+PR #7 is being reviewed for reusable validation/grouping/checkpoint primitives,
+not experimental readiness. Phase 2 CPU implementation is separate and must fail
+closed without an explicit, checksum-bound protocol/training authorization.
+
+# Status — real-data validation and grouped split acceptance passed
+
+## Latest checkpoint — 29 October 2026 (IST)
+
+All 3,500 original labeled patient records and 7,000 referenced eye images are
+retained unchanged. Original data.xlsx remains authoritative; class order is
+N,D,G,C,A,H,M,O and labels remain patient-derived, not verified eye diagnoses.
+Dataset API observation: andrewmvd/ocular-disease-recognition-odir5k version 2,
+ID 611716. Workbook SHA256 remains
+0507270f4edad478857a300514018eabefff5fe3ce04ed3b5bd4fcefbd5f54bf.
+
+The original validator stopped at its first 64-bit dHash match with Hamming
+threshold 2. Full enumeration found 232,790 perceptual candidates, zero exact
+raw-file/decoded-pixel duplicates, and 186,139 candidate pairs with different
+patient label vectors. These are potential annotation conflicts, not proof of
+incorrect labels. All candidates remain conservatively co-grouped: 737 connected
+patient components, 44 nontrivial, largest 2,638 patient records. Both eyes and
+all transitive connections stay together. No candidate was dismissed to improve
+class support, and no image, label or duplicate threshold was changed.
+
+All pairs have numerical comparison evidence. A deterministic technical extremes
+sample of 70 pairs (94 distinct images) was visually reviewed on six sheets along
+with original workbook metadata. It includes probable photographic copies,
+visually different hash matches and low-information previews. Age/sex metadata
+conflicts were retained. This is not clinical or patient-identity adjudication;
+no true-duplicate prevalence is estimated from the selected sample.
+
+Full decoded validation checkpoint: source
+4ddf96236263fd3529b7346e4339e65646042a03, private CPU kernel
+saisathwikregula/trustretina-duplicate-group-validation-v2-b31d192e/1.
+The initial grouped greedy assignment failed H support in calibration and final
+evaluation; it published no splits. H occurs in 17 independent components, so
+that assignment failure did not prove grouping infeasible. The versioned v3
+allocator repairs deficits with deterministic whole-component moves, preserving
+donor support, the fixed seed 2026 and the original fraction targets. It uses
+no model metrics or seed search. The accepted assignment needed two singleton
+moves from train; their IDs remain only in the private manifest.
+
+Accepted publication: source 3692b3765bb3a7ca265fcf71f87be72cafb4bb23,
+private CPU kernel saisathwikregula/trustretina-support-floor-publication-30495e59/1.
+The completed validation stage was reused only after checksum/nonce/source/
+dependency/settings/fingerprint verification and rehashing every raw input.
+The CPU publication run passed support, patient/component separation, deterministic
+reconstruction, raw immutability, immutable reuse and all output checksum checks.
+No GPU smoke, model training or paid provisioning occurred in this continuation.
+Earlier 15/30-minute CPU time-limit attempts remain preserved as failed attempts.
+
+Support below is positive/negative patient records (not eye-specific ground truth):
+
+| Partition | Patients | Images | N | D | G | C | A | H | M | O |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| train | 2696 | 5392 | 843/1853 | 945/1751 | 134/2562 | 152/2544 | 128/2568 | 97/2599 | 101/2595 | 784/1912 |
+| validation | 385 | 770 | 137/248 | 98/287 | 34/351 | 27/358 | 18/367 | 4/381 | 30/355 | 97/288 |
+| calibration | 210 | 420 | 80/130 | 43/167 | 23/187 | 17/193 | 9/201 | 1/209 | 22/188 | 49/161 |
+| final_evaluation | 209 | 418 | 80/129 | 42/167 | 24/185 | 16/193 | 9/200 | 1/208 | 21/188 | 49/160 |
+
+Realized fractions are approximately 77.03%/11.00%/6.00%/5.97%. The giant
+component alone exceeds the 65% train target; targets are soft under indivisible
+components. Every initial one-positive/one-negative class floor passes. H has
+only one positive record in calibration and final evaluation: this is not evidence
+of statistical power, and the planned calibration fit/policy subdivision cannot
+place an H-positive record in both disjoint subsets. Review that protocol before
+Phase 3. Future subdivisions/bootstrap resampling must preserve components.
+
+Private artifacts: artifacts/runner/duplicate-group-validation-v2 (full evidence,
+pair CSV and original failed support), artifacts/runner/duplicate-pair-review
+(technical review and metadata), and artifacts/runner/support-floor-publication
+(accepted manifests, support, complete hashes and provenance). None is committed.
+Code/configuration and synthetic tests are in PR #7; 61 local tests and Python
+3.11/3.12 CI passed for the implementation. No automatic merge is authorized.
+
+Next executable phase: review/merge this Phase 1 PR, then Phase 2 CPU preprocessing,
+model/runner harness implementation and environment locking. Training remains
+outside this request; protocol/power limitations must be resolved before later
+calibration/evaluation claims. Historical checkpoints below are superseded.
+
+# Status — v2 smoke verified; real-data validation blocked by near-duplicate
+
+## Latest continuation — 29 October 2026 (IST)
+
+Resumed existing smoke saisathwikregula/trustretina-smoke-6100700cdc2f41df9219157c21f01309/2.
+No new GPU smoke was submitted. The applied restricted network policy includes
+www.kaggleusercontent.com; artifacts were retrieved through supported network-enabled
+execution. The fresh workspace lacked previous ignored files. The prior receipt
+was recovered from its chat output, and the request was recovered from pinned remote
+source. Its canonical SHA256 matches the prior receipt:
+39f675f8217124bdfe2b41b9da4c81776accb10192fab830c44b2c1edbb0196e.
+Remote source matches the fixed nontraining template. Artifact SHA256 is
+d02cb541240df7c02bf031d737e03496f13b0235bce18b6446f65fa606b6886e;
+checksum and nonce both verified. CUDA arithmetic passed on Tesla T4 with
+PyTorch 2.11.0+cu128. Dataset discovery independently passed: authoritative-style
+XLSX, Training Images and decoded eye samples were found beneath the nested
+/kaggle/input/datasets/andrewmvd/ocular-disease-recognition-odir5k/ODIR-5K/ODIR-5K.
+
+Continued the authorized existing prepare_data workflow in a private CPU-only,
+internet-disabled Kaggle script, without training or paid resources:
+saisathwikregula/trustretina-original-odir-validation-e9e075f05f81/1.
+Source revision: 23ceeb646cfa1fbfedbfa26c66fb3deaadc75c1c (current main at start).
+The dataset API reported version 2 (dataset ID 611716) before submission.
+The validation job verified the workbook against the smoke SHA256:
+0507270f4edad478857a300514018eabefff5fe3ce04ed3b5bd4fcefbd5f54bf.
+Retrieved report checksum, nonce, source hash and GPU-disabled metadata verified.
+
+The job finished, but real-data validation failed closed with DataValidationError:
+"Potential near-duplicate requires adjudication before splitting".
+Validation was not completed; no patient split bundle/manifests were published.
+No labels were altered, no images excluded and near_duplicate_hamming remains 2.
+Adjudication requires a versioned source-data decision before split publication;
+Phase 2/model training remains gated. The current validator stops at the first
+finding and does not expose the candidate pair, so no pair identities, full image
+counts or complete duplicate audit are claimed. Do not bypass this check or retry
+seeds to obtain splits.
+
+Receipts, original remote source, metadata, reports and a complete hash manifest
+are saved outside Git in artifacts/runner/dataset-smoke-v2,
+artifacts/runner/real-data-validation and artifacts/runner/v2-validation-checkpoint.json.
+All 42 existing local synthetic/mocked tests pass; git diff --check passes.
+The historical checkpoints below are superseded by this continuation.
+
 # Status — corrected smoke v2 complete; artifact host blocked
 
 ## Latest continuation — 29 October 2026 (IST)

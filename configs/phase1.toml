@@ -10,6 +10,9 @@ images = "Training Images"
 label_source = "patient"
 kind = "original_odir"
 near_duplicate_hamming = 2
+# Fail closed until independent candidate verification/protocol approval.
+# conservative_patient_components_v1 remains a historical sensitivity mode.
+duplicate_policy = "reject"
 # sheet = "Sheet1"  # Required only when multiple sheets have the full schema.
 
 [paths]
