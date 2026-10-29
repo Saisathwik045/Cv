@@ -30,6 +30,7 @@ def bootstrap_aurc(y,p,strategy_scores,components,*,replicates,seed):
 def run(spec,*,input_root,output,nonce,source_commit):
     start=time.monotonic();output=Path(output);output.mkdir(parents=True,exist_ok=False);cfg=spec['config']
     report={'nonce':nonce,'source_commit':source_commit,'training':False,'gpu_requested':False,'stage':'phase6_analysis','status':'incomplete','protocol_sha256':spec['protocol_sha256'],'release_sha256':spec['release_sha256'],'checkpoint_sha256':spec['checkpoint_sha256'],'final_evaluation_access':False,'risk_policy_fitted':False}
+    json_write(output/'configuration.json',spec)
     try:
         if cfg['final_evaluation_access'] or cfg['risk_policy_fitting'] or cfg['backbone_retraining']:raise ValueError('Phase6 analysis scope violation')
         index_paths=[p for p in Path(input_root).rglob('inputs.json') if file_hash(p)==spec['inputs_sha256']]
@@ -64,7 +65,7 @@ def run(spec,*,input_root,output,nonce,source_commit):
             role_signals[role]={'raw':signals(raw,mc_raw,qualities[role]),'calibrated':signals(calibrated,mc_cal,qualities[role])}
             diagnostics[role]={'role_interpretation':'in-sample calibration fit diagnostic' if role=='calibration' else 'conditional development diagnostic after model selection, not held-out final evidence','raw':calibration_diagnostics(d['labels'],raw,d['component_ids']),'calibrated':calibration_diagnostics(d['labels'],calibrated,d['component_ids'])}
             candidate[role]=candidate_outputs(raw,mc_raw,qualities[role],temperature=temperature)
-            np.savez_compressed(output/(role+'-candidate.npz'),**d,calibrated_probabilities=calibrated,calibrated_mc_patient_probabilities=mc_cal,quality=qualities[role],raw_uncertainty=role_signals[role]['raw']['uncertainty'],calibrated_uncertainty=role_signals[role]['calibrated']['uncertainty'])
+            np.savez_compressed(output/(role+'-candidate.npz'),**d,calibrated_probabilities=calibrated,calibrated_mc_patient_probabilities=mc_cal,quality=qualities[role],raw_mc_mean=mc_raw.mean(0),raw_mc_variance=mc_raw.var(0,ddof=0),calibrated_mc_mean=mc_cal.mean(0),calibrated_mc_variance=mc_cal.var(0,ddof=0),raw_uncertainty=role_signals[role]['raw']['uncertainty'],calibrated_uncertainty=role_signals[role]['calibrated']['uncertainty'])
             json_write(output/(role+'-decisions.json'),[{'patient_id':pid,'positive_labels':labels,'decision':decision,'explanation_target_index':int(target)} for pid,labels,decision,target in zip(d['patient_ids'],candidate[role]['positive_labels'],candidate[role]['decision'],candidate[role]['explanation_target_indices'])])
         np.savez_compressed(output/'quality-normalizer.npz',sorted_training_feature_distributions=np.sort(features['train'],axis=0));json_write(output/'fit-diagnostics.json',diagnostics)
         d=data['validation'];comparisons={};curves={}
