@@ -1,3 +1,17 @@
+# Phase 4 — fixed-schedule completion and explicit containment in progress
+
+PR #10 is verified merged at `9943135`; its final CI passed. The historical v3
+blocked status below is preserved. Architecture and all five backbones are unchanged.
+See [development v4](DEVELOPMENT_V4.md) for the bounded, evidence-based protocol.
+
+The lost content cache was reconstructed once in 779 seconds, without repeating
+completed image validation. The recovered schedule matches all 422 saved results.
+The remaining 1,114 entries are running in checkpointed 384/384/346 CPU batches;
+accepted hard session reservations total 4,500 seconds against a 7,200-second cap.
+All 14 named cases were rendered and technically reviewed; uncertainty is explicitly
+contained, never called clinical identity or annotation error. No GPU has been
+submitted while complete-schedule/readiness evidence is pending.
+
 # Phase 3 actual evidence — split freeze and pilot BLOCKED (29 October 2026 IST)
 
 Latest merged main was verified at `0d5986f`; PR #8 and PR #9 are present. The

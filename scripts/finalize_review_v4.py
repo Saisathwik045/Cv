@@ -33,6 +33,7 @@ def finalize(args):
         or cache["remaining"] != 1114
     ):
         raise ValueError("Fixed selection reconstruction/recovery incomplete")
+    if any(cache_receipt.get(k)!=prior_receipt.get(k) for k in ('dataset_id','dataset_version_observed')):raise ValueError('Recovery source dataset version changed')
     selection = json.loads((root / "selection.json").read_text())
     catalog = json.loads((root / "catalog.json").read_text())
     selection_sha = file_hash(root / "selection.json")
@@ -62,6 +63,7 @@ def finalize(args):
             or r.get("packages") != cache["packages"]
         ):
             raise ValueError("Batch selection/method/environment mismatch")
+        if any(v.get(k)!=prior_receipt.get(k) for k in ('dataset_id','dataset_version_observed')):raise ValueError('Batch source dataset version changed')
         parts.append(
             [json.loads(l) for l in (b / "results.jsonl").read_text().splitlines() if l]
         )
@@ -80,7 +82,13 @@ def finalize(args):
             for c in technical["cases"]
         )
     )
-    edges, decisions = group_constraints(inventory, catalog, rows, named_cases=named)
+    previous_path=Path(args.previous_adjudication)
+    if file_hash(previous_path)!=args.previous_adjudication_sha256:raise ValueError('Previous adjudication manifest checksum changed')
+    previous=json.loads(previous_path.read_text())
+    if previous['inventory_sha256']!=cache['inventory_sha256']:raise ValueError('Previous adjudication inventory identity changed')
+    false_positive_indices={p['pair_index'] for p in previous['pairs'] if p['classification']=='evidence_supported_false_positive'}
+    if any(r['pair_index'] in false_positive_indices and r['independent_evidence']['link'] for r in rows):raise ValueError('New evidence conflicts with prior supported false-positive decision')
+    edges, decisions = group_constraints(inventory, catalog, rows, named_cases=named,supported_false_positive_indices=false_positive_indices)
     ledger = json.loads(Path(args.budget).read_text())
     reserved = sum(r["execution_timeout_seconds"] for r in ledger["reservations"])
     actual = sum(r["elapsed_seconds"] for r in reports)
@@ -135,6 +143,8 @@ def finalize(args):
             audit,
             inventory,
             provenance={
+                "dataset_id":prior_receipt['dataset_id'],
+                "dataset_version":prior_receipt['dataset_version_observed'],
                 "prior_validation_report_sha256": prior_receipt["artifact_sha256"],
                 "selection_sha256": selection_sha,
                 "stage_report_checksums": receipt_digests,
@@ -168,6 +178,8 @@ def main():
         "cache-bundle",
         "named-cases",
         "technical-review",
+        "previous-adjudication",
+        "previous-adjudication-sha256",
         "budget",
         "output",
     ):

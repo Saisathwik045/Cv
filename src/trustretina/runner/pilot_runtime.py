@@ -288,6 +288,8 @@ def run_pilot(spec, *, input_root, output, nonce, source_commit):
                     "validation_execution_check_only": True,
                 }
             )
+            (output/'training-log.json').write_text(json.dumps(history,indent=2))
+            report.update(completed_training_epochs=epoch+1,optimizer_steps=step)
             ck = output / f"epoch-{epoch}.pt"
             digest = save_checkpoint(
                 ck,
@@ -349,6 +351,7 @@ def run_pilot(spec, *, input_root, output, nonce, source_commit):
                     "validation_predictions_exact": True,
                 }
             )
+            (output/'reload-evidence.json').write_text(json.dumps(reloads,indent=2))
             model = resumed
             optimizer = resumed_optimizer
             if epoch == 0:

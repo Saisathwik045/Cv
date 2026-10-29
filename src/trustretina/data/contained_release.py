@@ -58,7 +58,7 @@ def group_constraints(
     *,
     named_cases,
     prior_possible=(),
-    supported_false_positive_indices=(0, 1),
+    supported_false_positive_indices=(),
 ):
     by_id = {p["patient_id"]: p for p in inventory["patients"]}
     named = {r["review_index"] for r in named_cases}
@@ -115,6 +115,8 @@ def group_constraints(
                     "reason": reason,
                 }
             )
+        elif row.get("pair_index") in supported_false_positive_indices:
+            decisions.append({'review_index':i,'decision':'preserve_supported_false_positive','reason':'Preserved independently supported prior technical false-positive decision bound to immutable original pair identity'})
         else:
             decisions.append(
                 {
@@ -253,11 +255,14 @@ def publish_release(output, manifest, audit, inventory, *, provenance):
     (output / "checksums.json").write_text(
         json.dumps(checksums, sort_keys=True, indent=2)
     )
+    (output/'complete.json').write_text(json.dumps({'schema_version':4,'release_complete':True,'manifest_sha256':checksums['manifest.json'],'checksums_sha256':file_hash(output/'checksums.json')},sort_keys=True))
     return manifest
 
 
 def pilot_spec_from_release(directory, config_sha256):
     directory = Path(directory)
+    complete=json.loads((directory/'complete.json').read_text())
+    if complete.get('release_complete') is not True or file_hash(directory/'checksums.json')!=complete['checksums_sha256'] or file_hash(directory/'manifest.json')!=complete['manifest_sha256']:raise DataValidationError('Frozen release is incomplete or changed')
     checks = json.loads((directory / "checksums.json").read_text())
     for name in ("manifest.json", "readiness.json", "train.json", "validation.json"):
         if file_hash(directory / name) != checks[name]:
