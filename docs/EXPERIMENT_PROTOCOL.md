@@ -1,3 +1,15 @@
+# Review v2 supersedes historical split acceptance
+
+See [independent duplicate and feasibility review](DUPLICATE_REVIEW_V2.md).
+Historical candidate-connected manifests are diagnostic sensitivity artifacts.
+Confirmed/probable-copy links remain mandatory groups; weak candidates require
+independent evidence or explicit quarantine, never automatic confirmation.
+Before fitting, freeze validation-only selection, distinct calibration-fit and
+calibration-policy groups with all-eight-class support/power, a prespecified risk
+budget and confidence bounds, and an untouched final holdout. One H-positive
+calibration patient cannot support class-specific fitting or disjoint supported
+subdivisions. No revised cohort or experimental split is approved.
+
 # Experimental readiness: blocked pending duplicate/protocol review
 
 The rules below include historical Phase 1 choices. The blanket weak-candidate
