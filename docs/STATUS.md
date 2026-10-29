@@ -1,3 +1,18 @@
+# Phase 3 — bounded verification and prospective development protocol
+
+Latest main was verified at `0d5986f`: PR #8 and PR #9 are merged. This branch
+preserves both implementations, the architecture and all five backbones.
+A private CPU review is running as
+`trustretina-bounded-retinal-review-v3-426a3327/1`, source `2da502a`, dataset version 2.
+It is bounded to 30 minutes and 1,536 detailed comparisons; no GPU was submitted.
+
+The new [development protocol](DEVELOPMENT_V3.md) uses the existing fixed-seed
+component stratifier with supported links only, explicit material-case leakage
+audits and one shared calibration temperature with no class-specific fitting or
+same-set risk-policy fitting. Historical manifests are unchanged. Actual data
+readiness and the single authorized GPU pilot remain pending verified CPU evidence.
+No five-model training is authorized. This section supersedes historical statuses.
+
 # Phase 2 CPU modules implemented — training blocked (29 October 2026 IST)
 
 PR #7 merged as reusable Phase 1 code after corrected readiness wording and passing

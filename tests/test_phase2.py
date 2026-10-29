@@ -307,3 +307,37 @@ class Phase2Tests(unittest.TestCase):
         self.assertEqual(a, b)
         with self.assertRaises(ValueError):
             component_bootstrap_f1(y, p, ["copy"] * 4, replicates=20)
+
+    def test_shared_design_does_not_imply_fitting_authorization(self):
+        from unittest.mock import patch
+        from trustretina.calibration.shared_development import (
+            fit_shared_development,
+            SharedCalibrationPermit,
+        )
+
+        with patch("torch.optim.LBFGS") as optimizer:
+            with self.assertRaises(ProtocolNotReady):
+                fit_shared_development(
+                    np.zeros((2, 8)),
+                    np.zeros((2, 8)),
+                    patient_ids=["a", "b"],
+                    component_ids=["a", "b"],
+                    manifest_sha256="a" * 64,
+                    checkpoint_sha256="b" * 64,
+                )
+            optimizer.assert_not_called()
+            # A synthetic permit exercises refusal on insufficient independent support;
+            # it cannot reach parameter fitting or create a trained/calibrated artifact.
+            permit = SharedCalibrationPermit("a" * 64, "b" * 64, True, True)
+            with self.assertRaisesRegex(ProtocolNotReady, "independent groups"):
+                fit_shared_development(
+                    np.zeros((2, 8)),
+                    np.zeros((2, 8)),
+                    patient_ids=["a", "b"],
+                    component_ids=["a", "b"],
+                    manifest_sha256="a" * 64,
+                    checkpoint_sha256="b" * 64,
+                    permit=permit,
+                    allow_fitting=True,
+                )
+            optimizer.assert_not_called()

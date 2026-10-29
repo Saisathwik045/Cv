@@ -42,6 +42,7 @@ jobs:
       - run: trustretina check-config --config configs/phase0.toml
       - run: trustretina plan --config configs/phase0.toml
       - run: trustretina check-config --config configs/phase1.toml
+      - run: trustretina check-development --config configs/development-v3.toml
       - run: trustretina check-env
 
   duplicate-evidence:
@@ -53,3 +54,4 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -e ".[data,duplicate-review]"
       - run: python -m unittest discover -s tests -p 'test_photo_verification.py' -v
+      - run: python -m unittest discover -s tests -p 'test_bounded_review.py' -v

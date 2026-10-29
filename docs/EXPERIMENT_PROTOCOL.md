@@ -1,3 +1,12 @@
+# Prospective development protocol v3
+
+[Development v3](DEVELOPMENT_V3.md) and `configs/development-v3.toml` define the
+current bounded verification and simpler shared-calibration design. This supersedes
+the infeasible requirement for independent rare-class calibration subdivisions
+for the development pilot only. No per-class calibration or fitted clinical risk
+policy is claimed. All five backbones and architecture components remain.
+Real-data readiness is conditional on a new audit; historical splits stay unapproved.
+
 # Review v2 supersedes historical split acceptance
 
 See [independent duplicate and feasibility review](DUPLICATE_REVIEW_V2.md).
