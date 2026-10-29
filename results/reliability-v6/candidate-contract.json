@@ -1,0 +1,78 @@
+{
+  "artifact_storage": {
+    "analysis_kernel_version": "saisathwikregula/trustretina-phase6-analysis-ab40b8f2/1",
+    "candidate_file": "full/candidate-pipeline.json",
+    "candidate_sha256": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "quality_normalizer_file": "full/quality-normalizer.npz",
+    "quality_normalizer_sha256": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "temperature_file": "full/temperature.json",
+    "temperature_sha256": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202"
+  },
+  "automatic_acceptance_policy_fitted": false,
+  "best_epoch": 2,
+  "calibration_order": "sigmoid(logit(clip(mean_eye_sigmoid,1e-6,1-1e-6))/T)",
+  "checkpoint_sha256": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+  "class_order": [
+    "N",
+    "D",
+    "G",
+    "C",
+    "A",
+    "H",
+    "M",
+    "O"
+  ],
+  "clinical_automatic_acceptance_ready": false,
+  "config_sha256": "e8b11e270c6baf78ebe479ee6d7ba8cfeaf23c43ce9d29061ab906b7894c8a47",
+  "deployment_default": "REVIEW REQUIRED",
+  "deterministic_predictor": "mean left/right sigmoid probabilities",
+  "final_evaluation_accessed": false,
+  "final_evaluation_status": "sealed during Phase6; future research evaluation requires its own authorized execution",
+  "gradcam_layer": "backbone.features.7",
+  "gradcam_target": "highest_deterministic_patient_probability_tie_class_order",
+  "mc_calibration_seed": 72026,
+  "mc_passes": 20,
+  "mc_scope": "trained head.0 Dropout p=0.2; stochastic depth and normalization eval; no inserted layers",
+  "mc_validation_seed": 62026,
+  "preprocessing": {
+    "geometry": "exif_rgb_letterbox_v1",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "size": 224,
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "training_horizontal_flip": false
+  },
+  "preprocessing_sha256": "bb6ab553e8d29d0248555108921b5a81ac7e3860c0165d247e512669b751fa48",
+  "protocol_commit_before_calibration_labels": "d837019b1c566261d24aad024c5b09d6c23d44c5",
+  "protocol_sha256": "6539e0caf37a2468dfdb96917458b0dd2d8705bff9bb092e0c5241c1acebd402",
+  "quality_features": [
+    "foreground_fraction",
+    "contrast",
+    "gradient_energy"
+  ],
+  "quality_fit_role": "train",
+  "quality_normalizer_sha256": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+  "quality_training_input_index_sha256": "a45f0dd9b1e9d49b89014ee3b3e3104f451f3fa9806c824d2ba07cdf17509888",
+  "readiness": "frozen research candidate; needs separately authorized held-out evaluation; automatic acceptance unsupported",
+  "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
+  "reliability_strategy_selection": "none; all three fixed exploratory ablations retained",
+  "role_manifest_sha256": {
+    "calibration": "91fd16b7d6693eee7d98e74335910583fdb3312309d2198cedeeb8bd21d9e969",
+    "train": "082ede51da1698cf44ac904e6b22a4467765892ad6371fc8fa04c48e148c2775",
+    "validation": "109edbb890b030695985682ea413d070b724d7469b28aaabc8a19f49cdb71acb"
+  },
+  "schema": 6,
+  "selected_backbone": "convnext_tiny",
+  "selected_checkpoint_kernel_version": "saisathwikregula/trustretina-full-v5-convnext-tiny-c349c706/1",
+  "source_commit": "b196a11344dee744f14b8a0cd2548272f230d823",
+  "temperature": 0.7226021421263825,
+  "temperature_sha256": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+  "threshold": 0.5
+}

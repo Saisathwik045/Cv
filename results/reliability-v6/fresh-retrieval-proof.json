@@ -1,0 +1,11 @@
+{
+  "kernel_version": "saisathwikregula/trustretina-phase6-analysis-ab40b8f2/1",
+  "independent_private_retrieval_verified": true,
+  "report_sha256": "8086daf9fa61e46f9d2c954752b5f5bf4cf9c63d7896d7ae54b4d0711ecc3e4c",
+  "artifact_sha256": {
+    "candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+    "quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "configuration.json": "503df1bb6fd85917b7bd0d16f8067fa0a77ae7cd24c63293e134f7cf16452547"
+  }
+}

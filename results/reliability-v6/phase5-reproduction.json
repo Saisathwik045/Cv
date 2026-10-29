@@ -1,0 +1,7 @@
+{
+  "validation_image_rows": 1050,
+  "maximum_absolute_probability_difference": 0.0,
+  "fixed_tolerance": 1e-06,
+  "sample_alignment_verified": true,
+  "checkpoint_sha256": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1"
+}

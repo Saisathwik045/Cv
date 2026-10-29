@@ -1,0 +1,597 @@
+{
+  "all_deterministic_binary_decisions_unchanged": true,
+  "automatic_acceptance_policy_fitted": false,
+  "candidate_pipeline_sha256": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+  "class_order": [
+    "N",
+    "D",
+    "G",
+    "C",
+    "A",
+    "H",
+    "M",
+    "O"
+  ],
+  "deployment_default": "REVIEW REQUIRED",
+  "development_comparisons": {
+    "calibrated__confidence": {
+      "any_error_aurc": 0.7102922305538468,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.6037735849056604,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.1320754716981132,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.6,
+          "coverage": 0.2,
+          "hamming_risk": 0.12261904761904761,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.689873417721519,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.15348101265822786,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.7490494296577946,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.1791825095057034,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.7868020304568528,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.19574873096446702,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.1686524527064588,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.15305391294217147,
+          0.183667246308248
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          0.0,
+          0.0
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    },
+    "calibrated__confidence_uncertainty": {
+      "any_error_aurc": 0.709882224466,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.5849056603773585,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.12735849056603774,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.5904761904761905,
+          "coverage": 0.2,
+          "hamming_risk": 0.12142857142857143,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.689873417721519,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.1550632911392405,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.7490494296577946,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.17775665399239543,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.7918781725888325,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.19606598984771573,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.16858541503375374,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.15289274103408548,
+          0.18356227065591527
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          -0.0004401454138742933,
+          0.0003188805009350745
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    },
+    "calibrated__confidence_uncertainty_quality": {
+      "any_error_aurc": 0.7954707026268919,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.7735849056603774,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.1957547169811321,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.8,
+          "coverage": 0.2,
+          "hamming_risk": 0.1988095238095238,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.7974683544303798,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.20332278481012658,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.8365019011406845,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.21482889733840305,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.8223350253807107,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.20970812182741116,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.20093627085211035,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.18441068198162391,
+          0.21807711530960433
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          0.01925431108052257,
+          0.04712430828442316
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    },
+    "raw__confidence": {
+      "any_error_aurc": 0.7102922305538468,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.6037735849056604,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.1320754716981132,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.6,
+          "coverage": 0.2,
+          "hamming_risk": 0.12261904761904761,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.689873417721519,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.15348101265822786,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.7490494296577946,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.1791825095057034,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.7868020304568528,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.19574873096446702,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.1686524527064588,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.15305391294217147,
+          0.183667246308248
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          0.0,
+          0.0
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    },
+    "raw__confidence_uncertainty": {
+      "any_error_aurc": 0.7097856255731885,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.5849056603773585,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.12971698113207547,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.5904761904761905,
+          "coverage": 0.2,
+          "hamming_risk": 0.12142857142857143,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.689873417721519,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.1550632911392405,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.7490494296577946,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.1782319391634981,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.7868020304568528,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.19543147208121828,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.1686120881762257,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.15286192690785796,
+          0.18364381987219774
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          -0.00029755375565629973,
+          0.0002561720495796366
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    },
+    "raw__confidence_uncertainty_quality": {
+      "any_error_aurc": 0.798909840961994,
+      "fixed_coverage": [
+        {
+          "accepted": 0,
+          "any_error_risk": null,
+          "coverage": 0.0,
+          "hamming_risk": null,
+          "target_coverage": 0.0
+        },
+        {
+          "accepted": 53,
+          "any_error_risk": 0.7924528301886793,
+          "coverage": 0.10095238095238095,
+          "hamming_risk": 0.20518867924528303,
+          "target_coverage": 0.1
+        },
+        {
+          "accepted": 105,
+          "any_error_risk": 0.7904761904761904,
+          "coverage": 0.2,
+          "hamming_risk": 0.19166666666666668,
+          "target_coverage": 0.2
+        },
+        {
+          "accepted": 158,
+          "any_error_risk": 0.7911392405063291,
+          "coverage": 0.30095238095238097,
+          "hamming_risk": 0.20253164556962025,
+          "target_coverage": 0.3
+        },
+        {
+          "accepted": 263,
+          "any_error_risk": 0.8365019011406845,
+          "coverage": 0.5009523809523809,
+          "hamming_risk": 0.21435361216730037,
+          "target_coverage": 0.5
+        },
+        {
+          "accepted": 394,
+          "any_error_risk": 0.8274111675126904,
+          "coverage": 0.7504761904761905,
+          "hamming_risk": 0.21161167512690354,
+          "target_coverage": 0.75
+        },
+        {
+          "accepted": 525,
+          "any_error_risk": 0.819047619047619,
+          "coverage": 1.0,
+          "hamming_risk": 0.20714285714285716,
+          "target_coverage": 1.0
+        }
+      ],
+      "hamming_aurc": 0.20240638656570864,
+      "uncertainty": {
+        "hamming_aurc_percentile_95": [
+          0.1861089247868424,
+          0.2202803116517755
+        ],
+        "paired_hamming_aurc_difference_vs_confidence_percentile_95": [
+          0.020359755393437273,
+          0.04902239605474609
+        ],
+        "replicates": 200,
+        "seed": 62026,
+        "unit": "whole containment component; conditional descriptive intervals, not selection-adjusted or clinical bounds"
+      }
+    }
+  },
+  "diagnostics": {
+    "calibration": {
+      "calibrated": {
+        "brier": 0.1390073381209203,
+        "component_equal_brier": 0.13792377679781023,
+        "component_equal_nll": 0.4194419361195878,
+        "macro_ece_10_equal_width_bins": 0.16614933314822514,
+        "patient_nll": 0.42328333765733095
+      },
+      "interpretation": "in-sample calibration fit diagnostic",
+      "raw": {
+        "brier": 0.14101303569875737,
+        "component_equal_brier": 0.140149933254332,
+        "component_equal_nll": 0.42981183301752934,
+        "macro_ece_10_equal_width_bins": 0.18769209081697877,
+        "patient_nll": 0.4323727637023291
+      }
+    },
+    "validation": {
+      "calibrated": {
+        "brier": 0.14010399138167323,
+        "component_equal_brier": 0.14046821380807376,
+        "component_equal_nll": 0.4264253683420609,
+        "macro_ece_10_equal_width_bins": 0.1648302899769022,
+        "patient_nll": 0.4258960770405301
+      },
+      "interpretation": "conditional development diagnostic after model selection, not held-out final evidence",
+      "raw": {
+        "brier": 0.14205538313768812,
+        "component_equal_brier": 0.14233064332264062,
+        "component_equal_nll": 0.43509543680992097,
+        "macro_ece_10_equal_width_bins": 0.1877534445587523,
+        "patient_nll": 0.43474028853238766
+      }
+    }
+  },
+  "final_evaluation_accessed": false,
+  "fit": {
+    "boundary_hit": false,
+    "calibration_components": 331,
+    "calibration_manifest_sha256": "91fd16b7d6693eee7d98e74335910583fdb3312309d2198cedeeb8bd21d9e969",
+    "calibration_patients": 350,
+    "checkpoint_sha256": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "config_sha256": "e8b11e270c6baf78ebe479ee6d7ba8cfeaf23c43ce9d29061ab906b7894c8a47",
+    "fitted_component_weighted_nll": 0.4194419361195878,
+    "identity_component_weighted_nll": 0.42981183301752934,
+    "inference_report_sha256": "5b07469dd440da4f15670da4ccc36988335236213dd51d5c8f1e1e39e31a317f",
+    "interpretation": "in-sample fit diagnostic; no held-out improvement claim",
+    "objective": "component-equal eight-label patient NLL after mean-eye probabilities",
+    "optimizer_evaluations": 13,
+    "optimizer_success": true,
+    "protocol_sha256": "6539e0caf37a2468dfdb96917458b0dd2d8705bff9bb092e0c5241c1acebd402",
+    "role": "calibration",
+    "temperature": 0.7226021421263825
+  },
+  "gradcam_cases": 4,
+  "gradcam_maps": 8,
+  "gradcam_zero_maps": 0,
+  "limitations": [
+    "Calibration diagnostics are in sample",
+    "Validation selected the backbone; ablations are conditional development evidence",
+    "Head dropout omits backbone epistemic uncertainty",
+    "Heuristic quality is not clinical gradability",
+    "Sparse classes and duplicate-connected dependence limit claims",
+    "No automatic acceptance cutoff or clinical guarantee supported"
+  ],
+  "mc_scope": "trained head.0 Dropout p=0.2; stochastic depth and normalization eval; no inserted layers",
+  "mc_supported": true,
+  "support": {
+    "calibration": {
+      "A": {
+        "negative_patients": 334,
+        "negative_supplying_components": 317,
+        "positive_patients": 16,
+        "positive_supplying_components": 16
+      },
+      "C": {
+        "negative_patients": 329,
+        "negative_supplying_components": 315,
+        "positive_patients": 21,
+        "positive_supplying_components": 19
+      },
+      "D": {
+        "negative_patients": 237,
+        "negative_supplying_components": 224,
+        "positive_patients": 113,
+        "positive_supplying_components": 110
+      },
+      "G": {
+        "negative_patients": 329,
+        "negative_supplying_components": 310,
+        "positive_patients": 21,
+        "positive_supplying_components": 21
+      },
+      "H": {
+        "negative_patients": 340,
+        "negative_supplying_components": 321,
+        "positive_patients": 10,
+        "positive_supplying_components": 10
+      },
+      "M": {
+        "negative_patients": 333,
+        "negative_supplying_components": 314,
+        "positive_patients": 17,
+        "positive_supplying_components": 17
+      },
+      "N": {
+        "negative_patients": 234,
+        "negative_supplying_components": 222,
+        "positive_patients": 116,
+        "positive_supplying_components": 113
+      },
+      "O": {
+        "negative_patients": 252,
+        "negative_supplying_components": 243,
+        "positive_patients": 98,
+        "positive_supplying_components": 95
+      }
+    },
+    "validation": {
+      "A": {
+        "negative_patients": 500,
+        "negative_supplying_components": 493,
+        "positive_patients": 25,
+        "positive_supplying_components": 25
+      },
+      "C": {
+        "negative_patients": 493,
+        "negative_supplying_components": 487,
+        "positive_patients": 32,
+        "positive_supplying_components": 32
+      },
+      "D": {
+        "negative_patients": 356,
+        "negative_supplying_components": 352,
+        "positive_patients": 169,
+        "positive_supplying_components": 168
+      },
+      "G": {
+        "negative_patients": 493,
+        "negative_supplying_components": 488,
+        "positive_patients": 32,
+        "positive_supplying_components": 31
+      },
+      "H": {
+        "negative_patients": 509,
+        "negative_supplying_components": 502,
+        "positive_patients": 16,
+        "positive_supplying_components": 16
+      },
+      "M": {
+        "negative_patients": 499,
+        "negative_supplying_components": 492,
+        "positive_patients": 26,
+        "positive_supplying_components": 26
+      },
+      "N": {
+        "negative_patients": 350,
+        "negative_supplying_components": 344,
+        "positive_patients": 175,
+        "positive_supplying_components": 174
+      },
+      "O": {
+        "negative_patients": 378,
+        "negative_supplying_components": 376,
+        "positive_patients": 147,
+        "positive_supplying_components": 144
+      }
+    }
+  },
+  "temperature": 0.7226021421263825
+}
