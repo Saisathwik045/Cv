@@ -67,8 +67,12 @@ def repair_support(groups, units, settings, targets, rank):
                       'reason': 'Prespecified support floor; whole component, donor support preserved; no model outcomes'})
 
 
-def make_splits(inventory, config):
-    patients = inventory['patients']
+def allocate_components(patients, patient_groups, config):
+    """Pure shared allocator. Assignments are diagnostic until independently audited.
+
+    Keeps the existing rarest-label + whole-group support-repair v3 method; no
+    alternative seeds or model results are accepted as inputs.
+    """
     settings = config['split']
     n = len(patients)
     minimum_pos = settings['minimum_positive_patients']
@@ -86,7 +90,10 @@ def make_splits(inventory, config):
     # Allocate the rarest remaining label first, choosing its greatest unfilled
     # per-partition target. No seed retries or final-evaluation outcome selection.
     by_id = {p['patient_id']: p for p in patients}
-    units = [[by_id[pid] for pid in ids] for ids in verified_components(inventory)]
+    flat = [pid for ids in patient_groups for pid in ids]
+    if (len(flat) != len(set(flat)) or set(flat) != set(by_id) or any(not ids for ids in patient_groups)):
+        raise DataValidationError('Components must cover each original patient exactly once')
+    units = [[by_id[pid] for pid in ids] for ids in patient_groups]
     # Four partitions each need a component supplying each outcome. This is a
     # necessary feasibility check; the actual patient support audit remains final.
     for j in range(8):
@@ -121,6 +128,12 @@ def make_splits(inventory, config):
                 need[best][j] -= sum(p['labels'][j] for p in units[i])
             remaining.remove(i)
     repairs = repair_support(groups, units, settings, sizes, rank)
+    return groups, repairs
+
+
+def make_splits(inventory, config):
+    settings = config['split']
+    groups, repairs = allocate_components(inventory['patients'], verified_components(inventory), config)
     manifest = {'schema_version': 1, 'algorithm': ALGORITHM, 'support_repairs': repairs,
                 'dataset_fingerprint': inventory['fingerprint'], 'class_order': CLASSES,
                 'label_source': 'patient', 'seed': config['seed'], 'split_settings': settings,

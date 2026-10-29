@@ -13,7 +13,7 @@ def main(argv=None):
     env = commands.add_parser("check-env", help="Report observed capabilities; does not certify GPU jobs")
     env.add_argument("--network", action="store_true")
     env.add_argument("--require-gpu", action="store_true")
-    for name in ("check-config", "plan"):
+    for name in ("check-config", "plan", "check-development"):
         sub = commands.add_parser(name)
         sub.add_argument("--config", required=True)
     for name in ('discover-data', 'prepare-data'):
@@ -33,7 +33,10 @@ def main(argv=None):
     run.add_argument('--timeout-seconds', type=int, default=600)
     args = parser.parse_args(argv)
     try:
-        if args.command == "check-env":
+        if args.command == 'check-development':
+            from .data.development import load_development_config
+            print(json.dumps(load_development_config(args.config),indent=2))
+        elif args.command == "check-env":
             report = environment_report(args.network)
             print(json.dumps(report, indent=2))
             if args.require_gpu and not require_gpu(report):

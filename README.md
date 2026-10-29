@@ -101,3 +101,9 @@ CPU implementation contracts and prospective protocol:
 [Phase 2 CPU modules](docs/PHASE2_CPU.md). Install the pinned CPU lock and run the
 non-fitting tests described there. Training remains blocked by duplicate/split and
 calibration protocol review; no training command is exposed.
+
+
+Current prospective development workflow: [protocol v3](docs/DEVELOPMENT_V3.md).
+`trustretina check-development --config configs/development-v3.toml` checks the
+four-role, shared-calibration and bounded-pilot contract without fitting anything.
+Actual readiness depends on verified private real-data evidence.
