@@ -124,3 +124,18 @@ technical review and CPU ledger. It writes diagnostics on failure and can publis
 a new private frozen release/pilot request only when all readiness checks pass.
 Actual counts, stage times, pilot outcome and remaining limitations belong in
 STATUS.md after observed execution; software tests alone establish none of them.
+
+
+## Observed outcome
+
+All 1,536 scheduled comparisons are complete with 422 reused and 1,114 newly
+processed. Additional CPU worker execution totaled 1,814 seconds; hard accepted
+reservations were 4,500 seconds. Fourteen supported-copy and 61 explicit uncertainty
+edges form 3,435 groups (largest nine). All patients are retained. The v4 readiness
+audit and independent deterministic replay pass; the new manifests are frozen.
+
+The sole authorized EfficientNet-B0 pilot then completed two epochs/32 steps on
+Tesla T4, with finite losses, strict state/RNG/checkpoint reload, epoch-boundary
+resume and checksum-verified validation predictions. Final data was not accessed.
+These are execution checks, not final model performance or clinical validation.
+See STATUS.md for complete aggregate support, exact job/source/digests and limits.
