@@ -1,0 +1,2 @@
+backbone,patient_macro_auroc,patient_macro_auprc,patient_macro_f1,patient_micro_f1,patient_subset_accuracy,patient_labelwise_accuracy,parameters,epochs,best_epoch,worker_seconds,inference_ms_per_image
+efficientnet_b0,0.7875901984464209,0.4686172612617757,0.40546848818291986,0.4230377166156983,0.09142857142857143,0.7304761904761905,4017796,5,2,169.30485558499998,1.7313915009524516

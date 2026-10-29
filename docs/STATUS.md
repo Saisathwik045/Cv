@@ -35,22 +35,25 @@ No fitting of calibration or acceptance-risk policy occurs here.
 
 | Backbone | State | Pinned job/version |
 |---|---|---|
-| EfficientNet-B0 | Submitted; remote running | `saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1` |
-| ResNet50 | Queued; not submitted | — |
+| EfficientNet-B0 | Complete: 5 epochs; best epoch 2 | `saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1` |
+| ResNet50 | Running | `saisathwikregula/trustretina-full-v5-resnet50-618fc487/1` |
 | DenseNet121 | Queued; not submitted | — |
 | ConvNeXt-Tiny | Queued; not submitted | — |
 | EfficientNet-B2 | Queued; not submitted | — |
 
-No full model is yet verified complete; no validation comparison or selected
-backbone is claimed. Best/last checkpoints, predictions and histories are generated
+EfficientNet-B0 completed five epochs; best checkpoint is epoch two. Its best/last
+checkpoints, aligned predictions, history and logs were retrieved and verified.
+The [generated partial comparison](../results/full-v5/README.md) uses actual NPZ
+predictions; no selected backbone is claimed until all five finish. Best/last checkpoints, predictions and histories are generated
 by each worker and retrieved/checksummed after it finishes. Every completed epoch
 writes a durable progress report for compatible resume. Ambiguous/failed submissions
 block automatic retries. GPU jobs run sequentially on free Kaggle quota only.
 
 At pre-submission inspection Kaggle reported 21,600 GPU seconds total, 210.693 used,
 zero reserved and paid scaling disabled: approximately 5.94 GPU hours remained.
-This is a quota observation, not full-training elapsed time. The new worker's GPU
-time will be reported after actual execution evidence is retrieved.
+This is a quota observation, not full-training elapsed time. The completed B0 worker used 169.3 seconds (including CPU/I/O inside the GPU
+session); the quota counter increased by 210.022 seconds. Exact accelerator kernel
+time is not separately measured. Later runs remain in progress.
 
 ## Resume exactly
 
@@ -73,14 +76,15 @@ checkout, run `scripts/full_experiment.py restore` first **only if the private
 registry is missing**. This restores receipts from the aggregate snapshot; the next
 advance retrieves pinned remote artifacts. Never rerun init or cache preparation.
 
-After completed models are available, use the Phase 2/report environment:
+After completed models are available, install the CPU/report environment from
+`requirements/full-v5-reports.lock` and use:
 `python scripts/compare_full_experiment.py`, then `python scripts/full_experiment.py export`.
 Comparison reads actual aligned NPZ predictions; it selects no winner until all five
 complete. Keep generated permitted aggregate CSV/plots explicit when adding them
 (the broad artifact ignore rules remain). Never add sample predictions/checkpoints.
 
-Local checks: 114 tests passed, nine optional/environment skips; all five strict
-ImageNet factory loads passed. CI for this phase is recorded in its PR.
+Local checks: 115 tests passed, nine optional/environment skips; all five strict
+ImageNet factory loads passed. Initial PR #12 CI passed; subsequent report/driver checks are tracked in that PR.
 Next executable step is advancing the existing queue. Reliability and shared-
 temperature calibration experiments follow the completed validation comparison;
 rare-class limitations remain, and final evaluation stays untouched.

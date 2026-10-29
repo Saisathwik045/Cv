@@ -100,6 +100,12 @@ def advance(base,r,api,submit):
         remote=str(api.kernels_status(identity).status).split('.')[-1];attempt['remote_status']=remote
         if remote in ('QUEUED','RUNNING'):return
         report,folder,v=retrieve(api,bundle)
+        if report['status']=='complete':
+            if not report.get('strict_best_reload') or not report.get('metrics') or not {'best.pt','last.pt','validation-images.npz','validation-patients.npz'}<=set(report['output_hashes']):
+                run['status']='incomplete_finalization';raise ValueError('Epochs saved but final prediction/checkpoint audit incomplete; do not retrain')
+            baseline=r.setdefault('runtime_dependencies',report['dependencies'])
+            if report['dependencies']!=baseline:
+                run['status']='environment_mismatch';raise ValueError('Runtime versions changed across models; review before accepting comparison')
         run.update(status=report['status'],completed_epochs=report.get('completed_epochs'),report_sha256=v['artifact_sha256'],elapsed_seconds=report.get('elapsed_seconds'),metrics=report.get('metrics'),artifact_hashes=report['output_hashes'])
         attempt.update(status=report['status'],kernel_version=receipt['kernel_version'])
         if run['status'] not in ('complete','paused'):return
@@ -113,6 +119,8 @@ def advance(base,r,api,submit):
     if set(existing)-known:raise ValueError('Unregistered full run exists; recover it before submitting')
     quota=api.quota_view();write(base/'latest-quota.json',json.loads(str(quota)))
     q=json.loads(str(quota))['gpuQuota']
+    if q.get('isPayToScaleEnabled') is not False:
+        r['queue_blocker']='Paid scaling must be disabled before free-quota-only submission';return
     # Kaggle currently emits malformed fractional durations (210.693.0s); parse leading number.
     import re
     seconds=lambda s:float(re.match(r'^[0-9]+(?:\.[0-9]+)?',s).group())
@@ -122,7 +130,9 @@ def advance(base,r,api,submit):
         r['queue_blocker']='Free quota below ten-minute minimum; no paid fallback';return
     if unfinished['status']=='prepared':
         bundle=ROOT/unfinished['attempts'][-1]['bundle'];receipt=json.loads((bundle/'submission.json').read_text())
-    else:bundle,receipt=prepare(base,r,unfinished)
+    else:
+        if unfinished['status']=='paused':retrieve(api,ROOT/unfinished['attempts'][-1]['bundle'])
+        bundle,receipt=prepare(base,r,unfinished)
     if receipt['submission_attempted']:raise ValueError('Ambiguous attempted submission must be reconciled; no retry')
     # Write-ahead receipt and registry BEFORE external mutation.
     receipt['submission_attempted']=True;write(bundle/'submission.json',receipt);unfinished['status']='submitting';write(base/'registry.json',r)
@@ -157,10 +167,26 @@ def restore(base):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','restore','export','status','advance']);p.add_argument('--submit',action='store_true',help='Submit next authorized run only after reconciliation');p.add_argument('--base',type=Path,default=ROOT/'artifacts/runner/full-v5');args=p.parse_args();base=args.base
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','restore','export','retrieve','status','advance','drive']);p.add_argument('--submit',action='store_true',help='Submit next authorized run only after reconciliation');p.add_argument('--base',type=Path,default=ROOT/'artifacts/runner/full-v5');p.add_argument('--max-seconds',type=int,default=900);p.add_argument('--poll-seconds',type=int,default=60);args=p.parse_args();base=args.base
     if args.action=='init':r=init(base)
     elif args.action=='restore':r=restore(base)
     else:r=json.loads((base/'registry.json').read_text())
+    if args.action=='retrieve':
+        api=api_client()
+        for run in r['runs']:
+            if run['status'] in ('complete','paused'):
+                retrieve(api,ROOT/run['attempts'][-1]['bundle'])
+    if args.action=='drive':
+        if not args.submit or args.poll_seconds<60 or not 0<args.max_seconds<=3600:raise ValueError('Drive requires --submit, poll >=60s, and duration <=3600s')
+        deadline=time.monotonic()+args.max_seconds;api=api_client()
+        while time.monotonic()<deadline:
+            try:advance(base,r,api,True)
+            finally:write(base/'registry.json',r);snapshot(base,r)
+            print(json.dumps({'states':[(x['backbone'],x['status']) for x in r['runs']]}),flush=True)
+            if all(x['status']=='complete' for x in r['runs']) or any(x['status'] in ('ambiguous','failed','incomplete_finalization','environment_mismatch') for x in r['runs']) or r.get('queue_blocker'):break
+            remaining=deadline-time.monotonic()
+            if remaining<args.poll_seconds:break
+            time.sleep(args.poll_seconds)
     if args.action=='advance':
         try:advance(base,r,api_client(),args.submit)
         finally:write(base/'registry.json',r)

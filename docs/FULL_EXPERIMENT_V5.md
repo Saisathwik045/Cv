@@ -61,7 +61,7 @@ observations and session reservations where available.
 
 ## Durable execution and recovery
 
-`scripts/full_experiment.py` provides init, status and advance. It has an exclusive
+`scripts/full_experiment.py` provides init, restore, retrieve, status, advance and bounded drive. It has an exclusive
 controller lock, atomic registry writes, write-ahead submission receipts and
 source/config/input identity checks. Each advance performs a bounded status check;
 `--submit` may submit one next authorized run after reconciliation. It never
@@ -88,3 +88,10 @@ remote versions, not create replacement jobs. See STATUS.md for current commands
 The next phase, after the five-model validation comparison completes, is
 reliability and shared-temperature calibration experiments under the frozen
 protocol. Final evaluation stays untouched throughout model/result selection.
+
+For a fresh task, restore the aggregate snapshot, then use `retrieve` to recover
+completed models before comparison. The next `advance --submit` reconciles any
+active job and resumes a paused compatible job. `drive --submit --max-seconds 1800
+--poll-seconds 60` bounds automatic queue advancement to 30 minutes; it saves
+state and returns at the budget boundary or on a blocker. No detached service is
+installed. Use `requirements/full-v5-reports.lock` for the comparison environment.
