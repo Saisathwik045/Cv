@@ -1,3 +1,12 @@
+# Final research evaluation Phase 7
+
+[Phase 7](FINAL_EVALUATION_V7.md) was committed before the authorized final-data
+exposure. One fixed candidate was evaluated on all 350 final patients with no
+refitting or tuning. Saved validation cutoffs were reused; retrospective coverage
+subsets are research analyses, not a validated acceptance policy. Final results,
+negative findings and recovery are in STATUS.md. This holdout is now used and must
+not select future parameters. Deployment remains REVIEW REQUIRED.
+
 # Phase 6 reliability and shared calibration
 
 [Phase 6](RELIABILITY_V6.md) was committed before calibration-label access and
