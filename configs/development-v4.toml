@@ -1,0 +1,54 @@
+schema_version = 4
+protocol = "development-content-containment-v4"
+seed = 2026
+class_order = ["N", "D", "G", "C", "A", "H", "M", "O"]
+backbones = ["efficientnet_b0", "resnet50", "densenet121", "convnext_tiny", "efficientnet_b2"]
+
+[split]
+fractions = [0.65, 0.15, 0.10, 0.10]
+minimum_positive_patients = 5
+minimum_negative_patients = 5
+method = "trustretina-component-rarest-label-repair-v3"
+# Floors are feasibility safeguards, not a power calculation or clinical guarantee.
+
+[calibration]
+method = "shared_patient_temperature"
+role = "calibration"
+minimum_independent_groups = 50
+class_specific_fitting = false
+policy_fitting = false
+# One held-out calibration set; no infeasible internal rare-class subdivisions.
+# No claims of same-set calibration/generalization or calibrated clinical risk.
+
+[selection]
+role = "validation"
+metric = "patient_macro_f1"
+threshold = 0.5
+checkpoint_tie = "earliest_epoch"
+backbone_tie = "fixed_backbone_order"
+final_evaluation_for_selection = false
+
+[pilot]
+backbone = "efficientnet_b0"
+maximum_epochs = 2
+maximum_training_patients = 128
+maximum_validation_patients = 64
+batch_size = 16
+learning_rate = 0.0001
+initialization = "random_unfitted_execution_evidence_only"
+requires_data_checks_passed = true
+uses_final_evaluation = false
+full_five_model_training_authorized = false
+
+[release]
+# These are policy defaults, not a real-data approval record.
+pilot_ready = false
+full_training_ready = false
+
+[duplicate_review]
+policy = "scheduled-content-containment-v4"
+fixed_scheduled_pairs = 1536
+additional_cpu_budget_seconds = 7200
+unresolved_material_handling = "explicit_connected_patient_containment"
+weak_dhash_alone_creates_link = false
+all_possible_duplicates_ruled_out = false

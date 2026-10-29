@@ -1,3 +1,12 @@
+# Contained bounded-review development protocol v4
+
+[Development v4](DEVELOPMENT_V4.md) completes the original fixed schedule and permits
+explicit connected-patient containment of unresolved material content evidence.
+It does not upgrade those relationships to confirmed duplicates. Weak dHash alone
+creates no link/quarantine. Shared-temperature calibration and rare-class caveats
+remain. Only a complete, checked new release can enable the single authorized
+execution pilot. Historical v3 blocked manifests are preserved.
+
 # Prospective development protocol v3
 
 [Development v3](DEVELOPMENT_V3.md) and `configs/development-v3.toml` define the

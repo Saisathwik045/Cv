@@ -21,7 +21,12 @@ def evaluate(
         raise ProtocolNotReady(
             "Final pipeline executor awaits approved calibrator/reliability freeze; validation evaluator cannot release final results"
         )
-    elif role not in ("validation", "calibration_fit", "calibration_policy"):
+    elif role not in (
+        "validation",
+        "calibration",
+        "calibration_fit",
+        "calibration_policy",
+    ):
         raise ValueError("Unknown evaluation role")
     flags = {module: module.training for module in model.modules()}
     model.eval()

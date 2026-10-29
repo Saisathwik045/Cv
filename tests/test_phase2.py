@@ -341,3 +341,20 @@ class Phase2Tests(unittest.TestCase):
                     allow_fitting=True,
                 )
             optimizer.assert_not_called()
+
+    def test_shared_calibration_inference_role_keeps_deterministic_preprocessing(self):
+        image = Image.new("RGB", (40, 32), (70, 30, 20))
+        a, _ = preprocess(image, role="calibration")
+        b, _ = preprocess(image, role="validation")
+        self.assertTrue(torch.equal(a, b))
+        model = torch.nn.Linear(3, 8)
+        batch = dict(
+            role="calibration",
+            images=torch.zeros(2, 3),
+            targets=torch.zeros(2, 8),
+            patient_ids=["synthetic", "synthetic"],
+            eyes=["left", "right"],
+            component_ids=["g", "g"],
+        )
+        result = evaluate(model, [batch], role="calibration")
+        self.assertEqual(result["per_patient"]["n"], 1)

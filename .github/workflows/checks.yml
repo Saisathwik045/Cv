@@ -43,6 +43,7 @@ jobs:
       - run: trustretina plan --config configs/phase0.toml
       - run: trustretina check-config --config configs/phase1.toml
       - run: trustretina check-development --config configs/development-v3.toml
+      - run: trustretina check-contained-development --config configs/development-v4.toml
       - run: trustretina check-env
 
   duplicate-evidence:

@@ -1,3 +1,139 @@
+# Phase 4 complete — v4 development splits frozen; bounded GPU pilot passed
+
+PR #10 was already merged at `9943135` and its final CI passed. Its historical
+blocked v3 status is preserved below. Architecture and all five backbones remain
+unchanged. [Development v4](DEVELOPMENT_V4.md) defines the new evidence/containment
+contract; no historical manifest was overwritten or silently reapproved.
+
+## Scheduled review and CPU budget
+
+Exactly **1,536 / 1,536 scheduled comparisons** are complete: the prior 422 results
+were checksum-verified/recovered without recomputation; 1,114 remaining comparisons
+ran in checkpointed 384/384/346 batches. The lost cache was reconstructed once
+because the old runtime finalized it too late. The recovered schedule/endpoints/
+scores match every completed result. Completed workbook/7,000-image validation was
+reused from verified dataset-version-2 evidence, not repeated.
+
+Observed additional worker execution: **1,814 seconds** (779 reconstruction +
+237/462/336 batch seconds). Accepted hard CPU session reservations total 4,500
+seconds, below the 7,200-second cap. A rejected initial upload had no run and no
+execution; API reconciliation and both request receipts are preserved. Content
+chunks, full numeric cache/selection and each new detailed result are checkpointed.
+No search expansion, new GPU smoke or paid resources were used.
+
+## Decisions, containment and frozen data
+
+All 14 named cases were rendered from hash-verified originals and technically
+reviewed with individual evidence/reasons. They remain explicitly
+**unresolved_contained**, not confirmed identical photographs or clinical identities.
+The completed scheduled assay yields **14 supported photographic-copy links** and
+**61 unresolved material-content containment links**. Prior supported false-positive
+evidence is retained. Weak unscheduled dHash candidates stay sensitivity records;
+there is no blanket quarantine and all 3,500 patients / 7,000 images are retained.
+
+Connected containment produces **3,435 patient groups, largest nine**, with no
+copy/containment edge crossing a role. All original patient-derived label vectors
+remain unchanged. Three supported-copy links and 41 uncertainty-containment links have differing
+patient label vectors. These are reported disagreements, not inferred annotation
+errors. Patient-level targets can differ even when one eye photograph is shared. Mixed-label group support is explicit in the private audit.
+Passing this bounded audit does not rule out every possible duplicate, different
+capture of the same eye, or clinical identity overlap.
+
+Versioned private release: `artifacts/runner/contained-release-v4/frozen-splits/`.
+Fixed seed 2026 and the unchanged rarest-label/whole-group repair method produce
+train/validation/calibration/final counts **2,275 / 525 / 350 / 350**; component counts
+are **2,240 / 518 / 331 / 346**. All-eight positive/negative patient/group support
+floors, known constraint separation, exact scheduled coverage, source/receipt
+integrity, CPU budget and independent deterministic replay passed.
+
+| Label | Train + / − | Validation + / − | Calibration + / − | Final + / − |
+|---|---:|---:|---:|---:|
+| N | 738 / 1537 | 175 / 350 | 116 / 234 | 111 / 239 |
+| D | 733 / 1542 | 169 / 356 | 113 / 237 | 113 / 237 |
+| G | 140 / 2135 | 32 / 493 | 21 / 329 | 22 / 328 |
+| C | 138 / 2137 | 32 / 493 | 21 / 329 | 21 / 329 |
+| A | 107 / 2168 | 25 / 500 | 16 / 334 | 16 / 334 |
+| H | 67 / 2208 | 16 / 509 | 10 / 340 | 10 / 340 |
+| M | 113 / 2162 | 26 / 499 | 17 / 333 | 18 / 332 |
+| O | 636 / 1639 | 147 / 378 | 98 / 252 | 98 / 252 |
+
+Shared-temperature design is retained: the whole calibration set contains 331
+components, including 10 H-positive patients in 10 positive-supplying components.
+No per-class temperature, internal calibration-policy subdivision or clinical
+risk/acceptance policy is fitted. Rare-class precision/calibration guarantees are
+unsupported. Confidence, MC Dropout, quality, calibration and triage remain in the
+architecture; unsupported clinical acceptance remains REVIEW REQUIRED.
+
+Frozen manifest SHA256:
+`c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57`.
+The release has role hashes, source/policy/config lineage and a final complete marker.
+Historical artifacts and blocked v3 manifests remain unchanged.
+
+## Single authorized pilot — actual GPU execution evidence
+
+Pinned private Kaggle job:
+`saisathwikregula/trustretina-efficientnet-v4-pilot-4aabc289/1`, source `5b9b737`.
+It ran on **Tesla T4**, completed in **150 seconds**, and performed **two epochs /
+32 optimizer steps** using 128 training patients (256 eye images). The 64 validation
+patients (128 images) were used only for execution and strict-reload checks.
+No final-evaluation images or labels were opened; no final metrics, model selection,
+calibration or acceptance-policy fitting occurred. No full five-model run was launched.
+
+This pilot used declared random initialization and is **execution evidence only**.
+Epoch mean BCE losses were 0.6437473 and 0.5525889; these are not final performance
+or clinical accuracy. After epoch one, strict reload into a new model/optimizer
+verified exact state, Python/NumPy/Torch/CUDA/loader RNG and validation predictions;
+the second epoch continued from that checkpoint. Both saved epoch checkpoints
+passed strict reload and checksum checks. Actual GPU runtime versions include
+Torch 2.11.0+cu128 and NumPy 2.1.3; cross-version resume is not claimed.
+
+Downloaded artifacts include both checkpoints, incremental epoch/reload logs and
+validation probabilities/targets with patient aggregation. Independent local
+checks verified every digest, finite losses, (128,8) image and (64,8) patient
+prediction shapes, unchanged targets and exact aggregation. Source/nonce/receipt
+and frozen split identities match. Pilot report SHA256:
+`78de7408aaa18f753d487bb9d61111f0f8079141473d3b8cb12568c87bb6ec8c`.
+
+## Current scope and next executable step
+
+`pilot_ready=true`; the single authorized pilot succeeded. There is **no remaining
+blocker for this bounded development pilot**. `full_training_ready=false` remains
+the authorization/scope guard: the five full runs have not been authorized or
+launched. The pilot establishes execution/resume, not a completed five-backbone
+comparison, clinically validated calibration or risk guarantees. Residual duplicate
+uncertainty and rare-class limitations remain documented in the frozen policy.
+
+Private evidence index: `artifacts/runner/phase4/PRIVATE_INDEX.md`. It links the
+fixed selection, recovered/new results, 14 technical case decisions, containment
+policy, all-eight support, frozen hashes, job receipts, logs, predictions and model
+checkpoints. Patient-level data/images/weights remain outside Git.
+
+Executable non-fitting verification:
+
+```sh
+trustretina check-contained-development --config configs/development-v4.toml
+python -m unittest discover -s tests -v
+```
+
+Do not rerun the consumed pilot authorization or change frozen partitions using
+its results. The next research phase can plan the five full pretrained comparisons
+and calibration evaluation against this frozen release under a separate explicit
+execution authorization. No final-evaluation selection is permitted.
+
+# Phase 4 — fixed-schedule completion and explicit containment in progress
+
+PR #10 is verified merged at `9943135`; its final CI passed. The historical v3
+blocked status below is preserved. Architecture and all five backbones are unchanged.
+See [development v4](DEVELOPMENT_V4.md) for the bounded, evidence-based protocol.
+
+The lost content cache was reconstructed once in 779 seconds, without repeating
+completed image validation. The recovered schedule matches all 422 saved results.
+The remaining 1,114 entries are running in checkpointed 384/384/346 CPU batches;
+accepted hard session reservations total 4,500 seconds against a 7,200-second cap.
+All 14 named cases were rendered and technically reviewed; uncertainty is explicitly
+contained, never called clinical identity or annotation error. No GPU has been
+submitted while complete-schedule/readiness evidence is pending.
+
 # Phase 3 actual evidence — split freeze and pilot BLOCKED (29 October 2026 IST)
 
 Latest merged main was verified at `0d5986f`; PR #8 and PR #9 are present. The

@@ -107,3 +107,9 @@ Current prospective development workflow: [protocol v3](docs/DEVELOPMENT_V3.md).
 `trustretina check-development --config configs/development-v3.toml` checks the
 four-role, shared-calibration and bounded-pilot contract without fitting anything.
 Actual readiness depends on verified private real-data evidence.
+
+
+Current contained development release and bounded execution evidence:
+[protocol v4](docs/DEVELOPMENT_V4.md) and [actual status](docs/STATUS.md).
+The fixed review is complete, v4 private splits are frozen and the sole authorized
+B0 pilot passed. Full five-model runs remain outside this execution scope.
