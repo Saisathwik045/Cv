@@ -48,6 +48,14 @@ class ReliabilityNumericTests(unittest.TestCase):
         self.assertEqual(float(s['uncertainty'][0]),0.)
         self.assertGreater(eyes.var(0).mean(),0.)
 
+    def test_candidate_returns_all_labels_and_never_auto_accepts(self):
+        from trustretina.reliability.candidate import candidate_outputs
+        p=np.full((2,8),.8);p[0,0]=.9999992;p[0,1]=.9999997
+        result=candidate_outputs(p,np.stack([p,p]),[1.,1.],temperature=2.)
+        self.assertEqual(len(result['positive_labels'][0]),8)
+        self.assertEqual(result['decision'],['REVIEW REQUIRED']*2)
+        self.assertEqual(int(result['explanation_target_indices'][0]),1)
+
     def test_ties_are_complete_blocks_zero_coverage_undefined(self):
         y=np.asarray([[0]*8,[1]*8,[0]*8]);p=np.full((3,8),.9);score=np.asarray([.9,.9,.1])
         curve=coverage_curve(y,p,score)
