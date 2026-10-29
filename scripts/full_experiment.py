@@ -137,13 +137,34 @@ def advance(base,r,api,submit):
         unfinished['status']='ambiguous';receipt.update(submission_error_type=type(e).__name__,submission_error=str(e)[:300]);write(bundle/'submission.json',receipt);raise
 
 
+def snapshot(base, r):
+    """Only aggregate state and receipts; never sample rows or probabilities."""
+    bundles=[r['cache']['bundle']]+[a['bundle'] for run in r['runs'] for a in run['attempts']]
+    records={b:json.loads((ROOT/b/'submission.json').read_text()) for b in bundles}
+    write(ROOT/'results/full-v5/run-registry.json',{'registry':r,'receipts':records})
+
+
+def restore(base):
+    if (base/'registry.json').exists():raise ValueError('Private registry exists; refusing overwrite')
+    saved=json.loads((ROOT/'results/full-v5/run-registry.json').read_text())
+    for relative,receipt in saved['receipts'].items():
+        path=(ROOT/relative).resolve()
+        if not path.is_relative_to((ROOT/'artifacts/runner').resolve()):raise ValueError('Receipt path outside private artifacts')
+        path.mkdir(parents=True,exist_ok=True)
+        if (path/'submission.json').exists() and json.loads((path/'submission.json').read_text())!=receipt:raise ValueError('Existing receipt disagrees')
+        write(path/'submission.json',receipt)
+    write(base/'registry.json',saved['registry']);return saved['registry']
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','status','advance']);p.add_argument('--submit',action='store_true',help='Submit next authorized run only after reconciliation');p.add_argument('--base',type=Path,default=ROOT/'artifacts/runner/full-v5');args=p.parse_args();base=args.base
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','restore','export','status','advance']);p.add_argument('--submit',action='store_true',help='Submit next authorized run only after reconciliation');p.add_argument('--base',type=Path,default=ROOT/'artifacts/runner/full-v5');args=p.parse_args();base=args.base
     if args.action=='init':r=init(base)
+    elif args.action=='restore':r=restore(base)
     else:r=json.loads((base/'registry.json').read_text())
     if args.action=='advance':
         try:advance(base,r,api_client(),args.submit)
         finally:write(base/'registry.json',r)
+    if args.action=='export':snapshot(base,r)
     print(json.dumps({'runs':[{k:x[k] for k in ('backbone','status','completed_epochs','elapsed_seconds') if k in x} for x in r['runs']],'selected_backbone':r['selected_backbone'],'queue_blocker':r.get('queue_blocker')},indent=2))
 
 if __name__=='__main__':
