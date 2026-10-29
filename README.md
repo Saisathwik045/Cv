@@ -1,15 +1,20 @@
 # TrustRetina
 
+The frozen Phase 7 held-out evaluation is complete. See the
+[generated research report](results/final-v7/REPORT.md) for actual metrics,
+intervals, negative findings and limitations. No automatic acceptance policy is
+validated. Next: package the unchanged pipeline into the research demo app.
+
 Phase 6 reliability and shared-temperature calibration are complete. See the
 [development findings and limitations](results/reliability-v6/README.md) and
 [frozen research candidate](results/reliability-v6/candidate-contract.json).
-Automatic acceptance remains unsupported; final evaluation is sealed.
+Automatic acceptance remains unsupported; Phase 7 now records the authorized final evaluation.
 
 The five-backbone v4 development comparison is complete. See the
 [actual validation results](results/full-v5/README.md),
 [current status and recovery commands](docs/STATUS.md), and
 [prespecified training protocol](docs/FULL_EXPERIMENT_V5.md).
-The next phase is a separately authorized held-out research evaluation.
+The final evaluation is complete; do not tune against this now-used holdout.
 
 Automated retinal screening **research**, using original ODIR-5K and authoritative
 `data.xlsx` patient labels. Class order: **N, D, G, C, A, H, M, O**.

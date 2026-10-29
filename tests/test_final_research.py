@@ -35,6 +35,22 @@ from trustretina.evaluation.final_research import classification,calibration,wei
 from trustretina.reliability.development import component_weights
 
 class FinalMetricTests(unittest.TestCase):
+    def test_recovery_preserves_exposure_and_refuses_conflicting_attempts(self):
+        import importlib.util,hashlib
+        path=Path(__file__).resolve().parents[1]/'scripts/final_evaluation.py'
+        spec=importlib.util.spec_from_file_location('final_restore_fixture',path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as td:
+            module.ROOT=Path(td);module.BASE=module.ROOT/'artifacts/runner/phase7'
+            ledger='{"event":"synthetic_exposure_fixture"}\n'
+            receipt={'kernel_version':'fixture/private/1','submission_attempted':True}
+            r={'stages':{'inference':{'status':'complete','bundle':'artifacts/runner/phase7/inference/attempt-1'}},'final_exposure_ledger_text':ledger,'final_exposure_ledger_sha256':hashlib.sha256(ledger.encode()).hexdigest()}
+            module.write(module.ROOT/'results/final-v7/run-registry.json',{'registry':r,'receipts':{'inference':receipt}})
+            target=module.BASE/'inference/attempt-1/submission.json';module.write(target,{'kernel_version':'fixture/private/2'})
+            with self.assertRaisesRegex(ValueError,'disagrees'):module.restore()
+            self.assertEqual(json.loads(target.read_text())['kernel_version'],'fixture/private/2')
+            target.unlink();self.assertEqual(module.restore(),r);self.assertEqual((module.BASE/'exposure.jsonl').read_text(),ledger)
+            with self.assertRaisesRegex(ValueError,'refusing overwrite'):module.restore()
+
     def test_weighted_two_dimensional_f1_and_accuracy(self):
         y=np.asarray([[1]*8,[0]*8,[0]*8]);p=np.full((3,8),.9);w=np.asarray([.5,.5,1.])
         m=classification(y,p,w)

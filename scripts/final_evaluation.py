@@ -115,6 +115,9 @@ def advance(r,stage,submit):
 
 
 def export(r):
+    ledger=BASE/'exposure.jsonl'
+    if ledger.exists():
+        r['final_exposure_ledger_text']=ledger.read_text();r['final_exposure_ledger_sha256']=file_hash(ledger);write(BASE/'registry.json',r)
     write(ROOT/'results/final-v7/run-registry.json',{'registry':r,'receipts':{key:json.loads((ROOT/s['bundle']/'submission.json').read_text()) for key,s in r['stages'].items()}})
 
 
@@ -124,7 +127,13 @@ def restore():
     for key,receipt in saved['receipts'].items():
         folder=(ROOT/r['stages'][key]['bundle']).resolve()
         if not folder.is_relative_to(BASE.resolve()):raise ValueError('Receipt path outside private storage')
+        if (folder/'submission.json').exists() and json.loads((folder/'submission.json').read_text())!=receipt:raise ValueError('Existing attempt receipt disagrees; reconcile without overwriting')
         write(folder/'submission.json',receipt)
+    if 'final_exposure_ledger_text' in r:
+        ledger=BASE/'exposure.jsonl'
+        if ledger.exists() and ledger.read_text()!=r['final_exposure_ledger_text']:raise ValueError('Exposure ledger disagrees; do not overwrite')
+        ledger.write_text(r['final_exposure_ledger_text'])
+        if file_hash(ledger)!=r['final_exposure_ledger_sha256']:raise ValueError('Restored exposure ledger checksum mismatch')
     write(BASE/'registry.json',r);return r
 
 
