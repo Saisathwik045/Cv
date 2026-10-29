@@ -56,6 +56,21 @@ class FullComparisonTests(unittest.TestCase):
             r={'runs':[{'status':'ambiguous','attempts':[{'bundle':str(folder)}]}]}
             with self.assertRaises(RuntimeError):module.advance(folder,r,API(),True)
 
+    def test_restore_recovers_receipts_without_overwriting_existing_state(self):
+        spec=importlib.util.spec_from_file_location('full_experiment_restore',Path(__file__).resolve().parents[1]/'scripts/full_experiment.py')
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as td:
+            module.ROOT=Path(td)
+            base=module.ROOT/'artifacts/runner/full-v5'
+            relative='artifacts/runner/fixture-attempt'
+            receipt={'kernel_version':'fixture/private/1','submission_attempted':True}
+            registry={'runs':[{'status':'running','attempts':[{'bundle':relative}]}]}
+            module.write(module.ROOT/'results/full-v5/run-registry.json',{'registry':registry,'receipts':{relative:receipt}})
+            restored=module.restore(base)
+            self.assertEqual(restored,registry)
+            self.assertEqual(json.loads((module.ROOT/relative/'submission.json').read_text()),receipt)
+            with self.assertRaisesRegex(ValueError,'refusing overwrite'):module.restore(base)
+
     def test_cache_normalization_matches_shared_preprocessing(self):
         try:
             import torch

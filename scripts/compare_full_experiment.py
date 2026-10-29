@@ -5,21 +5,38 @@ from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from trustretina.runner.verified_artifacts import read_stage
+from trustretina.data.validation import file_hash
 from trustretina.training.comparison import comparison_metrics,select_backbone
 from trustretina.evaluation.metrics import aggregate_patient_mean
 
 
 def compare(base,output, *, update_registry=True):
     registry=json.loads((base/'registry.json').read_text());reports={};reference=None;runtime=None;rows=[];histories={}
+    index=ROOT/registry['cache']['bundle']/'download/prepared/inputs.json'
+    if file_hash(index)!=registry['cache']['inputs_sha256']:raise ValueError('Frozen comparison input index changed')
+    cache=json.loads(index.read_text());v=cache['roles']['validation'];rowpath=index.parent/v['rows_file']
+    if file_hash(rowpath)!=v['rows_sha256']:raise ValueError('Frozen validation rows changed')
+    frozen=json.loads(rowpath.read_text())
+    expected_keys=[(r['patient_id'],r['eye'],r['path'],r['component_id']) for r in frozen]
+    expected_labels=np.asarray([r['labels'] for r in frozen])
     for run in registry['runs']:
+
         if run['status']!='complete':continue
         bundle=ROOT/run['attempts'][-1]['bundle'];report,folder,_=read_stage(bundle)
         if report['status']!='complete' or report['release_sha256']!=registry['config']['release_manifest_sha256'] or report['config_sha256']!=registry['config_sha256']:raise ValueError('Comparison source/config mismatch')
+        state=json.loads((folder/'progress.json').read_text())
+        if state['provenance']!=report['provenance'] or state['selection']!=report['selection']:raise ValueError('Checkpoint/report provenance mismatch')
+        for filename in ('best.pt','last.pt','history.json'):
+            if file_hash(folder/filename)!=state['hashes'][filename]:raise ValueError('Checkpoint/progress checksum mismatch')
+        for filename in ('best.pt','last.pt'):
+            marker=folder/(filename+'.sha256')
+            if marker.exists() and marker.read_text().strip()!=state['hashes'][filename]:raise ValueError('Checkpoint marker mismatch')
         if runtime is None:runtime=report['dependencies']
         elif runtime!=report['dependencies']:raise ValueError('Mixed runtime environments; comparison requires review')
         with np.load(folder/'validation-images.npz',allow_pickle=False) as eye:
             data={k:eye[k] for k in eye.files}
         keys=list(zip(data['patient_ids'],data['eyes'],data['image_ids'],data['component_ids']))
+        if keys!=expected_keys or not np.array_equal(data['labels'],expected_labels):raise ValueError('Prediction alignment differs from frozen validation')
         if len(set(keys))!=len(keys):raise ValueError('Repeated validation sample')
         if reference is None:reference=(keys,data['labels'])
         elif keys!=reference[0] or not np.array_equal(data['labels'],reference[1]):raise ValueError('Validation sample alignment differs across models')
@@ -53,7 +70,7 @@ def compare(base,output, *, update_registry=True):
     (output/'README.md').write_text('\n'.join(lines))
     if rows:
         with (output/'comparison.csv').open('w') as f:
-            writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+            writer=csv.DictWriter(f,fieldnames=list(rows[0]),lineterminator='\n');writer.writeheader();writer.writerows(rows)
         os.environ.setdefault('MPLCONFIGDIR',str(Path(tempfile.gettempdir())/'trustretina-mpl'))
         import matplotlib;matplotlib.use('Agg')
         from matplotlib import pyplot as plt

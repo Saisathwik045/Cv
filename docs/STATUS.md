@@ -35,11 +35,11 @@ No fitting of calibration or acceptance-risk policy occurs here.
 
 | Backbone | State | Pinned job/version |
 |---|---|---|
-| EfficientNet-B0 | Complete: 5 epochs; best epoch 2 | `saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1` |
-| ResNet50 | Running | `saisathwikregula/trustretina-full-v5-resnet50-618fc487/1` |
-| DenseNet121 | Queued; not submitted | — |
-| ConvNeXt-Tiny | Queued; not submitted | — |
-| EfficientNet-B2 | Queued; not submitted | — |
+| EfficientNet-B0 | Complete: 5 epochs | `saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1` |
+| ResNet50 | Complete: 5 epochs | `saisathwikregula/trustretina-full-v5-resnet50-618fc487/1` |
+| DenseNet121 | Complete: 6 epochs | `saisathwikregula/trustretina-full-v5-densenet121-a0a7f6e8/1` |
+| ConvNeXt-Tiny | running | `saisathwikregula/trustretina-full-v5-convnext-tiny-c349c706/1` |
+| EfficientNet-B2 | queued | — |
 
 EfficientNet-B0 completed five epochs; best checkpoint is epoch two. Its best/last
 checkpoints, aligned predictions, history and logs were retrieved and verified.
@@ -83,8 +83,8 @@ Comparison reads actual aligned NPZ predictions; it selects no winner until all 
 complete. Keep generated permitted aggregate CSV/plots explicit when adding them
 (the broad artifact ignore rules remain). Never add sample predictions/checkpoints.
 
-Local checks: 115 tests passed, nine optional/environment skips; all five strict
-ImageNet factory loads passed. Initial PR #12 CI passed; subsequent report/driver checks are tracked in that PR.
+Local checks: 116 tests passed, nine optional/environment skips; all five strict
+ImageNet factory loads passed. PR #12 CI passed on both Python versions; later evidence updates remain tracked there.
 Next executable step is advancing the existing queue. Reliability and shared-
 temperature calibration experiments follow the completed validation comparison;
 rare-class limitations remain, and final evaluation stays untouched.

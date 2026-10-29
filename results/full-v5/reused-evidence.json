@@ -1,0 +1,12 @@
+{
+  "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
+  "readiness_sha256": "0700d13ea5bdcb1d6edc4d3cfa4c8d089faea95cf62a99425969f2fab67d407a",
+  "policy_sha256": "bc222cfc81b51963923e4f3ab0d39d43e59fa33cdbbc622d5451bb8a38e7db36",
+  "pilot_report_sha256": "78de7408aaa18f753d487bb9d61111f0f8079141473d3b8cb12568c87bb6ec8c",
+  "train_sha256": "082ede51da1698cf44ac904e6b22a4467765892ad6371fc8fa04c48e148c2775",
+  "validation_sha256": "109edbb890b030695985682ea413d070b724d7469b28aaabc8a19f49cdb71acb",
+  "calibration_final_recorded_hashes_bound_to_frozen_root": true,
+  "calibration_and_final_contents_opened": false,
+  "duplicate_review_repeated": false,
+  "splits_recreated": false
+}

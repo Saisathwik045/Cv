@@ -50,6 +50,17 @@ def retrieve(api,bundle):
     return report,reportpath.parent,json.loads((bundle/'verification.json').read_text())
 
 
+def retrieve_cache_metadata(api,r):
+    folder=ROOT/r['cache']['bundle']/'download'
+    index=folder/'prepared/inputs.json'
+    if not index.exists():
+        with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
+            api.kernels_output(r['cache']['kernel_version'],path=str(folder),file_pattern=r'^prepared/(inputs.json|validation-rows.json)$',page_size=100)
+    if file_hash(index)!=r['cache']['inputs_sha256']:raise ValueError('Cache index checksum mismatch')
+    metadata=json.loads(index.read_text())['roles']['validation']
+    if file_hash(index.parent/metadata['rows_file'])!=metadata['rows_sha256']:raise ValueError('Validation row checksum mismatch')
+
+
 def init(base):
     from trustretina.runner.verified_artifacts import read_stage
     registry=base/'registry.json'
@@ -172,7 +183,7 @@ def main():
     elif args.action=='restore':r=restore(base)
     else:r=json.loads((base/'registry.json').read_text())
     if args.action=='retrieve':
-        api=api_client()
+        api=api_client();retrieve_cache_metadata(api,r)
         for run in r['runs']:
             if run['status'] in ('complete','paused'):
                 retrieve(api,ROOT/run['attempts'][-1]['bundle'])

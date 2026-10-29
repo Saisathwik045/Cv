@@ -5,9 +5,9 @@ Generated from checksum-verified best-checkpoint prediction files. Patient proba
 | Backbone | State | Epochs / best | Patient macro AUROC | Macro AP | Macro F1 | Micro F1 |
 |---|---|---:|---:|---:|---:|---:|
 | efficientnet_b0 | complete | 5 / 2 | 0.7876 | 0.4686 | 0.4055 | 0.4230 |
-| resnet50 | running | — | — | — | — | — |
-| densenet121 | queued | — | — | — | — | — |
-| convnext_tiny | queued | — | — | — | — | — |
+| resnet50 | complete | 5 / 2 | 0.7784 | 0.4632 | 0.3708 | 0.3974 |
+| densenet121 | complete | 6 / 3 | 0.8119 | 0.5053 | 0.4607 | 0.4773 |
+| convnext_tiny | running | — | — | — | — | — |
 | efficientnet_b2 | queued | — | — | — | — | — |
 
 Selected backbone: pending completion/defined rankings for all five.
