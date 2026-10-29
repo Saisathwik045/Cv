@@ -34,6 +34,14 @@ relationship; one bridge has parallel image edges), together with the earlier
 70-edge technical sample: 302 distinct candidates. Another 64 non-candidates
 (32 Hamming 3/4; 32 ≥12, content-hash ordered) check rejected candidates. Selection
 used no class labels, model results, seed search or desired split sizes.
+Of the sampled candidates, 242 are inside the giant component (179 bridge
+representatives): one probable copy, two supported false positives and 239
+unresolved. This is direct evidence of mixed edge meanings inside that component,
+not merely findings from unrelated small components. Reviewing/pruning bridges
+alone cannot clear its dense cycles. Twenty-four original image candidates are
+within the same patient; both eyes were already contained. Their endpoints also
+touch cross-patient candidates here, so including them in the conservative
+quarantine does not change its patient count.
 
 ## Independent photographic evidence
 
