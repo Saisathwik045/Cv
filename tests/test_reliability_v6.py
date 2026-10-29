@@ -5,6 +5,22 @@ from trustretina.reliability.development import (canonical_quality,quality_midra
 
 
 class ReliabilityNumericTests(unittest.TestCase):
+    def test_numeric_package_import_does_not_require_optional_torch(self):
+        import subprocess,sys
+        code="""
+import sys, importlib.abc
+class WithoutTorch(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == 'torch' or fullname.startswith('torch.'):
+            raise ModuleNotFoundError('Optional Torch intentionally unavailable')
+sys.meta_path.insert(0, WithoutTorch())
+from trustretina.reliability import quality_proxies
+from trustretina.reliability.development import temperature_probabilities
+assert 'torch' not in sys.modules
+assert temperature_probabilities([[.5]*8], 1.).shape == (1,8)
+"""
+        subprocess.run([sys.executable,'-c',code],check=True,capture_output=True,text=True)
+
     def test_quality_excludes_exact_letterbox_padding_and_ties(self):
         content=np.full((3,40,80),80,dtype=np.uint8)
         padded=np.broadcast_to(np.array([124,116,104],dtype=np.uint8)[:,None,None],(3,80,80)).copy();padded[:,20:60]=content

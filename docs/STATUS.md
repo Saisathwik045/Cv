@@ -89,7 +89,7 @@ Grad-CAM records were retrieved/verified. Large/sample artifacts remain outside 
 
 Observed GPU quota increase: **53.686 seconds**, paid scaling disabled.
 Worker times exclude interpreter/provisioning overhead. [Compute receipt](../results/reliability-v6/compute.json).
-Local checks: 128 tests passed with nine optional/environment skips; focused
+Local checks: 129 tests passed with nine optional/environment skips; focused
 actual-checkpoint Grad-CAM and exact Phase 5 reproduction checks also passed.
 Phase 6 PR CI tracks the final source.
 
