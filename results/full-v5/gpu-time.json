@@ -1,0 +1,43 @@
+{
+  "definition": "Quota counter increase during the experiment; run-function seconds exclude provisioning/import overhead and include CPU/I/O. Accelerator kernel time is not separately measured.",
+  "observed_quota_increase_seconds": 1882.137,
+  "quota_after": {
+    "gpuQuota": {
+      "hasEverRun": true,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "21600s",
+      "timeReserved": "0s",
+      "timeUsed": "2092.830.0s",
+      "totalTimeAllowed": "21600s"
+    },
+    "quotaRefreshTime": "2026-10-31T00:00:00.000Z",
+    "tpuQuota": {
+      "hasEverRun": false,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "72000s",
+      "timeReserved": "0s",
+      "timeUsed": "0s",
+      "totalTimeAllowed": "72000s"
+    }
+  },
+  "quota_before": {
+    "gpuQuota": {
+      "hasEverRun": true,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "21600s",
+      "timeReserved": "0s",
+      "timeUsed": "210.693.0s",
+      "totalTimeAllowed": "21600s"
+    },
+    "quotaRefreshTime": "2026-10-31T00:00:00.000Z",
+    "tpuQuota": {
+      "hasEverRun": false,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "72000s",
+      "timeReserved": "0s",
+      "timeUsed": "0s",
+      "totalTimeAllowed": "72000s"
+    }
+  },
+  "summed_run_function_seconds": 1707.273741211
+}

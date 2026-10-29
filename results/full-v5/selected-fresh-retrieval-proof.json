@@ -1,0 +1,8 @@
+{
+  "selected_backbone": "convnext_tiny",
+  "kernel_version": "saisathwikregula/trustretina-full-v5-convnext-tiny-c349c706/1",
+  "best_checkpoint_sha256": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+  "report_sha256": "aa248a074be37badecf898de0405625760902b70b1873140673e0620fafcb17b",
+  "independent_retrieval_verified": true,
+  "private_storage": "pinned private Kaggle kernel-version output"
+}

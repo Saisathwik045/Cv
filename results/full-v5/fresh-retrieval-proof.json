@@ -1,0 +1,7 @@
+{
+  "kernel_version": "saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1",
+  "best_checkpoint_sha256": "a006c7ccf8d43f11a4a53471d32bb1f7c633c424358b84df47ae6644f0c6463e",
+  "report_sha256": "fcc00e0b1c03f82a98700f6403a445368bc6a04c096695a436bb09da6c2fe4f0",
+  "independent_retrieval_verified": true,
+  "private_storage": "pinned private Kaggle kernel-version output"
+}

@@ -43,19 +43,7 @@ def preprocess(image, config=PreprocessConfig(), *, role="validation", rng=None)
         "inference",
     ):
         raise ValueError("Unknown role")
-    rgb = ImageOps.exif_transpose(image).convert("RGB")
-    width, height = rgb.size
-    scale = min(config.size / width, config.size / height)
-    resized = rgb.resize(
-        (max(1, round(width * scale)), max(1, round(height * scale))),
-        Image.Resampling.BILINEAR,
-    )
-    left = (config.size - resized.width) // 2
-    top = (config.size - resized.height) // 2
-    canvas = Image.new(
-        "RGB", (config.size, config.size), tuple(round(v * 255) for v in config.mean)
-    )
-    canvas.paste(resized, (left, top))
+    canvas, geometry = letterbox_rgb(image, config)
     flip = False
     if role == "train" and config.training_horizontal_flip:
         if rng is None:
@@ -70,15 +58,21 @@ def preprocess(image, config=PreprocessConfig(), *, role="validation", rng=None)
         config.std, np.float32
     )
     tensor = torch.from_numpy(array.transpose(2, 0, 1).copy())
-    return tensor, {
-        "original_size": [width, height],
-        "resized_size": [resized.width, resized.height],
-        "padding": [
-            left,
-            top,
-            config.size - left - resized.width,
-            config.size - top - resized.height,
-        ],
-        "horizontal_flip": flip,
-        "preprocessing_sha256": config.fingerprint(),
-    }
+    return tensor, {**geometry, "horizontal_flip": flip, "preprocessing_sha256": config.fingerprint()}
+
+
+def letterbox_rgb(image, config=PreprocessConfig()):
+    rgb = ImageOps.exif_transpose(image).convert("RGB")
+    width, height = rgb.size
+    scale = min(config.size / width, config.size / height)
+    resized = rgb.resize(
+        (max(1, round(width * scale)), max(1, round(height * scale))),
+        Image.Resampling.BILINEAR,
+    )
+    left = (config.size - resized.width) // 2
+    top = (config.size - resized.height) // 2
+    canvas = Image.new(
+        "RGB", (config.size, config.size), tuple(round(v * 255) for v in config.mean)
+    )
+    canvas.paste(resized, (left, top))
+    return canvas, {"original_size":[width,height],"resized_size":[resized.width,resized.height],"padding":[left,top,config.size-left-resized.width,config.size-top-resized.height]}

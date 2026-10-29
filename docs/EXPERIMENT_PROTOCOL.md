@@ -1,3 +1,13 @@
+# Full backbone comparison v5
+
+[Full experiment v5](FULL_EXPERIMENT_V5.md) and the committed common TOML govern
+the authorized sequential ImageNet runs on the unchanged frozen v4 cohort.
+Checkpoint selection uses patient validation weighted BCE; backbone selection
+uses validation patient macro AUROC after all five models complete. Calibration
+and final evaluation are not accessed. The v4 shared-temperature design remains
+reserved for the next phase; historical per-class calibration language below
+does not authorize it. Architecture and all five backbones are unchanged.
+
 # Contained bounded-review development protocol v4
 
 [Development v4](DEVELOPMENT_V4.md) completes the original fixed schedule and permits

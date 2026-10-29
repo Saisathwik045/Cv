@@ -1,6 +1,7 @@
 """Five fixed torchvision backbones, eight independent logits and a common dropout head."""
 
 import hashlib
+import re
 from pathlib import Path
 import torch
 from torch import nn
@@ -39,9 +40,11 @@ def create_backbone(
         digest = hashlib.sha256(Path(weights_path).read_bytes()).hexdigest()
         if digest != expected_weights_sha256:
             raise ValueError("Pretrained weight checksum mismatch")
-        base.load_state_dict(
-            torch.load(weights_path, map_location="cpu", weights_only=True), strict=True
-        )
+        state=torch.load(weights_path,map_location="cpu",weights_only=True)
+        if name=='densenet121':
+            pattern=re.compile(r'^(.*denselayer\d+\.(?:norm|relu|conv))\.([12]\.(?:weight|bias|running_mean|running_var))$')
+            state={pattern.sub(r'\1\2',k):v for k,v in state.items()}
+        base.load_state_dict(state,strict=True)
         provenance.update(
             initialization="verified_local_imagenet_state", weights_sha256=digest
         )
