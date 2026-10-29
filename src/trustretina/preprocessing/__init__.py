@@ -1,4 +1,3 @@
-"""Deterministic image transforms and train-only augmentation (Phase 2).
+"""Shared CPU preprocessing with explicit geometry/provenance."""
 
-No runtime implementation in Phase 0.
-"""
+from .shared import PreprocessConfig, preprocess

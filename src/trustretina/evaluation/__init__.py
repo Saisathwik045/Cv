@@ -1,4 +1,3 @@
-"""Two-dimensional multilabel metrics and saved prediction evaluation (Phase 2).
+"""Strict multilabel and patient-aggregation evaluation primitives."""
 
-No runtime implementation in Phase 0.
-"""
+from .metrics import multilabel_metrics, aggregate_patient_mean

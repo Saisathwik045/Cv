@@ -1,0 +1,27 @@
+# Tested Linux CPU environment, CPython 3.11/3.12; no pretrained downloads.
+--extra-index-url https://download.pytorch.org/whl/cpu
+cloudpickle==3.1.2
+et_xmlfile==2.0.0
+filelock==3.18.0
+fsspec==2025.5.1
+Jinja2==3.1.6
+joblib==1.6.0
+MarkupSafe==3.0.2
+mpmath==1.3.0
+networkx==3.4.2
+numpy==2.2.6
+openpyxl==3.1.5
+pandas==2.2.3
+pillow==11.3.0
+python-dateutil==3.0.0
+pytz==2026.5
+scikit-learn==1.6.1
+scipy==1.15.3
+setuptools==78.1.0
+six==1.17.0
+sympy==1.14.0
+threadpoolctl==3.7.0
+torch==2.7.1+cpu
+torchvision==0.22.1+cpu
+typing_extensions==4.13.2
+tzdata==2026.6
