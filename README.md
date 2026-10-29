@@ -1,10 +1,15 @@
 # TrustRetina
 
+Phase 6 reliability and shared-temperature calibration are complete. See the
+[development findings and limitations](results/reliability-v6/README.md) and
+[frozen research candidate](results/reliability-v6/candidate-contract.json).
+Automatic acceptance remains unsupported; final evaluation is sealed.
+
 The five-backbone v4 development comparison is complete. See the
 [actual validation results](results/full-v5/README.md),
 [current status and recovery commands](docs/STATUS.md), and
 [prespecified training protocol](docs/FULL_EXPERIMENT_V5.md).
-Reliability and calibration experiments are next; final evaluation remains untouched.
+The next phase is a separately authorized held-out research evaluation.
 
 Automated retinal screening **research**, using original ODIR-5K and authoritative
 `data.xlsx` patient labels. Class order: **N, D, G, C, A, H, M, O**.

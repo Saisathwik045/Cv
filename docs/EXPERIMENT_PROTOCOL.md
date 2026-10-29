@@ -1,3 +1,12 @@
+# Phase 6 reliability and shared calibration
+
+[Phase 6](RELIABILITY_V6.md) was committed before calibration-label access and
+supplements frozen v4. Deterministic patient predictions remain mean eye sigmoid
+probabilities; one shared temperature acts after that mean. Only the trained head
+Dropout is stochastic. Fixed reliability ablations are descriptive; no acceptance
+policy is fitted and deployment stays REVIEW REQUIRED. Final evaluation is sealed
+during Phase 6. The completed candidate and limitations are recorded in STATUS.md.
+
 # Full backbone comparison v5
 
 [Full experiment v5](FULL_EXPERIMENT_V5.md) and the committed common TOML govern

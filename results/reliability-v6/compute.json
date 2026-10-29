@@ -1,0 +1,48 @@
+{
+  "observed_gpu_quota_increase_seconds": 53.68600000000015,
+  "stage_run_function_seconds": {
+    "analysis": 14.627729896000005,
+    "inference": 31.922870682000024,
+    "inputs": 272.71437342699994
+  },
+  "quota_before_gpu": {
+    "gpuQuota": {
+      "hasEverRun": true,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "21600s",
+      "timeReserved": "0s",
+      "timeUsed": "2092.830.0s",
+      "totalTimeAllowed": "21600s"
+    },
+    "quotaRefreshTime": "2026-10-31T00:00:00.000Z",
+    "tpuQuota": {
+      "hasEverRun": false,
+      "isPayToScaleEnabled": false,
+      "minimumTimeAllowed": "72000s",
+      "timeReserved": "0s",
+      "timeUsed": "0s",
+      "totalTimeAllowed": "72000s"
+    }
+  },
+  "quota_after": {
+    "quotaRefreshTime": "2026-10-31T00:00:00.000Z",
+    "gpuQuota": {
+      "timeUsed": "2146.516.0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "21600s",
+      "minimumTimeAllowed": "21600s",
+      "isPayToScaleEnabled": false,
+      "hasEverRun": true
+    },
+    "tpuQuota": {
+      "timeUsed": "0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "72000s",
+      "minimumTimeAllowed": "72000s",
+      "isPayToScaleEnabled": false,
+      "hasEverRun": false
+    }
+  },
+  "paid_resources": false,
+  "interpretation": "Quota counter increase; run function times exclude imports/provisioning and include CPU/I/O."
+}

@@ -2,7 +2,7 @@
 """Three bounded private Kaggle stages; persist/reconcile receipts before submission."""
 import argparse,base64,contextlib,hashlib,io,json,os,subprocess,sys,tomllib,uuid,zipfile,fcntl
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'));sys.path.insert(0,str(ROOT/'scripts'))
 import full_experiment as transport
 from trustretina.data.validation import file_hash
 from trustretina.runner.verified_artifacts import read_stage
@@ -84,7 +84,8 @@ def advance(r,stage,submit):
         if report['protocol_sha256']!=r['protocol_sha256'] or report.get('final_evaluation_access') is not False:raise ValueError('Phase6 role/protocol mismatch')
         state.update(status=report['status'],report_sha256=v['artifact_sha256'],kernel_version=receipt['kernel_version'],artifact_hashes=report['output_hashes'],elapsed_seconds=report.get('elapsed_seconds'))
         if 'inputs_sha256' in report:state['inputs_sha256']=report['inputs_sha256']
-        if report['status']!='complete':state['error']=report.get('error');return
+        if report['status']!='complete':
+            state['error']=report.get('error');raise RuntimeError('Phase6 stage incomplete: '+str(state['error']))
     elif submit:
         known={s['kernel_id'] for s in r['stages'].values()}
         remote=[k.ref for k in api.kernels_list(mine=True,page_size=100,sort_by='dateRun') if 'trustretina-phase6-' in k.ref]
@@ -110,14 +111,38 @@ def export(r):
     write(ROOT/'results/reliability-v6/run-registry.json',{'registry':r,'receipts':receipts})
 
 
+def restore():
+    if (BASE/'registry.json').exists():raise ValueError('Private Phase6 state already exists; refusing overwrite')
+    saved=json.loads((ROOT/'results/reliability-v6/run-registry.json').read_text());r=saved['registry']
+    for key,receipt in saved['receipts'].items():
+        folder=(ROOT/r['stages'][key]['bundle']).resolve()
+        if not folder.is_relative_to(BASE.resolve()):raise ValueError('Recovery receipt path outside private Phase6 storage')
+        if (folder/'submission.json').exists() and json.loads((folder/'submission.json').read_text())!=receipt:raise ValueError('Existing receipt disagrees')
+        write(folder/'submission.json',receipt)
+    write(BASE/'registry.json',r);return r
+
+
+def retrieve_all(r):
+    api=transport.api_client()
+    for stage,state in r['stages'].items():
+        if state['status']=='complete':transport.retrieve(api,ROOT/state['bundle'])
+    folder=BASE/'selected-checkpoint';checkpoint=folder/'full/best.pt'
+    if not checkpoint.exists():
+        with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):
+            api.kernels_output(r['selected_kernel_version'],path=str(folder),file_pattern=r'^full/(best.pt|best.pt.sha256|stage-report.json|stage-report.sha256)$',page_size=100)
+    if file_hash(checkpoint)!=r['checkpoint_sha256'] or file_hash(folder/'full/stage-report.json')!=r['selected_report_sha256']:raise ValueError('Recovered selected checkpoint/report mismatch')
+
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','status','advance','export']);p.add_argument('--stage',choices=['inputs','inference','analysis']);p.add_argument('--submit',action='store_true');a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['init','restore','retrieve','status','advance','export']);p.add_argument('--stage',choices=['inputs','inference','analysis']);p.add_argument('--submit',action='store_true');a=p.parse_args()
     if a.action=='init':r=init()
+    elif a.action=='restore':r=restore()
     else:r=json.loads((BASE/'registry.json').read_text())
     if a.action=='advance':
         if not a.stage:raise ValueError('--stage required')
         try:advance(r,a.stage,a.submit)
         finally:write(BASE/'registry.json',r)
+    if a.action=='retrieve':retrieve_all(r)
     if a.action=='export':export(r)
     print(json.dumps({'stages':r['stages'],'final_evaluation_accessed':r['final_evaluation_accessed']},indent=2))
 

@@ -56,6 +56,20 @@ class ReliabilityNumericTests(unittest.TestCase):
         self.assertEqual(result['decision'],['REVIEW REQUIRED']*2)
         self.assertEqual(int(result['explanation_target_indices'][0]),1)
 
+    def test_phase6_receipt_restore_refuses_overwrite(self):
+        import importlib.util,json,tempfile
+        from pathlib import Path
+        script=Path(__file__).resolve().parents[1]/'scripts/phase6_experiment.py'
+        spec=importlib.util.spec_from_file_location('phase6_restore_fixture',script);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        with tempfile.TemporaryDirectory() as td:
+            module.ROOT=Path(td);module.BASE=module.ROOT/'artifacts/runner/phase6'
+            r={'stages':{'inference':{'status':'running','bundle':'artifacts/runner/phase6/inference'}}}
+            receipt={'kernel_version':'fixture/private/1','submission_attempted':True}
+            module.write(module.ROOT/'results/reliability-v6/run-registry.json',{'registry':r,'receipts':{'inference':receipt}})
+            self.assertEqual(module.restore(),r)
+            self.assertEqual(json.loads((module.BASE/'inference/submission.json').read_text()),receipt)
+            with self.assertRaisesRegex(ValueError,'refusing overwrite'):module.restore()
+
     def test_ties_are_complete_blocks_zero_coverage_undefined(self):
         y=np.asarray([[0]*8,[1]*8,[0]*8]);p=np.full((3,8),.9);score=np.asarray([.9,.9,.1])
         curve=coverage_curve(y,p,score)
