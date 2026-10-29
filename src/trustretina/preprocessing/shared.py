@@ -36,6 +36,7 @@ def preprocess(image, config=PreprocessConfig(), *, role="validation", rng=None)
     if role not in (
         "train",
         "validation",
+        "calibration",
         "calibration_fit",
         "calibration_policy",
         "final_evaluation",

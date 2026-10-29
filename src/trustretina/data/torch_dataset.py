@@ -22,6 +22,7 @@ class PatientEyeDataset(torch.utils.data.Dataset):
             not in (
                 "train",
                 "validation",
+                "calibration",
                 "calibration_fit",
                 "calibration_policy",
                 "final_evaluation",
