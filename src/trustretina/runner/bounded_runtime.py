@@ -18,6 +18,39 @@ from trustretina.data.bounded_review import (
 from trustretina.data.photo_verification import public_photo_record
 
 
+def checkpoint_content(output, records, coarse, pairs, scores, selection):
+    """Preserve completed screening before slower detail work can exhaust its cap.
+
+    Numeric-only cache permits targeted continuation without repeating full-image
+    content extraction. A trusted source/inventory/artifact checksum is still required.
+    """
+    if len(records) != len(coarse) or len(pairs) != len(scores):
+        raise ValueError("Content checkpoint dimensions disagree")
+    output = Path(output)
+    (output / "catalog.json").write_text(json.dumps(records, sort_keys=True))
+    (output / "detail-selection.json").write_text(json.dumps(selection))
+    np.savez_compressed(
+        output / "retinal-content.npz",
+        intensity=np.stack([r["intensity"] for r in coarse]),
+        gradient=np.stack([r["gradient"] for r in coarse]),
+        pairs=np.asarray(pairs, dtype=np.int64),
+        scores=np.asarray(scores, dtype=np.float32),
+    )
+    with (output / "coarse-screening.csv").open("w", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(
+            [
+                "review_index",
+                "a_index",
+                "b_index",
+                "intensity_correlation",
+                "gradient_correlation",
+            ]
+        )
+        for i, (pair, score) in enumerate(zip(pairs, scores)):
+            writer.writerow([i, *pair, *score])
+
+
 def run_review(spec, *, nonce, source_commit, input_root, output):
     import cv2, skimage
 
@@ -184,6 +217,13 @@ def run_review(spec, *, nonce, source_commit, input_root, output):
         selection = select_detail_pairs(
             pairs, screen, mandatory, maximum=POLICY_V3["maximum_detail_pairs"]
         )
+        checkpoint_content(output, records, coarse, pairs, screen, selection)
+        report.update(
+            candidate_pairs=original_count,
+            detail_budget=len(selection),
+            scheduled_detail_indices=selection,
+            screened_pairs=len(screen),
+        )
         # Four label-blind informative sources. Synthetic derivative controls are not
         # dataset duplicates and never enter patient groups or split counts.
         control_sources = []
@@ -257,6 +297,8 @@ def run_review(spec, *, nonce, source_commit, input_root, output):
                 "independent_evidence": e,
             }
             results.append(row)
+            with (output / "detail-progress.jsonl").open("a") as progress_file:
+                progress_file.write(json.dumps(row, sort_keys=True) + "\n")
             if (k + 1) % 25 == 0:
                 progress("bounded_detail", pairs=k + 1, total=len(selection))
         report.update(

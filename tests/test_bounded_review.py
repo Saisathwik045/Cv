@@ -95,3 +95,32 @@ class DetailedReviewTests(unittest.TestCase):
             prepare_detail(np.ones((512, 512, 3), np.uint8) * 51),
         )
         self.assertEqual(result["classification"], "unresolved_candidate")
+
+
+class ContentCheckpointTests(unittest.TestCase):
+    def test_numeric_checkpoint_keeps_unprocessed_pairs_without_pickle(self):
+        import tempfile, json
+        from pathlib import Path
+        from trustretina.runner.bounded_runtime import checkpoint_content
+
+        records = [{"patient_id": "synthetic-a"}, {"patient_id": "synthetic-b"}]
+        features = [
+            {"intensity": np.array([1.0, 0.0]), "gradient": np.array([0.0, 1.0])}
+        ] * 2
+        with tempfile.TemporaryDirectory() as directory:
+            checkpoint_content(
+                directory, records, features, [(0, 1)], [(1.0, 1.0)], [0]
+            )
+            with np.load(
+                Path(directory) / "retinal-content.npz", allow_pickle=False
+            ) as cache:
+                self.assertEqual(cache["pairs"].tolist(), [[0, 1]])
+            self.assertEqual(
+                json.loads((Path(directory) / "detail-selection.json").read_text()), [0]
+            )
+            self.assertEqual(
+                len(
+                    (Path(directory) / "coarse-screening.csv").read_text().splitlines()
+                ),
+                2,
+            )

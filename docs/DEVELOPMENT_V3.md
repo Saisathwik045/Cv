@@ -148,3 +148,20 @@ Patient-level reports, adjudication, candidate assignments, predictions and any
 checkpoints stay outside Git. Aggregate actual findings belong in STATUS.md after
 verified retrieval. The real-data result can remain blocked; synthetic tests do not
 clear it. Full five-model training is not authorized by this protocol revision.
+
+
+## Actual bounded result
+
+See STATUS.md for machine-derived counts/support. The CPU job stopped at 1,800
+seconds with 422 detailed comparisons, six probable image-copy links, 14 material
+uncertain cases and nine candidate-partition crossings. The report/source/nonce
+checks passed; review coverage did not. No experimental split was frozen and no
+GPU pilot was submitted. All scheduled-but-unfinished work remains unadjudicated.
+Future runtime code now checkpoints screening before detailed comparisons so a
+bounded stop does not discard that completed work. This was not available in the
+actual source-2da502a execution and is not claimed as retrieved evidence.
+
+The private named-case renderer is executable with `python -m
+trustretina.data.review_render`; it checks original image hashes and produces
+comparison pages without clearing any case. Render against the attached original
+source using the existing CPU workflow. No additional GPU smoke is required.

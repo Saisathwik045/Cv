@@ -1,3 +1,116 @@
+# Phase 3 actual evidence — split freeze and pilot BLOCKED (29 October 2026 IST)
+
+Latest merged main was verified at `0d5986f`; PR #8 and PR #9 are present. The
+original architecture and all five backbones are unchanged. [PR #10](https://github.com/Saisathwik045/Cv/pull/10)
+contains this bounded review, prospective development protocol and actual evidence.
+This section supersedes historical readiness/acceptance statements below.
+
+## Real bounded CPU result
+
+Private job `saisathwikregula/trustretina-bounded-retinal-review-v3-426a3327/1`,
+source `2da502a`, dataset version 2, finished its fixed 1,800-second budget.
+Kaggle execution is COMPLETE; semantic review status is **incomplete** because its
+1,536-pair detailed ceiling was not reached. No repeat CPU submission was made.
+No GPU job, training, calibration fitting or paid resources were used.
+
+All 3,500 patients / 7,000 images passed workbook/label/reference, raw-byte,
+canonical-pixel and independent-dHash identity checks. All 13 photographic controls
+passed. Completed detailed comparisons: **422** = all 302 mandatory technical/bridge
+candidates + 120 outside-dHash pairs (64 prior rejected pairs, 56 new foreground
+neighbours). These support six probable image-copy relationships, four two-patient
+groups; zero raw/pixel-exact duplicates. Largest supported group: two patients,
+3,496 components total. The previous two evidence-supported false positives remain.
+Across the original 232,790 candidates: six probable, two supported false positives,
+232,782 unresolved sensitivity records. No weak match is automatically a must-link
+or a quarantine exclusion; all original patients/images/labels are retained.
+
+The supported pairs have 356–1,562 geometric inliers, >=.9595 inlier fraction,
+aligned foreground SSIM .9772–1.0 and normalized MAE <=.00737. They are photographic
+copy evidence, not clinical/patient identity adjudication. One supported relationship
+has conflicting age/sex metadata; supported links have no patient-vector disagreement.
+Fourteen completed comparisons still trigger material uncertainty; **nine cross**
+the proposed partitions. Nine of these 14 have differing patient annotation vectors,
+which does not establish nine annotation errors. Two crossing cases have hundreds
+of geometric inliers but insufficient photometric agreement; others involve weak or
+low-information matching. Their exact IDs/eyes, scores, metadata, roles and reasons
+are preserved privately. Do not lower thresholds just to clear them.
+
+The 14 cases are not an exhaustive census: 1,114 scheduled detailed comparisons were
+not completed within the time cap. The first runtime finalized its full screening
+cache only after detail completion, so that cache was not retained on timeout.
+This PR fixes checkpoint timing for future passes: retinal vectors, coarse scores,
+selection indices and completed detail rows are saved before/during slow work.
+Actual evidence remains attributed to the earlier runtime; the fix is not retroactive.
+
+## Diagnostic assignment only — no frozen experimental split
+
+[Development v3](DEVELOPMENT_V3.md) uses supported-copy components, the existing
+rarest-label/whole-group-repair allocator, seed 2026 and .65/.15/.10/.10 targets.
+Deterministic replay, patient separation, supported-copy separation and all-eight
+positive/negative patient/group feasibility floors passed. Counts are 2,275 / 525 /
+350 / 350, with 2,272 / 524 / 350 / 350 components. These assignments are private
+**diagnostics**, not frozen or approved experimental splits.
+
+| Label | Train + / − | Validation + / − | Calibration + / − | Final + / − |
+|---|---:|---:|---:|---:|
+| N | 725 / 1550 | 179 / 346 | 117 / 233 | 119 / 231 |
+| D | 733 / 1542 | 169 / 356 | 113 / 237 | 113 / 237 |
+| G | 140 / 2135 | 32 / 493 | 22 / 328 | 21 / 329 |
+| C | 138 / 2137 | 32 / 493 | 21 / 329 | 21 / 329 |
+| A | 107 / 2168 | 25 / 500 | 16 / 334 | 16 / 334 |
+| H | 67 / 2208 | 16 / 509 | 10 / 340 | 10 / 340 |
+| M | 113 / 2162 | 26 / 499 | 18 / 332 | 17 / 333 |
+| O | 636 / 1639 | 147 / 378 | 98 / 252 | 98 / 252 |
+
+Calibration and final each have 10 H positives, rather than the historical one.
+This supports no H-specific calibration or precise H-performance claim. Use the
+single shared patient-level temperature design; do not subdivide calibration or
+fit a same-set acceptance policy. All 350 calibration patients are separate groups.
+No temperature was fitted; confidence/MC Dropout/quality/calibration/triage components
+remain, with unsupported acceptance returning REVIEW REQUIRED.
+
+Sensitivity analysis containing just the 14 identified material relationships has
+3,482 components, largest three, and no crossing among those cases. It retains all
+patients and class support, but is a hypothesis, not adjudication or release; mixed
+annotations and incomplete unprocessed coverage remain. Neither the 2,638-patient
+weak graph nor the 2,807-patient blanket quarantine is the new default.
+
+**Freeze/pilot blockers:** bounded detailed review incomplete; nine specific material
+uncertainty crossings. `readiness.json` says checks_passed=false, pilot_ready=false,
+full_training_ready=false. No `frozen-splits` directory or training-ready marker was
+created. The single conditional GPU authorization remains unused: pilot job ID is
+null and submission_attempted=false; there are no pilot predictions/checkpoints.
+All 94 historical evidence artifact checksums were reverified unchanged.
+
+## Evidence and next executable phase
+
+Private, ignored `artifacts/runner/bounded-retinal-review-v3/` contains the pinned
+submission, verified nonce/source/report digest, real report and execution log.
+`artifacts/runner/development-v3-diagnostic/` contains versioned adjudication,
+checksum-bound candidate assignment/support/readiness, specific-cases-for-review,
+annotation evidence, sensitivity summary and pilot-blocked record. Patient-level
+artifacts stay outside Git. No final evaluation was used for model selection.
+
+Next, use the existing CPU workflow to render/review the **14 named cases**, resolve
+or explicitly contain their uncertainty with new versioned evidence, and complete
+the remaining bounded coverage before repeating the readiness audit. Render only
+these cases against immutable original files (no model fitting):
+
+```sh
+python -m trustretina.data.review_render \
+  --cases "$PRIVATE_CASE_MANIFEST" --cases-sha256 "$TRUSTED_CASE_MANIFEST_SHA" \
+  --root "$ODIR_ROOT" --output "$NEW_PRIVATE_REVIEW_DIRECTORY"
+```
+
+The renderer leaves every case unresolved; images alone do not create adjudication.
+Then run the checksum-bound audit command in [DEVELOPMENT_V3.md](DEVELOPMENT_V3.md).
+Only a passing new audit can freeze a new manifest version and enable the sole
+bounded EfficientNet-B0 pilot. Full five-model training remains unready and is not
+launched. Local suites discover 99 tests: data environment passes with 14 Torch skips;
+CPU environment passes with nine photographic-dependency skips. Dedicated CI jobs
+exercise both optional groups. Compile/config/diff checks pass. Software tests
+establish contracts, not real model performance.
+
 # Phase 3 — bounded verification and prospective development protocol
 
 Latest main was verified at `0d5986f`: PR #8 and PR #9 are merged. This branch
