@@ -68,4 +68,16 @@ class FinalMetricTests(unittest.TestCase):
         wrong=classification(y[indices],p[indices],component_weights(['A','A','A','A','B']))
         self.assertNotEqual(correct['hamming_loss'],wrong['hamming_loss'])
 
+
+
+    def test_bootstrap_undefined_rankings_report_defined_counts_and_paired_samples(self):
+        y=np.asarray([[1]*7+[0],[0]*8,[1]*7+[0]]);p=np.full((3,8),.6);score=np.asarray([.8,.7,.6]);pred={'raw':p,'calibrated':p.copy()}
+        names=['confidence','confidence_uncertainty','confidence_uncertainty_quality']
+        scores={mode+'__'+name:score.copy() for mode in pred for name in names}
+        cutoffs={key:[{'target_coverage':0.,'threshold':None},{'target_coverage':1.,'threshold':0.}] for key in scores}
+        intervals,draws=bootstrap(y,pred,scores,['A','B','C'],cutoffs,replicates=5,seed=62026,minimum_defined=4)
+        bad=intervals['raw.patient_equal.classification.macro_auroc'];self.assertEqual(bad['defined_replicates'],0);self.assertIsNone(bad['lower'])
+        diff='paired_calibrated_minus_raw.patient_equal.calibration.nll';np.testing.assert_array_equal(draws[diff],np.zeros(5))
+        self.assertEqual(intervals[diff]['lower'],0.)
+
 if __name__=='__main__':unittest.main()
