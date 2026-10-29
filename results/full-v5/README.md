@@ -7,10 +7,10 @@ Generated from checksum-verified best-checkpoint prediction files. Patient proba
 | efficientnet_b0 | complete | 5 / 2 | 0.7876 | 0.4686 | 0.4055 | 0.4230 |
 | resnet50 | complete | 5 / 2 | 0.7784 | 0.4632 | 0.3708 | 0.3974 |
 | densenet121 | complete | 6 / 3 | 0.8119 | 0.5053 | 0.4607 | 0.4773 |
-| convnext_tiny | running | — | — | — | — | — |
-| efficientnet_b2 | queued | — | — | — | — | — |
+| convnext_tiny | complete | 5 / 2 | 0.8288 | 0.5398 | 0.4762 | 0.4988 |
+| efficientnet_b2 | complete | 5 / 2 | 0.8048 | 0.4933 | 0.4280 | 0.4697 |
 
-Selected backbone: pending completion/defined rankings for all five.
+Selected backbone: convnext_tiny.
 
 | Label | Validation positive / negative patients |
 |---|---:|
