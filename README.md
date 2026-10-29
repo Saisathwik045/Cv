@@ -1,5 +1,11 @@
 # TrustRetina
 
+The five-backbone v4 development comparison is complete. See the
+[actual validation results](results/full-v5/README.md),
+[current status and recovery commands](docs/STATUS.md), and
+[prespecified training protocol](docs/FULL_EXPERIMENT_V5.md).
+Reliability and calibration experiments are next; final evaluation remains untouched.
+
 Automated retinal screening **research**, using original ODIR-5K and authoritative
 `data.xlsx` patient labels. Class order: **N, D, G, C, A, H, M, O**.
 
@@ -32,8 +38,11 @@ trustretina plan --config configs/phase0.toml
 `--network` makes bounded read-only HTTPS probes. `--require-gpu` exits 1 unless a
 PyTorch CUDA device is usable. Configuration errors exit 2. `plan` prints a
 **declarative inventory**, marks jobs `not_implemented`, and never starts work.
-Dataset validation/splitting and runner checks are implemented in Phase 1. Training,
-model evaluation, inference and report generation remain future implementations.
+Dataset validation/splitting, the five-backbone training/evaluation modules and
+prediction-derived reports are implemented. The Phase 0 `plan` command remains
+declarative; the completed experiment uses the dedicated resumable runner linked
+in the current status. Clinical deployment and fitted reliability/calibration
+claims are not established.
 
 For a preinstalled managed environment with unavailable package downloads, the
 verified offline installation is:
