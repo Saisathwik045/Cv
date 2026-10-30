@@ -1,0 +1,16 @@
+{
+  "scope": "Portable real Streamlit fixture on current host, not macOS testing",
+  "system": "Linux",
+  "macos_native_execution": false,
+  "macos_dependency_installation": false,
+  "finder_gatekeeper_browser_open": "unverified on macOS",
+  "path_with_spaces": true,
+  "loopback_http_health": true,
+  "process_identity": true,
+  "second_launch_reused_same_pid": true,
+  "one_server_only": true,
+  "control_c_stops_owned_server_and_cleans_receipt": true,
+  "raw_server_output_persisted": false,
+  "model_inference_or_evaluation": false,
+  "frozen_bundle_hash_verification": true
+}

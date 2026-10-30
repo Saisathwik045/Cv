@@ -1,0 +1,20 @@
+{
+  "scope": "Linux-only packaging verification and remote wheel metadata; no native macOS claim",
+  "target": "macOS13+ Apple silicon ARM64 CPython3.11/3.12 CPU",
+  "focused_launcher_tests": 21,
+  "local_full_suite": {
+    "run": 169,
+    "passed": 160,
+    "optional_skipped": 9
+  },
+  "bash_syntax": "passed",
+  "compileall": "passed",
+  "diff_check": "passed",
+  "original_model_code_changed": false,
+  "real_data_evaluation_rerun": false,
+  "training_or_calibration": false,
+  "macos_native_execution": false,
+  "macos_wheel_installation": false,
+  "finder_gatekeeper_browser_open": "unverified on macOS",
+  "private_artifact_sources": "original pinned Phase5 checkpoint and Phase6 parameter job versions only"
+}

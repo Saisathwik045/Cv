@@ -1,5 +1,13 @@
 # TrustRetina
 
+## Apple-silicon Mac
+
+[Mac quickstart](docs/MACOS_QUICKSTART.md): install native Python 3.11/3.12 once,
+download/extract this checkout, double-click **Setup_TrustRetina.command** once,
+then **Start_TrustRetina.command**. The launcher installs/reuses locked app
+dependencies, verifies the private bundle and opens the local browser after health
+succeeds. Targets macOS 13+; native Mac execution is not yet verified.
+
 ## Research demo — Phase 8
 
 The complete local Streamlit demo packages the unchanged frozen ConvNeXt-Tiny

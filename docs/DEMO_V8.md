@@ -5,7 +5,17 @@ threshold/strategy selection, split changes or final-evaluation replay. PR #14
 was already merged at `0e14fa5`; its final CI run `40926892656` passed. This phase
 starts from that merged main. All five backbone factories remain unchanged.
 
-## Install and launch
+## Apple-silicon Mac: minimum-effort launch
+
+See [Mac quickstart](MACOS_QUICKSTART.md). Install native Python 3.11/3.12 once,
+extract/clone the project, double-click `Setup_TrustRetina.command` once to
+restore the checksum-verified private bundle, then double-click
+`Start_TrustRetina.command`. It manages a project-local environment and opens
+your local browser only after health succeeds. macOS 13+ / ARM64 is targeted;
+portable Linux and wheel-metadata checks are recorded, **not native Mac testing**.
+The frozen model and REVIEW REQUIRED behavior are unchanged.
+
+## Install and launch on Linux
 
 Use Python 3.11/3.12 on Linux from the repository root:
 
