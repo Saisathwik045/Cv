@@ -16,7 +16,9 @@ python scripts/install_inference_bundle.py --download
 python scripts/run_demo.py
 ```
 
-Private preview: http://127.0.0.1:8501. See [installation and walkthrough](docs/DEMO_V8.md)
+Local browser on the same computer: `http://127.0.0.1:8501` (not a cloud preview).
+This cloud task has no supported private port-exposure mechanism. See
+[installation, access limitations and walkthrough](docs/DEMO_V8.md)
 for local artifact installation, exact verification evidence and limitations.
 No training, fitting, final evaluation replay or public hosting occurs.
 
