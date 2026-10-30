@@ -1,9 +1,30 @@
 # TrustRetina
 
+## Research demo — Phase 8
+
+The complete local Streamlit demo packages the unchanged frozen ConvNeXt-Tiny
+pipeline. Both eyes are required; all predictions remain **REVIEW REQUIRED**.
+It includes raw/calibrated probabilities, trained-head MC signals, technical
+quality, per-eye Grad-CAM, JSON download and separate validation/held-out tables.
+
+```sh
+python -m pip install -r requirements/app-cpu.lock
+python -m pip install --no-deps --no-build-isolation -e .
+# Once, using the existing credentialed Kaggle SDK environment:
+python scripts/install_inference_bundle.py --download
+# App runtime requires neither Kaggle credentials nor the dataset:
+python scripts/run_demo.py
+```
+
+Private preview: http://127.0.0.1:8501. See [installation and walkthrough](docs/DEMO_V8.md)
+for local artifact installation, exact verification evidence and limitations.
+No training, fitting, final evaluation replay or public hosting occurs.
+
+
 The frozen Phase 7 held-out evaluation is complete. See the
 [generated research report](results/final-v7/REPORT.md) for actual metrics,
 intervals, negative findings and limitations. No automatic acceptance policy is
-validated. Next: package the unchanged pipeline into the research demo app.
+validated. Phase 8 now packages the unchanged pipeline into the local research demo.
 
 Phase 6 reliability and shared-temperature calibration are complete. See the
 [development findings and limitations](results/reliability-v6/README.md) and

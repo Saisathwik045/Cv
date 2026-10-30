@@ -1,0 +1,43 @@
+{
+  "contract_sha256": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61",
+  "device": "cpu",
+  "cuda_available": false,
+  "development_pairs": 3,
+  "selection": "first three saved validation patients; fixed before inference",
+  "atol": 1e-05,
+  "rtol": 0.0001,
+  "cases": [
+    {
+      "case_index": 0,
+      "raw_max_abs_error": 5.960464477539063e-08,
+      "seconds": 0.27374335500007874,
+      "repeat_mc_exact": true
+    },
+    {
+      "case_index": 1,
+      "raw_max_abs_error": 2.1606683731079102e-07,
+      "seconds": 0.21438152199993965,
+      "repeat_mc_exact": true
+    },
+    {
+      "case_index": 2,
+      "raw_max_abs_error": 1.4901161193847656e-07,
+      "seconds": 0.24530477400003292,
+      "repeat_mc_exact": true
+    }
+  ],
+  "model_state_unchanged": true,
+  "strict_checkpoint_load": true,
+  "gradcam_target": "D",
+  "gradcam_seconds": 0.3110856790000298,
+  "peak_process_rss_mib": 844.59375,
+  "load_seconds": 1.0198452890000453,
+  "dependencies": {
+    "torch": "2.7.1+cpu",
+    "torchvision": "0.22.1+cpu",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0"
+  },
+  "saved_cohort_mc_parity": "Not bitwise comparable: CPU vs CUDA RNG and single-pair vs cohort-sized masks. Exact internal frozen-helper parity and repeated-pair reproducibility verified.",
+  "final_evaluation_rerun": false
+}
