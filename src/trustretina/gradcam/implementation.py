@@ -4,14 +4,15 @@ import numpy as np
 from torch.nn import functional as F
 
 
-def patient_gradcam(model,images,*,layer=None):
+def patient_gradcam(model,images,*,layer=None,target_index=None):
     if images.ndim!=4 or len(images)!=2:raise ValueError('Exactly both eye images of one patient required')
     model.eval();target_layer=layer if layer is not None else model.backbone.features[-1]
     saved=[]
     hook=target_layer.register_forward_hook(lambda module,inputs,output:saved.append(output))
     try:
         x=images.detach().clone().requires_grad_(True)
-        logits=model(x);p=logits.sigmoid().mean(0);target=int(p.detach().argmax())
+        logits=model(x);p=logits.sigmoid().mean(0);target=int(p.detach().argmax()) if target_index is None else target_index
+        if not isinstance(target,int) or not 0<=target<8:raise ValueError('Explanation target must be a class index 0..7')
         if len(saved)!=1 or saved[0].ndim!=4:raise ValueError('Require one spatial BCHW activation')
         activation=saved[0];grad=torch.autograd.grad(p[target],activation,retain_graph=False)[0]
         cam=(grad.mean((2,3),keepdim=True)*activation).sum(1,keepdim=True).relu()

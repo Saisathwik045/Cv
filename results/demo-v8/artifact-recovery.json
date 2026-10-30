@@ -1,0 +1,17 @@
+{
+  "fresh_private_download": true,
+  "checkpoint_version": "saisathwikregula/trustretina-full-v5-convnext-tiny-c349c706/1",
+  "parameters_version": "saisathwikregula/trustretina-phase6-analysis-ab40b8f2/1",
+  "contract_sha256": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61",
+  "files": {
+    "best.pt": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+    "quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "candidate-contract.json": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61"
+  },
+  "dataset_required": false,
+  "runtime_kaggle_token_required": false,
+  "fresh_bundle_strict_cpu_load": true,
+  "kaggle_token_removed_from_runtime_process": true
+}

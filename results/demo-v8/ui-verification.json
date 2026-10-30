@@ -1,0 +1,22 @@
+{
+  "browser": "system Chromium / Playwright 1.56.0",
+  "url": "http://127.0.0.1:8501",
+  "paired_interaction": "private development pair from third prespecified validation patient",
+  "single_eye_blocked": true,
+  "json_download_verified": true,
+  "eight_probabilities": true,
+  "review_required": true,
+  "selectable_d_gradcam_both_eyes": true,
+  "reset_clears_uploads_predictions_explanations": true,
+  "invalid_image_error": true,
+  "results_page_separate_tables": true,
+  "browser_errors": [],
+  "seconds": 13.377281388000029,
+  "screenshots": {
+    "public": [
+      "preview-empty.png",
+      "preview-results.png"
+    ],
+    "private_development": "artifacts/demo-v8/paired-development-preview.png"
+  }
+}

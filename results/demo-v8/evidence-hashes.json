@@ -1,0 +1,7 @@
+{
+  "results/full-v5/comparison.csv": "5d88313d29d484ed7413d451f747f9bb09773a312a89538806195a572f3a500c",
+  "results/final-v7/aggregate-summary.json": "a75c905079c134f9edde22864b789a8f1b1b539af43110c7c6d931d246d19278",
+  "results/final-v7/REPORT.md": "0ac863d9aa812688a8f230ad488277bb77a7ddee187a18dc5bc56ba9573fc86f",
+  "results/final-v7/patient_equal-reliability-diagrams.png": "8b90057c5328e03df8b694da3e2cca41cdd7223bb3d6949a2f09839837049c4c",
+  "results/final-v7/patient_equal-hamming_risk.png": "9cdf9811cb63af7a658111ad0a2799a6a989d00a0b9ce6b6a47fdebb347ab3ab"
+}

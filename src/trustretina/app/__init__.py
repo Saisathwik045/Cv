@@ -1,4 +1,1 @@
-"""Upload interface consuming the inference bundle (Phase 4).
-
-No runtime implementation in Phase 0.
-"""
+"""Local Streamlit research interface; patient uploads remain session-only."""
