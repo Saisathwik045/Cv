@@ -46,12 +46,69 @@ corrupt bundles fail explicitly; no random weights can produce an app result.
 python scripts/run_demo.py
 ```
 
-Open **http://127.0.0.1:8501**. The launcher uses two CPU threads by default and
+On the **same computer running the command**, open `http://127.0.0.1:8501`.
+This is a local address, not a cloud preview link. When the command runs in a
+remote cloud workspace, opening that address on your phone/laptop points to your
+own device, not the workspace. The launcher uses two CPU threads by default and
 loopback binding; it does not provision hosting. The app has no Kaggle dependency
 or token lookup once installed. The exact CPU dependency lock is separate from
 the historical GPU lock. CUDA is selected automatically when an installed
 compatible Torch/torchvision runtime reports it available. No CUDA app execution
 was available in this workspace; that path has not been reverified here.
+
+## Cloud access diagnosis and supported alternative
+
+The access investigation on 30 October 2026 found the existing process alive at
+PID 2447, listening only on workspace `127.0.0.1:8501`. It was reused; no duplicate
+server was started. An internal health response is insufficient evidence that a
+user's device can reach the app. The earlier “verified private preview” wording
+and queued browser card did not establish device-accessible forwarding.
+
+The current managed-environment status reports no configured capabilities, and
+the available tool catalog exposes no private web-preview/ingress registration
+or port-exposure operation. The cloud-runtime networking reference documents
+outbound HTTP; its VPN forwarding reference explicitly excludes inbound
+connections. VPN is not configured here. `open_in_codex` opens/queues a browser
+tab; it does not register a forwarded port or return a hosted preview URL.
+Consequently **no supported device-accessible private preview URL can be issued
+from this task**. There is no registered URL whose base path/WebSocket proxy can
+be tested. Switching the bind address to `0.0.0.0` would not create that route,
+so the healthy listener and default CORS/XSRF protections remain unchanged.
+No public tunnel, publication or paid hosting is used.
+
+A fresh workspace-internal Chromium check verified the main page, Streamlit
+`/_stcore/stream` WebSocket and received frames, both upload controls, an existing
+private development-pair prediction, result download control and reset without
+page/WebSocket exceptions or displayed startup/artifact-load errors. This
+**does not verify external/device access**. The original detached execution
+session is no longer available to this turn; access to its stdout/stderr file
+descriptors is denied, so complete server logs could not be inspected. The
+private check record is `artifacts/demo-v8/access-diagnosis.json`.
+
+The smallest supported alternative is local execution on your own computer.
+Use the dependency installation above, then either copy the verified private
+`artifacts/inference-v8` bundle or restore it with the optional authorized Kaggle
+SDK. For that one-time recovery, install `kaggle==2.2.5` in the setup environment.
+From an already dependency-installed checkout, this single shell command verifies
+or installs the bundle and launches locally:
+
+```sh
+python scripts/install_inference_bundle.py --download && python scripts/run_demo.py
+```
+
+For an already installed bundle, only `python scripts/run_demo.py` is needed.
+The browser must run on that same computer. No Kaggle token is required by the
+running app. Do not upload private images to an unapproved tunnel or hosting site.
+
+The existing workspace process is left running, but the original execution
+session cannot be reattached from this turn. Its observed survival is not a
+managed restart or uptime guarantee. It stops when the cloud environment stops;
+no permanent hosting or future monitoring is promised. A local launch lives as
+long as its terminal/process and computer remain running. If the platform later
+provides an authenticated private port-preview feature, register the port through
+that feature first, use only its returned URL, and separately verify HTTP,
+WebSocket, upload interactions and access control through that URL before sharing
+it. Bind to `0.0.0.0` only if that documented mechanism requires it.
 
 ## Walkthrough
 

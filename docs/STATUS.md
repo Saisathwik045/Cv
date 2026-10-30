@@ -16,7 +16,11 @@ python scripts/install_inference_bundle.py --download
 python scripts/run_demo.py
 ```
 
-Verified loopback preview: **http://127.0.0.1:8501**. No paid/public hosting.
+Workspace-internal address: `http://127.0.0.1:8501`; **not a user-accessible cloud preview**.
+The available runtime/tools provide no supported private port-exposure mechanism.
+The healthy existing process was reused; no bind/security change or public hosting
+was introduced. Browser HTTP/WebSocket/pair interaction checks are internal only.
+Use the [local alternative and access diagnosis](DEMO_V8.md#cloud-access-diagnosis-and-supported-alternative).
 [Setup and walkthrough](DEMO_V8.md) also gives local-only installation from existing
 artifacts. Independent fresh retrieval of the original pinned model/Phase 6
 parameters verified every hash; the fresh bundle loaded strictly on CPU with the
