@@ -43,3 +43,8 @@ configs/local*.toml
 
 # Token files must never be committed even outside .kaggle
 access_token
+
+# Mac launcher environments and private lifecycle diagnostics
+.venv-mac/
+.venv-artifacts-mac/
+.trustretina/
