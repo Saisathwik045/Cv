@@ -51,6 +51,28 @@ class ResolutionGuardsTests(unittest.TestCase):
         from report_resolution_results import rename
         self.assertEqual(rename({'ratio_bce':{'candidate_for_future_study':'sqrt_ratio_bce'}}),{'res224':{'candidate_for_future_study':'res320'}})
 
+    def test_native_archive_allowlist_and_digest_reject_unrelated_images(self):
+        import hashlib,io,tarfile
+        from verify_resolution_inputs import verify_archive
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t)/'native.tar';data=b'synthetic fixture, not a patient image'
+            row={'path':'Training Images/fixture_left.jpg','raw_sha256':hashlib.sha256(data).hexdigest()}
+            with tarfile.open(p,'w') as z:
+                info=tarfile.TarInfo(row['path']);info.size=len(data);z.addfile(info,io.BytesIO(data))
+            self.assertEqual(verify_archive(p,[row]),1)
+            with self.assertRaises(ValueError):verify_archive(p,[{**row,'raw_sha256':'wrong'}])
+            with tarfile.open(p,'a') as z:
+                info=tarfile.TarInfo('unrelated.jpg');info.size=len(data);z.addfile(info,io.BytesIO(data))
+            with self.assertRaisesRegex(ValueError,'unexpected'):verify_archive(p,[row])
+
+    def test_320_must_use_native_information_not_upscaled_224(self):
+        from PIL import Image
+        from trustretina.preprocessing.shared import letterbox_rgb,PreprocessConfig
+        x=np.indices((601,803)).sum(0)%2*255;x=np.repeat(x[:,:,None],3,axis=2).astype(np.uint8)
+        native=Image.fromarray(x);a,_=letterbox_rgb(native,PreprocessConfig(size=224));b,_=letterbox_rgb(native,PreprocessConfig(size=320))
+        up=a.resize((320,320),Image.Resampling.BILINEAR)
+        self.assertFalse(np.array_equal(np.asarray(up),np.asarray(b)))
+
 
 try:
     import torch
