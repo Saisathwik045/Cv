@@ -1,0 +1,55 @@
+schema_version = 9
+experiment = "trustretina-controlled-development-v9"
+seed = 2026
+backbones = ["convnext_tiny", "densenet121"]
+class_order = ["N", "D", "G", "C", "A", "H", "M", "O"]
+release_manifest_sha256 = "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57"
+initialization = "torchvision_IMAGENET1K_V1"
+image_size = 224
+augmentation = "none"
+patient_aggregation = "mean_left_right_sigmoid_before_threshold"
+threshold = 0.5
+loss = "BCEWithLogitsLoss"
+positive_weights = "negative_over_positive_training_patients_only_unclipped"
+optimizer = "AdamW"
+learning_rate = 0.0001
+minimum_learning_rate = 0.000001
+weight_decay = 0.01
+batch_size = 16
+max_epochs = 25
+precision = "float32"
+num_workers = 0
+checkpoint_selection = "maximum_validation_patient_macro_auroc_all_eight_defined_tie_earliest"
+early_stopping_metric = "validation_patient_macro_auroc"
+early_stopping_patience = 6
+early_stopping_min_delta = 0.0001
+backbone_selection = "maximum_validation_patient_macro_auroc_all_eight_defined"
+backbone_tie = "fixed_run_order"
+maximum_gpu_session_seconds = 1800
+maximum_gpu_total_seconds = 14400
+maximum_run_reserved_seconds = 4800
+gpu_overhead_reserve_per_attempt_seconds = 600
+maximum_attempts_per_run = 2
+final_evaluation_access = false
+calibration_fitting = false
+risk_policy_fitting = false
+threshold_fitting = false
+higher_resolution_enabled = false
+alternative_loss_enabled = false
+
+[[runs]]
+id = "convnext_constant"
+backbone = "convnext_tiny"
+schedule = "constant"
+[[runs]]
+id = "convnext_cosine"
+backbone = "convnext_tiny"
+schedule = "cosine"
+[[runs]]
+id = "densenet_constant"
+backbone = "densenet121"
+schedule = "constant"
+[[runs]]
+id = "densenet_cosine"
+backbone = "densenet121"
+schedule = "cosine"

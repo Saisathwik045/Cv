@@ -1,45 +1,90 @@
-# Phase 8 Mac packaging — native execution pending
+# Phase 9 — controlled second training round prepared; approval required
 
-PRs #15/#16 were already merged; their final CI runs `40999463918` and
-`41002913956` passed. Packaging continues from latest main `b0e6f9c`.
-[Apple-silicon quickstart](MACOS_QUICKSTART.md) gives the minimum local steps:
-install native Python 3.11/3.12, clone/extract, double-click
-`Setup_TrustRetina.command` once, then `Start_TrustRetina.command`. Targets
-macOS 13+ ARM64 CPU execution. No further cloud-preview work or tunnel is used.
+Continue from latest merged main `d7d7187` (Mac packaging PR #17 merged).
+[Prior demo/Mac status](history/STATUS-through-phase8-macos.md) preserves evidence
+and native-Mac limitations. The demo checkpoint, contract, five backbone factories
+and REVIEW REQUIRED behavior are unchanged. No new training job was submitted.
 
-The launcher locates its checkout, verifies all frozen bundle hashes, manages
-`.venv-mac` with an exact Mac lock/installed-version checks, verifies native imports
-on installation, reuses its healthy identified server, waits for loopback health
-and then opens the browser. Startup locks prevent duplicate launch races.
-Changed app-entry/dependency hashes require restarting the original instance.
-The owning Terminal controls lifecycle; Control-C/hangup stops its child and
-cleans its receipt. No daemon, public hosting or permanent uptime is promised.
+## Verified diagnosis
 
-One-time artifact setup has a separate `.venv-artifacts-mac` / exact recovery lock,
-uses the original pinned jobs, accepts a hidden token without saving it, or reuses
-secure existing local credentials. Copying `artifacts/inference-v8` privately skips
-credential setup. The running app receives no Kaggle environment variables and
-needs neither Kaggle SDK/credentials nor ODIR. No random-weight fallback exists.
-Lifecycle logs are private, controlled metadata only; raw subprocess/server
-output, credential values and uploaded contents are not persisted.
+All five v5 job versions remotely report COMPLETE. Original source/nonce/report,
+best/last, history, predictions and shared train/validation cache hashes verify;
+selected-checkpoint patient metrics reproduce from private validation arrays.
+ConvNeXt remains the historical winner at validation macro AUROC 0.828764.
+Historical held-out artifacts are preserved separately and are not tuning inputs;
+no holdout prediction arrays or individual labels/errors were loaded.
 
-PyPI wheel/Requires-Python/conditional-dependency metadata checks passed for both
-exact locks on macOS 13 ARM64 / CPython 3.11 and 3.12. This is not a native install.
-Twenty-one focused portable launcher tests pass. The full local Linux suite ran
-169 tests: 160 passed and nine optional checks skipped. A real Linux Streamlit fixture
-verified paths with spaces, HTTP health, process identity, second-launch reuse of
-the same PID, and Control-C cleanup. It performs no model inference/evaluation.
-Evidence: [wheel metadata](../results/demo-v8/macos-wheel-metadata.json),
-[portable lifecycle](../results/demo-v8/macos-portable-verification.json).
+[Generated development diagnosis](../results/round2-v9/DIAGNOSIS.md) and
+[audit](../results/round2-v9/development-audit.json) show falling training loss
+with worsening validation loss for ConvNeXt/DenseNet: evidence of overfitting or
+overconfidence, not proof that more epochs help. Loss-selected checkpoints differ
+from their best recorded AUROC epochs (ConvNeXt epoch 2 vs 4; DenseNet 3 vs 4).
+Rare-label positive weighting and fixed .5 decisions contribute high FP counts:
+ConvNeXt H predicts 183 positive among 525 validation patients, with 16 positives
+(11 TP / 172 FP / 5 FN). N/D/O ranking is also limited. No labels were altered.
 
-**Not executed on macOS:** Finder/Gatekeeper, native environment installation,
-default-browser opening, strict checkpoint execution, latency or numerical parity.
-No Mac runner or paid resource was provisioned. The frozen model, preprocessing,
-mean-eye aggregation, temperature, 20 head passes and REVIEW REQUIRED behavior
-are unchanged. No training, recalibration or real-data evaluation was repeated.
-Next: review the packaging PR, then perform the documented first run on the
-user's Apple-silicon Mac. The linked historical Phase 8 evidence remains Linux evidence.
+Frozen v4 stays 2,275 training / 525 validation patients, 2,240 / 518 components,
+both eyes together and zero train/validation patient/component overlap. Root and
+train/validation manifest hashes match. All-eight validation positive counts:
+N,D,G,C,A,H,M,O = 175,169,32,32,25,16,26,147. Full negative/supplying-group support
+is in the audit. Reused validation is suitable only for this bounded exploratory
+comparison; it is not fresh evaluation and H estimates are unstable.
 
+## Prospective matrix and boundary
 
-[Prior Linux implementation and access diagnosis](history/STATUS-through-phase8-linux.md)
-preserves the earlier evidence and private recovery commands.
+[Protocol](CONTROLLED_TRAINING_V9.md) and
+[configuration](../configs/controlled-training-v9.toml) define four new fits:
+ConvNeXt-Tiny constant / cosine LR, then DenseNet121 constant / cosine LR.
+All use ImageNet V1 from the existing verified cache, seed 2026, FP32 AdamW
+1e-4 / weight decay .01, batch 16, 224 pixels, no augmentation, unchanged weighted
+BCE and mean-eye sigmoid aggregation. Cosine decays to 1e-6 over 25 epochs.
+Maximum 25 epochs, six-epoch early stopping on validation patient macro AUROC
+(delta 1e-4); strict best-AUROC checkpoint, earliest exact tie. All four completed
+runs are compared by that same primary criterion, fixed .5 secondary metrics.
+
+This establishes a new AUROC-selected baseline; only LR schedule changes within
+each v9 pair. Historical v5 loss selection is preserved. No seed search.
+Higher resolution, alternative imbalance loss, OOF threshold fitting, calibration
+and risk fitting remain outside this queue and require separate design/budget.
+The future threshold objective/grid/tie/support rule is prospective and tested
+synthetically; no thresholds were fitted on saved real data.
+
+Measured-worker extrapolation for all four at 25 epochs: **2.376 h**. Request
+**four GPU-quota hours**: maximum six half-hour job attempts (three worker hours),
+each charged a ten-minute setup/teardown guard; max two attempts per run. Failed
+and ambiguous attempts count. Interruptions can exhaust the cap before all four
+finish; no automatic extra run or paid fallback. Current read-only quota reports
+six free hours, zero used/reserved and paid scaling false; recheck before jobs.
+API accounting/provisioning can lag and is not a second-exact billing guarantee.
+
+## Implementation, recovery and next action
+
+New isolated v9 worker/controller retain scheduler/model/optimizer/all RNG state,
+per-epoch LR/all-eight validation metrics, best/last checkpoints and checksums.
+ImageNet initialization and original input/protocol/source/runtime hashes are bound
+in provenance. Private pinned Docker/runtime is reused. Existing IDs/receipts and
+remote inventory must be reconciled before any submission; running/completed/
+ambiguous jobs cannot be duplicated. Private attempt outputs are durable on Kaggle.
+No calibration/final data source is mounted. No historical final rerun is allowed.
+
+CPU preparation: `python scripts/controlled_experiment.py prepare`; `status`,
+`check-quota` and `restore` are read-only/recovery operations. The concrete
+[queue snapshot](../results/round2-v9/queue.json) records source/config/plan hashes
+and all four pending runs; private registry/index: `artifacts/runner/round2-v9/`.
+Preparation does not submit jobs. `advance --submit` rejects missing or mismatched
+explicit user approval before creating an API client. After approval, bind its
+reference to the exact plan/source/run IDs/four-hour cap in private JSON and
+advance one sequential job at a time. Preserve incomplete/unsuccessful results.
+
+Local full suite: 185 tests run, 176 passed and nine optional skips; all 16
+focused v9 tests passed. Compile and diff checks passed. Tests cover AUROC
+ties/patience, exact matrix/role guards, free-
+quota/budget caps, no approval/no submission, ambiguous/unknown/completed/active
+job handling, write-ahead receipts, private-source bundles and exact synthetic
+scheduler/checkpoint resume. These are not new remote GPU execution evidence.
+A new generalization claim requires a fresh suitable independent evaluation
+cohort and prospective protocol, with patient/identity containment and adequate
+all-eight label support. The old exposed holdout cannot select this round.
+
+**Single remaining approval:** execute the exact four-run matrix with a maximum
+four-hour free-Kaggle GPU-quota budget and the declared reservation/attempt caps.
