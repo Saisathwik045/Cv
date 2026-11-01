@@ -1,0 +1,13 @@
+{
+  "all_hashes_match": true,
+  "files": {
+    "history.json": "e93e3cb2da7a259af69b1e40ed1ed3eed65f390b6f7b33d805e3e046764ac51b",
+    "outer-patients.npz": "56a3185cb8b8cefe91c36fdffdff4c7320be0f2fdc9d0bbb1e7101475c0a85ad",
+    "stage-report.json": "7fb0b134b23e1e72582fdff099f2b29e0cab6c593bfd349d92f9e6c02ddab615",
+    "stage-report.sha256": "7a2389204c7ae4967f189bd853750c37981144193cd9fb95676179ca1bb22526"
+  },
+  "fresh_directory_retrieval": true,
+  "kernel_version": "saisathwikregula/trustretina-nested-v11-fold0-ratio-bce-2ab221ef/1",
+  "new_gpu_jobs": 0,
+  "sample_level_files_private": true
+}

@@ -1,11 +1,13 @@
-# Nested training-only loss study v11 — approval pending
+# Nested training-only loss study v11 — completed
 
 [Nested v11](NESTED_LOSS_V11.md) specifies three outer training-only folds with
 one fixed inner checkpoint-selection holdout per fold. Six paired fresh-ImageNet
 ConvNeXt cosine fits compare ratio BCE with square-root ratio BCE only.
-The concrete four-hour free-quota cap requires separate user approval bound to
-the saved plan/source. No training, historical final access, old validation reuse,
-calibration fit, threshold deployment or demo replacement is authorized now.
+The user approved the exact saved plan/source and six-session, four-hour cap;
+all six fits completed within 1.143 free quota hours. See the
+[verified paired results](../results/nested-v11/RESULTS.md). The hash-bound prospective
+protocol is preserved as written. No historical final access, old validation reuse,
+calibration fit, threshold deployment, demo replacement or full-data refit occurred.
 
 # Exploratory threshold analysis v10
 

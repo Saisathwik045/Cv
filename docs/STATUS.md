@@ -1,70 +1,75 @@
-# Phase 11 — bounded nested loss study prepared; approval required
+# V11 six-fit study complete
 
-PR #20 is already merged at `75e9111`. V9/v10 reports were reviewed; no demo,
-historical evaluation, calibration or exploratory-threshold deployment changed.
-[Previous threshold evidence](history/STATUS-through-phase10-thresholds.md) is preserved.
+PR #21 was already merged at `3b9856b`; all seven CI jobs passed. The exact
+user-approved plan/source hashes were verified before execution. All six fresh
+ImageNet ConvNeXt-Tiny fits completed, with no checkpoint resumes or seventh GPU
+session. [Results and paired intervals](../results/nested-v11/RESULTS.md),
+[execution audit](../results/nested-v11/EXECUTION.md) and
+[accounting/artifact provenance](../results/nested-v11/execution-provenance.json)
+record actual evidence. The original architecture and all five factories remain.
 
-The [prospective protocol](NESTED_LOSS_V11.md), [configuration](../configs/nested-loss-v11.toml)
-and [concrete queue/support/cost report](../results/nested-v11/README.md) define six fits:
-three outer folds × ConvNeXt-Tiny cosine ratio-BCE reference versus square-root
-ratio-BCE. Fresh ImageNet initialization in every fit; never reuse v9 weights.
-Only the existing 2,275 training patients / 2,240 containment components are used.
-Original v4 roles and both-eye/linked-patient grouping remain intact. No new cache,
-duplicate investigation, GPU smoke, model inference or training was performed.
+| Fold | Ratio BCE epochs / best | Sqrt-ratio BCE epochs / best |
+|---|---:|---:|
+| 0 | 12 / 6 | 9 / 3 |
+| 1 | 12 / 6 | 8 / 2 |
+| 2 | 15 / 9 | 10 / 4 |
 
-Each outer fold has a fixed 25% inner holdout for checkpoint selection; the
-remaining 75% fits weights. Actual role counts are:
+Actual settled free Kaggle GPU-quota charge: **4113.487 seconds (1.142635 hours)**,
+below the 14400-second cap. Six versioned GPU sessions; paid scaling disabled,
+zero GPU time reserved at completion. Separate summed worker time was
+3953.290 seconds; worker duration is not used as charged quota. Before every
+submission, actual used/reserved/free quota and accelerator accounting were
+checked against the existing reservation. Final owned-job inventory matches
+exactly the six recorded versions. No GPU job or background monitor is active.
 
-| Fold | Fit / inner / outer patients | H positives fit / inner / outer |
-|---|---|---|
-| 0 | 1137 / 379 / 759 | 33 / 11 / 23 |
-| 1 | 1137 / 380 / 758 | 33 / 12 / 22 |
-| 2 | 1137 / 380 / 758 | 34 / 11 / 22 |
+One additional SaveKernel request returned HTTP400 before a session/version was
+created. Inventory, exact-version and quota recovery checks found no job or
+charge. Only the provider name was shortened; approved scientific source,
+configuration, nonce and reservation were unchanged. Identifier validation is a
+possible cause, not proven because the initial response body was unavailable.
+The failed request and recovery evidence are retained privately; this was not a
+seventh GPU session or a repeated completed fit.
 
-All eight labels pass the prespecified positive/negative patient/component audit.
-Every role has at least ten supplying components for each outcome. This is not
-power or clinical adequacy evidence; H's inner support remains small. Source cache
-metadata and hashes were reused; old validation/calibration/final payloads were
-not opened. Worker code indexes only train tensors. Outer pixels are deferred
-until complete training and strict best reload; pauses never assess outer data.
+All six best/last checkpoints, histories, aligned image/patient probabilities,
+labels/groups, source/nonce receipts, dependency records and output hashes were
+retrieved and verified. The executable embedded worker was independently decoded
+and matched the approved SHA256. Inner-only best/stop selection was replayed;
+outer rows/groups match frozen assignments and mean-eye aggregation was
+recomputed. Original demo checkpoint/temperature/normalizer/contract hashes match;
+historical final and calibration payloads were not opened. No threshold fitting,
+calibration transfer, full-data refit or demo promotion occurred. REVIEW REQUIRED
+remains unchanged.
 
-Checkpoint = maximum inner patient macro AUROC, earliest tie; six-epoch meaningful
-patience, maximum 25. Arm comparison = mean paired outer macro AUROC; tie reference.
-All use raw mean-eye sigmoid probabilities at .5; report macro AP/F1 and all-eight
-precision/recall/support/TP/FP/FN, H detail and fixed paired component bootstrap.
-No partial selection, new threshold fitting, calibration transfer or automatic refit.
+Square-root weighting is the prespecified future-study candidate: mean outer AUROC
+0.83549 versus 0.83451 (difference +0.00098; conditional 95% interval −0.00930
+to +0.01058). Mean macro F1 falls from 0.53901 to 0.51359. Both arms miss 58/67
+H positives. This does not establish improvement. See the [interpretation and
+all-eight pooled counts](../results/nested-v11/DISCUSSION.md).
 
-**Estimated ceiling cost: 2.783 worker-hours; proposed strict free-quota cap: four
-hours**, maximum six sessions including failures/resumes, each hard timeout 35
-minutes plus five-minute guard. No seventh session reserve. Interruptions may
-leave an incomplete matrix; preserve checkpoints and stop rather than extend the
-budget. About 4.6623 free hours were observed, paid scaling disabled; recheck at
-execution. All six runs remain queued, zero submission attempts, no approval file.
+## Recovery and next action
 
-203 CPU tests: 194 passed / nine optional skips; compilation, source/manifest
-integrity, real metadata support and diff checks pass. Mocked no-approval/no-API,
-running-job deduplication and deferred-outer guards pass. Actual premature reporting
-is refused. Automatic review rejected a live submission-guard test because a guard
-failure could launch a job before approval; that live check was not executed.
-GPU worker execution is untested and remains outside this turn's authorization.
+Private state is `artifacts/runner/nested-v11/registry.json`, `PRIVATE_INDEX.md`,
+`TASK_RESUME.json`, exact per-attempt receipts and pinned private Kaggle versions.
+The public [queue](../results/nested-v11/queue.json) exposes run/version state
+without patient records. A fresh-download proof verifies remote artifact recovery.
+Do not start the submission driver: the approved matrix is complete.
 
-Private authoritative state: `artifacts/runner/nested-v11/registry.json`,
-`fold-manifest.json`, `PRIVATE_INDEX.md` and quota receipts. Public
-[queue](../results/nested-v11/queue.json), [preparation](../results/nested-v11/preparation.json),
-[support CSV](../results/nested-v11/support.csv) and
-[readiness](../results/nested-v11/readiness.json) contain aggregates/hashes only.
-Source-formatting-only plan rebinding is recorded with its unsubmitted predecessor;
-no assignment/configuration changed. Current approval target is in the queue.
+`python scripts/nested_experiment.py retrieve` retrieves existing terminal
+versions without submitting jobs. `python scripts/report_nested_results.py
+--bootstrap-batch 2000` reproduces/resumes the fixed 2000-replicate CPU analysis;
+`python scripts/plot_nested_comparison.py` renders aggregate figures. Use the
+recorded scientific dependencies and verified private metadata. Missing registry
+recovery uses the documented hash-exact metadata restore, never new splits/cache.
+No credentials, predictions, patient manifests or checkpoints belong in Git.
 
-New fits prevent direct outer-patient weight/checkpoint/loss-weight leakage, but
-prior adaptive development, same-source data and one seed still limit independence.
-A fresh suitable external/temporal labeled cohort with adequate all-eight support,
-particularly H, is needed to confirm improvement. Specify label adjudication,
-representative sampling and clustered precision/power before collecting/evaluating;
-no target accuracy is promised. Do not use the exposed historical final holdout.
+208 CPU tests ran: 199 passed and nine optional skips. No new GPU smoke, duplicate
+review, split generation or historical evaluation was performed. Earlier adaptive
+choices, same-source data, one seed, only three outer folds and sparse H limit
+inference. Conditional bootstrap intervals omit training/selection variability.
+A candidate loss for further study is not independently confirmed improvement.
+The next research step requires a separately approved plan and a fresh suitable
+independent labeled cohort; there is no automatic refit or deployment step.
 
-**Only next authorization needed:** approve the exact six-fit plan and four-hour
-free Kaggle cap. Then bind the actual user instruction to plan/source hashes and
-six run IDs in private approval.json, inspect existing jobs/receipts/quota, and
-advance sequentially under the same caps. No job runs or monitoring continues now.
-Original demo and REVIEW REQUIRED remain unchanged.
+[Prospective frozen protocol](NESTED_LOSS_V11.md),
+[historical preparation/support report](../results/nested-v11/README.md) and
+[pre-approval status](history/STATUS-through-v11-plan.md) preserve the design.
