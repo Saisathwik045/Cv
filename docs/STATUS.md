@@ -1,56 +1,65 @@
-# V12 CPU development audit complete — no training authorized
+# V13 matched resolution study prepared — training not authorized
 
-[Consolidated v9–v12 report](../results/development-audit-v12/REPORT.md),
-[aggregate evidence](../results/development-audit-v12/audit.json),
-[prospective sampling rules](DEVELOPMENT_AUDIT_V12.md), and
-[one next-experiment proposal](NEXT_EXPERIMENT_AFTER_V12.md).
+PR #23 is already merged at `d94fbda`; CI41311898604 passed all seven jobs.
+[Preparation/approval target](../results/resolution-v13/README.md),
+[frozen protocol](RESOLUTION_V13.md), [configuration](../configs/resolution-v13.toml),
+[verified native/parity evidence](../results/resolution-v13/prerequisites.json).
 
-PR #22 is already merged at `8e67b82`; CI41309020903 passed all seven jobs.
-Its reporting/runner/aggregation/accounting paths were reviewed. The numerical
-sqrt-loss AUROC nomination does not establish improvement: paired mean difference
-+0.00098 (conditional 95% interval −0.00930 to +0.01058), with macro F1 down .02541.
-Keep ratio BCE as development reference; preserve both loss implementations.
+One GPU-disabled private CPU job, `saisathwikregula/trustretina-res-v13-inputs-767673ae/1`,
+completed and was retrieved/source/nonce/checksum verified. All4550 original TRAIN
+images matched frozen raw hashes; local independent archive rehash also passed.
+All4550 rebuilt224 inputs matched the saved cache exactly (zero differing uint8
+channel values). The320 tensor was built directly from originals; original source,
+rows and old cache remain immutable. Native tar, both arrays, receipts and ImageNet
+weights are durable in that pinned private output; patient data stays outside Git.
+No new raw source upload or GPU smoke. CPU worker763.25s; GPU-quota charge0s.
 
-The bounded audit used six existing v11 training-only outer prediction pairs and
-one pass over 4,550 cached 224px eyes (12 seconds automated wall time). All 2,275
-training labels and raw-image references match saved source inventory; source
-receipts/cache/prediction hashes pass. Keywords cover only 1,835 patients and are
-selection-biased. H has 42/67 multilabel positives and O 275/636. Of 528 covered
-O positives, 259 have a literal normal-fundus keyword in exactly one eye; 54/60
-covered H positives have H keywords in both eyes. Source consistency is not
-clinical annotation verification. No labels were changed.
+Authoritative ODIR material confirms patient-level H=hypertension and O=other
+abnormalities/diseases, using both-eye information. Precise H criteria, O taxonomy
+and eye-localized truth remain unresolved; benchmark-target ablation is not a
+clinical claim. No relabeling. See the source-access limitations in readiness.
 
-All 32 fixed TP/FP/FN/TN stratum records were technically inspected: 18 unique
-paired inputs / 36 eyes. Correct predictions and errors both include variable
-framing, softness and illumination. H true/false positives can share small fields
-and wide padding. No sole quality, sparse-support or annotation-error explanation
-is established. Original images are not local; native-detail and raw-to-cache
-parity checks remain unavailable. Private selection, arrays, keywords, montages
-and individual notes stay in `artifacts/audit-v12`; public hashes permit integrity
-checks. A report-only correction removes precision/F1 conditioned on true-positive
-subgroups; original output and explanation are preserved, without repeating images.
+Six queued runs: fold0/1/2 × res224/res320, fresh ImageNet ConvNeXt-Tiny, ratio BCE,
+seed2026, same fixed training-only inner/outer containment folds. Common8-image
+microbatches with2-step accumulation, effective16, FP32 AdamW/cosine, max25 epochs,
+AUROC inner checkpoint selection and patience6/min delta1e-4. V11 reference runs
+cannot substitute because their16-image/no-accumulation execution differs. All
+five factories and both historical losses are preserved. Outer assessment occurs
+only after complete fit and strict best reload; fixed mean-eye sigmoid p≥.5.
 
-**Next action:** recover/verify native TRAIN-only inputs and confirm H/O annotation
-semantics before requesting training approval. The sole proposed follow-up is
-three paired containment folds of 224 versus 320px ConvNeXt cosine ratio BCE.
-Estimated ceiling 4.23 worker-hours (5.50 with allowance); proposed strict six free
-GPU-quota hours / six sessions, including failures/resumes/overhead. No queue is
-submitted or new cache created. Increasing resolution is an unconfirmed hypothesis,
-not a promised gain. Freeze/test the implementation and obtain separate exact-plan
-approval first. Stop if the prerequisites or quota cannot support it.
+Plan: `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`.
+Worker/source: `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`.
+Configuration: `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`.
+Exact matrix, all-eight support and remaining identities are in preparation README.
 
-214 CPU tests ran: 205 passed, nine optional skips; compilation and diff checks
-passed. New tests cover fixed component-distinct sampling, missing strata,
-threshold/count boundaries, technical padding masks, source-receipt tampering
-and positive-only support reporting.
+Proposed strict cap21600 free GPU-quota seconds / max6 sessions, including every
+failure/resume/overhead; reservations2700s for224 and4500s for320. Estimate4.23
+worker-hours,5.50 with allowance, not a new measured throughput/memory guarantee.
+Observed free quota12670.775s (3.5197h), GPU reserved0, paid scaling disabled.
+**First-job gate is blocked** until the full six-hour reservation is actually free.
+Provider reports refresh7Nov2026 at05:30IST; recheck, do not assume future quota.
+SDK does not expose guaranteed per-shape billing. Counter-based/rate guards and
+bounded sequential reconciliation stop rather than use paid resources or exceed
+caps. Zero training submissions; no approval record or background monitor.
 
-A fresh independent paired-eye/all-eight cohort is not currently secured or
-verified. Its labels, rights, overlap exclusion, representative enrollment and
-clustering-aware all-class precision/power require prospective planning. The old
-final holdout cannot confirm a new development choice. No new data was uploaded.
+225 CPU tests:216 passed, nine optional skips. Accumulation/remainder, stochastic
+checkpoint resume, source/archive integrity, approval/budget/recovery guards and
+both resolution tensors are covered. Synthetic official-ImageNet CPU forwards
+were finite at224/320; no new patient inference or GPU memory experiment. Compiler
+and diff checks pass. New PR CI is reported separately, never inferred from local
+checks or earlier commits.
 
-The demo checkpoint/temperature/normalizer/contract hashes match the prior frozen
-bundle. Historical final, calibration, thresholds, raw labels, all five factories
-and both losses remain unchanged. No training, new inference, GPU submission,
-full-data refit, threshold deployment or background monitoring. REVIEW REQUIRED
-remains default. [Previous completed study and recovery](history/STATUS-through-v11-results.md).
+**Next action:** review preparation PR and approve the exact six-fit plan/source,
+run IDs and21600-second/six-session cap if desired; wait for verified full free
+quota before any training. Do not refit all data, deploy thresholds, transfer the
+old temperature, change demo or access historical final evaluation/calibration.
+The original demo/temperature/normalizer/contract hashes and old worker source
+match prior records; REVIEW REQUIRED remains default.
+
+Private state: `artifacts/resolution-v13/TASK_RESUME.json`, `PRIVATE_INDEX.md`,
+preparation receipts/artifacts and experiment registry. Fresh-task recovery uses
+`python scripts/restore_resolution_state.py` with existing secure Kaggle access;
+it retrieves pinned outputs and original fold metadata, creates no approval and
+submits no jobs. Conflicting/newer state is never overwritten. No new dataset,
+partition search, duplicate review or historical evaluation was performed.
+[Prior audit](history/STATUS-through-v12-audit.md) is preserved.

@@ -1,0 +1,15 @@
+{
+  "original_demo_hashes_unchanged": {
+    "artifacts/inference-v8/best.pt": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "artifacts/inference-v8/candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "artifacts/inference-v8/quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "artifacts/inference-v8/temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+    "results/reliability-v6/candidate-contract.json": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61"
+  },
+  "original_worker_source_unchanged": "1512109180685148b7aca4b9d1fd4160eef434f4c30d65721a3aa9d6f4790eab",
+  "frozen_v13_plan": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+  "training_submissions": 0,
+  "approval_record_exists": false,
+  "GPU_quota_delta_CPU_preparation_seconds": 0.0,
+  "historical_final_or_calibration_payload_opened": false
+}

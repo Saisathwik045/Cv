@@ -1,0 +1,23 @@
+{
+  "fixture": "synthetic zero tensors only, no patient images, no fit",
+  "initialization_sha256": "983f1562536e84ff750a1576fb08e54de751dbf2e17c0d8a4a13704341fdcd3d",
+  "resolutions": {
+    "224": {
+      "output_shape": [
+        2,
+        8
+      ],
+      "finite": true,
+      "cpu_seconds": 0.17724331300269114
+    },
+    "320": {
+      "output_shape": [
+        2,
+        8
+      ],
+      "finite": true,
+      "cpu_seconds": 0.2899662769996212
+    }
+  },
+  "GPU_used": false
+}

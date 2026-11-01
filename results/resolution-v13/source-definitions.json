@@ -1,0 +1,44 @@
+{
+  "checked_utc": "2026-11-01T15:13:32.776543+00:00",
+  "labels_unchanged": true,
+  "unit": "patient with both-eye information; not verified eye diagnoses",
+  "sources": [
+    {
+      "url": "https://odir2019.grand-challenge.org/dataset/",
+      "access": "Official indexed page text retrieved; direct open returned403",
+      "supported": [
+        "H label named hypertension",
+        "O label named other diseases/abnormalities",
+        "patient-level multilabel annotations based on both eyes; age available to annotators"
+      ]
+    },
+    {
+      "url": "https://odir2019.grand-challenge.org/background/",
+      "access": "Official indexed text retrieved; direct open returned403",
+      "supported": [
+        "Binocular input and patient classification",
+        "Hypertension discussed in relation to vascular morphology, without a precise H diagnostic rule"
+      ]
+    },
+    {
+      "url": "https://github.com/nkicsl/OIA-ODIR",
+      "access": "Creators repository README directly accessible",
+      "supported": [
+        "Dataset authors describe patient-level eight-label annotation with both eyes and age"
+      ]
+    },
+    {
+      "url": "https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k/versions/2",
+      "access": "Authorized SDK metadata and versioned listing",
+      "metadata_sha256": "c438cbf86df94600e65c2dad8b37625ee3e8b57a35a66b84a5c3e51d0aae28f2",
+      "note": "SDK description metadata is current mirror metadata, not independently version-specific; raw training bytes are verified separately against frozen version2 records"
+    }
+  ],
+  "unresolved": [
+    "No exhaustive O disease/abnormality inclusion and exclusion list",
+    "No published deterministic keyword-to-label mapping",
+    "No precise H severity/diagnostic case definition or clarification of systemic versus retinal signs",
+    "No verified eye-localized ground truth"
+  ],
+  "scope": "Controlled ODIR target ablation can proceed as benchmark research after native parity; clinical meaning/label harmonization limitations remain explicit. No relabeling."
+}
