@@ -1,34 +1,34 @@
-# Phase 9 — all four approved experiments complete
+# Phase 10 — CPU-only exploratory threshold analysis complete
 
-PR #18 was already merged at `26f4a51`; final CI `41283819937` passed. The exact approved plan/source/configuration were reused. No new smoke, dataset preparation, duplicate review or split generation occurred.
+PR #19 is already merged at `f5f50fb`; its CI `41291834977` passed. Review confirmed the full four-run report preserves negative findings and correctly limits the conclusions to reused development data. No human PR review submissions were recorded. [Phase 9 status/history](history/STATUS-through-phase9-results.md) preserves the training results and recovery instructions.
 
-| Run | Epochs / best | Patient macro AUROC | Macro F1 | Micro F1 | FP / FN label decisions |
+The [v10 protocol](THRESHOLD_V10.md) and [configuration](../configs/threshold-v10.toml) were committed at `1d1516f` before any threshold computation; implementation/tests were committed at `14f6382` before execution. The user authorized existing validation predictions for this separate exploratory analysis; the original training-OOF-only helper and frozen v9 protocol remain unchanged.
+
+## Actual development findings
+
+Selected ConvNeXt cosine epoch 13, raw mean-eye probabilities, same 525 patients / 518 components. Four fixed label-stratified group folds (seed 2026), assessment sizes 132/131/131/131; every patient assessed once and no containment-component crossing. Thresholds maximize fitting-fold per-class F1 on .05:.05:.95; exact ties nearest .5, then higher. Fit support below 10 supplying groups per outcome retains .5; no class required a fallback.
+
+| Procedure | Macro F1 | Micro F1 | TP | FP | FN |
 |---|---:|---:|---:|---:|---:|
-| original_convnext_tiny | 5 / 2 | 0.8288 | 0.4762 | 0.4988 | 681 / 189 |
-| original_densenet121 | 6 / 3 | 0.8119 | 0.4607 | 0.4773 | 753 / 191 |
-| convnext_constant | 13 / 7 | 0.8391 | 0.5558 | 0.5455 | 322 / 268 |
-| convnext_cosine | 19 / 13 | 0.8417 | 0.5926 | 0.5714 | 243 / 276 |
-| densenet_constant | 10 / 4 | 0.8142 | 0.4900 | 0.5027 | 647 / 196 |
-| densenet_cosine | 10 / 4 | 0.8209 | 0.4781 | 0.5003 | 589 / 218 |
+| Fixed .5 | 0.5926 | 0.5714 | 346 | 243 | 276 |
+| Held-out threshold CV | 0.6055 | 0.5880 | 436 | 425 | 186 |
 
-**Selected development run: ConvNeXt cosine, epoch 13**, by prespecified maximum patient validation macro AUROC. All use the same 525 validation patients / 518 containment components, mean-eye sigmoid aggregation and fixed p ≥ .5. [Generated report](../results/round2-v9/RESULTS.md) includes all-eight AUROC/AP/support/precision/recall/F1 and FP/FN, accuracy definitions, original baselines and learning curves.
+CV reduced missed positives by 90 but added 182 false positives. Conversely, .5 avoids those 182 false alarms at the cost of 90 more missed positives. N/D/G/M/O F1 rose, C F1 fell, A/H were unchanged. Exact match fell .4152 → .2952 and labelwise accuracy fell .8764 → .8545; neither is a clinical diagnostic-accuracy claim.
 
-The selected run reduces FP label decisions 681 → 243 but increases FN 189 → 276. N and D F1 fall; H recall falls 11/16 → 3/16 despite higher H F1. DenseNet cosine improves ranking over its constant counterpart but lowers macro F1. These negative findings are retained. V9-versus-v5 also changes checkpoint/early-stop/budget rules; only the within-v9 constant/cosine contrasts isolate the schedule.
+H threshold was .50 in every fit, **not a fallback**: each fit had 12 positive-supplying groups and each assessment fold had four positive patients. Pooled H TP/FP/FN remain 3/1/13, precision .75, recall .1875, F1 .30. Agreement on this coarse grid with sparse overlapping fitting samples is not robust clinical threshold evidence. Full all-eight precision/recall/F1/counts, fold support and threshold quartiles/ranges are in the [generated report](../results/threshold-v10/RESULTS.md), [aggregate JSON](../results/threshold-v10/aggregate.json) and [CSV](../results/threshold-v10/per-class.csv).
 
-Actual Kaggle quota counter increase: **4815.738 seconds (1.337705 hours)** across five sessions including the one ConvNeXt resume. Worker time 4647.982 seconds. Conservative charged reservations: 12,000 seconds (3h20m), below the four-hour cap. No paid scaling; final API shows zero reserved GPU time. The bounded driver returned; no training or monitoring continues after this task.
+## Preservation, checks and recovery
 
-## Verified artifacts and recovery
+No model training/inference, new GPU job, calibration fit, acceptance policy, new data setup or paid resources. Historical final and calibration datasets/manifests were not opened. No old temperature was applied. Five frozen demo/contract artifacts remain byte-identical; original demo and REVIEW REQUIRED behavior are unchanged. No all-development threshold vector was refitted or exported for deployment.
 
-All best/last checkpoints, histories, logs, image/patient predictions, exact source versions and receipts were retrieved into ignored private storage and checksum/source/nonce verified. Strict best reload passed. The ConvNeXt cosine resume preserved epochs 1–16, continued at 17, and matched the saved next LR; final history has 19 epochs. Patient probabilities were independently reconstructed from both eye predictions; labels/IDs/components match original validation artifacts exactly. A fresh-directory download of the first run’s predictions/history/report/checksum also reproduced the saved hashes without submitting a job.
+Pinned inputs: `saisathwikregula/trustretina-round2-v9-convnext-cosine-ede050b3/1`; checkpoint SHA256 `af33eb06fb2de21929e4dd3ec3959c0fbc58890d126a50c2e0d2b34bafaa0d49`; patient prediction SHA256 `e3f03f4fda4439aee575b12fd1cebd47056d97143f8a7bef3decc0b5ae51f44a`. Source/nonce/report/all-output integrity and saved mean-eye aggregation were verified. The private fold assignments, OOF decisions, fitting curves, provenance and completion hashes live in `artifacts/analysis/threshold-v10/attempt-1/`; original private Kaggle artifacts remain recoverable.
 
-[Public registry and exact pinned versions](../results/round2-v9/queue.json) · [aggregate execution/hash provenance](../results/round2-v9/execution-provenance.json) · [read-only recovery commands](ROUND2_RECOVERY.md). Private authoritative registry: `artifacts/runner/round2-v9/registry.json`; approval, source/submission/verification receipts and outputs remain there. Private Kaggle versions retain every completed and paused attempt; never resubmit them.
+CPU analysis before report rendering: 1.305 wall seconds. Scientific suite: 194 tests, 185 passed / 9 optional skips. Six new focused tests cover exact ties, sparse-group fallback, deterministic mixed-label grouping, unchanged own-fold thresholds after held-out labels/scores change, cross-fold leakage rejection and analytical 2-D metrics. Actual saved decisions were separately checked against scikit-learn precision/recall/F1/confusion counts within 1e-12. Compilation and diff checks pass.
 
-Frozen demo checkpoint, candidate contract, temperature, normalizer, pipeline, calibration/final manifests and historical final report/predictions remain byte-identical (10 opaque SHA256 checks). No historical final or calibration arrays were parsed for this experiment. All five original backbone implementations remain unchanged; REVIEW REQUIRED remains the deployment default. No newly trained checkpoint is installed in the demo.
+Re-run `python scripts/analyze_thresholds_v10.py` in the existing CPU/report environment to verify/reuse a completed analysis; it does not fit again or overwrite mismatched artifacts. Required original selected inputs can be restored read-only using [Phase 9 recovery](ROUND2_RECOVERY.md); reuse the pinned selected run, never re-submit it. Public provenance records input/output hashes; sample-level outputs stay private.
 
-## Checks and next step
+## Concrete next step
 
-CPU scientific environment: 188 tests, 9 optional skips (179 passed). Foundation environment: 188 tests, 29 optional skips (159 passed). Compilation, configuration checks and `git diff --check` pass. Remote CI for this results PR is tracked separately; local tests are not remote training evidence.
+Do not install the exploratory thresholds or replace the demo. Before any new threshold/deployment claim, prospectively define error costs/objective and obtain development predictions independent of checkpoint selection, e.g. training-only containment-aware out-of-fold model predictions in a separately authorized study. Freeze the complete new pipeline and assess it on a fresh suitable independent cohort with adequate H support. Calibration for the new checkpoint remains a separate prospective fit; never transfer the old temperature. No additional run or fit is authorized or queued here.
 
-The reused validation cohort can support this fixed development comparison, with repeated-selection optimism, one seed and H support of 16. It cannot establish a new generalization claim. Next: review these results; define a fresh suitable independent evaluation cohort before claiming improved performance. Any threshold experiment must be separately prespecified on development data, with calibration fitting separate. No further training or fitting is queued.
-
-[Original prospective plan/status](history/STATUS-through-phase9-plan.md) · [frozen protocol](CONTROLLED_TRAINING_V9.md). The protocol’s original approval-pending wording is preserved because its hash is bound to the separately recorded execution approval.
+Each threshold-assessment fold was untouched by its threshold fit, but all validation labels already influenced model/epoch selection. This fixed-model CV cannot remove that adaptive selection bias and does not provide independent confirmation. No clinical recall target or automatic acceptance policy is inferred.
