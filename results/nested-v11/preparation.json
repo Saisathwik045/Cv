@@ -1,0 +1,686 @@
+{
+  "calibration_accessed": false,
+  "estimate_includes_per_fit_cold_start_io_seconds": 180,
+  "estimated_six_fit_worker_hours_at_25_epochs": 2.782755888662615,
+  "estimates": [
+    {
+      "max_epoch_worker_seconds_per_fit_estimate": 1669.5029953478863,
+      "outer_fold": 0,
+      "seconds_per_epoch_estimate": 59.29091045391545
+    },
+    {
+      "max_epoch_worker_seconds_per_fit_estimate": 1669.7288021224101,
+      "outer_fold": 1,
+      "seconds_per_epoch_estimate": 59.300323764896405
+    },
+    {
+      "max_epoch_worker_seconds_per_fit_estimate": 1669.7288021224101,
+      "outer_fold": 2,
+      "seconds_per_epoch_estimate": 59.300323764896405
+    }
+  ],
+  "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
+  "folds": [
+    {
+      "outer_fold": 0,
+      "roles": {
+        "fit": {
+          "components": 1122,
+          "images": 2274,
+          "patients": 1137,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 786,
+              "negative_components": 776,
+              "positive": 351,
+              "positive_components": 349
+            },
+            {
+              "label": "D",
+              "negative": 771,
+              "negative_components": 762,
+              "positive": 366,
+              "positive_components": 364
+            },
+            {
+              "label": "G",
+              "negative": 1066,
+              "negative_components": 1052,
+              "positive": 71,
+              "positive_components": 71
+            },
+            {
+              "label": "C",
+              "negative": 1067,
+              "negative_components": 1056,
+              "positive": 70,
+              "positive_components": 67
+            },
+            {
+              "label": "A",
+              "negative": 1083,
+              "negative_components": 1068,
+              "positive": 54,
+              "positive_components": 54
+            },
+            {
+              "label": "H",
+              "negative": 1104,
+              "negative_components": 1092,
+              "positive": 33,
+              "positive_components": 32
+            },
+            {
+              "label": "M",
+              "negative": 1080,
+              "negative_components": 1065,
+              "positive": 57,
+              "positive_components": 57
+            },
+            {
+              "label": "O",
+              "negative": 819,
+              "negative_components": 809,
+              "positive": 318,
+              "positive_components": 313
+            }
+          ]
+        },
+        "inner": {
+          "components": 373,
+          "images": 758,
+          "patients": 379,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 255,
+              "negative_components": 253,
+              "positive": 124,
+              "positive_components": 123
+            },
+            {
+              "label": "D",
+              "negative": 257,
+              "negative_components": 252,
+              "positive": 122,
+              "positive_components": 121
+            },
+            {
+              "label": "G",
+              "negative": 356,
+              "negative_components": 350,
+              "positive": 23,
+              "positive_components": 23
+            },
+            {
+              "label": "C",
+              "negative": 356,
+              "negative_components": 354,
+              "positive": 23,
+              "positive_components": 22
+            },
+            {
+              "label": "A",
+              "negative": 361,
+              "negative_components": 356,
+              "positive": 18,
+              "positive_components": 18
+            },
+            {
+              "label": "H",
+              "negative": 368,
+              "negative_components": 363,
+              "positive": 11,
+              "positive_components": 11
+            },
+            {
+              "label": "M",
+              "negative": 360,
+              "negative_components": 354,
+              "positive": 19,
+              "positive_components": 19
+            },
+            {
+              "label": "O",
+              "negative": 273,
+              "negative_components": 269,
+              "positive": 106,
+              "positive_components": 106
+            }
+          ]
+        },
+        "outer": {
+          "components": 745,
+          "images": 1518,
+          "patients": 759,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 496,
+              "negative_components": 486,
+              "positive": 263,
+              "positive_components": 261
+            },
+            {
+              "label": "D",
+              "negative": 514,
+              "negative_components": 507,
+              "positive": 245,
+              "positive_components": 240
+            },
+            {
+              "label": "G",
+              "negative": 713,
+              "negative_components": 699,
+              "positive": 46,
+              "positive_components": 46
+            },
+            {
+              "label": "C",
+              "negative": 714,
+              "negative_components": 706,
+              "positive": 45,
+              "positive_components": 40
+            },
+            {
+              "label": "A",
+              "negative": 724,
+              "negative_components": 711,
+              "positive": 35,
+              "positive_components": 35
+            },
+            {
+              "label": "H",
+              "negative": 736,
+              "negative_components": 722,
+              "positive": 23,
+              "positive_components": 23
+            },
+            {
+              "label": "M",
+              "negative": 722,
+              "negative_components": 708,
+              "positive": 37,
+              "positive_components": 37
+            },
+            {
+              "label": "O",
+              "negative": 547,
+              "negative_components": 538,
+              "positive": 212,
+              "positive_components": 210
+            }
+          ]
+        }
+      }
+    },
+    {
+      "outer_fold": 1,
+      "roles": {
+        "fit": {
+          "components": 1117,
+          "images": 2274,
+          "patients": 1137,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 760,
+              "negative_components": 749,
+              "positive": 377,
+              "positive_components": 373
+            },
+            {
+              "label": "D",
+              "negative": 771,
+              "negative_components": 761,
+              "positive": 366,
+              "positive_components": 361
+            },
+            {
+              "label": "G",
+              "negative": 1067,
+              "negative_components": 1047,
+              "positive": 70,
+              "positive_components": 70
+            },
+            {
+              "label": "C",
+              "negative": 1069,
+              "negative_components": 1057,
+              "positive": 68,
+              "positive_components": 63
+            },
+            {
+              "label": "A",
+              "negative": 1083,
+              "negative_components": 1064,
+              "positive": 54,
+              "positive_components": 54
+            },
+            {
+              "label": "H",
+              "negative": 1104,
+              "negative_components": 1084,
+              "positive": 33,
+              "positive_components": 33
+            },
+            {
+              "label": "M",
+              "negative": 1081,
+              "negative_components": 1061,
+              "positive": 56,
+              "positive_components": 56
+            },
+            {
+              "label": "O",
+              "negative": 819,
+              "negative_components": 807,
+              "positive": 318,
+              "positive_components": 314
+            }
+          ]
+        },
+        "inner": {
+          "components": 377,
+          "images": 760,
+          "patients": 380,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 250,
+              "negative_components": 249,
+              "positive": 130,
+              "positive_components": 130
+            },
+            {
+              "label": "D",
+              "negative": 257,
+              "negative_components": 255,
+              "positive": 123,
+              "positive_components": 122
+            },
+            {
+              "label": "G",
+              "negative": 357,
+              "negative_components": 355,
+              "positive": 23,
+              "positive_components": 23
+            },
+            {
+              "label": "C",
+              "negative": 358,
+              "negative_components": 356,
+              "positive": 22,
+              "positive_components": 22
+            },
+            {
+              "label": "A",
+              "negative": 363,
+              "negative_components": 360,
+              "positive": 17,
+              "positive_components": 17
+            },
+            {
+              "label": "H",
+              "negative": 368,
+              "negative_components": 366,
+              "positive": 12,
+              "positive_components": 12
+            },
+            {
+              "label": "M",
+              "negative": 361,
+              "negative_components": 358,
+              "positive": 19,
+              "positive_components": 19
+            },
+            {
+              "label": "O",
+              "negative": 274,
+              "negative_components": 271,
+              "positive": 106,
+              "positive_components": 106
+            }
+          ]
+        },
+        "outer": {
+          "components": 746,
+          "images": 1516,
+          "patients": 758,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 527,
+              "negative_components": 517,
+              "positive": 231,
+              "positive_components": 230
+            },
+            {
+              "label": "D",
+              "negative": 514,
+              "negative_components": 505,
+              "positive": 244,
+              "positive_components": 242
+            },
+            {
+              "label": "G",
+              "negative": 711,
+              "negative_components": 699,
+              "positive": 47,
+              "positive_components": 47
+            },
+            {
+              "label": "C",
+              "negative": 710,
+              "negative_components": 703,
+              "positive": 48,
+              "positive_components": 44
+            },
+            {
+              "label": "A",
+              "negative": 722,
+              "negative_components": 711,
+              "positive": 36,
+              "positive_components": 36
+            },
+            {
+              "label": "H",
+              "negative": 736,
+              "negative_components": 727,
+              "positive": 22,
+              "positive_components": 21
+            },
+            {
+              "label": "M",
+              "negative": 720,
+              "negative_components": 708,
+              "positive": 38,
+              "positive_components": 38
+            },
+            {
+              "label": "O",
+              "negative": 546,
+              "negative_components": 538,
+              "positive": 212,
+              "positive_components": 209
+            }
+          ]
+        }
+      }
+    },
+    {
+      "outer_fold": 2,
+      "roles": {
+        "fit": {
+          "components": 1123,
+          "images": 2274,
+          "patients": 1137,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 770,
+              "negative_components": 760,
+              "positive": 367,
+              "positive_components": 365
+            },
+            {
+              "label": "D",
+              "negative": 770,
+              "negative_components": 760,
+              "positive": 367,
+              "positive_components": 364
+            },
+            {
+              "label": "G",
+              "negative": 1067,
+              "negative_components": 1053,
+              "positive": 70,
+              "positive_components": 70
+            },
+            {
+              "label": "C",
+              "negative": 1068,
+              "negative_components": 1058,
+              "positive": 69,
+              "positive_components": 65
+            },
+            {
+              "label": "A",
+              "negative": 1083,
+              "negative_components": 1070,
+              "positive": 54,
+              "positive_components": 54
+            },
+            {
+              "label": "H",
+              "negative": 1103,
+              "negative_components": 1089,
+              "positive": 34,
+              "positive_components": 34
+            },
+            {
+              "label": "M",
+              "negative": 1080,
+              "negative_components": 1066,
+              "positive": 57,
+              "positive_components": 57
+            },
+            {
+              "label": "O",
+              "negative": 819,
+              "negative_components": 812,
+              "positive": 318,
+              "positive_components": 314
+            }
+          ]
+        },
+        "inner": {
+          "components": 368,
+          "images": 760,
+          "patients": 380,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 253,
+              "negative_components": 243,
+              "positive": 127,
+              "positive_components": 126
+            },
+            {
+              "label": "D",
+              "negative": 258,
+              "negative_components": 252,
+              "positive": 122,
+              "positive_components": 118
+            },
+            {
+              "label": "G",
+              "negative": 357,
+              "negative_components": 345,
+              "positive": 23,
+              "positive_components": 23
+            },
+            {
+              "label": "C",
+              "negative": 356,
+              "negative_components": 351,
+              "positive": 24,
+              "positive_components": 19
+            },
+            {
+              "label": "A",
+              "negative": 363,
+              "negative_components": 352,
+              "positive": 17,
+              "positive_components": 17
+            },
+            {
+              "label": "H",
+              "negative": 369,
+              "negative_components": 360,
+              "positive": 11,
+              "positive_components": 10
+            },
+            {
+              "label": "M",
+              "negative": 362,
+              "negative_components": 350,
+              "positive": 18,
+              "positive_components": 18
+            },
+            {
+              "label": "O",
+              "negative": 274,
+              "negative_components": 264,
+              "positive": 106,
+              "positive_components": 105
+            }
+          ]
+        },
+        "outer": {
+          "components": 749,
+          "images": 1516,
+          "patients": 758,
+          "per_class": [
+            {
+              "label": "N",
+              "negative": 514,
+              "negative_components": 512,
+              "positive": 244,
+              "positive_components": 242
+            },
+            {
+              "label": "D",
+              "negative": 514,
+              "negative_components": 509,
+              "positive": 244,
+              "positive_components": 243
+            },
+            {
+              "label": "G",
+              "negative": 711,
+              "negative_components": 703,
+              "positive": 47,
+              "positive_components": 47
+            },
+            {
+              "label": "C",
+              "negative": 713,
+              "negative_components": 707,
+              "positive": 45,
+              "positive_components": 45
+            },
+            {
+              "label": "A",
+              "negative": 722,
+              "negative_components": 713,
+              "positive": 36,
+              "positive_components": 36
+            },
+            {
+              "label": "H",
+              "negative": 736,
+              "negative_components": 728,
+              "positive": 22,
+              "positive_components": 22
+            },
+            {
+              "label": "M",
+              "negative": 720,
+              "negative_components": 711,
+              "positive": 38,
+              "positive_components": 38
+            },
+            {
+              "label": "O",
+              "negative": 546,
+              "negative_components": 540,
+              "positive": 212,
+              "positive_components": 210
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "hard_total_quota_seconds_including_retries": 14400,
+  "historical_final_opened": false,
+  "maximum_session_seconds": 2100,
+  "maximum_submitted_sessions_including_resumes": 6,
+  "measured_compute_epoch_seconds": 96.90520038194737,
+  "measured_reference_epochs": 19,
+  "measured_reference_worker_seconds": 2026.674360601,
+  "measured_selection_epoch_seconds": 4.941988264999985,
+  "old_validation_payload_opened": false,
+  "overhead_guard_per_session": 300,
+  "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+  "retained_fixed_overhead_seconds_per_epoch": 9.761871228631577,
+  "runs_submitted": 0,
+  "status": "CPU preparation complete; no training submitted",
+  "supersedes_unsubmitted_plan_sha256": "46997816faa471d9b4e7c12dfb2b46d8792ed9a4d503c5f7cf80e61100bb6174",
+  "training": {
+    "components": 2240,
+    "images": 4550,
+    "patients": 2275,
+    "per_class": [
+      {
+        "label": "N",
+        "negative": 1537,
+        "negative_components": 1515,
+        "positive": 738,
+        "positive_components": 733
+      },
+      {
+        "label": "D",
+        "negative": 1542,
+        "negative_components": 1521,
+        "positive": 733,
+        "positive_components": 725
+      },
+      {
+        "label": "G",
+        "negative": 2135,
+        "negative_components": 2101,
+        "positive": 140,
+        "positive_components": 140
+      },
+      {
+        "label": "C",
+        "negative": 2137,
+        "negative_components": 2116,
+        "positive": 138,
+        "positive_components": 129
+      },
+      {
+        "label": "A",
+        "negative": 2168,
+        "negative_components": 2135,
+        "positive": 107,
+        "positive_components": 107
+      },
+      {
+        "label": "H",
+        "negative": 2208,
+        "negative_components": 2177,
+        "positive": 67,
+        "positive_components": 66
+      },
+      {
+        "label": "M",
+        "negative": 2162,
+        "negative_components": 2127,
+        "positive": 113,
+        "positive_components": 113
+      },
+      {
+        "label": "O",
+        "negative": 1639,
+        "negative_components": 1616,
+        "positive": 636,
+        "positive_components": 629
+      }
+    ]
+  },
+  "unchanged_fold_manifest_file_sha256": "c1025877459ed3a787f72e7938d474e13b260537893f5f025079f1f61f8b191a"
+}

@@ -1,0 +1,147 @@
+{
+  "receipts": {},
+  "registry": {
+    "cache": {
+      "bundle": "artifacts/runner/full-v5-inputs",
+      "inputs_sha256": "a45f0dd9b1e9d49b89014ee3b3e3104f451f3fa9806c824d2ba07cdf17509888",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-inputs-4f23af6d/1",
+      "parent_config_sha256": "99e309ac619f73bec615ed32b08402a951e764f3a22187ecd5af0cb7bda59b89",
+      "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
+      "report_sha256": "6ffa93639a1e5916539a752f6e8b82620c9b04e63a8a5e4dfc548a3f27a53e30",
+      "train_rows_sha256": "2656e5b7403d90123c54e5c493988f1fd889003e8424cec3ebdf33ff016a2885",
+      "training_metadata_file": "artifacts/runner/full-v5-inputs/download/prepared/train-rows.json"
+    },
+    "config": {
+      "arms": [
+        "ratio_bce",
+        "sqrt_ratio_bce"
+      ],
+      "augmentation": "none",
+      "backbone": "convnext_tiny",
+      "batch_size": 16,
+      "bootstrap_replicates": 2000,
+      "bootstrap_seed": 2026,
+      "calibration_fitting": false,
+      "checkpoint_selection": "maximum_inner_patient_macro_auroc_tie_earliest",
+      "class_order": [
+        "N",
+        "D",
+        "G",
+        "C",
+        "A",
+        "H",
+        "M",
+        "O"
+      ],
+      "early_stopping_min_delta": 0.0001,
+      "early_stopping_patience": 6,
+      "full_training_refit": false,
+      "gpu_overhead_reserve_per_attempt_seconds": 300,
+      "historical_final_access": false,
+      "image_size": 224,
+      "initialization": "torchvision_IMAGENET1K_V1",
+      "inner_folds": 4,
+      "inner_selection_fold": 0,
+      "learning_rate": 0.0001,
+      "max_epochs": 25,
+      "maximum_attempts_per_run": 2,
+      "maximum_gpu_session_seconds": 2100,
+      "maximum_gpu_total_seconds": 14400,
+      "maximum_sessions": 6,
+      "minimum_fit_positive_components": 10,
+      "minimum_inner_positive_components": 10,
+      "minimum_learning_rate": 1e-06,
+      "minimum_negative_components": 10,
+      "minimum_outer_positive_components": 10,
+      "minimum_submission_interval_seconds": 180,
+      "old_validation_access": false,
+      "optimizer": "AdamW",
+      "outer_folds": 3,
+      "patient_aggregation": "mean_left_right_sigmoid_before_threshold",
+      "precision": "float32",
+      "primary_comparison": "mean_paired_outer_macro_auroc_difference",
+      "risk_policy_fitting": false,
+      "schedule": "cosine",
+      "schema_version": 11,
+      "secondary": [
+        "macro_ap",
+        "macro_f1",
+        "micro_f1",
+        "all_class_precision_recall_f1_support_tp_fp_fn"
+      ],
+      "seed": 2026,
+      "source_role": "train",
+      "split_seed": 2026,
+      "threshold": 0.5,
+      "threshold_fitting": false,
+      "weight_decay": 0.01
+    },
+    "config_sha256": "88492609e3e15a26686d99db2667831ab764ded26205921e3b57192e015d5506",
+    "controller_sha256": "1897c26bde2cf2cbc3d48c6141fdbc503b8f6ffdd581edfb0542157aafa1a30f",
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
+    "execution_authorized": false,
+    "expected_dependencies": {
+      "Pillow": "13.0.0",
+      "cuda": "12.8",
+      "cudnn": 91900,
+      "numpy": "2.1.3",
+      "python": "3.13.15",
+      "sklearn": "1.6.1",
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128"
+    },
+    "experiment_source_sha256": "1512109180685148b7aca4b9d1fd4160eef434f4c30d65721a3aa9d6f4790eab",
+    "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
+    "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+    "protocol_sha256": "ba9cc0c6f21a784a193483ec92b6f114097bb2e84baefecfb1fdf7eb7c1a5e5c",
+    "queue_blocker": "Awaiting explicit six-fit / four-hour approval",
+    "reporter_sha256": "edb2f791e8a1527240d7f9289d9b8c85bd3d3e0c3a525cfb2b902372e638cd34",
+    "runs": [
+      {
+        "arm": "ratio_bce",
+        "attempts": [],
+        "id": "fold0_ratio_bce",
+        "outer_fold": 0,
+        "status": "queued"
+      },
+      {
+        "arm": "sqrt_ratio_bce",
+        "attempts": [],
+        "id": "fold0_sqrt_ratio_bce",
+        "outer_fold": 0,
+        "status": "queued"
+      },
+      {
+        "arm": "ratio_bce",
+        "attempts": [],
+        "id": "fold1_ratio_bce",
+        "outer_fold": 1,
+        "status": "queued"
+      },
+      {
+        "arm": "sqrt_ratio_bce",
+        "attempts": [],
+        "id": "fold1_sqrt_ratio_bce",
+        "outer_fold": 1,
+        "status": "queued"
+      },
+      {
+        "arm": "ratio_bce",
+        "attempts": [],
+        "id": "fold2_ratio_bce",
+        "outer_fold": 2,
+        "status": "queued"
+      },
+      {
+        "arm": "sqrt_ratio_bce",
+        "attempts": [],
+        "id": "fold2_sqrt_ratio_bce",
+        "outer_fold": 2,
+        "status": "queued"
+      }
+    ],
+    "source_commit": "93300d694dea55d4ccba83027a7b8aff7a43ee43",
+    "source_rebind_reason": "Whitespace-only allocator EOF normalization before approval; no assignments, settings, jobs or approvals changed.",
+    "supersedes_unsubmitted_plan_sha256": "46997816faa471d9b4e7c12dfb2b46d8792ed9a4d503c5f7cf80e61100bb6174"
+  }
+}

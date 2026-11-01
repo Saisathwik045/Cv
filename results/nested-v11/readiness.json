@@ -1,0 +1,27 @@
+{
+  "calibration_dataset_opened": false,
+  "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
+  "free_quota_seconds": 16784.262,
+  "gpu_worker_executed": false,
+  "historical_final_opened": false,
+  "local_cpu_tests": {
+    "optional_skips": 9,
+    "passed": 194,
+    "ran": 203
+  },
+  "original_demo_hashes_unchanged": {
+    "artifacts/inference-v8/best.pt": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "artifacts/inference-v8/candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "artifacts/inference-v8/quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "artifacts/inference-v8/temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+    "results/reliability-v6/candidate-contract.json": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61"
+  },
+  "paid_scaling_disabled": true,
+  "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+  "premature_reporting_refused": true,
+  "quota_observed_utc": "2026-11-01T10:08:20.149397+00:00",
+  "role_support_passed": true,
+  "runs_submitted": 0,
+  "source_and_fold_integrity_verified": true,
+  "unapproved_submission_test": "Mocked no-API unit tests passed; live CLI check was not executed because automatic approval review rejected the possible submission risk before user approval."
+}

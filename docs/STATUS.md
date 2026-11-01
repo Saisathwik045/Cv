@@ -1,34 +1,70 @@
-# Phase 10 — CPU-only exploratory threshold analysis complete
+# Phase 11 — bounded nested loss study prepared; approval required
 
-PR #19 is already merged at `f5f50fb`; its CI `41291834977` passed. Review confirmed the full four-run report preserves negative findings and correctly limits the conclusions to reused development data. No human PR review submissions were recorded. [Phase 9 status/history](history/STATUS-through-phase9-results.md) preserves the training results and recovery instructions.
+PR #20 is already merged at `75e9111`. V9/v10 reports were reviewed; no demo,
+historical evaluation, calibration or exploratory-threshold deployment changed.
+[Previous threshold evidence](history/STATUS-through-phase10-thresholds.md) is preserved.
 
-The [v10 protocol](THRESHOLD_V10.md) and [configuration](../configs/threshold-v10.toml) were committed at `1d1516f` before any threshold computation; implementation/tests were committed at `14f6382` before execution. The user authorized existing validation predictions for this separate exploratory analysis; the original training-OOF-only helper and frozen v9 protocol remain unchanged.
+The [prospective protocol](NESTED_LOSS_V11.md), [configuration](../configs/nested-loss-v11.toml)
+and [concrete queue/support/cost report](../results/nested-v11/README.md) define six fits:
+three outer folds × ConvNeXt-Tiny cosine ratio-BCE reference versus square-root
+ratio-BCE. Fresh ImageNet initialization in every fit; never reuse v9 weights.
+Only the existing 2,275 training patients / 2,240 containment components are used.
+Original v4 roles and both-eye/linked-patient grouping remain intact. No new cache,
+duplicate investigation, GPU smoke, model inference or training was performed.
 
-## Actual development findings
+Each outer fold has a fixed 25% inner holdout for checkpoint selection; the
+remaining 75% fits weights. Actual role counts are:
 
-Selected ConvNeXt cosine epoch 13, raw mean-eye probabilities, same 525 patients / 518 components. Four fixed label-stratified group folds (seed 2026), assessment sizes 132/131/131/131; every patient assessed once and no containment-component crossing. Thresholds maximize fitting-fold per-class F1 on .05:.05:.95; exact ties nearest .5, then higher. Fit support below 10 supplying groups per outcome retains .5; no class required a fallback.
+| Fold | Fit / inner / outer patients | H positives fit / inner / outer |
+|---|---|---|
+| 0 | 1137 / 379 / 759 | 33 / 11 / 23 |
+| 1 | 1137 / 380 / 758 | 33 / 12 / 22 |
+| 2 | 1137 / 380 / 758 | 34 / 11 / 22 |
 
-| Procedure | Macro F1 | Micro F1 | TP | FP | FN |
-|---|---:|---:|---:|---:|---:|
-| Fixed .5 | 0.5926 | 0.5714 | 346 | 243 | 276 |
-| Held-out threshold CV | 0.6055 | 0.5880 | 436 | 425 | 186 |
+All eight labels pass the prespecified positive/negative patient/component audit.
+Every role has at least ten supplying components for each outcome. This is not
+power or clinical adequacy evidence; H's inner support remains small. Source cache
+metadata and hashes were reused; old validation/calibration/final payloads were
+not opened. Worker code indexes only train tensors. Outer pixels are deferred
+until complete training and strict best reload; pauses never assess outer data.
 
-CV reduced missed positives by 90 but added 182 false positives. Conversely, .5 avoids those 182 false alarms at the cost of 90 more missed positives. N/D/G/M/O F1 rose, C F1 fell, A/H were unchanged. Exact match fell .4152 → .2952 and labelwise accuracy fell .8764 → .8545; neither is a clinical diagnostic-accuracy claim.
+Checkpoint = maximum inner patient macro AUROC, earliest tie; six-epoch meaningful
+patience, maximum 25. Arm comparison = mean paired outer macro AUROC; tie reference.
+All use raw mean-eye sigmoid probabilities at .5; report macro AP/F1 and all-eight
+precision/recall/support/TP/FP/FN, H detail and fixed paired component bootstrap.
+No partial selection, new threshold fitting, calibration transfer or automatic refit.
 
-H threshold was .50 in every fit, **not a fallback**: each fit had 12 positive-supplying groups and each assessment fold had four positive patients. Pooled H TP/FP/FN remain 3/1/13, precision .75, recall .1875, F1 .30. Agreement on this coarse grid with sparse overlapping fitting samples is not robust clinical threshold evidence. Full all-eight precision/recall/F1/counts, fold support and threshold quartiles/ranges are in the [generated report](../results/threshold-v10/RESULTS.md), [aggregate JSON](../results/threshold-v10/aggregate.json) and [CSV](../results/threshold-v10/per-class.csv).
+**Estimated ceiling cost: 2.783 worker-hours; proposed strict free-quota cap: four
+hours**, maximum six sessions including failures/resumes, each hard timeout 35
+minutes plus five-minute guard. No seventh session reserve. Interruptions may
+leave an incomplete matrix; preserve checkpoints and stop rather than extend the
+budget. About 4.6623 free hours were observed, paid scaling disabled; recheck at
+execution. All six runs remain queued, zero submission attempts, no approval file.
 
-## Preservation, checks and recovery
+203 CPU tests: 194 passed / nine optional skips; compilation, source/manifest
+integrity, real metadata support and diff checks pass. Mocked no-approval/no-API,
+running-job deduplication and deferred-outer guards pass. Actual premature reporting
+is refused. Automatic review rejected a live submission-guard test because a guard
+failure could launch a job before approval; that live check was not executed.
+GPU worker execution is untested and remains outside this turn's authorization.
 
-No model training/inference, new GPU job, calibration fit, acceptance policy, new data setup or paid resources. Historical final and calibration datasets/manifests were not opened. No old temperature was applied. Five frozen demo/contract artifacts remain byte-identical; original demo and REVIEW REQUIRED behavior are unchanged. No all-development threshold vector was refitted or exported for deployment.
+Private authoritative state: `artifacts/runner/nested-v11/registry.json`,
+`fold-manifest.json`, `PRIVATE_INDEX.md` and quota receipts. Public
+[queue](../results/nested-v11/queue.json), [preparation](../results/nested-v11/preparation.json),
+[support CSV](../results/nested-v11/support.csv) and
+[readiness](../results/nested-v11/readiness.json) contain aggregates/hashes only.
+Source-formatting-only plan rebinding is recorded with its unsubmitted predecessor;
+no assignment/configuration changed. Current approval target is in the queue.
 
-Pinned inputs: `saisathwikregula/trustretina-round2-v9-convnext-cosine-ede050b3/1`; checkpoint SHA256 `af33eb06fb2de21929e4dd3ec3959c0fbc58890d126a50c2e0d2b34bafaa0d49`; patient prediction SHA256 `e3f03f4fda4439aee575b12fd1cebd47056d97143f8a7bef3decc0b5ae51f44a`. Source/nonce/report/all-output integrity and saved mean-eye aggregation were verified. The private fold assignments, OOF decisions, fitting curves, provenance and completion hashes live in `artifacts/analysis/threshold-v10/attempt-1/`; original private Kaggle artifacts remain recoverable.
+New fits prevent direct outer-patient weight/checkpoint/loss-weight leakage, but
+prior adaptive development, same-source data and one seed still limit independence.
+A fresh suitable external/temporal labeled cohort with adequate all-eight support,
+particularly H, is needed to confirm improvement. Specify label adjudication,
+representative sampling and clustered precision/power before collecting/evaluating;
+no target accuracy is promised. Do not use the exposed historical final holdout.
 
-CPU analysis before report rendering: 1.305 wall seconds. Scientific suite: 194 tests, 185 passed / 9 optional skips. Six new focused tests cover exact ties, sparse-group fallback, deterministic mixed-label grouping, unchanged own-fold thresholds after held-out labels/scores change, cross-fold leakage rejection and analytical 2-D metrics. Actual saved decisions were separately checked against scikit-learn precision/recall/F1/confusion counts within 1e-12. Compilation and diff checks pass.
-
-Re-run `python scripts/analyze_thresholds_v10.py` in the existing CPU/report environment to verify/reuse a completed analysis; it does not fit again or overwrite mismatched artifacts. Required original selected inputs can be restored read-only using [Phase 9 recovery](ROUND2_RECOVERY.md); reuse the pinned selected run, never re-submit it. Public provenance records input/output hashes; sample-level outputs stay private.
-
-## Concrete next step
-
-Do not install the exploratory thresholds or replace the demo. Before any new threshold/deployment claim, prospectively define error costs/objective and obtain development predictions independent of checkpoint selection, e.g. training-only containment-aware out-of-fold model predictions in a separately authorized study. Freeze the complete new pipeline and assess it on a fresh suitable independent cohort with adequate H support. Calibration for the new checkpoint remains a separate prospective fit; never transfer the old temperature. No additional run or fit is authorized or queued here.
-
-Each threshold-assessment fold was untouched by its threshold fit, but all validation labels already influenced model/epoch selection. This fixed-model CV cannot remove that adaptive selection bias and does not provide independent confirmation. No clinical recall target or automatic acceptance policy is inferred.
+**Only next authorization needed:** approve the exact six-fit plan and four-hour
+free Kaggle cap. Then bind the actual user instruction to plan/source hashes and
+six run IDs in private approval.json, inspect existing jobs/receipts/quota, and
+advance sequentially under the same caps. No job runs or monitoring continues now.
+Original demo and REVIEW REQUIRED remain unchanged.
