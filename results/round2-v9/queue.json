@@ -1,0 +1,138 @@
+{
+  "receipts": {},
+  "registry": {
+    "cache": {
+      "bundle": "artifacts/runner/full-v5-inputs",
+      "inputs_sha256": "a45f0dd9b1e9d49b89014ee3b3e3104f451f3fa9806c824d2ba07cdf17509888",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-inputs-4f23af6d/1",
+      "parent_config_sha256": "99e309ac619f73bec615ed32b08402a951e764f3a22187ecd5af0cb7bda59b89",
+      "report_sha256": "6ffa93639a1e5916539a752f6e8b82620c9b04e63a8a5e4dfc548a3f27a53e30"
+    },
+    "calibration_accessed": false,
+    "config": {
+      "alternative_loss_enabled": false,
+      "augmentation": "none",
+      "backbone_selection": "maximum_validation_patient_macro_auroc_all_eight_defined",
+      "backbone_tie": "fixed_run_order",
+      "backbones": [
+        "convnext_tiny",
+        "densenet121"
+      ],
+      "batch_size": 16,
+      "calibration_fitting": false,
+      "checkpoint_selection": "maximum_validation_patient_macro_auroc_all_eight_defined_tie_earliest",
+      "class_order": [
+        "N",
+        "D",
+        "G",
+        "C",
+        "A",
+        "H",
+        "M",
+        "O"
+      ],
+      "early_stopping_metric": "validation_patient_macro_auroc",
+      "early_stopping_min_delta": 0.0001,
+      "early_stopping_patience": 6,
+      "experiment": "trustretina-controlled-development-v9",
+      "final_evaluation_access": false,
+      "gpu_overhead_reserve_per_attempt_seconds": 600,
+      "higher_resolution_enabled": false,
+      "image_size": 224,
+      "initialization": "torchvision_IMAGENET1K_V1",
+      "learning_rate": 0.0001,
+      "loss": "BCEWithLogitsLoss",
+      "max_epochs": 25,
+      "maximum_attempts_per_run": 2,
+      "maximum_gpu_session_seconds": 1800,
+      "maximum_gpu_total_seconds": 14400,
+      "maximum_run_reserved_seconds": 4800,
+      "minimum_learning_rate": 1e-06,
+      "num_workers": 0,
+      "optimizer": "AdamW",
+      "patient_aggregation": "mean_left_right_sigmoid_before_threshold",
+      "positive_weights": "negative_over_positive_training_patients_only_unclipped",
+      "precision": "float32",
+      "release_manifest_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
+      "risk_policy_fitting": false,
+      "runs": [
+        {
+          "backbone": "convnext_tiny",
+          "id": "convnext_constant",
+          "schedule": "constant"
+        },
+        {
+          "backbone": "convnext_tiny",
+          "id": "convnext_cosine",
+          "schedule": "cosine"
+        },
+        {
+          "backbone": "densenet121",
+          "id": "densenet_constant",
+          "schedule": "constant"
+        },
+        {
+          "backbone": "densenet121",
+          "id": "densenet_cosine",
+          "schedule": "cosine"
+        }
+      ],
+      "schema_version": 9,
+      "seed": 2026,
+      "threshold": 0.5,
+      "threshold_fitting": false,
+      "weight_decay": 0.01
+    },
+    "config_sha256": "6b4f65cd88a1d11e8801fb9a742337642bb9cf6bc931073914886da1879dcc82",
+    "created_utc": "2026-11-01T07:07:59.591849+00:00",
+    "development_audit_sha256": "69a9128eeade62d61584386983988278a5cbbaa7f5aa6717dcc1a19bdbabeaf9",
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
+    "execution_authorized": false,
+    "expected_dependencies": {
+      "Pillow": "13.0.0",
+      "cuda": "12.8",
+      "cudnn": 91900,
+      "numpy": "2.1.3",
+      "python": "3.13.15",
+      "sklearn": "1.6.1",
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128"
+    },
+    "experiment_source_sha256": "cf302b64855c1050d6837c810a11d7120e4d68b4886d6bd084412ad93c7ef295",
+    "historical_final_reused_for_selection": false,
+    "plan_sha256": "044f5cc03b0e8befdb2e757b69fc4a184d33241bb45edff76d023a4de719462a",
+    "protocol_sha256": "21b3004e4a372e1e18be795573fd00aec835c07ccd91fbb3542c1db1faefb02c",
+    "queue_blocker": "Awaiting explicit user approval of four runs and four GPU hours",
+    "runs": [
+      {
+        "attempts": [],
+        "backbone": "convnext_tiny",
+        "id": "convnext_constant",
+        "schedule": "constant",
+        "status": "queued"
+      },
+      {
+        "attempts": [],
+        "backbone": "convnext_tiny",
+        "id": "convnext_cosine",
+        "schedule": "cosine",
+        "status": "queued"
+      },
+      {
+        "attempts": [],
+        "backbone": "densenet121",
+        "id": "densenet_constant",
+        "schedule": "constant",
+        "status": "queued"
+      },
+      {
+        "attempts": [],
+        "backbone": "densenet121",
+        "id": "densenet_cosine",
+        "schedule": "cosine",
+        "status": "queued"
+      }
+    ],
+    "source_commit": "8fc09e4b467c48b227b2ccbca80f2740cc67bdb9"
+  }
+}

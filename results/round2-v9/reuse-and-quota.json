@@ -1,0 +1,59 @@
+{
+  "observed_utc": "2026-11-01T07:08:54.174377+00:00",
+  "free_remaining_seconds": 21600.0,
+  "paid_scaling_disabled": true,
+  "refresh_time": "2026-11-07T00:00:00.000Z",
+  "gpu_quota": {
+    "hasEverRun": true,
+    "isPayToScaleEnabled": false,
+    "minimumTimeAllowed": "21600s",
+    "timeReserved": "0s",
+    "timeUsed": "0s",
+    "totalTimeAllowed": "21600s"
+  },
+  "new_job_submissions": 0,
+  "historical_remote_status": [
+    {
+      "backbone": "efficientnet_b0",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-efficientnet-b0-6c3a859e/1",
+      "remote_status": "COMPLETE"
+    },
+    {
+      "backbone": "resnet50",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-resnet50-618fc487/1",
+      "remote_status": "COMPLETE"
+    },
+    {
+      "backbone": "densenet121",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-densenet121-a0a7f6e8/1",
+      "remote_status": "COMPLETE"
+    },
+    {
+      "backbone": "convnext_tiny",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-convnext-tiny-c349c706/1",
+      "remote_status": "COMPLETE"
+    },
+    {
+      "backbone": "efficientnet_b2",
+      "kernel_version": "saisathwikregula/trustretina-full-v5-efficientnet-b2-1c489932/1",
+      "remote_status": "COMPLETE"
+    }
+  ],
+  "historical_artifact_preservation": {
+    "preserved_opaque_artifact_hashes": {
+      "final-predictions.npz": "a1c7aa739b2ea7217969949c72dc8483488f1231f1e55dee5e812e3b9912a3c6",
+      "intervals.json": "29d4d986d709e56e85a7116fa64de63ececa643d7c2e6a6bff866c746d30ab9a",
+      "configuration.json": "4409440eb34afeabf25269fc03743768d5104932040e1e926fdd16727698882b",
+      "temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+      "quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2"
+    },
+    "preservation_only_not_a_tuning_input": true,
+    "macro_auroc": 0.8580143322080953,
+    "macro_f1": 0.47741115914337895,
+    "aggregate_sha256": "a75c905079c134f9edde22864b789a8f1b1b539af43110c7c6d931d246d19278",
+    "research_report_sha256": "0ac863d9aa812688a8f230ad488277bb77a7ddee187a18dc5bc56ba9573fc86f",
+    "selected_checkpoint_sha256": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "no_holdout_arrays_loaded": true
+  },
+  "frozen_demo_changed": false
+}
