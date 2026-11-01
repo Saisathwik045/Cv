@@ -1,5 +1,10 @@
 # TrustRetina
 
+[CPU-only exploratory threshold analysis](results/threshold-v10/RESULTS.md) is complete:
+group-aware held-out threshold fitting reduced misses but increased false positives;
+H did not improve. This reused-validation study does not provide independent
+confirmation. The original demo and historical evaluation remain unchanged.
+
 All four approved [controlled development experiments](docs/CONTROLLED_TRAINING_V9.md)
 are complete within 1.338 free Kaggle quota hours, including resume.
 [Verified comparison, per-class FP/FN/F1 and learning curves](results/round2-v9/RESULTS.md)

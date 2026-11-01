@@ -1,3 +1,13 @@
+# Exploratory threshold analysis v10
+
+[Prospectively committed v10](THRESHOLD_V10.md) records the separately authorized
+CPU-only cross-validation of per-class F1 thresholds on saved validation predictions.
+Threshold fitting and assessment are separated by containment components; prior
+checkpoint selection used all validation labels, so this is exploratory only.
+The old training-OOF guard and frozen v9 protocol remain unchanged. No training,
+calibration/final-data access, temperature transfer, acceptance policy or demo
+replacement is authorized. See STATUS.md for executed findings.
+
 # Prospective controlled development round v9 — execution not yet approved
 
 [Controlled v9 protocol](CONTROLLED_TRAINING_V9.md) defines a fixed four-fit
