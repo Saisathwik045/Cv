@@ -1,0 +1,1106 @@
+{
+  "calibration_predictions_opened": false,
+  "classes": {
+    "H": {
+      "arms": {
+        "ratio_bce": {
+          "counts": {
+            "FN": 58,
+            "FP": 20,
+            "TN": 2188,
+            "TP": 9,
+            "f1": 0.1875,
+            "n": 2275,
+            "precision": 0.3103448275862069,
+            "recall": 0.13432835820895522
+          },
+          "multilabel_positives": {
+            "FN": 38,
+            "TP": 4,
+            "n": 42,
+            "recall": 0.09523809523809523
+          },
+          "one_eye_positive_mean_negative_among_true_positives": 6,
+          "single_label_positives": {
+            "FN": 20,
+            "TP": 5,
+            "n": 25,
+            "recall": 0.2
+          },
+          "status": {
+            "FN": {
+              "eye_score_gap": {
+                "n": 58,
+                "q25_median_q75": [
+                  0.009742595255374908,
+                  0.039663358591496944,
+                  0.1971856476739049
+                ]
+              },
+              "n": 58,
+              "patient_score": {
+                "n": 58,
+                "q25_median_q75": [
+                  0.018897227419074625,
+                  0.03582628257572651,
+                  0.14196591824293137
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.0878960518040747,
+                    0.10253658961181877,
+                    0.11532148843648912
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.0009288929006196062,
+                    0.0016132579181926353,
+                    0.002421036404997531
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.2500024912308674,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.3577747948841699,
+                    0.5680279242569511,
+                    0.5688144175455417
+                  ]
+                }
+              }
+            },
+            "FP": {
+              "eye_score_gap": {
+                "n": 20,
+                "q25_median_q75": [
+                  0.09808036684989929,
+                  0.35374030470848083,
+                  0.7362153343856335
+                ]
+              },
+              "n": 20,
+              "patient_score": {
+                "n": 20,
+                "q25_median_q75": [
+                  0.5415530828759074,
+                  0.6447027623653412,
+                  0.8249015808105469
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 20,
+                  "q25_median_q75": [
+                    0.08263806598484555,
+                    0.1010437777254114,
+                    0.1211122610081188
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 20,
+                  "q25_median_q75": [
+                    0.001219200137813561,
+                    0.0021917299563571887,
+                    0.00599747914294289
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 20,
+                  "q25_median_q75": [
+                    0.33482142857142855,
+                    0.33482142857142855,
+                    0.5357142857142857
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 20,
+                  "q25_median_q75": [
+                    0.5684286613135187,
+                    0.5694436121764141,
+                    0.5821653932005494
+                  ]
+                }
+              }
+            },
+            "TN": {
+              "eye_score_gap": {
+                "n": 2188,
+                "q25_median_q75": [
+                  0.0031614857143722475,
+                  0.009424288640730083,
+                  0.032055920688435435
+                ]
+              },
+              "n": 2188,
+              "patient_score": {
+                "n": 2188,
+                "q25_median_q75": [
+                  0.007541575498180464,
+                  0.014827142702415586,
+                  0.03237552859354764
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 2188,
+                  "q25_median_q75": [
+                    0.07555190797524822,
+                    0.09453008674688324,
+                    0.11336945809239282
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 2188,
+                  "q25_median_q75": [
+                    0.0008118077275873364,
+                    0.00136103825051532,
+                    0.00240338508134782
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 2188,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33035714285714285,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 2188,
+                  "q25_median_q75": [
+                    0.3170514787946429,
+                    0.5179315476190476,
+                    0.5684473873441994
+                  ]
+                }
+              }
+            },
+            "TP": {
+              "eye_score_gap": {
+                "n": 9,
+                "q25_median_q75": [
+                  0.04267096519470215,
+                  0.23271679878234863,
+                  0.3197835087776184
+                ]
+              },
+              "n": 9,
+              "patient_score": {
+                "n": 9,
+                "q25_median_q75": [
+                  0.6871005296707153,
+                  0.7385609447956085,
+                  0.9620637595653534
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.10045161047815268,
+                    0.10956418761070055,
+                    0.12125212273684739
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.006224000183534657,
+                    0.006884941874243558,
+                    0.007108937438871445
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.5357142857142857,
+                    0.5357142857142857,
+                    0.5357142857142857
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.5805073832417582,
+                    0.5855297046703296,
+                    0.5925480769230769
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "sqrt_ratio_bce": {
+          "counts": {
+            "FN": 58,
+            "FP": 21,
+            "TN": 2187,
+            "TP": 9,
+            "f1": 0.18556701030927836,
+            "n": 2275,
+            "precision": 0.3,
+            "recall": 0.13432835820895522
+          },
+          "multilabel_positives": {
+            "FN": 37,
+            "TP": 5,
+            "n": 42,
+            "recall": 0.11904761904761904
+          },
+          "one_eye_positive_mean_negative_among_true_positives": 3,
+          "single_label_positives": {
+            "FN": 21,
+            "TP": 4,
+            "n": 25,
+            "recall": 0.16
+          },
+          "status": {
+            "FN": {
+              "eye_score_gap": {
+                "n": 58,
+                "q25_median_q75": [
+                  0.011270952876657248,
+                  0.03649015724658966,
+                  0.08473763801157475
+                ]
+              },
+              "n": 58,
+              "patient_score": {
+                "n": 58,
+                "q25_median_q75": [
+                  0.02906430687289685,
+                  0.1528497226536274,
+                  0.2638054024428129
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.0878960518040747,
+                    0.09957783765761277,
+                    0.11472607512565014
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.0009288929006196062,
+                    0.001504409524000738,
+                    0.002346285262246915
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.27009675940688777,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 58,
+                  "q25_median_q75": [
+                    0.391455230740945,
+                    0.568050395493768,
+                    0.5688556148130394
+                  ]
+                }
+              }
+            },
+            "FP": {
+              "eye_score_gap": {
+                "n": 21,
+                "q25_median_q75": [
+                  0.011708259582519531,
+                  0.08017253875732422,
+                  0.16180765628814697
+                ]
+              },
+              "n": 21,
+              "patient_score": {
+                "n": 21,
+                "q25_median_q75": [
+                  0.5242295265197754,
+                  0.5568264722824097,
+                  0.6600145846605301
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 21,
+                  "q25_median_q75": [
+                    0.09499535673623893,
+                    0.11728446108519196,
+                    0.12330538985278483
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 21,
+                  "q25_median_q75": [
+                    0.002009238040513825,
+                    0.0030985479266576596,
+                    0.004269339235397185
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 21,
+                  "q25_median_q75": [
+                    0.33482142857142855,
+                    0.33482142857142855,
+                    0.5357142857142857
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 21,
+                  "q25_median_q75": [
+                    0.5678781160115053,
+                    0.568537272291467,
+                    0.5789835164835164
+                  ]
+                }
+              }
+            },
+            "TN": {
+              "eye_score_gap": {
+                "n": 2187,
+                "q25_median_q75": [
+                  0.005524949170649052,
+                  0.020251408219337463,
+                  0.054026730358600616
+                ]
+              },
+              "n": 2187,
+              "patient_score": {
+                "n": 2187,
+                "q25_median_q75": [
+                  0.015535169746726751,
+                  0.06154911406338215,
+                  0.1633558664470911
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 2187,
+                  "q25_median_q75": [
+                    0.07549156220185106,
+                    0.09444187124471307,
+                    0.11325512222664011
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 2187,
+                  "q25_median_q75": [
+                    0.0008125632184680962,
+                    0.001359125160701102,
+                    0.0023953235970492134
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 2187,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33035714285714285,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 2187,
+                  "q25_median_q75": [
+                    0.31942692477543505,
+                    0.5182142857142857,
+                    0.568462368168744
+                  ]
+                }
+              }
+            },
+            "TP": {
+              "eye_score_gap": {
+                "n": 9,
+                "q25_median_q75": [
+                  0.021943330764770508,
+                  0.040364205837249756,
+                  0.09877181053161621
+                ]
+              },
+              "n": 9,
+              "patient_score": {
+                "n": 9,
+                "q25_median_q75": [
+                  0.6474998891353607,
+                  0.7323241531848907,
+                  0.7952229976654053
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.10792071701640757,
+                    0.11741661353709136,
+                    0.12385721490906706
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.006629981713066859,
+                    0.007059651616079412,
+                    0.007385263818537711
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.5357142857142857,
+                    0.5357142857142857,
+                    0.5357142857142857
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 9,
+                  "q25_median_q75": [
+                    0.5852506868131868,
+                    0.5925480769230769,
+                    0.5950592376373627
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "co_positive": {
+        "A": 2,
+        "C": 2,
+        "D": 27,
+        "G": 5,
+        "H": 67,
+        "M": 0,
+        "N": 0,
+        "O": 8
+      },
+      "distinct_positive_eye_keyword_strings": 22,
+      "keywords": {
+        "hypertensive retinopathy": {
+          "both_eyes": 54,
+          "neither": 0,
+          "one_eye": 6
+        },
+        "normal fundus": {
+          "both_eyes": 0,
+          "neither": 60,
+          "one_eye": 0
+        }
+      },
+      "negative": 2208,
+      "positive": 67,
+      "positive_keyword_coverage": 60,
+      "single_label_positive": 25
+    },
+    "O": {
+      "arms": {
+        "ratio_bce": {
+          "counts": {
+            "FN": 343,
+            "FP": 468,
+            "TN": 1171,
+            "TP": 293,
+            "f1": 0.41947029348604153,
+            "n": 2275,
+            "precision": 0.38501971090670173,
+            "recall": 0.4606918238993711
+          },
+          "multilabel_positives": {
+            "FN": 132,
+            "TP": 143,
+            "n": 275,
+            "recall": 0.52
+          },
+          "one_eye_positive_mean_negative_among_true_positives": 131,
+          "single_label_positives": {
+            "FN": 211,
+            "TP": 150,
+            "n": 361,
+            "recall": 0.4155124653739612
+          },
+          "status": {
+            "FN": {
+              "eye_score_gap": {
+                "n": 343,
+                "q25_median_q75": [
+                  0.05516411364078522,
+                  0.17810368537902832,
+                  0.426493126899004
+                ]
+              },
+              "n": 343,
+              "patient_score": {
+                "n": 343,
+                "q25_median_q75": [
+                  0.1581324147991836,
+                  0.32357050478458405,
+                  0.41140475776046515
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 343,
+                  "q25_median_q75": [
+                    0.07786215206002528,
+                    0.09561254501919368,
+                    0.1154788278015618
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 343,
+                  "q25_median_q75": [
+                    0.0007994320446095258,
+                    0.0013070994442114165,
+                    0.0025208795379613527
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 343,
+                  "q25_median_q75": [
+                    0.24553571428571427,
+                    0.33035714285714285,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 343,
+                  "q25_median_q75": [
+                    0.31510084502551017,
+                    0.5058184523809524,
+                    0.5682900886864812
+                  ]
+                }
+              }
+            },
+            "FP": {
+              "eye_score_gap": {
+                "n": 468,
+                "q25_median_q75": [
+                  0.08622206747531891,
+                  0.19248630106449127,
+                  0.36009473353624344
+                ]
+              },
+              "n": 468,
+              "patient_score": {
+                "n": 468,
+                "q25_median_q75": [
+                  0.5474410802125931,
+                  0.6028424352407455,
+                  0.7072034403681755
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 468,
+                  "q25_median_q75": [
+                    0.08018744876607664,
+                    0.09470049707343343,
+                    0.1130851682819797
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 468,
+                  "q25_median_q75": [
+                    0.0008637777750832354,
+                    0.001487935184094402,
+                    0.0025503802235874815
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 468,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 468,
+                  "q25_median_q75": [
+                    0.3616971856701782,
+                    0.567046680249281,
+                    0.5685934503835092
+                  ]
+                }
+              }
+            },
+            "TN": {
+              "eye_score_gap": {
+                "n": 1171,
+                "q25_median_q75": [
+                  0.03610270470380783,
+                  0.12019482254981995,
+                  0.2592604289529845
+                ]
+              },
+              "n": 1171,
+              "patient_score": {
+                "n": 1171,
+                "q25_median_q75": [
+                  0.106421431992203,
+                  0.2540966048836708,
+                  0.3678528107702732
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 1171,
+                  "q25_median_q75": [
+                    0.072703627982345,
+                    0.0934310140015493,
+                    0.11323904772734955
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 1171,
+                  "q25_median_q75": [
+                    0.0007874012995153205,
+                    0.0012956313359443277,
+                    0.0023174523045474413
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 1171,
+                  "q25_median_q75": [
+                    0.24330357142857142,
+                    0.32589285714285715,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 1171,
+                  "q25_median_q75": [
+                    0.28548703135100195,
+                    0.4680590986394558,
+                    0.5684024448705656
+                  ]
+                }
+              }
+            },
+            "TP": {
+              "eye_score_gap": {
+                "n": 293,
+                "q25_median_q75": [
+                  0.09241622686386108,
+                  0.21619725227355957,
+                  0.4200625419616699
+                ]
+              },
+              "n": 293,
+              "patient_score": {
+                "n": 293,
+                "q25_median_q75": [
+                  0.5563033670186996,
+                  0.6492760926485062,
+                  0.7633518576622009
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 293,
+                  "q25_median_q75": [
+                    0.08243699920733549,
+                    0.09734962263240415,
+                    0.11391325076511308
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 293,
+                  "q25_median_q75": [
+                    0.0009151662556745926,
+                    0.0016341152547319038,
+                    0.002627420523267878
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 293,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 293,
+                  "q25_median_q75": [
+                    0.46204028486394555,
+                    0.5678781160115053,
+                    0.5688219079578141
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "sqrt_ratio_bce": {
+          "counts": {
+            "FN": 466,
+            "FP": 271,
+            "TN": 1368,
+            "TP": 170,
+            "f1": 0.31569173630454966,
+            "n": 2275,
+            "precision": 0.3854875283446712,
+            "recall": 0.2672955974842767
+          },
+          "multilabel_positives": {
+            "FN": 190,
+            "TP": 85,
+            "n": 275,
+            "recall": 0.3090909090909091
+          },
+          "one_eye_positive_mean_negative_among_true_positives": 138,
+          "single_label_positives": {
+            "FN": 276,
+            "TP": 85,
+            "n": 361,
+            "recall": 0.23545706371191136
+          },
+          "status": {
+            "FN": {
+              "eye_score_gap": {
+                "n": 466,
+                "q25_median_q75": [
+                  0.04184165596961975,
+                  0.1004582941532135,
+                  0.19327184185385704
+                ]
+              },
+              "n": 466,
+              "patient_score": {
+                "n": 466,
+                "q25_median_q75": [
+                  0.3268127143383026,
+                  0.38989876210689545,
+                  0.44652700796723366
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 466,
+                  "q25_median_q75": [
+                    0.07824276877696207,
+                    0.09717861648007313,
+                    0.116395460891635
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 466,
+                  "q25_median_q75": [
+                    0.0008082021141996758,
+                    0.001401998821699973,
+                    0.0026158529223938186
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 466,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33035714285714285,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 466,
+                  "q25_median_q75": [
+                    0.3376182504251701,
+                    0.5187425595238095,
+                    0.5684174256951102
+                  ]
+                }
+              }
+            },
+            "FP": {
+              "eye_score_gap": {
+                "n": 271,
+                "q25_median_q75": [
+                  0.04485835134983063,
+                  0.0984693169593811,
+                  0.19437770545482635
+                ]
+              },
+              "n": 271,
+              "patient_score": {
+                "n": 271,
+                "q25_median_q75": [
+                  0.5247617214918137,
+                  0.5497109442949295,
+                  0.6125948429107666
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 271,
+                  "q25_median_q75": [
+                    0.08569071458477481,
+                    0.09834357348926416,
+                    0.11635701436901896
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 271,
+                  "q25_median_q75": [
+                    0.0010357622349832967,
+                    0.0017694106473429697,
+                    0.0028915579053183336
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 271,
+                  "q25_median_q75": [
+                    0.25,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 271,
+                  "q25_median_q75": [
+                    0.4253959396258503,
+                    0.567743288590604,
+                    0.5687020613614573
+                  ]
+                }
+              }
+            },
+            "TN": {
+              "eye_score_gap": {
+                "n": 1368,
+                "q25_median_q75": [
+                  0.029161132872104645,
+                  0.07127620279788971,
+                  0.15461758896708488
+                ]
+              },
+              "n": 1368,
+              "patient_score": {
+                "n": 1368,
+                "q25_median_q75": [
+                  0.2743900567293167,
+                  0.3557971939444542,
+                  0.4173564128577709
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 1368,
+                  "q25_median_q75": [
+                    0.07297655015632974,
+                    0.09280424627619213,
+                    0.11248203932825229
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 1368,
+                  "q25_median_q75": [
+                    0.0007839961317715432,
+                    0.001289817274637927,
+                    0.002293340455489792
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 1368,
+                  "q25_median_q75": [
+                    0.24553571428571427,
+                    0.32589285714285715,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 1368,
+                  "q25_median_q75": [
+                    0.28598194085326434,
+                    0.4678863732993197,
+                    0.5684211709012463
+                  ]
+                }
+              }
+            },
+            "TP": {
+              "eye_score_gap": {
+                "n": 170,
+                "q25_median_q75": [
+                  0.07510535418987274,
+                  0.13647380471229553,
+                  0.23088327795267105
+                ]
+              },
+              "n": 170,
+              "patient_score": {
+                "n": 170,
+                "q25_median_q75": [
+                  0.5350343063473701,
+                  0.5743936598300934,
+                  0.6365553215146065
+                ]
+              },
+              "quality": {
+                "foreground_contrast": {
+                  "n": 170,
+                  "q25_median_q75": [
+                    0.08170983432185891,
+                    0.09499085006958372,
+                    0.109527236978983
+                  ]
+                },
+                "foreground_gradient_energy": {
+                  "n": 170,
+                  "q25_median_q75": [
+                    0.0009732552469675208,
+                    0.0016368800194244046,
+                    0.0025671351237859857
+                  ]
+                },
+                "mean_color_fraction": {
+                  "n": 170,
+                  "q25_median_q75": [
+                    0.33035714285714285,
+                    0.33482142857142855,
+                    0.33482142857142855
+                  ]
+                },
+                "nonpadding_dark_fraction": {
+                  "n": 170,
+                  "q25_median_q75": [
+                    0.5076004464285715,
+                    0.5679530201342282,
+                    0.56887434084372
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "co_positive": {
+        "A": 12,
+        "C": 17,
+        "D": 196,
+        "G": 32,
+        "H": 8,
+        "M": 27,
+        "N": 0,
+        "O": 636
+      },
+      "distinct_positive_eye_keyword_strings": 190,
+      "keywords": {
+        "hypertensive retinopathy": {
+          "both_eyes": 4,
+          "neither": 521,
+          "one_eye": 3
+        },
+        "normal fundus": {
+          "both_eyes": 1,
+          "neither": 268,
+          "one_eye": 259
+        }
+      },
+      "negative": 1639,
+      "positive": 636,
+      "positive_keyword_coverage": 528,
+      "single_label_positive": 361
+    }
+  },
+  "cohort": "v4 TRAIN-only / v11 outer OOF",
+  "components": 2240,
+  "elapsed_cpu_wall_seconds": 11.984578725001484,
+  "gpu_submissions": 0,
+  "historical_final_predictions_opened": false,
+  "native_raw_images_available": false,
+  "new_model_inference": false,
+  "patients": 2275,
+  "preprocessing": {
+    "long_side_downscale": {
+      "n": 4550,
+      "q25_median_q75": [
+        9.142857142857142,
+        11.571428571428571,
+        11.571428571428571
+      ]
+    },
+    "padding_fraction": {
+      "n": 4550,
+      "q25_median_q75": [
+        0.25,
+        0.33035714285714285,
+        0.33482142857142855
+      ]
+    },
+    "resize_short_side": {
+      "n": 4550,
+      "q25_median_q75": [
+        149.0,
+        150.0,
+        168.0
+      ]
+    }
+  },
+  "protocol_sha256": "2510de993a80fe5c70b58f0bdf1496a5a8896210309b8b74bec66665ef555a8c",
+  "provenance": {
+    "artifacts/runner/duplicate-pair-review/download/comparisons/workbook-metadata.json": "95635913e6401f0512d1a5267f947fe768589a18b2219f248654fc8ec8c14330",
+    "artifacts/runner/full-v5-inputs/download/prepared/inputs.json": "a45f0dd9b1e9d49b89014ee3b3e3104f451f3fa9806c824d2ba07cdf17509888",
+    "artifacts/runner/full-v5-inputs/download/prepared/train-images.npy": "274679427634724590dd9a7879cd562879e3d49dea6fdf62aa4e84a7d51fc70f",
+    "artifacts/runner/full-v5-inputs/download/prepared/train-rows.json": "2656e5b7403d90123c54e5c493988f1fd889003e8424cec3ebdf33ff016a2885",
+    "artifacts/runner/nested-v11/fold-manifest.json": "c1025877459ed3a787f72e7938d474e13b260537893f5f025079f1f61f8b191a",
+    "artifacts/runner/nested-v11/fold0_ratio_bce/attempt-1/download/full/outer-images.npz": "de4cee13fad824383fcb083228f4639eb169d0e9cb1dc4a647588d1c73ec2b30",
+    "artifacts/runner/nested-v11/fold0_ratio_bce/attempt-1/download/full/outer-patients.npz": "56a3185cb8b8cefe91c36fdffdff4c7320be0f2fdc9d0bbb1e7101475c0a85ad",
+    "artifacts/runner/nested-v11/fold0_ratio_bce/attempt-1/download/full/stage-report.json": "7fb0b134b23e1e72582fdff099f2b29e0cab6c593bfd349d92f9e6c02ddab615",
+    "artifacts/runner/nested-v11/fold0_sqrt_ratio_bce/attempt-1/download/full/outer-images.npz": "d295e1ad43f0af3d0bb1441dda80df82a18aa2065084b4ef46ef28cf52da1c19",
+    "artifacts/runner/nested-v11/fold0_sqrt_ratio_bce/attempt-1/download/full/outer-patients.npz": "3870ab1052d9294dfcfef548aaf98ba69cffcda769bc0ef5989fe86a94387016",
+    "artifacts/runner/nested-v11/fold0_sqrt_ratio_bce/attempt-1/download/full/stage-report.json": "7135997b7d3e7ce8b0d5cafc9d78798230df8995e4e4204c96e1264d7cb093c4",
+    "artifacts/runner/nested-v11/fold1_ratio_bce/attempt-1/download/full/outer-images.npz": "7fdca45505391f7fda5f7d12eddfd7d7e8b28e288b14d992d0f958bea3c5ee0a",
+    "artifacts/runner/nested-v11/fold1_ratio_bce/attempt-1/download/full/outer-patients.npz": "78e39b753989f58dba40d946b180c689f6e52f583e6d78a09e7ed639e8ffe55d",
+    "artifacts/runner/nested-v11/fold1_ratio_bce/attempt-1/download/full/stage-report.json": "6ccbc5acdda9c1d744b5bbc47e88e13a751f8e4e58c4b7bd965ecaf1da08556a",
+    "artifacts/runner/nested-v11/fold1_sqrt_ratio_bce/attempt-1/download/full/outer-images.npz": "09045f932ebf9821131286710fbd8ae053cc41568af9f5b7bf3729913b68e705",
+    "artifacts/runner/nested-v11/fold1_sqrt_ratio_bce/attempt-1/download/full/outer-patients.npz": "010e4d038ddd0f5e25e2710423dd88f264f8ab236a57eeae65743e98d126db51",
+    "artifacts/runner/nested-v11/fold1_sqrt_ratio_bce/attempt-1/download/full/stage-report.json": "03408bf01d242213900cafe4327488d521ebd5b74b8a54aa0a510d851490c054",
+    "artifacts/runner/nested-v11/fold2_ratio_bce/attempt-1/download/full/outer-images.npz": "78d43dfc6b91c63ea99cbfeb4badb335e41e57918f2d79aa8d927738f8aedb4e",
+    "artifacts/runner/nested-v11/fold2_ratio_bce/attempt-1/download/full/outer-patients.npz": "1407cc82b03280109837e3f66ac65bfee30cd132f52dd8ed46ab4cd0cf840332",
+    "artifacts/runner/nested-v11/fold2_ratio_bce/attempt-1/download/full/stage-report.json": "49417057a76a3779d16947f73c619cda6840f838263eae9c28ce4a681e863f9e",
+    "artifacts/runner/nested-v11/fold2_sqrt_ratio_bce/attempt-1/download/full/outer-images.npz": "e73c0c6f3e725b0bdcb1af5a139a67113e768b86ec0aea441bfc0cd5af7205e3",
+    "artifacts/runner/nested-v11/fold2_sqrt_ratio_bce/attempt-1/download/full/outer-patients.npz": "890e474a629a9d66f3f685c4b00406c9ad085cd12aba8ff195e7047d9b74fc07",
+    "artifacts/runner/nested-v11/fold2_sqrt_ratio_bce/attempt-1/download/full/stage-report.json": "e81f339c0ff6d9109ae98688f274cc4ef1183c8999b590f2566501bcd3d4ad37",
+    "artifacts/runner/support-floor-publication/download/validation-output/phase1/inventory.json": "033d360d46b671fb8690c958ff5285a30e64a4452b5e2327794b5118c954ac41"
+  },
+  "reporting_correction": {
+    "first_output_sha256": "03fa30b79889a634d5ebfd3085db4bde5f353c67e5fa3d52b16175af2e30f063",
+    "historical_final_exposure": false,
+    "reason": "Remove precision/F1 from truth-positive-only subgroups; these are recall/support summaries, not full-cohort precision/F1. Independently verify original source metadata receipts. No new image pass, predictions, fitting or sample selection."
+  },
+  "source_consistency": {
+    "N_with_disease": 0,
+    "identical_patient_targets_per_eye": true,
+    "keyword_cache_selection_biased": true,
+    "keyword_coverage": 1835,
+    "keywords_missing": 440,
+    "label_mismatches": 0,
+    "source_metadata_receipts_verified": true,
+    "source_rows": 2275
+  },
+  "thresholds_fitted": false,
+  "visual_selection": {
+    "pages": 5,
+    "selection_sha256": "26f7e1c4c62474bc839059d79c8eb8751578635ce48bd9f2a40118e5258de2a6",
+    "stratum_records": 32,
+    "unique_patients": 18
+  }
+}

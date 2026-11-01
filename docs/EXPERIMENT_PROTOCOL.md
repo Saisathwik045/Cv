@@ -1,3 +1,7 @@
+# CPU development audit v12 — completed
+
+[Prespecified audit](DEVELOPMENT_AUDIT_V12.md) and [consolidated findings](../results/development-audit-v12/REPORT.md) preserve the v9–v11 results. No new model, calibration or thresholds were fitted. [One proposed next experiment](NEXT_EXPERIMENT_AFTER_V12.md) remains unexecuted and requires prerequisites, implementation freeze and separate budget approval.
+
 # Nested training-only loss study v11 — completed
 
 [Nested v11](NESTED_LOSS_V11.md) specifies three outer training-only folds with
