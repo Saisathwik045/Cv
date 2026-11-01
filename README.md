@@ -1,8 +1,11 @@
 # TrustRetina
 
-A [controlled second development experiment](docs/CONTROLLED_TRAINING_V9.md) is
-prepared for approval. No new training is launched; the frozen demo is unchanged.
-[Diagnosis and exact matrix](results/round2-v9/DIAGNOSIS.md).
+All four approved [controlled development experiments](docs/CONTROLLED_TRAINING_V9.md)
+are complete within 1.338 free Kaggle quota hours, including resume.
+[Verified comparison, per-class FP/FN/F1 and learning curves](results/round2-v9/RESULTS.md)
+retain positive and negative findings. These reuse validation; the frozen demo,
+calibration and historical holdout remain unchanged.
+[Current status and recovery](docs/STATUS.md).
 
 ## Apple-silicon Mac
 

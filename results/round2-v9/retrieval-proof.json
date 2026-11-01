@@ -1,0 +1,13 @@
+{
+  "kernel_version": "saisathwikregula/trustretina-round2-v9-convnext-constant-f28e547b/1",
+  "fresh_directory_retrieval": true,
+  "all_hashes_match": true,
+  "files": {
+    "stage-report.json": "1e218f36ee45fb2574be3e3a223aa9b6f732e7cf8720d737101e9aca3aeb19d7",
+    "stage-report.sha256": "2952ff685539fcd3955bd874ae1648e3d46a4fc1dba1f9887a6c793ce32f63ef",
+    "validation-patients.npz": "96960a53248e379c8e78268d1833d86d586c2637c099dad87382b7a228e6f52e",
+    "history.json": "9728880479e2af2ac081f3078647a7d724fec3dbca2ca171f2ef9548fcf6cab3"
+  },
+  "sample_level_files_private": true,
+  "job_submissions": 0
+}
