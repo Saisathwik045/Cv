@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-11-01T15:28:46.139875+00:00",
+  "free_gpu_quota_seconds": 12670.775,
+  "used_seconds": 8929.225,
+  "reserved_seconds": 0.0,
+  "paid_scaling_disabled": true,
+  "provider_refresh_utc": "2026-11-07T00:00:00.000Z",
+  "GPU_quota_delta_CPU_preparation_seconds": 0.0,
+  "proposed_cap_seconds": 21600,
+  "first_training_gate_passes": false,
+  "requested_training_accelerator": "NvidiaTeslaT4",
+  "per_shape_multiplier_exposed_by_SDK": false,
+  "prior_T4_counter_evidence": {
+    "worker_seconds": 3953.290253071,
+    "charged_quota_seconds": 4113.487,
+    "source": "results/nested-v11/execution-provenance.json"
+  },
+  "charging_rule": "Use actual before/after settled counters, separate runtime plus overhead guard, stop if observed rate/available quota cannot cover next reservation; do not assume old worker duration equals new charge.",
+  "estimated_all25_worker_hours": 4.231295918367347,
+  "planning_hours_with_30pct_allowance": 5.5006846938775515,
+  "GPU_submissions_this_phase": 0,
+  "known_new_GPU_memory_or_throughput_measurement": false
+}

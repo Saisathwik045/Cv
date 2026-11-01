@@ -1,5 +1,10 @@
 # TrustRetina
 
+[Matched 224/320 study preparation](results/resolution-v13/README.md) is complete:
+all original training-image hashes and exact 224-cache parity passed; 320 inputs
+come directly from originals. Six fits await separate approval and sufficient
+free quota. No training was launched.
+
 [Consolidated development audit](results/development-audit-v12/REPORT.md) is complete.
 Square-root weighting did not establish improvement; retain ratio BCE as the
 development reference and preserve the frozen demo. A single resolution ablation

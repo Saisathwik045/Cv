@@ -73,6 +73,14 @@ class ResolutionGuardsTests(unittest.TestCase):
         up=a.resize((320,320),Image.Resampling.BILINEAR)
         self.assertFalse(np.array_equal(np.asarray(up),np.asarray(b)))
 
+    def test_recovery_never_overwrites_newer_or_conflicting_registry(self):
+        from restore_resolution_state import exact_write
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t)/'registry.json';exact_write(p,{'state':'running'})
+            exact_write(p,{'state':'running'})
+            with self.assertRaises(ValueError):exact_write(p,{'state':'queued'})
+            self.assertEqual(json.loads(p.read_text()),{'state':'running'})
+
 
 try:
     import torch

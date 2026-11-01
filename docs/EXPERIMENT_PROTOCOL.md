@@ -1,3 +1,7 @@
+# Matched resolution study v13 — prepared, approval required
+
+[Frozen v13 protocol](RESOLUTION_V13.md) and [verified preparation](../results/resolution-v13/README.md) define six matched training-only fits. Exact native224 parity and native320 construction passed. No training authorization or GPU submission; full six-hour free quota is not currently available. Clinical H/O semantics remain limited to source dataset targets.
+
 # CPU development audit v12 — completed
 
 [Prespecified audit](DEVELOPMENT_AUDIT_V12.md) and [consolidated findings](../results/development-audit-v12/REPORT.md) preserve the v9–v11 results. No new model, calibration or thresholds were fitted. [One proposed next experiment](NEXT_EXPERIMENT_AFTER_V12.md) remains unexecuted and requires prerequisites, implementation freeze and separate budget approval.
