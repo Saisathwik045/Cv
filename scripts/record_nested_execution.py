@@ -28,10 +28,17 @@ def main():
     if any(path.startswith(('results/final-v7/','results/reliability-v6/','src/trustretina/demo/','configs/development-v4.toml')) for path in changed):raise ValueError('Protected historical/application paths changed')
     rejections=[entry for run in p['runs'] for entry in run.get('pre_session_save_rejections',[])]
     worker=sum(a.get('elapsed_seconds',0) for a in attempts)
+    observations=[]
+    for path in (c.BASE/'accounting').glob('quota-*.json'):
+        value=json.loads(path.read_text())
+        if value['raw'].get('quotaRefreshTime')==p['quota_baseline']['refresh_time']:
+            observations.append(seconds(value['raw']['gpuQuota']['timeUsed'])-p['quota_baseline']['used_seconds'])
+    peak=max([charged,*observations])
+    if peak>14400:raise ValueError('A reported charged-quota observation exceeded the cap; preserve and review')
     output={'recorded_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'plan_sha256':p['plan_sha256'],
         'approved_worker_source_sha256':p['experiment_source_sha256'],'implementation_source_commit':p['source_commit'],
         'gpu_quota_baseline_used_seconds':p['quota_baseline']['used_seconds'],'gpu_quota_final_used_seconds':q['used_seconds'],
-        'actual_charged_gpu_quota_seconds':charged,'actual_charged_gpu_quota_hours':charged/3600,
+        'actual_charged_gpu_quota_seconds':charged,'actual_charged_gpu_quota_hours':charged/3600,'peak_observed_charged_quota_seconds':peak,'counter_note':'Active API counters can reconcile at session completion; settled final counter is authoritative, all observations preserved.',
         'worker_elapsed_seconds_separate_from_charged_quota':worker,'conservative_reserved_seconds':reserved,
         'maximum_charged_seconds':14400,'maximum_sessions':6,'reserved_scientific_attempts':len(attempts),
         'actual_versioned_gpu_sessions':len(versions),'versions':versions,'paid_scaling_disabled':True,

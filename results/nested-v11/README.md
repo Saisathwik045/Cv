@@ -1,3 +1,5 @@
+> Historical pre-approval preparation record, preserved below. The six-fit study is now complete. See [actual results](RESULTS.md), [execution audit](EXECUTION.md), [provenance](execution-provenance.json) and [current status](../../docs/STATUS.md). Statements about pending approval/no execution below describe preparation only.
+
 # Nested loss study v11 — prepared, not executed
 
 [Prospective protocol](../../docs/NESTED_LOSS_V11.md) · [fixed configuration](../../configs/nested-loss-v11.toml) · [readiness evidence](readiness.json) · [all-eight support CSV](support.csv)

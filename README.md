@@ -1,7 +1,9 @@
 # TrustRetina
 
-The authorized [training-only nested loss study](results/nested-v11/README.md)
-is executing sequentially under its strict four-hour free Kaggle cap.
+All six authorized [training-only nested loss fits](results/nested-v11/RESULTS.md)
+completed using 1.143 free Kaggle GPU-quota hours within the four-hour cap.
+The paired comparison retains rare-class and false-positive/false-negative findings;
+it does not independently confirm improvement.
 [Current status and recovery](docs/STATUS.md) track actual jobs and artifact checks.
 The frozen demo, calibration and historical evaluation remain unchanged.
 

@@ -44,6 +44,51 @@
       "submission_attempted": true,
       "submission_verified": true,
       "training": true
+    },
+    "artifacts/runner/nested-v11/fold1_sqrt_ratio_bce/attempt-1": {
+      "approval_record_sha256": "a1bb953119fdf808fd7a9396f7265ed45422011ff64fb1f1e30d26cf3090f4d5",
+      "budget_reservation_seconds": 2400,
+      "execution_timeout_seconds": 2100,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-nested-v11-f1-sqrtbce-e3c475f1",
+      "kernel_version": "saisathwikregula/trustretina-nested-v11-f1-sqrtbce-e3c475f1/1",
+      "nonce": "e3c475f14a4c498d810dac39a9d029df",
+      "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+      "source_commit": "93300d694dea55d4ccba83027a7b8aff7a43ee43",
+      "source_sha256": "51514966ec177c506647917f46840ef9ca0e8780e8f14d5817d5703591d5a6dd",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/runner/nested-v11/fold2_ratio_bce/attempt-1": {
+      "approval_record_sha256": "a1bb953119fdf808fd7a9396f7265ed45422011ff64fb1f1e30d26cf3090f4d5",
+      "budget_reservation_seconds": 2400,
+      "execution_timeout_seconds": 2100,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-nested-v11-fold2-ratio-bce-c5db5ed9",
+      "kernel_version": "saisathwikregula/trustretina-nested-v11-fold2-ratio-bce-c5db5ed9/1",
+      "nonce": "c5db5ed9e4654432b95e86d11ce9d684",
+      "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+      "source_commit": "93300d694dea55d4ccba83027a7b8aff7a43ee43",
+      "source_sha256": "1bb56e9b4acb4fe19f04236fdca305b1e0fede1e6291de5c7e165e858139601a",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/runner/nested-v11/fold2_sqrt_ratio_bce/attempt-1": {
+      "approval_record_sha256": "a1bb953119fdf808fd7a9396f7265ed45422011ff64fb1f1e30d26cf3090f4d5",
+      "budget_reservation_seconds": 2400,
+      "execution_timeout_seconds": 2100,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-nested-v11-f2-sqrtbce-4c271a07",
+      "kernel_version": "saisathwikregula/trustretina-nested-v11-f2-sqrtbce-4c271a07/1",
+      "nonce": "4c271a078b774d23b355f7e7faee078a",
+      "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
+      "source_commit": "93300d694dea55d4ccba83027a7b8aff7a43ee43",
+      "source_sha256": "331d62d8239829c742224b06afaacc1ab50746881b5af0b4e0fc404f00fc152e",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
     }
   },
   "registry": {
@@ -57,7 +102,7 @@
       "train_rows_sha256": "2656e5b7403d90123c54e5c493988f1fd889003e8424cec3ebdf33ff016a2885",
       "training_metadata_file": "artifacts/runner/full-v5-inputs/download/prepared/train-rows.json"
     },
-    "charged_quota_seconds_observed": 2002.4940459999998,
+    "charged_quota_seconds_observed": 4113.487,
     "config": {
       "arms": [
         "ratio_bce",
@@ -139,7 +184,7 @@
     },
     "experiment_source_sha256": "1512109180685148b7aca4b9d1fd4160eef434f4c30d65721a3aa9d6f4790eab",
     "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
-    "last_advance_unix": 1793534130.6104832,
+    "last_advance_unix": 1793537482.792882,
     "plan_sha256": "55720cb1ba2da127af30dec04ebc10b35d7b579e6e99435985a9059e61ccba34",
     "protocol_sha256": "ba9cc0c6f21a784a193483ec92b6f114097bb2e84baefecfb1fdf7eb7c1a5e5c",
     "provider_metadata_corrections": [
@@ -148,6 +193,18 @@
         "original_provider_id": "saisathwikregula/trustretina-nested-v11-fold0-sqrt-ratio-bce-644b376e",
         "reason": "Compact provider title/slug to <=50 characters; scientific identity/source unchanged",
         "run": "fold0_sqrt_ratio_bce"
+      },
+      {
+        "actual_provider_id": "saisathwikregula/trustretina-nested-v11-f1-sqrtbce-e3c475f1",
+        "original_provider_id": "saisathwikregula/trustretina-nested-v11-fold1-sqrt-ratio-bce-e3c475f1",
+        "reason": "Compact provider title/slug to <=50 characters; scientific identity/source unchanged",
+        "run": "fold1_sqrt_ratio_bce"
+      },
+      {
+        "actual_provider_id": "saisathwikregula/trustretina-nested-v11-f2-sqrtbce-4c271a07",
+        "original_provider_id": "saisathwikregula/trustretina-nested-v11-fold2-sqrt-ratio-bce-4c271a07",
+        "reason": "Compact provider title/slug to <=50 characters; scientific identity/source unchanged",
+        "run": "fold2_sqrt_ratio_bce"
       }
     ],
     "queue_blocker": null,
@@ -215,37 +272,76 @@
         "attempts": [
           {
             "bundle": "artifacts/runner/nested-v11/fold1_ratio_bce/attempt-1",
+            "elapsed_seconds": 740.543235077,
             "kernel_id": "saisathwikregula/trustretina-nested-v11-fold1-ratio-bce-825e81a5",
             "kernel_version": "saisathwikregula/trustretina-nested-v11-fold1-ratio-bce-825e81a5/1",
-            "remote_status": "RUNNING",
+            "remote_status": "COMPLETE",
             "reserved_seconds": 2400,
-            "status": "running"
+            "status": "complete"
           }
         ],
+        "completed_epochs": 12,
         "id": "fold1_ratio_bce",
         "outer_fold": 1,
-        "status": "running"
+        "report_sha256": "6ccbc5acdda9c1d744b5bbc47e88e13a751f8e4e58c4b7bd965ecaf1da08556a",
+        "status": "complete"
       },
       {
         "arm": "sqrt_ratio_bce",
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/runner/nested-v11/fold1_sqrt_ratio_bce/attempt-1",
+            "elapsed_seconds": 479.01263866499994,
+            "kernel_id": "saisathwikregula/trustretina-nested-v11-f1-sqrtbce-e3c475f1",
+            "kernel_version": "saisathwikregula/trustretina-nested-v11-f1-sqrtbce-e3c475f1/1",
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2400,
+            "status": "complete"
+          }
+        ],
+        "completed_epochs": 8,
         "id": "fold1_sqrt_ratio_bce",
         "outer_fold": 1,
-        "status": "queued"
+        "report_sha256": "03408bf01d242213900cafe4327488d521ebd5b74b8a54aa0a510d851490c054",
+        "status": "complete"
       },
       {
         "arm": "ratio_bce",
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/runner/nested-v11/fold2_ratio_bce/attempt-1",
+            "elapsed_seconds": 909.700591507,
+            "kernel_id": "saisathwikregula/trustretina-nested-v11-fold2-ratio-bce-c5db5ed9",
+            "kernel_version": "saisathwikregula/trustretina-nested-v11-fold2-ratio-bce-c5db5ed9/1",
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2400,
+            "status": "complete"
+          }
+        ],
+        "completed_epochs": 15,
         "id": "fold2_ratio_bce",
         "outer_fold": 2,
-        "status": "queued"
+        "report_sha256": "49417057a76a3779d16947f73c619cda6840f838263eae9c28ce4a681e863f9e",
+        "status": "complete"
       },
       {
         "arm": "sqrt_ratio_bce",
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/runner/nested-v11/fold2_sqrt_ratio_bce/attempt-1",
+            "elapsed_seconds": 588.677771031,
+            "kernel_id": "saisathwikregula/trustretina-nested-v11-f2-sqrtbce-4c271a07",
+            "kernel_version": "saisathwikregula/trustretina-nested-v11-f2-sqrtbce-4c271a07/1",
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2400,
+            "status": "complete"
+          }
+        ],
+        "completed_epochs": 10,
         "id": "fold2_sqrt_ratio_bce",
         "outer_fold": 2,
-        "status": "queued"
+        "report_sha256": "e81f339c0ff6d9109ae98688f274cc4ef1183c8999b590f2566501bcd3d4ad37",
+        "status": "complete"
       }
     ],
     "source_commit": "93300d694dea55d4ccba83027a7b8aff7a43ee43",
