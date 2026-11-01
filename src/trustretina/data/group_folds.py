@@ -122,4 +122,3 @@ def allocate_components(patients, patient_groups, config):
             remaining.remove(i)
     repairs = repair_support(groups, units, settings, sizes, rank)
     return groups, repairs
-
