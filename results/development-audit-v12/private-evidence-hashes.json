@@ -1,0 +1,43 @@
+{
+  "private_root": "artifacts/audit-v12",
+  "protocol_commit": "c244d33",
+  "reviewed_stratum_records": 32,
+  "reviewed_unique_pairs": 18,
+  "clinical_review": false,
+  "original_demo_hashes_unchanged": {
+    "artifacts/inference-v8/best.pt": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+    "artifacts/inference-v8/candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+    "artifacts/inference-v8/quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+    "artifacts/inference-v8/temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+    "results/reliability-v6/candidate-contract.json": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61"
+  },
+  "no_gpu_or_inference": true,
+  "new_uploads": 0,
+  "files": {
+    "visual-page-04.png": "f527156852985210718d15ac08fc27144409a2180b69cb6c80ec8f4ed2215fa1",
+    "quality.json": "963a689dec080d45e91153ff4cb4bfe20645b5858fe652e1ae9065fa96e4f2bb",
+    "visual-page-01.png": "d6e9ff1250bb013db91a01bcd74a76468aeed919024ce3dc8fc212217a9493f8",
+    "selection.json": "26f7e1c4c62474bc839059d79c8eb8751578635ce48bd9f2a40118e5258de2a6",
+    "visual-review.json": "9160940c32ff05df98e29de637a5104982509f40e11cfaa5f355a4952ecbbcff",
+    "visual-page-05.png": "b62dd438603578144e691f524a39bc49864d9a21e7173bbee303f4d74649053a",
+    "patient-evidence.npz": "6d7b902a6710848f2a50b2f47ac276f6e628a94191b5872e457e4b2e2498581b",
+    "audit-first-output.json": "03fa30b79889a634d5ebfd3085db4bde5f353c67e5fa3d52b16175af2e30f063",
+    "visual-page-02.png": "ab306ddd8565ea0696719b7f6ef761037e0b3ff01d519e4b7821795b162bbe5c",
+    "visual-page-03.png": "c5d6b6d90e90feb82a930a48a9ed91c5e4df5d0f6f27b523d44304d6a860362f",
+    "selected-evidence.json": "eb33270e08abc2c8fb405dc2b496538e33fac83ebe1138b21ddb6d5a7a874ea1",
+    "PRIVATE_INDEX.json": "56edadb62a587204632e3cb57a230d9a25004224948960d734dbdd19f9e6f193"
+  },
+  "dependencies": {
+    "python": "3.12.14",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0"
+  },
+  "source_hash": "5f32491b55c1b91dda7c2f8bd040ae75ec4cedd1f21b63bbda769e341db2af6b",
+  "reporting_note": "Executed initial CPU pass once. Final script adds source-receipt validation (executed separately) and removes misleading positive-only precision/F1 fields; saved first output and report-only correction preserve history. No repeated image pass.",
+  "source_metadata_versions": {
+    "support-floor-publication": "saisathwikregula/trustretina-support-floor-publication-30495e59/1",
+    "duplicate-pair-review": "saisathwikregula/trustretina-duplicate-pair-review-7ca945a3/1"
+  },
+  "private_storage_note": "New private review evidence is stored in the existing workspace only; no new data/artifact uploads were authorized or performed. Existing prediction/cache/source artifacts remain retrievable from their pinned private versions.",
+  "frozen_manifest_canonical_hash_verified": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5"
+}

@@ -1,75 +1,56 @@
-# V11 six-fit study complete
+# V12 CPU development audit complete — no training authorized
 
-PR #21 was already merged at `3b9856b`; all seven CI jobs passed. The exact
-user-approved plan/source hashes were verified before execution. All six fresh
-ImageNet ConvNeXt-Tiny fits completed, with no checkpoint resumes or seventh GPU
-session. [Results and paired intervals](../results/nested-v11/RESULTS.md),
-[execution audit](../results/nested-v11/EXECUTION.md) and
-[accounting/artifact provenance](../results/nested-v11/execution-provenance.json)
-record actual evidence. The original architecture and all five factories remain.
+[Consolidated v9–v12 report](../results/development-audit-v12/REPORT.md),
+[aggregate evidence](../results/development-audit-v12/audit.json),
+[prospective sampling rules](DEVELOPMENT_AUDIT_V12.md), and
+[one next-experiment proposal](NEXT_EXPERIMENT_AFTER_V12.md).
 
-| Fold | Ratio BCE epochs / best | Sqrt-ratio BCE epochs / best |
-|---|---:|---:|
-| 0 | 12 / 6 | 9 / 3 |
-| 1 | 12 / 6 | 8 / 2 |
-| 2 | 15 / 9 | 10 / 4 |
+PR #22 is already merged at `8e67b82`; CI41309020903 passed all seven jobs.
+Its reporting/runner/aggregation/accounting paths were reviewed. The numerical
+sqrt-loss AUROC nomination does not establish improvement: paired mean difference
++0.00098 (conditional 95% interval −0.00930 to +0.01058), with macro F1 down .02541.
+Keep ratio BCE as development reference; preserve both loss implementations.
 
-Actual settled free Kaggle GPU-quota charge: **4113.487 seconds (1.142635 hours)**,
-below the 14400-second cap. Six versioned GPU sessions; paid scaling disabled,
-zero GPU time reserved at completion. Separate summed worker time was
-3953.290 seconds; worker duration is not used as charged quota. Before every
-submission, actual used/reserved/free quota and accelerator accounting were
-checked against the existing reservation. Final owned-job inventory matches
-exactly the six recorded versions. No GPU job or background monitor is active.
+The bounded audit used six existing v11 training-only outer prediction pairs and
+one pass over 4,550 cached 224px eyes (12 seconds automated wall time). All 2,275
+training labels and raw-image references match saved source inventory; source
+receipts/cache/prediction hashes pass. Keywords cover only 1,835 patients and are
+selection-biased. H has 42/67 multilabel positives and O 275/636. Of 528 covered
+O positives, 259 have a literal normal-fundus keyword in exactly one eye; 54/60
+covered H positives have H keywords in both eyes. Source consistency is not
+clinical annotation verification. No labels were changed.
 
-One additional SaveKernel request returned HTTP400 before a session/version was
-created. Inventory, exact-version and quota recovery checks found no job or
-charge. Only the provider name was shortened; approved scientific source,
-configuration, nonce and reservation were unchanged. Identifier validation is a
-possible cause, not proven because the initial response body was unavailable.
-The failed request and recovery evidence are retained privately; this was not a
-seventh GPU session or a repeated completed fit.
+All 32 fixed TP/FP/FN/TN stratum records were technically inspected: 18 unique
+paired inputs / 36 eyes. Correct predictions and errors both include variable
+framing, softness and illumination. H true/false positives can share small fields
+and wide padding. No sole quality, sparse-support or annotation-error explanation
+is established. Original images are not local; native-detail and raw-to-cache
+parity checks remain unavailable. Private selection, arrays, keywords, montages
+and individual notes stay in `artifacts/audit-v12`; public hashes permit integrity
+checks. A report-only correction removes precision/F1 conditioned on true-positive
+subgroups; original output and explanation are preserved, without repeating images.
 
-All six best/last checkpoints, histories, aligned image/patient probabilities,
-labels/groups, source/nonce receipts, dependency records and output hashes were
-retrieved and verified. The executable embedded worker was independently decoded
-and matched the approved SHA256. Inner-only best/stop selection was replayed;
-outer rows/groups match frozen assignments and mean-eye aggregation was
-recomputed. Original demo checkpoint/temperature/normalizer/contract hashes match;
-historical final and calibration payloads were not opened. No threshold fitting,
-calibration transfer, full-data refit or demo promotion occurred. REVIEW REQUIRED
-remains unchanged.
+**Next action:** recover/verify native TRAIN-only inputs and confirm H/O annotation
+semantics before requesting training approval. The sole proposed follow-up is
+three paired containment folds of 224 versus 320px ConvNeXt cosine ratio BCE.
+Estimated ceiling 4.23 worker-hours (5.50 with allowance); proposed strict six free
+GPU-quota hours / six sessions, including failures/resumes/overhead. No queue is
+submitted or new cache created. Increasing resolution is an unconfirmed hypothesis,
+not a promised gain. Freeze/test the implementation and obtain separate exact-plan
+approval first. Stop if the prerequisites or quota cannot support it.
 
-Square-root weighting is the prespecified future-study candidate: mean outer AUROC
-0.83549 versus 0.83451 (difference +0.00098; conditional 95% interval −0.00930
-to +0.01058). Mean macro F1 falls from 0.53901 to 0.51359. Both arms miss 58/67
-H positives. This does not establish improvement. See the [interpretation and
-all-eight pooled counts](../results/nested-v11/DISCUSSION.md).
+214 CPU tests ran: 205 passed, nine optional skips; compilation and diff checks
+passed. New tests cover fixed component-distinct sampling, missing strata,
+threshold/count boundaries, technical padding masks, source-receipt tampering
+and positive-only support reporting.
 
-## Recovery and next action
+A fresh independent paired-eye/all-eight cohort is not currently secured or
+verified. Its labels, rights, overlap exclusion, representative enrollment and
+clustering-aware all-class precision/power require prospective planning. The old
+final holdout cannot confirm a new development choice. No new data was uploaded.
 
-Private state is `artifacts/runner/nested-v11/registry.json`, `PRIVATE_INDEX.md`,
-`TASK_RESUME.json`, exact per-attempt receipts and pinned private Kaggle versions.
-The public [queue](../results/nested-v11/queue.json) exposes run/version state
-without patient records. A fresh-download proof verifies remote artifact recovery.
-Do not start the submission driver: the approved matrix is complete.
-
-`python scripts/nested_experiment.py retrieve` retrieves existing terminal
-versions without submitting jobs. `python scripts/report_nested_results.py
---bootstrap-batch 2000` reproduces/resumes the fixed 2000-replicate CPU analysis;
-`python scripts/plot_nested_comparison.py` renders aggregate figures. Use the
-recorded scientific dependencies and verified private metadata. Missing registry
-recovery uses the documented hash-exact metadata restore, never new splits/cache.
-No credentials, predictions, patient manifests or checkpoints belong in Git.
-
-208 CPU tests ran: 199 passed and nine optional skips. No new GPU smoke, duplicate
-review, split generation or historical evaluation was performed. Earlier adaptive
-choices, same-source data, one seed, only three outer folds and sparse H limit
-inference. Conditional bootstrap intervals omit training/selection variability.
-A candidate loss for further study is not independently confirmed improvement.
-The next research step requires a separately approved plan and a fresh suitable
-independent labeled cohort; there is no automatic refit or deployment step.
-
-[Prospective frozen protocol](NESTED_LOSS_V11.md),
-[historical preparation/support report](../results/nested-v11/README.md) and
-[pre-approval status](history/STATUS-through-v11-plan.md) preserve the design.
+The demo checkpoint/temperature/normalizer/contract hashes match the prior frozen
+bundle. Historical final, calibration, thresholds, raw labels, all five factories
+and both losses remain unchanged. No training, new inference, GPU submission,
+full-data refit, threshold deployment or background monitoring. REVIEW REQUIRED
+remains default. [Previous completed study and recovery](history/STATUS-through-v11-results.md).

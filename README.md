@@ -1,5 +1,10 @@
 # TrustRetina
 
+[Consolidated development audit](results/development-audit-v12/REPORT.md) is complete.
+Square-root weighting did not establish improvement; retain ratio BCE as the
+development reference and preserve the frozen demo. A single resolution ablation
+is proposed with prerequisites and a new budget; no training is authorized.
+
 All six authorized [training-only nested loss fits](results/nested-v11/RESULTS.md)
 completed using 1.143 free Kaggle GPU-quota hours within the four-hour cap.
 The paired comparison retains rare-class and false-positive/false-negative findings;
