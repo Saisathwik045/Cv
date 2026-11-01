@@ -1,3 +1,15 @@
+# Prospective controlled development round v9 — execution not yet approved
+
+[Controlled v9 protocol](CONTROLLED_TRAINING_V9.md) defines a fixed four-fit
+ConvNeXt/DenseNet constant-versus-cosine comparison, up to 25 epochs, AUROC
+checkpoint/early-stop selection and a four-hour free-quota reservation budget.
+This changes selection prospectively for new runs only; v5 loss selection and
+all historical/frozen artifacts remain unchanged. Existing v4 roles are reused.
+Repeated validation supports exploratory development only; a fresh suitable
+independent cohort is needed for new performance claims. Calibration, thresholds,
+higher resolution and alternative loss are outside this execution queue.
+No new GPU submission without the separate exact-plan/source/budget approval.
+
 # Final research evaluation Phase 7
 
 [Phase 7](FINAL_EVALUATION_V7.md) was committed before the authorized final-data

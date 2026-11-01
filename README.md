@@ -1,5 +1,9 @@
 # TrustRetina
 
+A [controlled second development experiment](docs/CONTROLLED_TRAINING_V9.md) is
+prepared for approval. No new training is launched; the frozen demo is unchanged.
+[Diagnosis and exact matrix](results/round2-v9/DIAGNOSIS.md).
+
 ## Apple-silicon Mac
 
 [Mac quickstart](docs/MACOS_QUICKSTART.md): install native Python 3.11/3.12 once,
