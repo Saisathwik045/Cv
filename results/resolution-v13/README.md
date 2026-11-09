@@ -1,3 +1,5 @@
+> Historical preparation record below. The user authorized this exact plan on9November2026; execution state and results are tracked in [STATUS](../../docs/STATUS.md) and [queue](queue.json). Pending-approval statements below describe preparation only.
+
 # Matched resolution study v13 — prepared; training not authorized
 
 [Frozen protocol](../../docs/RESOLUTION_V13.md) · [configuration](../../configs/resolution-v13.toml) · [prerequisites](prerequisites.json) · [identities](frozen-identities.json) · [queue](queue.json) · [all-eight fold support](support.csv)

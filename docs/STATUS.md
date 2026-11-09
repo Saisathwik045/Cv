@@ -18,6 +18,10 @@ images,320 cache, split assignments or duplicate investigation were rebuilt.
 Remote owned-job inventory had54 entries and no v13 training job. Observed initial
 GPU quota was21600s free, zero used/reserved, paid scaling disabled.
 
+Fold0 completed at both resolutions:224 ran13 epochs (best7),320 ran11
+epochs (best5); both strict reloads and artifact checksums passed. Settled quota
+used before fold1_res224 was2137.812s; paid disabled, reserved0. Fold1_res224
+started as `saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1`.
 The first version is `saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1`.
 Do not infer later completion from this paragraph. `driver-latest.json` and the
 registry list exact versions/status; first fit was submitted, five initially queued.
@@ -36,8 +40,7 @@ final evaluation, calibration, thresholds, five factories and both losses remain
 unchanged. REVIEW REQUIRED remains default.
 
 After all six verified complete, the frozen CPU reporter
-`python scripts/report_resolution_results.py --bootstrap-batch2000` (separate the
-option and value with a space) runs the prespecified2000 paired component
+`python scripts/report_resolution_results.py --bootstrap-batch 2000` runs the prespecified2000 paired component
 bootstrap replicates, resumably. An incomplete matrix must not select a winner.
 `scripts/audit_resolution_execution.py` statically checks the actual embedded
 worker and replays inner-only selection, fit-only weights and outer alignment.

@@ -59,6 +59,8 @@ def main():
             if report.get('positive_weights'):
                 fit=[rows[i] for i in manifest['folds'][run['outer_fold']]['fit_indices']]
                 np.testing.assert_allclose(report['positive_weights'],loss_weights(fit,'ratio_bce'),rtol=0,atol=1e-12)
+            if report.get('dependencies') and report['dependencies']!=p['expected_dependencies']:
+                raise ValueError('Actual training dependencies differ from frozen environment')
             if report['status']=='paused' and report.get('outer_assessed'):raise ValueError('Paused fit accessed outer patients')
             if report['status']=='complete':
                 if not report.get('strict_best_reload') or not report.get('outer_assessed'):raise ValueError('Outer freeze/reload missing')
