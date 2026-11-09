@@ -1,65 +1,52 @@
-# V13 matched resolution study prepared — training not authorized
+# V13 approved execution in progress
 
-PR #23 is already merged at `d94fbda`; CI41311898604 passed all seven jobs.
-[Preparation/approval target](../results/resolution-v13/README.md),
-[frozen protocol](RESOLUTION_V13.md), [configuration](../configs/resolution-v13.toml),
-[verified native/parity evidence](../results/resolution-v13/prerequisites.json).
+The user explicitly authorized the frozen six-fit matched224/320 experiment on
+9November2026, within21600 free Kaggle GPU-quota seconds and max6 sessions,
+including failures/resumes/overhead. No paid resources or automatic all-data refit.
+[Queue](../results/resolution-v13/queue.json) and private
+`artifacts/resolution-v13/experiment/registry.json` are authoritative.
 
-One GPU-disabled private CPU job, `saisathwikregula/trustretina-res-v13-inputs-767673ae/1`,
-completed and was retrieved/source/nonce/checksum verified. All4550 original TRAIN
-images matched frozen raw hashes; local independent archive rehash also passed.
-All4550 rebuilt224 inputs matched the saved cache exactly (zero differing uint8
-channel values). The320 tensor was built directly from originals; original source,
-rows and old cache remain immutable. Native tar, both arrays, receipts and ImageNet
-weights are durable in that pinned private output; patient data stays outside Git.
-No new raw source upload or GPU smoke. CPU worker763.25s; GPU-quota charge0s.
+Exact plan `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`,
+worker/source `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`
+and configuration `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`
+were verified unchanged. Current private authorization is `experiment/approval.json`;
+never replace it or invent another approval.
 
-Authoritative ODIR material confirms patient-level H=hypertension and O=other
-abnormalities/diseases, using both-eye information. Precise H criteria, O taxonomy
-and eye-localized truth remain unresolved; benchmark-target ablation is not a
-clinical claim. No relabeling. See the source-access limitations in readiness.
+Fresh-task recovery downloaded the actual pinned preparation output, source and
+nonce receipts; all artifact hashes and original frozen fold spec verified. No
+images,320 cache, split assignments or duplicate investigation were rebuilt.
+Remote owned-job inventory had54 entries and no v13 training job. Observed initial
+GPU quota was21600s free, zero used/reserved, paid scaling disabled.
 
-Six queued runs: fold0/1/2 × res224/res320, fresh ImageNet ConvNeXt-Tiny, ratio BCE,
-seed2026, same fixed training-only inner/outer containment folds. Common8-image
-microbatches with2-step accumulation, effective16, FP32 AdamW/cosine, max25 epochs,
-AUROC inner checkpoint selection and patience6/min delta1e-4. V11 reference runs
-cannot substitute because their16-image/no-accumulation execution differs. All
-five factories and both historical losses are preserved. Outer assessment occurs
-only after complete fit and strict best reload; fixed mean-eye sigmoid p≥.5.
+The first version is `saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1`.
+Do not infer later completion from this paragraph. `driver-latest.json` and the
+registry list exact versions/status; first fit was submitted, five initially queued.
+One driver (exec session63834) is active. Do not launch duplicate drivers or
+submission commands. The orchestration helper calls the unchanged frozen
+controller, observes quota immediately before each push and waits at least180s
+between reconciliations. Every terminal version is retrieved/source/nonce/output-
+hash verified. Reservations2700s for224 and4500s for320 enforce21600 total/max6;
+actual provider counter intervals are separate from worker timing. Stop on
+accounting, free-quota, paid-scaling, session-cap or ambiguous-state blockers.
 
-Plan: `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`.
-Worker/source: `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`.
-Configuration: `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`.
-Exact matrix, all-eight support and remaining identities are in preparation README.
+Shared microbatch8/accumulation2, fresh ImageNet ConvNeXt, ratio BCE, grouped
+training-only fit/inner/outer data, fixed mean-eye predictor and p≥.5 are unchanged.
+No source/config/protocol/reporter identity changes. The old demo, historical
+final evaluation, calibration, thresholds, five factories and both losses remain
+unchanged. REVIEW REQUIRED remains default.
 
-Proposed strict cap21600 free GPU-quota seconds / max6 sessions, including every
-failure/resume/overhead; reservations2700s for224 and4500s for320. Estimate4.23
-worker-hours,5.50 with allowance, not a new measured throughput/memory guarantee.
-Observed free quota12670.775s (3.5197h), GPU reserved0, paid scaling disabled.
-**First-job gate is blocked** until the full six-hour reservation is actually free.
-Provider reports refresh7Nov2026 at05:30IST; recheck, do not assume future quota.
-SDK does not expose guaranteed per-shape billing. Counter-based/rate guards and
-bounded sequential reconciliation stop rather than use paid resources or exceed
-caps. Zero training submissions; no approval record or background monitor.
+After all six verified complete, the frozen CPU reporter
+`python scripts/report_resolution_results.py --bootstrap-batch2000` (separate the
+option and value with a space) runs the prespecified2000 paired component
+bootstrap replicates, resumably. An incomplete matrix must not select a winner.
+`scripts/audit_resolution_execution.py` statically checks the actual embedded
+worker and replays inner-only selection, fit-only weights and outer alignment.
+Its partial audit never selects a candidate. Patient-level artifacts stay private.
 
-225 CPU tests:216 passed, nine optional skips. Accumulation/remainder, stochastic
-checkpoint resume, source/archive integrity, approval/budget/recovery guards and
-both resolution tensors are covered. Synthetic official-ImageNet CPU forwards
-were finite at224/320; no new patient inference or GPU memory experiment. Compiler
-and diff checks pass. New PR CI is reported separately, never inferred from local
-checks or earlier commits.
-
-**Next action:** review preparation PR and approve the exact six-fit plan/source,
-run IDs and21600-second/six-session cap if desired; wait for verified full free
-quota before any training. Do not refit all data, deploy thresholds, transfer the
-old temperature, change demo or access historical final evaluation/calibration.
-The original demo/temperature/normalizer/contract hashes and old worker source
-match prior records; REVIEW REQUIRED remains default.
-
-Private state: `artifacts/resolution-v13/TASK_RESUME.json`, `PRIVATE_INDEX.md`,
-preparation receipts/artifacts and experiment registry. Fresh-task recovery uses
-`python scripts/restore_resolution_state.py` with existing secure Kaggle access;
-it retrieves pinned outputs and original fold metadata, creates no approval and
-submits no jobs. Conflicting/newer state is never overwritten. No new dataset,
-partition search, duplicate review or historical evaluation was performed.
-[Prior audit](history/STATUS-through-v12-audit.md) is preserved.
+Private state/receipts: `artifacts/resolution-v13/TASK_RESUME.json`, `RESUME.md`,
+`experiment/registry.json`, per-attempt source/submission/verification and driver
+snapshots. If interrupted, inspect existing driver/remote versions first; never
+repeat CPU preparation or blindly resubmit an ambiguous job. No monitoring is
+promised after a task ends; exact current lifecycle is saved privately.
+[Historical preparation/evidence](../results/resolution-v13/README.md) and
+[prior status](history/STATUS-through-v13-preparation.md) remain intact.

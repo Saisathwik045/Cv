@@ -1,5 +1,10 @@
 # TrustRetina
 
+The authorized [v13 matched resolution study](docs/RESOLUTION_V13.md) is executing
+sequentially under its strict six-hour free Kaggle quota and six-session cap.
+[Current state](docs/STATUS.md) and [run registry](results/resolution-v13/queue.json)
+record actual versions; no result or model promotion is assumed.
+
 [Matched 224/320 study preparation](results/resolution-v13/README.md) is complete:
 all original training-image hashes and exact 224-cache parity passed; 320 inputs
 come directly from originals. Six fits await separate approval and sufficient
