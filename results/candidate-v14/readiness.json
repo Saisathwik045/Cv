@@ -1,0 +1,233 @@
+{
+  "CPU_elapsed_worker_seconds": 276.10317621800004,
+  "CPU_job_version": "saisathwikregula/trustretina-v14-inputs-c057c643/1",
+  "CPU_jobs_submitted": 1,
+  "CPU_report_sha256": "394acb3d97979777f5f097378d7ef2c9b8e06e7ea37c15062cc4a0bc4f75a0ae",
+  "CPU_timeout_seconds": 3600,
+  "GPU_execution_authorized": false,
+  "GPU_jobs_submitted": 0,
+  "GPU_quota_delta_from_saved_preparation_baseline_seconds": 0,
+  "TRAIN_preparation_repeated": false,
+  "budget_for_later_only": {
+    "initial_reservations": [
+      7800,
+      4200
+    ],
+    "maximum_gpu_quota_seconds": 14400,
+    "maximum_sessions": 3,
+    "optional_resume": 2400
+  },
+  "calibration_labels_in_GPU_bundle": false,
+  "component_support_note": "Mixed-label contained components contribute to both positive and negative component support; no label voting or annotation-error inference.",
+  "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
+  "controller_sha256": "1a52fb9ce92a019054ecde98a6de71e45ae308dea09acb1f165f2a8a6ce81fdb",
+  "cpu_inputs_and_worker_frozen": true,
+  "dependency_contract_file_sha256": "da9b9c0ab4ad840ac5864767d4723649bb923d7052220766e8582c0dd385ac26",
+  "existing224_reused_exact": true,
+  "external_evaluation_ready": false,
+  "gpu_quota_after_CPU": {
+    "free_seconds": 14673.105,
+    "observed_unix": 1794304193.8060877,
+    "paid_disabled": true,
+    "raw": {
+      "gpuQuota": {
+        "hasEverRun": true,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "21600s",
+        "timeReserved": "0s",
+        "timeUsed": "6926.895.0s",
+        "totalTimeAllowed": "21600s"
+      },
+      "quotaRefreshTime": "2026-11-14T00:00:00.000Z",
+      "tpuQuota": {
+        "hasEverRun": false,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "72000s",
+        "timeReserved": "0s",
+        "timeUsed": "0s",
+        "totalTimeAllowed": "72000s"
+      }
+    },
+    "refresh_time": "2026-11-14T00:00:00.000Z",
+    "reserved_seconds": 0.0,
+    "used_seconds": 6926.895
+  },
+  "historical_final_accessed": false,
+  "merged_main_sha": "f722cb51167b1694802ffdbbe297866b7e8db2a9",
+  "model_demo_changed": false,
+  "native_images_verified": 1750,
+  "new_model_training_or_inference_performed": false,
+  "observed_utc": "2026-11-10T09:49:55.432631+00:00",
+  "plan_sha256": "f86208573e522bd6c683bae18b18293b4b72ac36a77b78dea2e8c2016074e25a",
+  "prepared_inputs": {
+    "calibration224": "9587ddf4da564ccff18cfa1fbbf19a1c28cdf0d5be58197ed9156baf8fc81aa0",
+    "calibration320": "32c59551fa33fc27a2cbb3ba14f00b3af3d657485422363865219bc3e29b0a56",
+    "index_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+    "new_worker_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481",
+    "train224": "274679427634724590dd9a7879cd562879e3d49dea6fdf62aa4e84a7d51fc70f",
+    "train320": "9cd180cc9fff089b87320ad1a6f097c8b632a277e41dee5b54e06c9ecb0bc27d",
+    "train_index_sha256": "47c421217bb42cace8dcb11bd463d24a2d596ab3b74e33c7f40434335d45f08d",
+    "validation224": "e19fdd7337c260e00cac6678fb6d2249a550c7ec52586bf385959eef43749157",
+    "validation320": "cc5b616bfafa926d21ac0d4faefc71b9ed1043d3baea71f938f2e426cf1fd276"
+  },
+  "protocol_sha256": "ed34bb408b8f3969b5918d41fd187300ba251f211a2c3b83f62820d1aa89bf32",
+  "real_data_v14_model_training_or_inference_performed": false,
+  "role_support": {
+    "calibration": {
+      "components": 331,
+      "images": 700,
+      "negative_components": {
+        "A": 317,
+        "C": 315,
+        "D": 224,
+        "G": 310,
+        "H": 321,
+        "M": 314,
+        "N": 222,
+        "O": 243
+      },
+      "negative_patients": {
+        "A": 334,
+        "C": 329,
+        "D": 237,
+        "G": 329,
+        "H": 340,
+        "M": 333,
+        "N": 234,
+        "O": 252
+      },
+      "patients": 350,
+      "positive_components": {
+        "A": 16,
+        "C": 19,
+        "D": 110,
+        "G": 21,
+        "H": 10,
+        "M": 17,
+        "N": 113,
+        "O": 95
+      },
+      "positive_patients": {
+        "A": 16,
+        "C": 21,
+        "D": 113,
+        "G": 21,
+        "H": 10,
+        "M": 17,
+        "N": 116,
+        "O": 98
+      }
+    },
+    "train": {
+      "components": 2240,
+      "images": 4550,
+      "negative_components": {
+        "A": 2135,
+        "C": 2116,
+        "D": 1521,
+        "G": 2101,
+        "H": 2177,
+        "M": 2127,
+        "N": 1515,
+        "O": 1616
+      },
+      "negative_patients": {
+        "A": 2168,
+        "C": 2137,
+        "D": 1542,
+        "G": 2135,
+        "H": 2208,
+        "M": 2162,
+        "N": 1537,
+        "O": 1639
+      },
+      "patients": 2275,
+      "positive_components": {
+        "A": 107,
+        "C": 129,
+        "D": 725,
+        "G": 140,
+        "H": 66,
+        "M": 113,
+        "N": 733,
+        "O": 629
+      },
+      "positive_patients": {
+        "A": 107,
+        "C": 138,
+        "D": 733,
+        "G": 140,
+        "H": 67,
+        "M": 113,
+        "N": 738,
+        "O": 636
+      }
+    },
+    "validation": {
+      "components": 518,
+      "images": 1050,
+      "negative_components": {
+        "A": 493,
+        "C": 487,
+        "D": 352,
+        "G": 488,
+        "H": 502,
+        "M": 492,
+        "N": 344,
+        "O": 376
+      },
+      "negative_patients": {
+        "A": 500,
+        "C": 493,
+        "D": 356,
+        "G": 493,
+        "H": 509,
+        "M": 499,
+        "N": 350,
+        "O": 378
+      },
+      "patients": 525,
+      "positive_components": {
+        "A": 25,
+        "C": 32,
+        "D": 168,
+        "G": 31,
+        "H": 16,
+        "M": 26,
+        "N": 174,
+        "O": 144
+      },
+      "positive_patients": {
+        "A": 25,
+        "C": 32,
+        "D": 169,
+        "G": 32,
+        "H": 16,
+        "M": 26,
+        "N": 175,
+        "O": 147
+      }
+    }
+  },
+  "runtime_verification_limitations": [
+    "No v14 GPU execution or real-data neural inference performed.",
+    "Local Torch-dependent tests skipped; CPU Torch CI evidence recorded separately.",
+    "Fresh-task restore code selects pinned actual inputs; current idempotent invocation preserved already-verified inputs.",
+    "External endpoint/DUA/overlap and all-eight compatibility remain blocked."
+  ],
+  "schema": 14,
+  "source_commit": "7e0bad1872f65abb71737f17fe02427e2f65e89d",
+  "storage": {
+    "capacity_write_test_passed": true,
+    "durable_authority": "Pinned existing TRAIN preparation and new private CPU output, exact versions/receipts and output hashes; no paid storage",
+    "ephemeral_scratch": true,
+    "observed_free_bytes": 4158586880,
+    "permission_mode": "0700",
+    "private_scratch": "/tmp/trustretina-v14-private",
+    "verified_artifacts_deleted": false,
+    "worst_three_session_checkpoint_plus_margin_bytes": 2541834782
+  },
+  "temperature_or_threshold_fitted": false,
+  "training_start_gate": "Separate exact user approval including external-confirmation limitation acknowledgement, reviewed PR/CI and fresh full free quota; no approval file is created",
+  "worker_source_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481"
+}

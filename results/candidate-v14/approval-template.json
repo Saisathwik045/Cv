@@ -1,0 +1,16 @@
+{
+  "approved": false,
+  "approved_at_utc": null,
+  "plan_sha256": "f86208573e522bd6c683bae18b18293b4b72ac36a77b78dea2e8c2016074e25a",
+  "worker_source_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481",
+  "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
+  "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+  "run_ids": [
+    "v14_candidate_res320_seed2026",
+    "v14_reference_res224_seed2026"
+  ],
+  "maximum_gpu_quota_seconds": 14400,
+  "maximum_sessions": 3,
+  "free_kaggle_only": true,
+  "external_confirmation_not_ready_acknowledged": false
+}

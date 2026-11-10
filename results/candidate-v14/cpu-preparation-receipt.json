@@ -1,0 +1,14 @@
+{
+  "execution_timeout_seconds": 3600,
+  "gpu_requested": false,
+  "kernel_id": "saisathwikregula/trustretina-v14-inputs-c057c643",
+  "kernel_version": "saisathwikregula/trustretina-v14-inputs-c057c643/1",
+  "nonce": "c057c643f3a946ecbff05fbdf6ebe503",
+  "source_commit": "acd8fc8ef69d21ca86d80f5072b31abfaa89f2c0",
+  "source_dataset_version": 2,
+  "source_sha256": "2344a857a51c42bb4e796f7f6c452ab8271ef60d40a54815cf4ee15d7f534c6e",
+  "spec_sha256": "b7e1082fdc00f4ca29222ea8c456aca269d2e2c82733894151371f5c6645b4ce",
+  "submission_attempted": true,
+  "submission_verified": true,
+  "training": false
+}

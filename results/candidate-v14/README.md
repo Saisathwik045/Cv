@@ -1,3 +1,5 @@
+> **Current: [CPU readiness completed](CPU_READINESS.md).** Actual input/worker/configuration hashes and a disabled execution template are saved. One CPU job passed; no GPU training/fitting is authorized. The planning record below is historical.
+
 # V14 candidate/freezing and independent-evaluation plan
 
 **Research/planning only. No jobs submitted, models/temperatures/thresholds fitted,
