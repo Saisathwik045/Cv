@@ -25,7 +25,13 @@ started as `saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1`.
 The first version is `saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1`.
 Do not infer later completion from this paragraph. `driver-latest.json` and the
 registry list exact versions/status; first fit was submitted, five initially queued.
-One driver (exec session63834) is active. Do not launch duplicate drivers or
+The environment restarted after three submissions. Remote reconciliation found
+exactly those three versions complete and no unregistered job; used2989.626s,
+free18610.374s, reserved0, paid disabled. Existing fold1_res224 outputs were
+retrieved/verified (13epochs,best7), without resubmission. Fold1_res320 is now
+`saisathwikregula/trustretina-res-v13-f1-320-597875b0/1`.
+The old driver63834 stopped with the environment. One resumed driver (exec
+session22178) is active. Do not launch duplicate drivers or
 submission commands. The orchestration helper calls the unchanged frozen
 controller, observes quota immediately before each push and waits at least180s
 between reconciliations. Every terminal version is retrieved/source/nonce/output-

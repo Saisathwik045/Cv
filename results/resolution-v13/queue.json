@@ -44,6 +44,21 @@
       "submission_attempted": true,
       "submission_verified": true,
       "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold1_res320/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 4500,
+      "execution_timeout_seconds": 4200,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f1-320-597875b0",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+      "nonce": "597875b002ad495f985582d295e70e47",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "49e8e654cbfc8a436f3da5483de4c0db98c1d0168ae7afabf68c385b1fffeb22",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
     }
   },
   "registry": {
@@ -147,7 +162,7 @@
     },
     "experiment_source_sha256": "e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c",
     "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
-    "last_advance_unix": 1794246845.1631978,
+    "last_advance_unix": 1794283843.613487,
     "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
     "protocol_sha256": "04bb5d9885bea00f3a0148310d1340db9fc6286a7e497682d2a6e4b9c8119775",
     "queue_blocker": null,
@@ -197,24 +212,35 @@
         "attempts": [
           {
             "bundle": "artifacts/resolution-v13/experiment/fold1_res224/attempt-1",
+            "elapsed_seconds": 826.7174325810001,
             "kernel_id": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3",
             "kernel_version": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1",
             "quota_used_before": 2137.812,
+            "remote_status": "COMPLETE",
             "reserved_seconds": 2700,
-            "status": "running"
+            "status": "complete"
           }
         ],
         "id": "fold1_res224",
         "image_size": 224,
         "outer_fold": 1,
-        "status": "running"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold1_res320/attempt-1",
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f1-320-597875b0",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+            "quota_used_before": 2989.626,
+            "reserved_seconds": 4500,
+            "status": "running"
+          }
+        ],
         "id": "fold1_res320",
         "image_size": 320,
         "outer_fold": 1,
-        "status": "queued"
+        "status": "running"
       },
       {
         "attempts": [],
