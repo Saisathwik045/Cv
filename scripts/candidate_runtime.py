@@ -44,7 +44,7 @@ def features_and_predictions(model,path,rows,size,device,batch):
         f=torch.cat(features);logits=torch.cat(raw_logits);prob=logits.sigmoid().cpu().numpy()
         patient=mean_eyes(ordered,prob)
         samples=[]
-        with torch.random.fork_rng(devices=[0] if f.is_cuda else []),trained_head_dropout(model):
+        with torch.random.fork_rng(devices=list(range(torch.cuda.device_count())) if f.is_cuda else []),trained_head_dropout(model):
             for seed in range(72026 if 'labels' not in rows[0] else 62026,(72026 if 'labels' not in rows[0] else 62026)+20):
                 torch.manual_seed(seed)
                 if f.is_cuda:torch.cuda.manual_seed_all(seed)
@@ -71,7 +71,7 @@ def run(spec,*,input_root,output,nonce,source_commit):
             roles[role]=json.loads(rowpath.read_text());images[role]=image
             if role!='train' and m['manifest_sha256']!=spec['role_manifest_sha256'][role]:raise ValueError('Role manifest changed')
         report['role_support']=audit_roles(roles,{'train':2275,'validation':525,'calibration':350})
-        if not torch.cuda.is_available() or torch.cuda.device_count()!=1 or torch.cuda.get_device_name(0)!='Tesla T4':raise RuntimeError('Exactly one free-requested Tesla T4 required; no CPU/multi-GPU substitute')
+        if not torch.cuda.is_available() or torch.cuda.device_count()!=cfg['expected_visible_cuda_devices'] or torch.cuda.get_device_name(0)!='Tesla T4':raise RuntimeError('Verified two-visible-device lease with one active Tesla T4 at cuda:0 required; no CPU/DDP substitute')
         deps={'python':platform.python_version(),'torch':str(torch.__version__),'torchvision':__import__('torchvision').__version__,'numpy':np.__version__,'Pillow':__import__('PIL').__version__,'sklearn':__import__('sklearn').__version__,'cuda':torch.version.cuda,'cudnn':torch.backends.cudnn.version()}
         if deps!=spec['expected_dependencies']:raise ValueError('Training environment changed')
         torch.set_num_threads(2);seed=cfg['seed'];random.seed(seed);np.random.seed(seed);torch.manual_seed(seed);torch.cuda.manual_seed_all(seed)
@@ -88,7 +88,7 @@ def run(spec,*,input_root,output,nonce,source_commit):
         scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=25,eta_min=cfg['minimum_learning_rate'])
         criterion=torch.nn.BCEWithLogitsLoss(pos_weight=torch.tensor(weights,dtype=torch.float32,device=device))
         provenance={'backbone':'convnext_tiny','split_sha256':spec['release_sha256'],'config_sha256':spec['config_sha256'],'preprocessing_sha256':PreprocessConfig(size=size).fingerprint(),'seed':seed,'data_kind':'real_odir_frozen_v4_roles_v14','plan_sha256':spec['plan_sha256'],'run_id':spec['run_id'],'image_size':size,'worker_source_sha256':spec['worker_source_sha256'],'inputs_sha256':spec['inputs_sha256'],'train_inputs_sha256':spec['train_inputs_sha256'],'initialization_sha256':w['sha256']}
-        report.update(plan_sha256=spec['plan_sha256'],run_id=spec['run_id'],image_size=size,provenance=provenance,dependencies=deps,gpu='Tesla T4',positive_weights=weights.tolist(),initialization_record=w,history=history)
+        report.update(plan_sha256=spec['plan_sha256'],run_id=spec['run_id'],image_size=size,provenance=provenance,dependencies=deps,gpu='Tesla T4',visible_CUDA_devices=torch.cuda.device_count(),active_training_device='cuda:0',positive_weights=weights.tolist(),initialization_record=w,history=history)
         (out/'dependencies.txt').write_text(subprocess.check_output([sys.executable,'-m','pip','freeze'],text=True))
         if spec.get('resume'):
             prior=spec['resume'];matches=[p for p in Path(input_root).rglob('progress.json') if file_hash(p)==prior['progress_sha256']]

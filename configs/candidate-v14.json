@@ -1,5 +1,6 @@
 {
   "accumulation_steps": 2,
+  "active_cuda_device": 0,
   "augmentation": "none",
   "backbone": "convnext_tiny",
   "calibration_role": "calibration",
@@ -21,6 +22,7 @@
   "early_stopping_min_delta": 0.0001,
   "early_stopping_patience": 6,
   "effective_batch_size": 16,
+  "expected_visible_cuda_devices": 2,
   "fit_role": "train",
   "historical_final_access": false,
   "initialization": "fresh torchvision IMAGENET1K_V1",

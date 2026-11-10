@@ -1,0 +1,54 @@
+{
+  "source": "Six already-verified v13 checkpoints; capture_rng uses get_rng_state_all, one state per visible device. Existing worker trained on cuda:0.",
+  "visible_devices_observed_historically": 2,
+  "active_training_devices": 1,
+  "active_device": "cuda:0",
+  "active_device_name_from_v13_reports": "Tesla T4",
+  "secondary_device_name_historically_verified": false,
+  "new_GPU_session_executed": false,
+  "charged_quota_rule": "Actual account counter delta, not device count times worker time",
+  "checkpoints": [
+    {
+      "run_id": "fold0_res224",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "bf6d87f8abbf296adc06dc76e5845edc68396348e12bdf800e593872b7470faf",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    },
+    {
+      "run_id": "fold0_res320",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-320-e7853320/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "4ca91729a191255db33e294cdeb7b1873d881d263d738a8daa27bdb9c1d2f953",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    },
+    {
+      "run_id": "fold1_res224",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "c512717d63e12353cef11fd09c7c7be3345bd1991bb0c0720d6707340d1e97f2",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    },
+    {
+      "run_id": "fold1_res320",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "c7d95ab5b6964c71b9bd81ea89e506aaae713d003aae68f7ac2fbed2c3b95b89",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    },
+    {
+      "run_id": "fold2_res224",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "70f82ced0835b6257fb127941733916fd304e1d7f15e5adfdadf0e2b033b84ee",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    },
+    {
+      "run_id": "fold2_res320",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-320-2958393a/1",
+      "visible_CUDA_RNG_states": 2,
+      "checkpoint_metadata_sha256": "4d64b7cb57d130f58e17731b72a71d0877a90099ecbdeeead6cd8e6bfdc2d4d9",
+      "method": "Static pickletools opcode inspection only; no unpickling, model loading, inference or job submission"
+    }
+  ]
+}

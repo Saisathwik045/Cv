@@ -95,8 +95,13 @@ actual counter/window and conservative observed charging rate. Worker time is no
 charged quota. Initial reservations total12,000s; the sole optional compatible
 resume has worker timeout≤2,100s and overhead300s, reservation≤2,400s. Reservations
 and observed charges must stay within14,400s; no fourth session or paid fallback.
-Exactly one requested/observed Tesla T4 is required; no CPU/multi-GPU training
-substitute. Stop safely if accounting/resource availability cannot cover the next
+The existing `NvidiaTeslaT4` offer is evidenced by all six v13 checkpoint RNG
+metadata lists to expose two CUDA devices; the model uses only `cuda:0`, whose
+reported name is Tesla T4. The worker checks that two-device visibility and the
+active T4, with no DataParallel/DDP or second-device training. The secondary
+device name was not recorded historically and is not invented. Actual quota
+counters remain authoritative; do not multiply elapsed time by two or assume a
+billing multiplier. No CPU training substitute. Stop safely if accounting/resource availability cannot cover the next
 session. No new GPU smoke job is permitted.
 
 A controller lock, durable pre-push receipt/reservation and exact remote inventory
