@@ -38,6 +38,12 @@ def main():
         rows=[next(r for r in p['secondary_pooled'][a]['confusion'] if r['label']==label) for a in arms]
         a,b=rows
         lines.append(f"- {label}: recall {a['recall']:.4f}→{b['recall']:.4f}, F1 {a['f1']:.4f}→{b['f1']:.4f}; TP {a['tp']}→{b['tp']}, FP {a['fp']}→{b['fp']}, FN {a['fn']}→{b['fn']}, among {a['positive']} positive patients. These are fixed-threshold development counts, not a clinical sensitivity guarantee.")
+    for label in ('H','O'):
+        parts=[]
+        for fold in p['folds']:
+            left=fold['arms']['res224']['per_class'][label]['recall'];right=fold['arms']['res320']['per_class'][label]['recall']
+            parts.append(f"fold{fold['outer_fold']} {left:.4f}→{right:.4f}")
+        lines.append(f"- {label} per-fold recall: "+'; '.join(parts)+'. Pooled counts should be read with these fold differences.')
     lines+=['','H has only23/22/22 outer positives and66 positive containment components overall. Sparse support increases uncertainty but is not a sole explanation for its errors. Patient-derived labels are inherited by both eye targets; H/O case-definition and localization limitations from v12 persist. Resolution changes neither source labels nor clinical validity. Negative findings and class-specific harms must be retained.','',
       '## Execution, accounting and recovery','',
       'See execution-audit.json for actual versions, source/nonce/output hashes, dependencies and worker times; execution-provenance.json records settled quota counters separately. Best/last checkpoints, aligned eye/patient predictions, histories and logs remain in pinned private Kaggle output versions and private local artifacts, outside Git. The approved scientific worker/configuration/protocol/reporter hashes are unchanged.','',

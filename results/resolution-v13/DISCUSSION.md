@@ -47,6 +47,8 @@ All2275 training patients contribute once per arm. Each arm pools predictions fr
 
 - H: recall 0.1791→0.2537, F1 0.2308→0.2125; TP 12→17, FP 25→76, FN 55→50, among 67 positive patients. These are fixed-threshold development counts, not a clinical sensitivity guarantee.
 - O: recall 0.4450→0.6588, F1 0.4168→0.4721; TP 283→419, FP 439→720, FN 353→217, among 636 positive patients. These are fixed-threshold development counts, not a clinical sensitivity guarantee.
+- H per-fold recall: fold0 0.0870→0.4348; fold1 0.2727→0.1818; fold2 0.1818→0.1364. Pooled counts should be read with these fold differences.
+- O per-fold recall: fold0 0.5425→0.7264; fold1 0.5236→0.4811; fold2 0.2689→0.7689. Pooled counts should be read with these fold differences.
 
 H has only23/22/22 outer positives and66 positive containment components overall. Sparse support increases uncertainty but is not a sole explanation for its errors. Patient-derived labels are inherited by both eye targets; H/O case-definition and localization limitations from v12 persist. Resolution changes neither source labels nor clinical validity. Negative findings and class-specific harms must be retained.
 
