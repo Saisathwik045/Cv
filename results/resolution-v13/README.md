@@ -1,3 +1,5 @@
+> **Execution completed:** all six fits are verified. See [RESULTS](RESULTS.md), [all-eight report/plots](DISCUSSION.md), [settled quota/artifact hashes](execution-provenance.json) and [recovery](RECOVERY.md).6,926.895 free GPU-quota seconds, exactly6 sessions; no refit or demo replacement.
+>
 > Historical preparation record below. The user authorized this exact plan on9November2026; execution state and results are tracked in [STATUS](../../docs/STATUS.md) and [queue](queue.json). Pending-approval statements below describe preparation only.
 
 # Matched resolution study v13 — prepared; training not authorized

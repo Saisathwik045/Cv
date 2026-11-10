@@ -14,8 +14,8 @@ def main():
     for arm in arms:
         m=p['mean_fold_metrics'][arm];lines.append(f"| {arm} | {m['macro_auroc']:.5f} | {m['macro_auprc_average_precision']:.5f} | {m['macro_f1']:.5f} | {m['micro_f1']:.5f} |")
     lines+=['','| Paired mean difference (320−224) | Estimate | Conditional 95% interval | Defined / total |','|---|---:|---:|---:|']
-    for k in ('macro_auroc','macro_auprc_average_precision','macro_f1'):
-        d=p['mean_fold_metrics']['res320'][k]-p['mean_fold_metrics']['res224'][k];b=p['paired_component_bootstrap'][k];ci=b['percentile_95_interval'];text='undefined' if ci is None else f'[{ci[0]:+.5f}, {ci[1]:+.5f}]'
+    for k in ('macro_auroc','macro_auprc_average_precision','macro_f1','H_recall','H_f1'):
+        d=sum(f['paired_differences'][k] for f in p['folds'])/3 if k.startswith('H_') else p['mean_fold_metrics']['res320'][k]-p['mean_fold_metrics']['res224'][k];b=p['paired_component_bootstrap'][k];ci=b['percentile_95_interval'];text='undefined' if ci is None else f'[{ci[0]:+.5f}, {ci[1]:+.5f}]'
         lines.append(f"| {k} | {d:+.5f} | {text} | {b['defined_replicates']} / {b['total_replicates']} |")
     ci=p['paired_component_bootstrap']['macro_auroc']['percentile_95_interval']
     if ci is None or ci[0]<=0<=ci[1]:conclusion='The primary interval does not establish a resolution improvement.'
@@ -44,7 +44,8 @@ def main():
       'Next research decisions need separate authorization and a fresh suitable independent paired-eye/all-eight labeled evaluation cohort with compatible definitions and overlap exclusion. Do not tune on the historical final holdout, transfer its calibration to these checkpoints, deploy exploratory thresholds or replace the working demo. REVIEW REQUIRED remains unchanged.','',
       '[Frozen protocol](../../docs/RESOLUTION_V13.md) · [Complete paired aggregates](comparison.json) · [Per-fold per-class CSV](per-class.csv) · [Execution audit](EXECUTION.md)','',
       '![Paired metrics](paired-resolution-metrics.png)','','![H/O tradeoffs](H-O-tradeoffs.png)','','![All-eight FP/FN](all-eight-error-counts.png)','']
-    (out/'DISCUSSION.md').write_text('\n'.join(lines));print('Complete-matrix discussion generated from verified aggregates only.')
+    (out/'DISCUSSION.md').write_text('\n'.join(lines))
+    (out/'RESULTS.md').write_text('\n'.join(lines[:lines.index('## Every class: descriptive pooled outer decisions')])+ '\n[All-eight per-class metrics, H/O tradeoffs, plots and limitations](DISCUSSION.md) · [Verified execution](EXECUTION.md) · [Settled accounting and artifact hashes](execution-provenance.json)\n');print('Complete-matrix discussion generated from verified aggregates only.')
 
 
 if __name__=='__main__':main()

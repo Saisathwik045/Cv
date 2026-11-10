@@ -1,61 +1,39 @@
-# V13 approved execution in progress
+# V13 matched resolution study — completed
 
-The user explicitly authorized the frozen six-fit matched224/320 experiment on
-9November2026, within21600 free Kaggle GPU-quota seconds and max6 sessions,
-including failures/resumes/overhead. No paid resources or automatic all-data refit.
-[Queue](../results/resolution-v13/queue.json) and private
-`artifacts/resolution-v13/experiment/registry.json` are authoritative.
+All six authorized training-only fits completed and were retrieved/source/nonce/output-hash verified. The complete paired analysis and 2,000 fixed-seed component bootstrap replicates are finished. [Results](../results/resolution-v13/RESULTS.md), [all-eight findings and plots](../results/resolution-v13/DISCUSSION.md), [registry](../results/resolution-v13/queue.json), and [accounting/artifact hashes](../results/resolution-v13/execution-provenance.json).
 
-Exact plan `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`,
-worker/source `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`
-and configuration `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`
-were verified unchanged. Current private authorization is `experiment/approval.json`;
-never replace it or invent another approval.
+| Run | Status | Epochs / best (one-based) |
+|---|---|---:|
+| fold0_res224 | verified complete | 13 / 7 |
+| fold0_res320 | verified complete | 11 / 5 |
+| fold1_res224 | verified complete | 13 / 7 |
+| fold1_res320 | verified complete | 15 / 9 |
+| fold2_res224 | verified complete | 10 / 4 |
+| fold2_res320 | verified complete | 12 / 6 |
 
-Fresh-task recovery downloaded the actual pinned preparation output, source and
-nonce receipts; all artifact hashes and original frozen fold spec verified. No
-images,320 cache, split assignments or duplicate investigation were rebuilt.
-Remote owned-job inventory had54 entries and no v13 training job. Observed initial
-GPU quota was21600s free, zero used/reserved, paid scaling disabled.
+Settled free Kaggle charge: **6926.895s (1.924138h)** against 21,600s. Exactly 6 submitted sessions; zero failures/resubmitted GPU sessions, zero final reserved time, paid scaling disabled. Worker elapsed time is separately 6717.541s. Owned remote inventory matches the six registered version1 jobs. No seventh session, additional training or refit is authorized.
 
-Fold0 completed at both resolutions:224 ran13 epochs (best7),320 ran11
-epochs (best5); both strict reloads and artifact checksums passed. Settled quota
-used before fold1_res224 was2137.812s; paid disabled, reserved0. Fold1_res224
-started as `saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1`.
-The first version is `saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1`.
-Do not infer later completion from this paragraph. `driver-latest.json` and the
-registry list exact versions/status; first fit was submitted, five initially queued.
-The environment restarted after three submissions. Remote reconciliation found
-exactly those three versions complete and no unregistered job; used2989.626s,
-free18610.374s, reserved0, paid disabled. Existing fold1_res224 outputs were
-retrieved/verified (13epochs,best7), without resubmission. Fold1_res320 is now
-`saisathwikregula/trustretina-res-v13-f1-320-597875b0/1`.
-The old driver63834 stopped with the environment. One resumed driver (exec
-session22178) is active. Do not launch duplicate drivers or
-submission commands. The orchestration helper calls the unchanged frozen
-controller, observes quota immediately before each push and waits at least180s
-between reconciliations. Every terminal version is retrieved/source/nonce/output-
-hash verified. Reservations2700s for224 and4500s for320 enforce21600 total/max6;
-actual provider counter intervals are separate from worker timing. Stop on
-accounting, free-quota, paid-scaling, session-cap or ambiguous-state blockers.
+| Mean outer metric | 224 | 320 |
+|---|---:|---:|
+| Macro AUROC | 0.83273 | 0.85108 |
+| Macro AP | 0.57279 | 0.59412 |
+| Macro F1 | 0.53758 | 0.57156 |
+| Micro F1 | 0.53534 | 0.57509 |
 
-Shared microbatch8/accumulation2, fresh ImageNet ConvNeXt, ratio BCE, grouped
-training-only fit/inner/outer data, fixed mean-eye predictor and p≥.5 are unchanged.
-No source/config/protocol/reporter identity changes. The old demo, historical
-final evaluation, calibration, thresholds, five factories and both losses remain
-unchanged. REVIEW REQUIRED remains default.
+Primary paired macro AUROC difference (320−224): **+0.01835**, conditional 95% interval **[+0.01036,+0.02655]**. Macro AP and F1 differences are positive on this cohort. The frozen numerical rule nominates 320 for future research only; no fold checkpoint is promoted globally. These intervals condition on fitted models and omit training/selection variability; prior adaptive same-source development and one seed limit independence. Fresh compatible independent paired-eye eight-label data is needed for confirmation.
 
-After all six verified complete, the frozen CPU reporter
-`python scripts/report_resolution_results.py --bootstrap-batch 2000` runs the prespecified2000 paired component
-bootstrap replicates, resumably. An incomplete matrix must not select a winner.
-`scripts/audit_resolution_execution.py` statically checks the actual embedded
-worker and replays inner-only selection, fit-only weights and outer alignment.
-Its partial audit never selects a candidate. Patient-level artifacts stay private.
+H pooled recall0.1791→0.2537, FP25→76, FN55→50, F10.2308→0.2125 (67 positives/66 positive components). Its paired recall/F1 intervals include zero. O recall0.4450→0.6588, FP439→720, FN353→217, F10.4168→0.4721 (636 positives). G AP/F1 are worse; D/A/M have more missed positives at p≥.5. Keep these harms alongside aggregate gains. H/O source semantics and patient-derived per-eye targets remain limitations, without relabeling or clinical inference.
 
-Private state/receipts: `artifacts/resolution-v13/TASK_RESUME.json`, `RESUME.md`,
-`experiment/registry.json`, per-attempt source/submission/verification and driver
-snapshots. If interrupted, inspect existing driver/remote versions first; never
-repeat CPU preparation or blindly resubmit an ambiguous job. No monitoring is
-promised after a task ends; exact current lifecycle is saved privately.
-[Historical preparation/evidence](../results/resolution-v13/README.md) and
-[prior status](history/STATUS-through-v13-preparation.md) remain intact.
+Frozen approval identities remain unchanged:
+
+- Plan `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`
+- Worker/source `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`
+- Configuration `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`
+
+No image preparation, split generation, duplicate review, GPU smoke or historical final evaluation was repeated. All five factories, both loss implementations, frozen demo, calibration, thresholds and REVIEW REQUIRED behavior remain unchanged.
+
+CPU checks: two focused execution-guard/archive-verification tests passed; syntax/diff checks and CPU dependency consistency passed. All six real output audits replayed fit-only weights, inner-only selection, strict reload evidence, frozen outer alignment and mean-eye prediction metrics. The bootstrap resumed from 1,580 saved replicates after its local process disappeared, using identical seeds/sources; no model rerun or analysis change. The frozen protocol, worker, controller and reporter bytes are unchanged. Latest pushed CI evidence and PR are recorded below when available.
+
+PR: https://github.com/Saisathwik045/Cv/pull/25 (focused execution/results branch; not merged).
+
+Next executable action is CPU-only artifact recovery or independent review using [RECOVERY.md](../results/resolution-v13/RECOVERY.md). No GPU job is queued and no monitoring is promised after closeout. Further training, refit, threshold/calibration work or demo replacement requires a separate scoped decision. Private exact receipts and TASK_RESUME.json preserve recovery; historical preparation is preserved [here](../results/resolution-v13/README.md) and [prior status](history/STATUS-through-v13-preparation.md).

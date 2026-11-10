@@ -1,0 +1,14 @@
+{
+  "DISCUSSION.md": "4a46c25ff73705ab07d493af89cf00b7215f348d8cffb40b7b23e2a92d7e77a3",
+  "EXECUTION.md": "7df29a9a32ccccb24689c38c4c5385f1ee73d1f68f90a66ca3e58aeea4375340",
+  "H-O-tradeoffs.png": "b0808dd6491ef48418f236efa4ef33eb4ff9fccc0a8f561d3458aac1b87b5130",
+  "RESULTS.md": "81577849c4c8a6ca6d94214710276a3dd65091fbdacfe66e4ffb8b72e7c52982",
+  "all-eight-error-counts.png": "32e0c50b5d705c9a6b6b75bd798f387088acdbe8899565998bf1896783a11ee1",
+  "comparison.json": "9af9706c3831e99b09e100dbb939a388662bdacaf88dbf8073560b8050a7cd63",
+  "executed-per-class.csv": "b0207768093402ea60dc638679d7027b97f1ad4b14bc9b14974a58aecc471188",
+  "execution-audit.json": "850ca9fc700e3e2f6876b2db30b5003585ee4cd3b20e40585cdcf03fe5a41a1e",
+  "execution-provenance.json": "20501a8d17cb3e1665c6379f7c5823abc012b7dd11c5a1e4910acb27646b357c",
+  "paired-resolution-metrics.png": "a1828231bb6fdfb5da265e16313358993b50aac003a728fd18245718bfb3c8d6",
+  "per-class.csv": "042f55a3d8b337d7f2c9bdbfa02469676738942b7b3ace441b01883697775bff",
+  "queue.json": "e1199f00d4e2e32bff70d81a26fbfd166ab8a9a87611f46fbf6100b5c39137c7"
+}
