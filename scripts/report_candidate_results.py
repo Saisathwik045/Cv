@@ -72,6 +72,15 @@ def main():
         vals=[next(r for r in per_class if r['run_id']==run['id'] and r['class']==c) for run in p['runs']];lines.append(f"- {c} false positives: 320={vals[0]['FP']}, 224={vals[1]['FP']}; false negatives: 320={vals[0]['FN']}, 224={vals[1]['FN']}.")
     for c in 'DAM':
         vals=[next(r for r in per_class if r['run_id']==run['id'] and r['class']==c) for run in p['runs']];lines.append(f"- {c} missed positives: 320={vals[0]['FN']}, 224={vals[1]['FN']}, among {vals[0]['positive']} validation positives.")
+    by_class={(r['run_id'],r['class']):r for r in per_class}
+    a,b=aggregate
+    lines+=['',f"The descriptive320−224 differences are macro AUROC{a['macro_AUROC']-b['macro_AUROC']:+.5f}, macro AP{a['macro_AP']-b['macro_AP']:+.5f}, macro F1{a['macro_F1']-b['macro_F1']:+.5f} and micro F1{a['micro_F1']-b['micro_F1']:+.5f}. No independent confirmation or significance claim follows.",'','Additional regressions must not be hidden:']
+    for c in ('C','G'):
+        x,z=[by_class[(run['id'],c)] for run in p['runs']]
+        lines.append(f"- {c}:320 precision/recall/F1={x['precision']:.4f}/{x['recall']:.4f}/{x['F1']:.4f}, FP/FN={x['FP']}/{x['FN']};224={z['precision']:.4f}/{z['recall']:.4f}/{z['F1']:.4f}, FP/FN={z['FP']}/{z['FN']}.")
+    lines+=['','| Resolution | Exact-match accuracy | Labelwise binary accuracy | Hamming loss |','|---|---:|---:|---:|']
+    for x in aggregate:lines.append(f"| {x['resolution']} | {x['exact_match_accuracy']:.4f} | {x['labelwise_accuracy']:.4f} | {x['Hamming_loss']:.4f} |")
+    lines+=['','320 has lower exact-match accuracy despite its higher aggregate ranking/F1 scores. H detection remains weak (only4/16 positive patients detected at320), and C/A/G/H tradeoffs preclude a claim of uniform class improvement. Labelwise accuracy is not diagnostic accuracy. No independent-cohort endpoint or grouped interval is reported here; those remain unexecuted, separately gated research steps.']
     lines+=['','All-eight AUROC/AP and TN are in validation-per-class.csv. Sparse H support and reused validation limit interpretation. BRSET remains an independent access/compatibility blocker. The original demo remains REVIEW REQUIRED. Large checkpoints, aligned predictions, stochastic arrays and logs are retained in the pinned private job versions; hashes are recorded in execution-results.json.']
     (out/'RESULTS.md').write_text('\n'.join(lines)+'\n');print('\n'.join(lines))
 

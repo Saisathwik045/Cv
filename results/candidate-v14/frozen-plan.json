@@ -100,7 +100,7 @@
       "train": "136a0289f42a6541088a3bb1cfba7871e5465eeb52c4fa91587ba35c1cdb0526"
     },
     "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
-    "last_poll_unix": 1794322806.5866528,
+    "last_poll_unix": 1794324323.3199637,
     "maximum_gpu_quota_seconds": 14400,
     "maximum_sessions": 3,
     "orchestration_dependency_sha256": {
@@ -200,17 +200,21 @@
       {
         "attempts": [
           {
+            "artifact_bundle": "/tmp/trustretina-v14-private/runs/v14_reference_res224_seed2026/attempt-1",
             "bundle": "artifacts/candidate-v14/experiment/v14_reference_res224_seed2026/attempt-1",
+            "elapsed_seconds": 1282.091581217,
             "kernel_id": "saisathwikregula/trustretina-v14-fit-224-779a38cd",
             "kernel_version": "saisathwikregula/trustretina-v14-fit-224-779a38cd/1",
             "quota_used_before": 9438.564,
+            "remote_status": "COMPLETE",
+            "report_sha256": "89bf87aecb00182f235a23f8ab03d95c347e5ff37c124d94df41d0218f4f2f0a",
             "reserved_seconds": 4200,
-            "status": "running"
+            "status": "complete"
           }
         ],
         "id": "v14_reference_res224_seed2026",
         "image_size": 224,
-        "status": "running"
+        "status": "complete"
       }
     ],
     "schema_version": 14,

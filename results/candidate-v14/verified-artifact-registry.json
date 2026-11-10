@@ -1,5 +1,5 @@
 {
-  "GPU_sessions_submitted": 1,
+  "GPU_sessions_submitted": 2,
   "fits": [
     {
       "artifact_sha256": {
@@ -34,10 +34,44 @@
       "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
       "strict_best_reload": true,
       "worker_seconds": 2485.689461756
+    },
+    {
+      "artifact_sha256": {
+        "best.pt": "32a316e6c1a898a85249c4ef26df7440bb95d91c6667aecb508b722e17a43695",
+        "best.pt.sha256": "d842ede7728e44b8d72761d558eb82a57e7f0a3afec768f4a993b4a278843bb0",
+        "calibration-images.npz": "c9876f025923eb85be9d5b80b5b4f969c43df10362a40e03ebd71afbbdff7f68",
+        "calibration-passes.npz": "4928a055b8061908487a689831f494f51270143e9397ed82501bbae9da8dc91d",
+        "calibration-patients.npz": "d918fa0fd56871e705dba748b94dd07415a80f15a196cddde91b2aa2e15555ce",
+        "dependencies.txt": "75abf5a5b84e04e2e3ba62cbad028024968b3336d10544c8479fe9e5f0918313",
+        "experiment-spec.json": "a60a19769cb0813f669eac6c015570032715ce31a63af631345476f2b9f32e33",
+        "history.json": "8165837fe0cbdc47b2fce7e37bba5c5960959e34ca82b19fb63d06e6435c783a",
+        "last.pt": "97c9af1af3d41d80489a4bc9ba31b02a4b86b19ae8b75c2152ea510185ab73c6",
+        "last.pt.sha256": "088a83c2710113d36936f53c6c409c9791331455b80e587ae05fefacc28506bf",
+        "metrics.json": "0fbb81879c8c39647b25611472ee8db031b7d20493d949460bdc06a5c2e5d4a2",
+        "progress.json": "0f7fd4366ef5cd8089e5a53b4f4669083499def5c230b73d00842516be86b56a",
+        "quality-features.npz": "1a20a7b4aa39b8ea0b92cf14f5788f9a1db1d4fe9282317a649ea870dcdea5a5",
+        "selected-checkpoint.json": "e374371db730e373de80578e765024d09c01cedaf538d36d8a66e2b9dc7e1e26",
+        "validation-images.npz": "a3f1aff039eb5d482f88ff373cbee327e851e25176dc78084f3d0e2e78d0f4ed",
+        "validation-passes.npz": "a4244370805b5005fafaf88a292e13b221581d8177afbe79c026223c7f3ff167",
+        "validation-patients.npz": "8803d53b06de4988e53e0834698a0c278fb1af08b1db9fd09974e34e4089fbc0"
+      },
+      "best_epoch": 5,
+      "epochs": 11,
+      "kernel_version": "saisathwikregula/trustretina-v14-fit-224-779a38cd/1",
+      "model_state_invariance": true,
+      "no_temperature_or_threshold_fit": true,
+      "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
+      "post_freeze_calibration_inference": true,
+      "private_log_sha256": "8bf50ed52ad63cd4c854e5ada7ff9e0f2b22f54db19da2c65635fba2414f05bb",
+      "report_sha256": "89bf87aecb00182f235a23f8ab03d95c347e5ff37c124d94df41d0218f4f2f0a",
+      "run_id": "v14_reference_res224_seed2026",
+      "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
+      "strict_best_reload": true,
+      "worker_seconds": 1282.091581217
     }
   ],
   "large_and_sample_level_files_private": true,
-  "matrix_complete": false,
+  "matrix_complete": true,
   "quota_baseline": {
     "refresh_time": "2026-11-14T00:00:00.000Z",
     "used_seconds": 6926.895
