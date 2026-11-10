@@ -20,7 +20,7 @@
   "calibration_labels_in_GPU_bundle": false,
   "component_support_note": "Mixed-label contained components contribute to both positive and negative component support; no label voting or annotation-error inference.",
   "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
-  "controller_sha256": "1a52fb9ce92a019054ecde98a6de71e45ae308dea09acb1f165f2a8a6ce81fdb",
+  "controller_sha256": "b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da",
   "cpu_inputs_and_worker_frozen": true,
   "dependency_contract_file_sha256": "da9b9c0ab4ad840ac5864767d4723649bb923d7052220766e8582c0dd385ac26",
   "existing224_reused_exact": true,
@@ -58,7 +58,7 @@
   "native_images_verified": 1750,
   "new_model_training_or_inference_performed": false,
   "observed_utc": "2026-11-10T09:49:55.432631+00:00",
-  "plan_sha256": "f86208573e522bd6c683bae18b18293b4b72ac36a77b78dea2e8c2016074e25a",
+  "plan_sha256": "8cdbcaa643618ed29813b10a6f0cec3e5d8a91d8b69395184590ac8807c944be",
   "prepared_inputs": {
     "calibration224": "9587ddf4da564ccff18cfa1fbbf19a1c28cdf0d5be58197ed9156baf8fc81aa0",
     "calibration320": "32c59551fa33fc27a2cbb3ba14f00b3af3d657485422363865219bc3e29b0a56",
@@ -216,7 +216,7 @@
     "External endpoint/DUA/overlap and all-eight compatibility remain blocked."
   ],
   "schema": 14,
-  "source_commit": "7e0bad1872f65abb71737f17fe02427e2f65e89d",
+  "source_commit": "f7b3c832c1239e6de89ee3b01b2a0faf4f9cb92c",
   "storage": {
     "capacity_write_test_passed": true,
     "durable_authority": "Pinned existing TRAIN preparation and new private CPU output, exact versions/receipts and output hashes; no paid storage",

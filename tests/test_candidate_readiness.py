@@ -112,3 +112,13 @@ class CandidateWorkerTorchTests(unittest.TestCase):
             self.assertTrue(all(torch.equal(before[k],v) for k,v in model.state_dict().items()))
             with self.assertRaisesRegex(ValueError,'provenance mismatch'):
                 load_checkpoint(path,model,optimizer,expected_sha256=digest,expected_provenance={**provenance,'image_size':224},scheduler=scheduler,generator=generator)
+
+class CandidateFrozenRecordTests(unittest.TestCase):
+    def test_current_registry_readiness_and_disabled_approval_bind_same_identity(self):
+        base=ROOT/'results/candidate-v14';p=json.loads((base/'frozen-plan.json').read_text())['registry'];r=json.loads((base/'readiness.json').read_text());a=json.loads((base/'approval-template.json').read_text())
+        for key in ('plan_sha256','worker_source_sha256','config_sha256'):
+            self.assertEqual(p[key],r[key]);self.assertEqual(p[key],a[key])
+        self.assertEqual(p['inputs_sha256'],a['inputs_sha256']);self.assertFalse(a['approved']);self.assertIsNone(a['approved_at_utc'])
+        self.assertIn(p['plan_sha256'],(base/'CPU_READINESS.md').read_text())
+        import candidate_experiment as controller
+        controller.verify_plan(p)
