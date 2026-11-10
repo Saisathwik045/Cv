@@ -1,4 +1,4 @@
-# V14 authorized execution — 320 candidate submitted, 224 reference pending
+# V14 authorized execution — 320 candidate verified complete, 224 queued
 
 Merged PR27/main3b07a7634f3e6530d66b2ec41c70d837893992c6 verified.
 User authorized the exact frozen two-fit queue under14400 free GPU-quota seconds/
@@ -11,10 +11,12 @@ Preflight remote v14 inventory empty; actual free quota14673.105s, reserved0, pa
 disabled. Original cumulative baseline timeUsed6926.895s, refresh2026-11-14T00:00Z
 is saved before first submission and must never be reset on interruption.
 
-First job: saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1. Submission accepted;
-its exact receipt/source/nonce/reservation7800s is saved. One of3 sessions used.
-The224 reference is not submitted; both fits are already authorized, sequentially.
-Provider queued/running/completed state must be read; no completion claimed yet.
+First job: saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1 completed11epochs,
+best epoch5, worker2485.689s. All17 artifacts passed checksum verification, with
+strict best reload, model-state invariance and post-freeze inference evidence.
+Its exact source/nonce/reservation7800s is saved. One of3 sessions used.
+The224 reference is queued and not submitted; it is already authorized, subject
+to the existing fresh quota/resource/session guards. No incomplete-matrix winner.
 [Machine-readable registry](../results/candidate-v14/frozen-plan.json),
 [preflight](../results/candidate-v14/execution-preflight.json),
 [actual input verification](../results/candidate-v14/actual-input-verification.json).
