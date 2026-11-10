@@ -1,5 +1,22 @@
 {
-  "receipts": {},
+  "receipts": {
+    "artifacts/candidate-v14/experiment/v14_candidate_res320_seed2026/attempt-1": {
+      "approval_record_sha256": "e37ea2591853f1e0d8a33cbd2ede752d71f86dcf3069401f381b5aefc8d77a16",
+      "budget_reservation_seconds": 7800,
+      "execution_timeout_seconds": 7500,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-v14-fit-320-7bbe5ade",
+      "kernel_version": "saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1",
+      "nonce": "7bbe5ade9d864155b5d095291aa9fb2a",
+      "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
+      "provider_response_version": 1,
+      "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
+      "source_sha256": "815aacbdfc99acc217c22605c84df9274182fa157a287b60ca67ba88c7f93cbd",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    }
+  },
   "registry": {
     "config": {
       "accumulation_steps": 2,
@@ -50,7 +67,7 @@
     "config_sha256": "88f074d6eed6f7848765fc02d9604250d812ed569719e8ec458520fe4cce8507",
     "controller_sha256": "b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da",
     "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
-    "execution_authorized": false,
+    "execution_authorized": true,
     "expected_dependencies": {
       "Pillow": "13.0.0",
       "cuda": "12.8",
@@ -67,6 +84,7 @@
       "train": "136a0289f42a6541088a3bb1cfba7871e5465eeb52c4fa91587ba35c1cdb0526"
     },
     "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+    "last_poll_unix": 1794319927.4268084,
     "maximum_gpu_quota_seconds": 14400,
     "maximum_sessions": 3,
     "orchestration_dependency_sha256": {
@@ -86,6 +104,10 @@
       2.5770440251572326
     ],
     "protocol_sha256": "6db9d7f040cd8921a895311df8f79b14251049772cc4e49ec13931de9db2e397",
+    "quota_baseline": {
+      "refresh_time": "2026-11-14T00:00:00.000Z",
+      "used_seconds": 6926.895
+    },
     "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
     "role_manifest_sha256": {
       "calibration": "91fd16b7d6693eee7d98e74335910583fdb3312309d2198cedeeb8bd21d9e969",
@@ -141,10 +163,19 @@
     },
     "runs": [
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/candidate-v14/experiment/v14_candidate_res320_seed2026/attempt-1",
+            "kernel_id": "saisathwikregula/trustretina-v14-fit-320-7bbe5ade",
+            "kernel_version": "saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1",
+            "quota_used_before": 6926.895,
+            "reserved_seconds": 7800,
+            "status": "running"
+          }
+        ],
         "id": "v14_candidate_res320_seed2026",
         "image_size": 320,
-        "status": "awaiting_approval"
+        "status": "running"
       },
       {
         "attempts": [],

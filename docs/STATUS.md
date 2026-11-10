@@ -1,46 +1,33 @@
-# V14 CPU readiness complete; no GPU execution authorized
+# V14 authorized execution — 320 candidate submitted, 224 reference pending
 
-Merged PR26/main `f722cb51167b1694802ffdbbe297866b7e8db2a9` verified.
-[Readiness/identities/commands](../results/candidate-v14/CPU_READINESS.md),
-[actual evidence](../results/candidate-v14/readiness.json),
-[worker contract](CANDIDATE_READY_V14.md), [frozen queue](../results/candidate-v14/frozen-plan.json).
+Merged PR27/main3b07a7634f3e6530d66b2ec41c70d837893992c6 verified.
+User authorized the exact frozen two-fit queue under14400 free GPU-quota seconds/
+maximum3sessions including failures, overhead and at most one compatible resume.
+No paid resources. Plan3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18.
+Worker/config/protocol/dependencies and actual six input tensors/ImageNet weights
+passed checksum verification. Original CPU preparation and v13 training not repeated.
 
-One private GPU-disabled CPU job completed:
-`saisathwikregula/trustretina-v14-inputs-c057c643/1`,276.103s against3,600s cap.
-All1,750 native validation/calibration raw hashes passed; only missing320 tensors
-were constructed. TRAIN224/TRAIN320 and existing224 validation/calibration caches
-were recovered/hash-verified and reused. Historical final excluded. Actual role
-patients/groups: TRAIN2275/2240, validation525/518, calibration350/331; all-eight
-support and patient/containment separation passed. No calibration labels in the
-new GPU input bundle. Separate original labeled metadata remains private.
+Preflight remote v14 inventory empty; actual free quota14673.105s, reserved0, paid
+disabled. Original cumulative baseline timeUsed6926.895s, refresh2026-11-14T00:00Z
+is saved before first submission and must never be reset on interruption.
 
-Storage: free private /tmp scratch, mode0700, capacity/write tested, enough for
-all3 possible sessions' best/last checkpoints plus512MiB margin. No verified
-artifact deleted; pinned existing/new Kaggle outputs are durable recovery copies.
-Scratch can disappear with the environment; use candidate_recover.py, not a new
-preparation job. Exactly one CPU submission used; no further preparation session.
+First job: saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1. Submission accepted;
+its exact receipt/source/nonce/reservation7800s is saved. One of3 sessions used.
+The224 reference is not submitted; both fits are already authorized, sequentially.
+Provider queued/running/completed state must be read; no completion claimed yet.
+[Machine-readable registry](../results/candidate-v14/frozen-plan.json),
+[preflight](../results/candidate-v14/execution-preflight.json),
+[actual input verification](../results/candidate-v14/actual-input-verification.json).
 
-Worker/registry enforce two fresh-ImageNet ConvNeXt ratio-BCE fits,320 then224,
-frozen v4 TRAIN/validation roles, max25 total cosine epochs/patience6, TRAIN-only
-weights, validation patient macro AUROC selection, strict checkpoint/RNG resume,
-mean-eye probabilities, fixed p≥.5 and label-free calibration inference only after
-checkpoint freeze. No temperature/threshold/policy fit, demo replacement or full-
-cohort refit. Four-hour free GPU cap14,400s/max3sessions retained; zero GPU attempts.
-No actual v14 GPU/model inference has run. REVIEW REQUIRED remains default.
+Resume using the existing private registry/approval and exact recorded version.
+`candidate_experiment.py advance --submit --approval-file
+artifacts/candidate-v14/experiment/approval.json` performs one guarded bounded
+advance; poll no faster than180s. Reconcile ambiguity; never blind-resubmit.
+Retrieve/hash-verify existing output before any next submission; preserve global
+budget baseline/session count. Training/calibration/final roles stay separated.
+No temperature/threshold fitting, external evaluation, historical final access or
+demo modification. BRSET access/agreements remain a separate user-controlled
+blocker. REVIEW REQUIRED remains unchanged. No monitoring is promised after a turn.
 
-BRSET public access requirements checked: PhysioNet credentialing, required CITI
-training and personal DUA signature are needed; no restricted metadata entitlement
-or files verified, no agreement submitted. Exact links are in CPU_READINESS.md.
-No invented label mapping. External confirmation/all-eight cohort readiness stays
-blocked; a future development-fit approval must acknowledge that separate limit.
-
-Current next action: review the source/input/config/dependency hashes and grant a
-separate exact two-fit GPU approval only if desired; full free quota/resource/
-accounting is rechecked immediately before submission. Disabled approval template
-and working gated commands are committed. No background monitoring is active.
-Nine local guard tests pass; both Torch fixtures passed in CPU CI for Python3.11
-and3.12. All seven jobs passed on implementation head77603f1 in
-[CI run42797248567](https://github.com/Saisathwik045/Cv/actions/runs/42797248567).
-[Reviewable PR27](https://github.com/Saisathwik045/Cv/pull/27) remains unmerged.
-[Prior v13 results and harms](../results/resolution-v13/DISCUSSION.md) and
-[historical planning](history/STATUS-through-v14-planning.md) remain unchanged.
+[CPU-readiness evidence](../results/candidate-v14/CPU_READINESS.md) and frozen
+[CANDIDATE_READY_V14.md](CANDIDATE_READY_V14.md) retain the unchanged protocol.
