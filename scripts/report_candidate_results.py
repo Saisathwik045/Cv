@@ -10,13 +10,15 @@ from trustretina.training.comparison import comparison_metrics
 import candidate_experiment as controller
 
 
-def summarize_validation(labels,probabilities):
+def summarize_validation(labels,probabilities,component_ids=None):
     y=np.asarray(labels);p=np.asarray(probabilities)
     m=comparison_metrics(y,p);conf=multilabel_confusion_matrix(y,p>=.5)
     rows=[]
     for j,c in enumerate('NDGCAHMO'):
         tn,fp,fn,tp=map(int,conf[j].ravel());r=m['per_class'][c]
-        rows.append({'class':c,'positive':int(r['positive']),'negative':int(r['negative']),'AUROC':r['auroc'],'AP':r['average_precision'],'precision':r['precision'],'recall':r['recall'],'F1':r['f1'],'TP':tp,'FP':fp,'FN':fn,'TN':tn})
+        groups=np.asarray(component_ids) if component_ids is not None else None
+        if groups is not None and groups.shape!=(len(y),):raise ValueError('One containment identity per patient required')
+        rows.append({'class':c,'positive':int(r['positive']),'negative':int(r['negative']),'AUROC':r['auroc'],'AP':r['average_precision'],'precision':r['precision'],'recall':r['recall'],'F1':r['f1'],'TP':tp,'FP':fp,'FN':fn,'TN':tn,'predicted_positive':tp+fp,'FPR':fp/(fp+tn) if fp+tn else None,'FNR':fn/(tp+fn) if tp+fn else None,'precision_defined':bool(tp+fp),'recall_defined':bool(tp+fn),'positive_components':len(set(groups[y[:,j]==1])) if groups is not None else None,'negative_components':len(set(groups[y[:,j]==0])) if groups is not None else None})
     return m,rows
 
 
@@ -34,6 +36,9 @@ def main():
         attempt=run['attempts'][-1];bundle=Path(attempt['artifact_bundle']);reportpath=bundle/'download/full/stage-report.json';folder=reportpath.parent;report=json.loads(reportpath.read_text())
         if file_hash(reportpath)!=attempt['report_sha256'] or report['plan_sha256']!=p['plan_sha256'] or report['run_id']!=run['id']:raise ValueError('Report/source identity changed')
         if report['status']!='complete' or not all(report.get(k) for k in ('strict_best_reload','model_state_invariance','calibration_inference_after_freeze')):raise ValueError('Incomplete strict-freeze evidence')
+        for flag in ('final_evaluation_access','calibration_fitted','threshold_fitted','risk_policy_fitted','calibration_labels_accessed'):
+            if report.get(flag) is not False:raise ValueError('Forbidden role access or parameter fitting in report')
+        if not np.allclose(report['positive_weights'],p['positive_weights'],rtol=0,atol=1e-12):raise ValueError('TRAIN-only loss weights differ')
         for name,digest in report['output_hashes'].items():
             target=(folder/name).resolve()
             if not target.is_relative_to(folder.resolve()) or file_hash(target)!=digest:raise ValueError('Private artifact hash changed')
@@ -46,7 +51,7 @@ def main():
             if mask.sum()!=2 or set(eyes['eyes'][mask])!={'left','right'} or not np.array_equal(eyes['labels'][mask],np.tile(label,(2,1))) or not np.allclose(eyes['probabilities'][mask].astype(float).mean(0),prob,atol=1e-12,rtol=0):raise ValueError('Mean-eye target/prediction mismatch')
         if aligned is None:aligned=(d['patient_ids'].copy(),d['component_ids'].copy(),y.copy())
         if any(not np.array_equal(a,b) for a,b in zip(aligned,(d['patient_ids'],d['component_ids'],y))):raise ValueError('Matched fit sample alignment changed')
-        m,rows=summarize_validation(y,scores)
+        m,rows=summarize_validation(y,scores,d['component_ids'])
         for key in ('macro_auroc','macro_auprc_average_precision','macro_f1','micro_f1','subset_exact_match_accuracy','labelwise_binary_accuracy','hamming_loss'):
             if abs(m[key]-report['metrics'][key])>1e-12:raise ValueError('Recomputed metric differs')
         record={'run_id':run['id'],'resolution':run['image_size'],'epochs':report['completed_epochs'],'best_epoch':report['selection']['best_epoch']+1,'macro_AUROC':m['macro_auroc'],'macro_AP':m['macro_auprc_average_precision'],'macro_F1':m['macro_f1'],'micro_F1':m['micro_f1'],'exact_match_accuracy':m['subset_exact_match_accuracy'],'labelwise_accuracy':m['labelwise_binary_accuracy'],'Hamming_loss':m['hamming_loss'],'patients':525,'threshold':.5,'worker_seconds':report['elapsed_seconds']}

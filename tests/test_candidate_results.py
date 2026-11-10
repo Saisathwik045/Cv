@@ -17,6 +17,11 @@ class CandidateReportTests(unittest.TestCase):
     def test_threshold_is_inclusive_half_without_fitting(self):
         y=np.array([[1]*8,[0]*8]);p=np.array([[.5]*8,[.49]*8]);metrics,rows=mod.summarize_validation(y,p)
         self.assertEqual(metrics['macro_f1'],1);self.assertTrue(all(r['TP']==1 and r['FP']==0 for r in rows))
+    def test_mixed_label_containment_counts_are_not_voted(self):
+        y=np.array([[1]*8,[0]*8,[1]*8]);p=np.array([[.8]*8,[.7]*8,[.2]*8])
+        _,rows=mod.summarize_validation(y,p,['shared','shared','other'])
+        self.assertEqual(rows[0]['positive_components'],2);self.assertEqual(rows[0]['negative_components'],1)
+        self.assertEqual(rows[0]['FPR'],1);self.assertEqual(rows[0]['FNR'],.5)
     def test_rejects_non_multilabel_shape(self):
         with self.assertRaises(ValueError):mod.summarize_validation([1,0],[.8,.2])
 
