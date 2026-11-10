@@ -66,7 +66,7 @@ Actual BRSET pair/support/overlap and ODIR-label compatibility remain unverified
 
 ## Verification and implementation history
 
-Eight new CPU guard tests passed locally; two additional Torch CPU fixture tests cover cached-head alignment/state invariance and strict checkpoint/RNG/scheduler reload. They were skipped locally because Torch is absent and are exercised in CPU CI, whose observed result is recorded separately. Existing v13 checkpoint/training primitives are reused; no new GPU smoke or real model fitting is performed by these tests.
+Nine new CPU guard/record-consistency tests passed locally; two additional Torch CPU fixture tests cover cached-head alignment/state invariance and strict checkpoint/RNG/scheduler reload. They were skipped locally because Torch is absent and are exercised in CPU CI, whose observed result is recorded separately. Existing v13 checkpoint/training primitives are reused; no new GPU smoke or real model fitting is performed by these tests.
 
 Code review before any GPU execution corrected validation patient-label and quality-ID export alignment, preserved newer attempt state during input restoration, and persisted unexpected provider version responses. Unexecuted intermediate freeze snapshots are retained under history/; no model result was overwritten. The single completed CPU input job and its receipt/source stayed unchanged. Source hashes reflect the final reviewed implementation, not those earlier snapshots.
 

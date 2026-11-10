@@ -38,6 +38,6 @@ Current next action: review the source/input/config/dependency hashes and grant 
 separate exact two-fit GPU approval only if desired; full free quota/resource/
 accounting is rechecked immediately before submission. Disabled approval template
 and working gated commands are committed. No background monitoring is active.
-Eight local guard tests pass; two Torch fixture tests await/are recorded by CPU CI.
+Nine local guard tests pass; two Torch fixture tests await/are recorded by CPU CI.
 [Prior v13 results and harms](../results/resolution-v13/DISCUSSION.md) and
 [historical planning](history/STATUS-through-v14-planning.md) remain unchanged.
