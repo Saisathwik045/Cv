@@ -1,0 +1,61 @@
+{
+  "both_histories_finite": true,
+  "calibration_labels_absent": true,
+  "checks": [
+    {
+      "eye_images": 1050,
+      "finite_probabilities_and_quality": true,
+      "labels_present": true,
+      "mean_eye_probability_tolerance": 1e-12,
+      "patients": 525,
+      "role": "validation",
+      "run_id": "v14_candidate_res320_seed2026",
+      "sample_alignment_verified": true,
+      "seed_end": 62045,
+      "seed_start": 62026,
+      "stochastic_passes": 20
+    },
+    {
+      "eye_images": 700,
+      "finite_probabilities_and_quality": true,
+      "labels_present": false,
+      "mean_eye_probability_tolerance": 1e-12,
+      "patients": 350,
+      "role": "calibration",
+      "run_id": "v14_candidate_res320_seed2026",
+      "sample_alignment_verified": true,
+      "seed_end": 72045,
+      "seed_start": 72026,
+      "stochastic_passes": 20
+    },
+    {
+      "eye_images": 1050,
+      "finite_probabilities_and_quality": true,
+      "labels_present": true,
+      "mean_eye_probability_tolerance": 1e-12,
+      "patients": 525,
+      "role": "validation",
+      "run_id": "v14_reference_res224_seed2026",
+      "sample_alignment_verified": true,
+      "seed_end": 62045,
+      "seed_start": 62026,
+      "stochastic_passes": 20
+    },
+    {
+      "eye_images": 700,
+      "finite_probabilities_and_quality": true,
+      "labels_present": false,
+      "mean_eye_probability_tolerance": 1e-12,
+      "patients": 350,
+      "role": "calibration",
+      "run_id": "v14_reference_res224_seed2026",
+      "sample_alignment_verified": true,
+      "seed_end": 72045,
+      "seed_start": 72026,
+      "stochastic_passes": 20
+    }
+  ],
+  "inference_rerun": false,
+  "parameter_fitting": false,
+  "private_arrays_not_published": true
+}

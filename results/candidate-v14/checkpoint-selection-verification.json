@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "best_epoch": 5,
+      "checkpoint_source_config_inputs_unchanged": true,
+      "earliest_exact_tie_rule": true,
+      "maximum_history_validation_macro_AUROC_matches_export": true,
+      "run_id": "v14_candidate_res320_seed2026"
+    },
+    {
+      "best_epoch": 5,
+      "checkpoint_source_config_inputs_unchanged": true,
+      "earliest_exact_tie_rule": true,
+      "maximum_history_validation_macro_AUROC_matches_export": true,
+      "run_id": "v14_reference_res224_seed2026"
+    }
+  ],
+  "history_only_selection_replay": true,
+  "no_inference_or_fitting": true
+}
