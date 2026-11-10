@@ -8,6 +8,13 @@
   "GPU_jobs_submitted": 0,
   "GPU_quota_delta_from_saved_preparation_baseline_seconds": 0,
   "TRAIN_preparation_repeated": false,
+  "accelerator_contract": {
+    "active_training_devices": 1,
+    "device": "cuda:0",
+    "historical_evidence": "accelerator-evidence.json",
+    "new_GPU_runtime_executed": false,
+    "visible_CUDA_devices": 2
+  },
   "budget_for_later_only": {
     "initial_reservations": [
       7800,
@@ -19,7 +26,7 @@
   },
   "calibration_labels_in_GPU_bundle": false,
   "component_support_note": "Mixed-label contained components contribute to both positive and negative component support; no label voting or annotation-error inference.",
-  "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
+  "config_sha256": "88f074d6eed6f7848765fc02d9604250d812ed569719e8ec458520fe4cce8507",
   "controller_sha256": "b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da",
   "cpu_inputs_and_worker_frozen": true,
   "dependency_contract_file_sha256": "da9b9c0ab4ad840ac5864767d4723649bb923d7052220766e8582c0dd385ac26",
@@ -58,19 +65,19 @@
   "native_images_verified": 1750,
   "new_model_training_or_inference_performed": false,
   "observed_utc": "2026-11-10T09:49:55.432631+00:00",
-  "plan_sha256": "8cdbcaa643618ed29813b10a6f0cec3e5d8a91d8b69395184590ac8807c944be",
+  "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
   "prepared_inputs": {
     "calibration224": "9587ddf4da564ccff18cfa1fbbf19a1c28cdf0d5be58197ed9156baf8fc81aa0",
     "calibration320": "32c59551fa33fc27a2cbb3ba14f00b3af3d657485422363865219bc3e29b0a56",
     "index_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
-    "new_worker_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481",
+    "new_worker_sha256": "485b7e05b1e7fbabea136c4c1925cfa81979dd3ad1892f796742d509c6dd06c3",
     "train224": "274679427634724590dd9a7879cd562879e3d49dea6fdf62aa4e84a7d51fc70f",
     "train320": "9cd180cc9fff089b87320ad1a6f097c8b632a277e41dee5b54e06c9ecb0bc27d",
     "train_index_sha256": "47c421217bb42cace8dcb11bd463d24a2d596ab3b74e33c7f40434335d45f08d",
     "validation224": "e19fdd7337c260e00cac6678fb6d2249a550c7ec52586bf385959eef43749157",
     "validation320": "cc5b616bfafa926d21ac0d4faefc71b9ed1043d3baea71f938f2e426cf1fd276"
   },
-  "protocol_sha256": "ed34bb408b8f3969b5918d41fd187300ba251f211a2c3b83f62820d1aa89bf32",
+  "protocol_sha256": "6db9d7f040cd8921a895311df8f79b14251049772cc4e49ec13931de9db2e397",
   "real_data_v14_model_training_or_inference_performed": false,
   "role_support": {
     "calibration": {
@@ -216,7 +223,7 @@
     "External endpoint/DUA/overlap and all-eight compatibility remain blocked."
   ],
   "schema": 14,
-  "source_commit": "f7b3c832c1239e6de89ee3b01b2a0faf4f9cb92c",
+  "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
   "storage": {
     "capacity_write_test_passed": true,
     "durable_authority": "Pinned existing TRAIN preparation and new private CPU output, exact versions/receipts and output hashes; no paid storage",
@@ -229,5 +236,5 @@
   },
   "temperature_or_threshold_fitted": false,
   "training_start_gate": "Separate exact user approval including external-confirmation limitation acknowledgement, reviewed PR/CI and fresh full free quota; no approval file is created",
-  "worker_source_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481"
+  "worker_source_sha256": "485b7e05b1e7fbabea136c4c1925cfa81979dd3ad1892f796742d509c6dd06c3"
 }

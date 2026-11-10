@@ -1,0 +1,164 @@
+{
+  "receipts": {},
+  "registry": {
+    "config": {
+      "accumulation_steps": 2,
+      "augmentation": "none",
+      "backbone": "convnext_tiny",
+      "calibration_role": "calibration",
+      "checkpoint_selection": "maximum_validation_patient_macro_auroc_tie_earliest",
+      "class_order": [
+        "N",
+        "D",
+        "G",
+        "C",
+        "A",
+        "H",
+        "M",
+        "O"
+      ],
+      "decision_threshold": 0.5,
+      "demo_replacement": false,
+      "dropout": 0.2,
+      "early_stop_reference": "same advance_auc meaningful-improvement rule as v13",
+      "early_stopping_min_delta": 0.0001,
+      "early_stopping_patience": 6,
+      "effective_batch_size": 16,
+      "fit_role": "train",
+      "historical_final_access": false,
+      "initialization": "fresh torchvision IMAGENET1K_V1",
+      "initialization_sha256": "983f1562536e84ff750a1576fb08e54de751dbf2e17c0d8a4a13704341fdcd3d",
+      "learning_rate": 0.0001,
+      "loss": "ratio_bce",
+      "max_epochs": 25,
+      "micro_batch_size": 8,
+      "minimum_learning_rate": 1e-06,
+      "optimizer": "AdamW",
+      "partial_window": "exact sample weighting",
+      "patient_aggregation": "mean_left_right_sigmoid_before_threshold",
+      "positive_weights": "negative/positive patient count in frozen TRAIN only",
+      "precision": "float32",
+      "risk_policy_fitting": false,
+      "schedule": "cosine_25_epoch_horizon",
+      "seed": 2026,
+      "selection_role": "validation",
+      "threshold_fitting": false,
+      "weight_decay": 0.01
+    },
+    "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
+    "controller_sha256": "b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da",
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
+    "execution_authorized": false,
+    "expected_dependencies": {
+      "Pillow": "13.0.0",
+      "cuda": "12.8",
+      "cudnn": 91900,
+      "numpy": "2.1.3",
+      "python": "3.13.15",
+      "sklearn": "1.6.1",
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128"
+    },
+    "external_confirmation_ready": false,
+    "input_report_sha256": {
+      "development_roles": "394acb3d97979777f5f097378d7ef2c9b8e06e7ea37c15062cc4a0bc4f75a0ae",
+      "train": "136a0289f42a6541088a3bb1cfba7871e5465eeb52c4fa91587ba35c1cdb0526"
+    },
+    "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+    "maximum_gpu_quota_seconds": 14400,
+    "maximum_sessions": 3,
+    "orchestration_dependency_sha256": {
+      "scripts/candidate_recover.py": "235c7df55ad960b5df05746f7099b3d7311ebd4ef2ba43dfc93e91ae1866dfa7",
+      "scripts/full_experiment.py": "8b72dadc3aa6752ccca9d0400fd63e8a5e6fc813c112aaeb34e9c466930d9bb1",
+      "scripts/resolution_experiment.py": "ba8edfc73b037941055b825f7bf369fe817359b15ffda0f6b96306ff3d49641a"
+    },
+    "plan_sha256": "8cdbcaa643618ed29813b10a6f0cec3e5d8a91d8b69395184590ac8807c944be",
+    "positive_weights": [
+      2.0826558265582658,
+      2.1036834924965895,
+      15.25,
+      15.485507246376812,
+      20.261682242990656,
+      32.95522388059702,
+      19.13274336283186,
+      2.5770440251572326
+    ],
+    "protocol_sha256": "ed34bb408b8f3969b5918d41fd187300ba251f211a2c3b83f62820d1aa89bf32",
+    "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
+    "role_manifest_sha256": {
+      "calibration": "91fd16b7d6693eee7d98e74335910583fdb3312309d2198cedeeb8bd21d9e969",
+      "train": "082ede51da1698cf44ac904e6b22a4467765892ad6371fc8fa04c48e148c2775",
+      "validation": "109edbb890b030695985682ea413d070b724d7469b28aaabc8a19f49cdb71acb"
+    },
+    "role_support": {
+      "calibration": {
+        "components": 331,
+        "images": 700,
+        "patients": 350,
+        "positive_patients": {
+          "A": 16,
+          "C": 21,
+          "D": 113,
+          "G": 21,
+          "H": 10,
+          "M": 17,
+          "N": 116,
+          "O": 98
+        }
+      },
+      "train": {
+        "components": 2240,
+        "images": 4550,
+        "patients": 2275,
+        "positive_patients": {
+          "A": 107,
+          "C": 138,
+          "D": 733,
+          "G": 140,
+          "H": 67,
+          "M": 113,
+          "N": 738,
+          "O": 636
+        }
+      },
+      "validation": {
+        "components": 518,
+        "images": 1050,
+        "patients": 525,
+        "positive_patients": {
+          "A": 25,
+          "C": 32,
+          "D": 169,
+          "G": 32,
+          "H": 16,
+          "M": 26,
+          "N": 175,
+          "O": 147
+        }
+      }
+    },
+    "runs": [
+      {
+        "attempts": [],
+        "id": "v14_candidate_res320_seed2026",
+        "image_size": 320,
+        "status": "awaiting_approval"
+      },
+      {
+        "attempts": [],
+        "id": "v14_reference_res224_seed2026",
+        "image_size": 224,
+        "status": "awaiting_approval"
+      }
+    ],
+    "schema_version": 14,
+    "source_commit": "f7b3c832c1239e6de89ee3b01b2a0faf4f9cb92c",
+    "sources": {
+      "development_roles": "saisathwikregula/trustretina-v14-inputs-c057c643/1",
+      "train": "saisathwikregula/trustretina-res-v13-inputs-767673ae/1"
+    },
+    "technical_training_inputs_ready": true,
+    "train_inputs_sha256": "47c421217bb42cace8dcb11bd463d24a2d596ab3b74e33c7f40434335d45f08d",
+    "worker_source_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481"
+  }
+}

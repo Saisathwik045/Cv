@@ -15,15 +15,15 @@ PR26 is merged at `f722cb51167b1694802ffdbbe297866b7e8db2a9`. The completed v13 
 
 | Item | SHA256 |
 |---|---|
-| Plan | `8cdbcaa643618ed29813b10a6f0cec3e5d8a91d8b69395184590ac8807c944be` |
-| Worker/source | `8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481` |
-| Configuration | `812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c` |
+| Plan | `3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18` |
+| Worker/source | `485b7e05b1e7fbabea136c4c1925cfa81979dd3ad1892f796742d509c6dd06c3` |
+| Configuration | `88f074d6eed6f7848765fc02d9604250d812ed569719e8ec458520fe4cce8507` |
 | Controller | `b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da` |
-| Protocol | `ed34bb408b8f3969b5918d41fd187300ba251f211a2c3b83f62820d1aa89bf32` |
+| Protocol | `6db9d7f040cd8921a895311df8f79b14251049772cc4e49ec13931de9db2e397` |
 | New role-input index | `ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a` |
 | Existing TRAIN index | `47c421217bb42cace8dcb11bd463d24a2d596ab3b74e33c7f40434335d45f08d` |
 
-Source revision: `f7b3c832c1239e6de89ee3b01b2a0faf4f9cb92c`. [Frozen registry](frozen-plan.json), [actual readiness](readiness.json), [CPU report](cpu-inputs-report.json), [private job receipt](cpu-preparation-receipt.json), [dependency contract](../../requirements/candidate-v14-environment.json). The original proposed-plan.json remains historical; current verified prepared_inputs in readiness.json replace its null readiness placeholders. No missing physical tensor is represented by metadata alone.
+Source revision: `09632a1347435991e6177cea5f5cb68ac8115655`. [Frozen registry](frozen-plan.json), [actual readiness](readiness.json), [CPU report](cpu-inputs-report.json), [private job receipt](cpu-preparation-receipt.json), [dependency contract](../../requirements/candidate-v14-environment.json). The original proposed-plan.json remains historical; current verified prepared_inputs in readiness.json replace its null readiness placeholders. No missing physical tensor is represented by metadata alone.
 
 | Actual tensor | SHA256 |
 |---|---|
@@ -71,3 +71,5 @@ Nine new CPU guard/record-consistency tests passed locally; two additional Torch
 Code review before any GPU execution corrected validation patient-label and quality-ID export alignment, preserved newer attempt state during input restoration, and persisted unexpected provider version responses. Unexecuted intermediate freeze snapshots are retained under history/; no model result was overwritten. The single completed CPU input job and its receipt/source stayed unchanged. Source hashes reflect the final reviewed implementation, not those earlier snapshots.
 
 [Executable contract](../../docs/CANDIDATE_READY_V14.md) · [Preserved prospective design](../../docs/CANDIDATE_FREEZE_V14.md) · [Original dataset review](../../docs/INDEPENDENT_DATASETS_V14.md)
+
+Historical accelerator correction: static metadata from all six v13 checkpoint CUDA RNG lists proves two visible devices, while optimization used only cuda:0. The new guard matches that setup; no DDP or second-device training, no new GPU probe, and the quota cap is unchanged. Actual account counters, not device-count multiplication, determine charged usage. [Evidence](accelerator-evidence.json).

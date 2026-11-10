@@ -3,6 +3,7 @@
   "registry": {
     "config": {
       "accumulation_steps": 2,
+      "active_cuda_device": 0,
       "augmentation": "none",
       "backbone": "convnext_tiny",
       "calibration_role": "calibration",
@@ -24,6 +25,7 @@
       "early_stopping_min_delta": 0.0001,
       "early_stopping_patience": 6,
       "effective_batch_size": 16,
+      "expected_visible_cuda_devices": 2,
       "fit_role": "train",
       "historical_final_access": false,
       "initialization": "fresh torchvision IMAGENET1K_V1",
@@ -45,7 +47,7 @@
       "threshold_fitting": false,
       "weight_decay": 0.01
     },
-    "config_sha256": "812895f5ca0b05606aa73168cf24bba2e4fb1244ccab7619af09f54939f2964c",
+    "config_sha256": "88f074d6eed6f7848765fc02d9604250d812ed569719e8ec458520fe4cce8507",
     "controller_sha256": "b1329aab14583592b5ee9f888b47eea342270d6ca6535149f3e9fa200ecd04da",
     "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
     "execution_authorized": false,
@@ -72,7 +74,7 @@
       "scripts/full_experiment.py": "8b72dadc3aa6752ccca9d0400fd63e8a5e6fc813c112aaeb34e9c466930d9bb1",
       "scripts/resolution_experiment.py": "ba8edfc73b037941055b825f7bf369fe817359b15ffda0f6b96306ff3d49641a"
     },
-    "plan_sha256": "8cdbcaa643618ed29813b10a6f0cec3e5d8a91d8b69395184590ac8807c944be",
+    "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
     "positive_weights": [
       2.0826558265582658,
       2.1036834924965895,
@@ -83,7 +85,7 @@
       19.13274336283186,
       2.5770440251572326
     ],
-    "protocol_sha256": "ed34bb408b8f3969b5918d41fd187300ba251f211a2c3b83f62820d1aa89bf32",
+    "protocol_sha256": "6db9d7f040cd8921a895311df8f79b14251049772cc4e49ec13931de9db2e397",
     "release_sha256": "c094f372aa8e9e2b15d1483c8f0f9cab58f3e3beabc11e938fd281f205c7af57",
     "role_manifest_sha256": {
       "calibration": "91fd16b7d6693eee7d98e74335910583fdb3312309d2198cedeeb8bd21d9e969",
@@ -152,13 +154,13 @@
       }
     ],
     "schema_version": 14,
-    "source_commit": "f7b3c832c1239e6de89ee3b01b2a0faf4f9cb92c",
+    "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
     "sources": {
       "development_roles": "saisathwikregula/trustretina-v14-inputs-c057c643/1",
       "train": "saisathwikregula/trustretina-res-v13-inputs-767673ae/1"
     },
     "technical_training_inputs_ready": true,
     "train_inputs_sha256": "47c421217bb42cace8dcb11bd463d24a2d596ab3b74e33c7f40434335d45f08d",
-    "worker_source_sha256": "8976912f9ed1bd1d85156bf8e425c3632e79805adbdc65e47eab6baf3fd4f481"
+    "worker_source_sha256": "485b7e05b1e7fbabea136c4c1925cfa81979dd3ad1892f796742d509c6dd06c3"
   }
 }
