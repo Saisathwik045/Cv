@@ -1,0 +1,19 @@
+{
+  "dataset": "BRSET",
+  "version": "1.0.2",
+  "public_metadata_dictionary_reviewed": true,
+  "restricted_files_accessed": false,
+  "entitlement_established": false,
+  "agreement_or_access_request_submitted": false,
+  "label_mapping_approved": false,
+  "complete_pair_counts_verified": false,
+  "overlap_verified": false,
+  "all_eight_compatible": false,
+  "credentialing_link": "https://physionet.org/settings/credentialing/",
+  "training_requirement": "CITI Data or Specimens Only Research",
+  "training_link": "https://physionet.org/content/brazilian-ophthalmological/view-required-training/1.0.2/",
+  "DUA_link": "https://physionet.org/sign-dua/brazilian-ophthalmological/1.0.2/",
+  "source": "https://physionet.org/content/brazilian-ophthalmological/1.0.2/",
+  "observations": "Credentialing/DUA links redirect to login; current environment only establishes Kaggle credentials. User must complete requirements and make lawful private access available; no secrets in chat. No fees/agreements are accepted by the agent.",
+  "taxonomy": "D/DR and H/systemic-versus-retinal remain unresolved; cup-disc enlargement is not G, media haze is not C, other is not the ODIR O category, absent targets are unknown."
+}

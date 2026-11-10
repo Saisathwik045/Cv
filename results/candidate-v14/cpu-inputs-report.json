@@ -1,0 +1,42 @@
+{
+  "calibration_labels_in_output": false,
+  "elapsed_seconds": 276.10317621800004,
+  "existing224_reused_exact": true,
+  "final_evaluation_access": false,
+  "gpu_requested": false,
+  "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+  "native_images_verified": 1750,
+  "new_training_cache_built": false,
+  "nonce": "c057c643f3a946ecbff05fbdf6ebe503",
+  "output_hashes": {
+    "calibration-224.npy": "9587ddf4da564ccff18cfa1fbbf19a1c28cdf0d5be58197ed9156baf8fc81aa0",
+    "calibration-320.npy": "32c59551fa33fc27a2cbb3ba14f00b3af3d657485422363865219bc3e29b0a56",
+    "calibration-rows.json": "209ff24dc468a46cffab07c45725737d397017da4b3329b9391577036565da32",
+    "inputs.json": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
+    "native-receipts.jsonl": "d9eb104aa6c81c8682e701ee0d613b6c2aa576164008512629fc733cf1798803",
+    "progress.json": "bf5969b3a1c8cce81f85bdfe1f9b42bede8a34fe27313286cd920fa3ad340bc2",
+    "validation-224.npy": "e19fdd7337c260e00cac6678fb6d2249a550c7ec52586bf385959eef43749157",
+    "validation-320.npy": "cc5b616bfafa926d21ac0d4faefc71b9ed1043d3baea71f938f2e426cf1fd276",
+    "validation-rows.json": "56f05cdb37e915801fdbd19646800a98abbf80ed84fdb568ea044d2037b59361"
+  },
+  "packages": {
+    "Pillow": "13.0.0",
+    "numpy": "2.1.3"
+  },
+  "role_counts": {
+    "calibration": {
+      "components": 331,
+      "images": 700,
+      "patients": 350
+    },
+    "validation": {
+      "components": 518,
+      "images": 1050,
+      "patients": 525
+    }
+  },
+  "source_commit": "acd8fc8ef69d21ca86d80f5072b31abfaa89f2c0",
+  "stage": "candidate_v14_inputs",
+  "status": "complete",
+  "training": false
+}

@@ -1,5 +1,7 @@
 # TrustRetina
 
+[V14 CPU readiness](results/candidate-v14/CPU_READINESS.md) is complete: actual role inputs and the two-fit worker/registry are frozen. One CPU preparation job passed; GPU training remains unapproved, and independent all-eight evaluation remains blocked.
+
 [Next-stage candidate/freezing plan](results/candidate-v14/README.md): retain 320 ConvNeXt-Tiny ratio BCE and the 224 reference. Independent all-eight confirmation remains blocked by dataset/label compatibility. No new training or fitting is authorized.
 
 All six authorized [v13 matched resolution fits](results/resolution-v13/RESULTS.md)
