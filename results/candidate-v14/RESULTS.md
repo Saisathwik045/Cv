@@ -36,17 +36,17 @@ Raw patient probabilities are float64 mean left/right sigmoid probabilities; fix
 - A missed positives: 320=14, 224=7, among 25 validation positives.
 - M missed positives: 320=4, 224=5, among 26 validation positives.
 
-The descriptive320−224 differences are macro AUROC+0.01163, macro AP+0.01816, macro F1+0.00387 and micro F1+0.02419. No independent confirmation or significance claim follows.
+The descriptive 320−224 differences are macro AUROC +0.01163, macro AP +0.01816, macro F1 +0.00387 and micro F1 +0.02419. No independent confirmation or significance claim follows.
 
 Additional regressions must not be hidden:
-- C:320 precision/recall/F1=0.2385/0.9688/0.3827, FP/FN=99/1;224=0.4828/0.8750/0.6222, FP/FN=30/4.
-- G:320 precision/recall/F1=0.5926/0.5000/0.5424, FP/FN=11/16;224=0.4500/0.5625/0.5000, FP/FN=22/14.
+- C: 320 precision/recall/F1=0.2385/0.9688/0.3827, FP/FN=99/1; 224=0.4828/0.8750/0.6222, FP/FN=30/4.
+- G: 320 precision/recall/F1=0.5926/0.5000/0.5424, FP/FN=11/16; 224=0.4500/0.5625/0.5000, FP/FN=22/14.
 
 | Resolution | Exact-match accuracy | Labelwise binary accuracy | Hamming loss |
 |---|---:|---:|---:|
 | 320 | 0.2990 | 0.8481 | 0.1519 |
 | 224 | 0.3143 | 0.8436 | 0.1564 |
 
-320 has lower exact-match accuracy despite its higher aggregate ranking/F1 scores. H detection remains weak (only4/16 positive patients detected at320), and C/A/G/H tradeoffs preclude a claim of uniform class improvement. Labelwise accuracy is not diagnostic accuracy. No independent-cohort endpoint or grouped interval is reported here; those remain unexecuted, separately gated research steps.
+The 320-pixel fit has lower exact-match accuracy despite its higher aggregate ranking/F1 scores. H detection remains weak (only 4/16 positive patients detected at320), and C/A/G/H tradeoffs preclude a claim of uniform class improvement. Labelwise accuracy is not diagnostic accuracy. No independent-cohort endpoint or grouped interval is reported here; those remain unexecuted, separately gated research steps.
 
 All-eight AUROC/AP and TN are in validation-per-class.csv. Sparse H support and reused validation limit interpretation. BRSET remains an independent access/compatibility blocker. The original demo remains REVIEW REQUIRED. Large checkpoints, aligned predictions, stochastic arrays and logs are retained in the pinned private job versions; hashes are recorded in execution-results.json.

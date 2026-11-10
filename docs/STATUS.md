@@ -13,7 +13,7 @@ session each, zero failures/resumes, and no paid scaling.
 [Complete all-eight precision/recall/F1 and TP/FP/FN](../results/candidate-v14/RESULTS.md)
 and [CSV](../results/candidate-v14/validation-per-class.csv).320 leads aggregate
 validation metrics but is not uniformly better: H FP6 vs21 but FN12 vs11; O FP119
-vs118, FN53 vs61; D/A/M misses107/14/4 vs130/7/5. C FP99 vs30 and F10.3827 vs0.6222;
+vs118, FN53 vs61; D/A/M misses107/14/4 vs130/7/5. C FP99 vs30 and F1 0.3827 vs 0.6222;
 A recall0.44 vs0.72; G recall0.50 vs0.5625. Exact match0.2990 vs0.3143. No independent
 confirmation or clinical superiority; no automatic promotion/refit/demo change.
 
@@ -21,7 +21,7 @@ Private pinned jobs:
 - saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1
 - saisathwikregula/trustretina-v14-fit-224-779a38cd/1
 
-All34 output-file hashes passed, including best/last checkpoints, aligned raw eye/
+All 34 output-file hashes passed, including best/last checkpoints, aligned raw eye/
 patient predictions, histories, dependency records,20-pass seeds and quality arrays.
 Both strict best reload/state-invariance/post-freeze inference checks passed.
 Small artifact/prediction recovery was independently verified from both versions;

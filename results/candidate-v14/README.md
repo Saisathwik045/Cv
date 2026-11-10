@@ -1,4 +1,4 @@
-> **Current: [both exact fits completed](RESULTS.md).** Validation320/224 macro AUROC0.8596/0.8480, macro F10.5371/0.5332. Two sessions,3826.407 free GPU-quota seconds; no failures/resumes. All checkpoint/prediction/history/log hashes and post-freeze checks verified. Class-specific regressions are retained, not hidden. No independent confirmation, fitting of temperatures/thresholds or demo replacement. [Artifacts](verified-artifact-registry.json) · [Accounting](gpu-time.json). CPU readiness/planning records below are historical.
+> **Current: [both exact fits completed](RESULTS.md).** Validation320/224 macro AUROC 0.8596/0.8480, macro F1 0.5371/0.5332. Two sessions, 3826.407 free GPU-quota seconds; no failures/resumes. All checkpoint/prediction/history/log hashes and post-freeze checks verified. Class-specific regressions are retained, not hidden. No independent confirmation, fitting of temperatures/thresholds or demo replacement. [Artifacts](verified-artifact-registry.json) · [Accounting](gpu-time.json). CPU readiness/planning records below are historical.
 
 # V14 candidate/freezing and independent-evaluation plan
 
