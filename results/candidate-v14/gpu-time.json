@@ -1,0 +1,48 @@
+{
+  "GPU_sessions_submitted": 2,
+  "accounting_note": "Observed account-counter delta includes startup/overhead and conservatively any concurrent activity; worker wall time is reported separately, never substituted for charged quota.",
+  "all_recorded_provider_versions_complete": true,
+  "approved_cap_seconds": 14400,
+  "cap_passed": true,
+  "failed_sessions": 0,
+  "final_quota_observation": {
+    "free_seconds": 10846.698,
+    "observed_unix": 1794324415.2759259,
+    "paid_disabled": true,
+    "raw": {
+      "gpuQuota": {
+        "hasEverRun": true,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "21600s",
+        "timeReserved": "0s",
+        "timeUsed": "10753.302.0s",
+        "totalTimeAllowed": "21600s"
+      },
+      "quotaRefreshTime": "2026-11-14T00:00:00.000Z",
+      "tpuQuota": {
+        "hasEverRun": false,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "72000s",
+        "timeReserved": "0s",
+        "timeUsed": "0s",
+        "totalTimeAllowed": "72000s"
+      }
+    },
+    "refresh_time": "2026-11-14T00:00:00.000Z",
+    "reserved_seconds": 0.0,
+    "used_seconds": 10753.302
+  },
+  "internal_budget_reservations_seconds": 12000,
+  "maximum_sessions": 3,
+  "no_background_monitoring": true,
+  "observed_account_gpu_quota_delta_hours": 1.0628908333333331,
+  "observed_account_gpu_quota_delta_seconds": 3826.4069999999992,
+  "owned_v14_inventory_matches_exact_two_receipts": true,
+  "paid_scaling_disabled": true,
+  "quota_baseline": {
+    "refresh_time": "2026-11-14T00:00:00.000Z",
+    "used_seconds": 6926.895
+  },
+  "resumes": 0,
+  "summed_worker_seconds": 3767.7810429730002
+}

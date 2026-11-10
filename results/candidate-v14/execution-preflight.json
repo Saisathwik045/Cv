@@ -1,0 +1,36 @@
+{
+  "existing_v14_remote_jobs": [],
+  "frozen_identities_verified": true,
+  "merged_main": "3b07a7634f3e6530d66b2ec41c70d837893992c6",
+  "no_gpu_submission_in_this_preflight": true,
+  "observed_unix": 1794319847.5132375,
+  "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
+  "quota": {
+    "free_seconds": 14673.105,
+    "observed_unix": 1794319847.5128644,
+    "paid_disabled": true,
+    "raw": {
+      "gpuQuota": {
+        "hasEverRun": true,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "21600s",
+        "timeReserved": "0s",
+        "timeUsed": "6926.895.0s",
+        "totalTimeAllowed": "21600s"
+      },
+      "quotaRefreshTime": "2026-11-14T00:00:00.000Z",
+      "tpuQuota": {
+        "hasEverRun": false,
+        "isPayToScaleEnabled": false,
+        "minimumTimeAllowed": "72000s",
+        "timeReserved": "0s",
+        "timeUsed": "0s",
+        "totalTimeAllowed": "72000s"
+      }
+    },
+    "refresh_time": "2026-11-14T00:00:00.000Z",
+    "reserved_seconds": 0.0,
+    "used_seconds": 6926.895
+  },
+  "saved_v14_attempts": []
+}

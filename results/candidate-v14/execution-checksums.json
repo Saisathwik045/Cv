@@ -1,0 +1,15 @@
+{
+  "RESULTS.md": "14592480462eafa202bfbb5c7b23253adc068dcbeeb8a98cf0d85676df3215ab",
+  "actual-input-verification.json": "a39750d4607e7e51fd3e53cbb9309f6784d0758ad13d72dcd9b895a69056f81f",
+  "checkpoint-selection-verification.json": "656a02250d4917252c887501bb9050a89f30732798746430dc47e1bb103a958c",
+  "execution-preflight.json": "4645b44d65c8c245229990971ea098b71be274695b8855dd824fac76302f2fe8",
+  "execution-results.json": "b75f0dc0b1af6a932e7d9b9a5de3bfb5e6e47f94e33f774473a2b64fda6af4b0",
+  "fresh-retrieval-proof.json": "e7e12fa392c02fc097ce8800d4e90ff547a7d115fd69943b7261ae6f1994c13c",
+  "frozen-plan.json": "43351a86118e6465a0e24939faddecd9b09d8c8af49d1122c8f0f47f197749e9",
+  "gpu-time.json": "e29bf07ef394fac19c8f521f4cb3261a3f741aa587715dbde1c920621c1b8b72",
+  "postfreeze-array-verification.json": "a9f76f0f997847bebba44a1d0748c20712508521e7221141aa432c9a3fdd2c74",
+  "training-history.csv": "37459d7c477cdeca54141d6744794fe40cca16521c5f0871356f3f9a62753c0a",
+  "validation-comparison.csv": "5deda1bc654f5c0e566bde5b4407572dd84eaf49d4a9a1c4fc395159389e588d",
+  "validation-per-class.csv": "d60fae10a46496e6e741dc47fef6e48a2e8f2c2416a557c4c86db1e2f0b74acd",
+  "verified-artifact-registry.json": "da8fc216144e5f233c4e58363632c53d7a43d1d8c6e07300ca366d965f7aafce"
+}

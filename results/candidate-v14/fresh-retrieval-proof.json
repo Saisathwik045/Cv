@@ -1,0 +1,34 @@
+{
+  "fits": [
+    {
+      "checkpoint_binaries_not_redundantly_redownloaded": true,
+      "checkpoints_downloaded_and_verified_in_primary_retrieval": true,
+      "fresh_files": [
+        "stage-report.json",
+        "selected-checkpoint.json",
+        "validation-patients.npz",
+        "history.json"
+      ],
+      "independent_small_artifact_retrieval_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1",
+      "run_id": "v14_candidate_res320_seed2026",
+      "selected_checkpoint_sha256_from_verified_receipt": "8a3341f2b416355d87a07196e5bc7825a81aa94b30d32e90cf0e65e6134c9bbd"
+    },
+    {
+      "checkpoint_binaries_not_redundantly_redownloaded": true,
+      "checkpoints_downloaded_and_verified_in_primary_retrieval": true,
+      "fresh_files": [
+        "stage-report.json",
+        "selected-checkpoint.json",
+        "validation-patients.npz",
+        "history.json"
+      ],
+      "independent_small_artifact_retrieval_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-v14-fit-224-779a38cd/1",
+      "run_id": "v14_reference_res224_seed2026",
+      "selected_checkpoint_sha256_from_verified_receipt": "32a316e6c1a898a85249c4ef26df7440bb95d91c6667aecb508b722e17a43695"
+    }
+  ],
+  "matrix_complete": true,
+  "patient_level_data_kept_private": true
+}

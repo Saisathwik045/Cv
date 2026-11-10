@@ -1,46 +1,49 @@
-# V14 CPU readiness complete; no GPU execution authorized
+# V14 two frozen fits complete — reused-validation development only
 
-Merged PR26/main `f722cb51167b1694802ffdbbe297866b7e8db2a9` verified.
-[Readiness/identities/commands](../results/candidate-v14/CPU_READINESS.md),
-[actual evidence](../results/candidate-v14/readiness.json),
-[worker contract](CANDIDATE_READY_V14.md), [frozen queue](../results/candidate-v14/frozen-plan.json).
+Merged PR27/main3b07a7634f3e6530d66b2ec41c70d837893992c6; approved plan/source/config/
+protocol/dependency/input identities preserved. No preparation, duplicate review
+or v13 training was repeated. Exact two fits completed sequentially with one
+session each, zero failures/resumes, and no paid scaling.
 
-One private GPU-disabled CPU job completed:
-`saisathwikregula/trustretina-v14-inputs-c057c643/1`,276.103s against3,600s cap.
-All1,750 native validation/calibration raw hashes passed; only missing320 tensors
-were constructed. TRAIN224/TRAIN320 and existing224 validation/calibration caches
-were recovered/hash-verified and reused. Historical final excluded. Actual role
-patients/groups: TRAIN2275/2240, validation525/518, calibration350/331; all-eight
-support and patient/containment separation passed. No calibration labels in the
-new GPU input bundle. Separate original labeled metadata remains private.
+| Fit | Epochs / best | Macro AUROC | Macro AP | Macro F1 | Micro F1 |
+|---|---:|---:|---:|---:|---:|
+| ConvNeXt320 | 11 / 5 | 0.8596 | 0.5993 | 0.5371 | 0.5532 |
+| ConvNeXt224 | 11 / 5 | 0.8480 | 0.5812 | 0.5332 | 0.5290 |
 
-Storage: free private /tmp scratch, mode0700, capacity/write tested, enough for
-all3 possible sessions' best/last checkpoints plus512MiB margin. No verified
-artifact deleted; pinned existing/new Kaggle outputs are durable recovery copies.
-Scratch can disappear with the environment; use candidate_recover.py, not a new
-preparation job. Exactly one CPU submission used; no further preparation session.
+[Complete all-eight precision/recall/F1 and TP/FP/FN](../results/candidate-v14/RESULTS.md)
+and [CSV](../results/candidate-v14/validation-per-class.csv).320 leads aggregate
+validation metrics but is not uniformly better: H FP6 vs21 but FN12 vs11; O FP119
+vs118, FN53 vs61; D/A/M misses107/14/4 vs130/7/5. C FP99 vs30 and F1 0.3827 vs 0.6222;
+A recall0.44 vs0.72; G recall0.50 vs0.5625. Exact match0.2990 vs0.3143. No independent
+confirmation or clinical superiority; no automatic promotion/refit/demo change.
 
-Worker/registry enforce two fresh-ImageNet ConvNeXt ratio-BCE fits,320 then224,
-frozen v4 TRAIN/validation roles, max25 total cosine epochs/patience6, TRAIN-only
-weights, validation patient macro AUROC selection, strict checkpoint/RNG resume,
-mean-eye probabilities, fixed p≥.5 and label-free calibration inference only after
-checkpoint freeze. No temperature/threshold/policy fit, demo replacement or full-
-cohort refit. Four-hour free GPU cap14,400s/max3sessions retained; zero GPU attempts.
-No actual v14 GPU/model inference has run. REVIEW REQUIRED remains default.
+Private pinned jobs:
+- saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1
+- saisathwikregula/trustretina-v14-fit-224-779a38cd/1
 
-BRSET public access requirements checked: PhysioNet credentialing, required CITI
-training and personal DUA signature are needed; no restricted metadata entitlement
-or files verified, no agreement submitted. Exact links are in CPU_READINESS.md.
-No invented label mapping. External confirmation/all-eight cohort readiness stays
-blocked; a future development-fit approval must acknowledge that separate limit.
+All 34 output-file hashes passed, including best/last checkpoints, aligned raw eye/
+patient predictions, histories, dependency records,20-pass seeds and quality arrays.
+Both strict best reload/state-invariance/post-freeze inference checks passed.
+Small artifact/prediction recovery was independently verified from both versions;
+large checkpoints and patient records remain private outside Git.
+[Artifact hashes](../results/candidate-v14/verified-artifact-registry.json),
+[fresh retrieval](../results/candidate-v14/fresh-retrieval-proof.json),
+[run registry/receipts](../results/candidate-v14/frozen-plan.json).
 
-Current next action: review the source/input/config/dependency hashes and grant a
-separate exact two-fit GPU approval only if desired; full free quota/resource/
-accounting is rechecked immediately before submission. Disabled approval template
-and working gated commands are committed. No background monitoring is active.
-Nine local guard tests pass; both Torch fixtures passed in CPU CI for Python3.11
-and3.12. All seven jobs passed on implementation head77603f1 in
-[CI run42797248567](https://github.com/Saisathwik045/Cv/actions/runs/42797248567).
-[Reviewable PR27](https://github.com/Saisathwik045/Cv/pull/27) remains unmerged.
-[Prior v13 results and harms](../results/resolution-v13/DISCUSSION.md) and
-[historical planning](history/STATUS-through-v14-planning.md) remain unchanged.
+[Actual quota accounting](../results/candidate-v14/gpu-time.json):3826.407s(1.062891h)
+observed account delta vs14400s cap; two sessions vs maximum3, no resume. Baseline
+timeUsed6926.895s and refresh2026-11-14T00:00Z retained throughout. Final used10753.302s,
+free10846.698s, reserved0, paid disabled. Worker sum3767.781s is distinct from billed
+quota. Internal conservative reservations12000s. Foreground queue driver exited;
+no background monitoring or further GPU session is active.
+
+No historical final access, external evaluation, temperature/threshold fitting or
+working-demo modification. Calibration output metadata has no labels; inference
+ran only after checkpoint freeze/strict reload. REVIEW REQUIRED stays unchanged.
+
+Next executable research step requires a separately authorized, prospectively
+recorded calibration/reliability analysis for these new checkpoints, using saved
+post-freeze inputs/predictions. Do not reuse the original demo's temperature or
+threshold experiments. BRSET remains a separate credentialing/CITI/personal-DUA/
+label-compatibility blocker; no agreement/form submitted. Independent all-eight
+confirmation remains unavailable. GPU training queue is complete; do not resubmit.
