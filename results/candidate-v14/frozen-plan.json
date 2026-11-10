@@ -15,6 +15,22 @@
       "submission_attempted": true,
       "submission_verified": true,
       "training": true
+    },
+    "artifacts/candidate-v14/experiment/v14_reference_res224_seed2026/attempt-1": {
+      "approval_record_sha256": "e37ea2591853f1e0d8a33cbd2ede752d71f86dcf3069401f381b5aefc8d77a16",
+      "budget_reservation_seconds": 4200,
+      "execution_timeout_seconds": 3900,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-v14-fit-224-779a38cd",
+      "kernel_version": "saisathwikregula/trustretina-v14-fit-224-779a38cd/1",
+      "nonce": "779a38cd90d74b56b68a58281e1fd233",
+      "plan_sha256": "3e82ea2c70524b2d7348ea4f7df8bc818535f8db95ec6ce7f15923693d4b0a18",
+      "provider_response_version": 1,
+      "source_commit": "09632a1347435991e6177cea5f5cb68ac8115655",
+      "source_sha256": "2a7b1995dec29f81567da5a737bd54a59181f39d148b7760b532202fd3a033d1",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
     }
   },
   "registry": {
@@ -84,7 +100,7 @@
       "train": "136a0289f42a6541088a3bb1cfba7871e5465eeb52c4fa91587ba35c1cdb0526"
     },
     "inputs_sha256": "ddbc1f4f0b0e21fa1c6ffd3f917ee7c958fd7d8b9ee9dc13aca1d386d6a62b4a",
-    "last_poll_unix": 1794322468.603776,
+    "last_poll_unix": 1794322806.5866528,
     "maximum_gpu_quota_seconds": 14400,
     "maximum_sessions": 3,
     "orchestration_dependency_sha256": {
@@ -182,10 +198,19 @@
         "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/candidate-v14/experiment/v14_reference_res224_seed2026/attempt-1",
+            "kernel_id": "saisathwikregula/trustretina-v14-fit-224-779a38cd",
+            "kernel_version": "saisathwikregula/trustretina-v14-fit-224-779a38cd/1",
+            "quota_used_before": 9438.564,
+            "reserved_seconds": 4200,
+            "status": "running"
+          }
+        ],
         "id": "v14_reference_res224_seed2026",
         "image_size": 224,
-        "status": "queued"
+        "status": "running"
       }
     ],
     "schema_version": 14,

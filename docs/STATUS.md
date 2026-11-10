@@ -1,4 +1,4 @@
-# V14 authorized execution — 320 candidate verified complete, 224 queued
+# V14 authorized execution — 320 verified complete, 224 submitted
 
 Merged PR27/main3b07a7634f3e6530d66b2ec41c70d837893992c6 verified.
 User authorized the exact frozen two-fit queue under14400 free GPU-quota seconds/
@@ -14,9 +14,11 @@ is saved before first submission and must never be reset on interruption.
 First job: saisathwikregula/trustretina-v14-fit-320-7bbe5ade/1 completed11epochs,
 best epoch5, worker2485.689s. All17 artifacts passed checksum verification, with
 strict best reload, model-state invariance and post-freeze inference evidence.
-Its exact source/nonce/reservation7800s is saved. One of3 sessions used.
-The224 reference is queued and not submitted; it is already authorized, subject
-to the existing fresh quota/resource/session guards. No incomplete-matrix winner.
+Its exact source/nonce/reservation7800s is saved. The224 reference is submitted
+as `saisathwikregula/trustretina-v14-fit-224-779a38cd/1`, reservation4200s. Both submissions
+passed fresh settled-quota/paid/resource/session guards. Two of maximum3sessions
+used; initial reservations total12000s. Cumulative baseline is unchanged.
+Reference completion is not claimed; no incomplete-matrix winner.
 [Machine-readable registry](../results/candidate-v14/frozen-plan.json),
 [preflight](../results/candidate-v14/execution-preflight.json),
 [actual input verification](../results/candidate-v14/actual-input-verification.json).
