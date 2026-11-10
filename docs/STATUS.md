@@ -32,7 +32,7 @@ Frozen approval identities remain unchanged:
 
 No image preparation, split generation, duplicate review, GPU smoke or historical final evaluation was repeated. All five factories, both loss implementations, frozen demo, calibration, thresholds and REVIEW REQUIRED behavior remain unchanged.
 
-CPU checks: two focused execution-guard/archive-verification tests passed; syntax/diff checks and CPU dependency consistency passed. All six real output audits replayed fit-only weights, inner-only selection, strict reload evidence, frozen outer alignment and mean-eye prediction metrics. The bootstrap resumed from 1,580 saved replicates after its local process disappeared, using identical seeds/sources; no model rerun or analysis change. The frozen protocol, worker, controller and reporter bytes are unchanged. Latest pushed CI evidence and PR are recorded below when available.
+CPU checks: two focused execution-guard/archive-verification tests passed; syntax/diff checks and CPU dependency consistency passed. All six real output audits replayed fit-only weights, inner-only selection, strict reload evidence, frozen outer alignment and mean-eye prediction metrics. The bootstrap resumed from 1,580 saved replicates after its local process disappeared, using identical seeds/sources; no model rerun or analysis change. The frozen protocol, worker, controller and reporter bytes are unchanged. Implementation/results commit `c6a3932`: all seven required CI jobs passed in [run42776144015](https://github.com/Saisathwik045/Cv/actions/runs/42776144015). This final status-only update preserves those implementation bytes.
 
 PR: https://github.com/Saisathwik045/Cv/pull/25 (focused execution/results branch; not merged).
 
