@@ -1,39 +1,52 @@
-# V13 matched resolution study — completed
+# V14 next-stage planning — no fitting authorized
 
-All six authorized training-only fits completed and were retrieved/source/nonce/output-hash verified. The complete paired analysis and 2,000 fixed-seed component bootstrap replicates are finished. [Results](../results/resolution-v13/RESULTS.md), [all-eight findings and plots](../results/resolution-v13/DISCUSSION.md), [registry](../results/resolution-v13/queue.json), and [accounting/artifact hashes](../results/resolution-v13/execution-provenance.json).
+PR #25 is merged on main `fe808b24c438503ba89462a3ed206fb7f3ae484d`.
+The six-fit v13 study, its checksums and original demo remain unchanged.
+[Current plan](../results/candidate-v14/README.md) · [candidate protocol](CANDIDATE_FREEZE_V14.md) · [independent dataset review](INDEPENDENT_DATASETS_V14.md).
 
-| Run | Status | Epochs / best (one-based) |
-|---|---|---:|
-| fold0_res224 | verified complete | 13 / 7 |
-| fold0_res320 | verified complete | 11 / 5 |
-| fold1_res224 | verified complete | 13 / 7 |
-| fold1_res320 | verified complete | 15 / 9 |
-| fold2_res224 | verified complete | 10 / 4 |
-| fold2_res320 | verified complete | 12 / 6 |
+Actual read-only verification: all six pinned Kaggle versions COMPLETE; local
+source/nonce/report/output hashes pass, fresh remote report hashes match, and all
+12 best/last checkpoints pass remote range-access/total-length checks. Large
+checkpoint bodies were rehashed locally, not redownloaded. [Evidence](../results/candidate-v14/recovery-verification.json).
+No preparation, duplicate review, split generation, training, evaluation replay,
+calibration/threshold fitting, new image acquisition/upload or paid resource used.
 
-Settled free Kaggle charge: **6926.895s (1.924138h)** against 21,600s. Exactly 6 submitted sessions; zero failures/resubmitted GPU sessions, zero final reserved time, paid scaling disabled. Worker elapsed time is separately 6717.541s. Owned remote inventory matches the six registered version1 jobs. No seventh session, additional training or refit is authorized.
+320 ConvNeXt-Tiny ratio BCE remains the leading development candidate. V13 mean
+macro AUROC 0.83273→0.85108, macro F1 0.53758→0.57156. Preserve the limitations:
+H FP 25→76/F1 0.2308→0.2125; O FP 439→720; D/A/M FN 269→316,62→66,11→19.
+H recall fell in two folds. Original [all-eight report](../results/resolution-v13/DISCUSSION.md)
+and [v13 status](history/STATUS-through-v13-complete.md) remain the result authority.
 
-| Mean outer metric | 224 | 320 |
-|---|---:|---:|
-| Macro AUROC | 0.83273 | 0.85108 |
-| Macro AP | 0.57279 | 0.59412 |
-| Macro F1 | 0.53758 | 0.57156 |
-| Micro F1 | 0.53534 | 0.57509 |
+No verified independent all-eight paired-eye cohort was identified among BRSET,
+PAPILA, RFMiD, mBRSET and EyePACS. BRSET is the recommended partial-label feasibility
+candidate; licensed access, actual pairs and native-endpoint compatibility remain
+unverified. Unknown labels are masked, never negative. H/O and D semantics need
+source guidance; partial studies cannot be called full validation. No external
+patient files were downloaded or non-overlap claims established.
 
-Primary paired macro AUROC difference (320−224): **+0.01835**, conditional 95% interval **[+0.01036,+0.02655]**. Macro AP and F1 differences are positive on this cohort. The frozen numerical rule nominates 320 for future research only; no fold checkpoint is promoted globally. These intervals condition on fitted models and omit training/selection variability; prior adaptive same-source development and one seed limit independence. Fresh compatible independent paired-eye eight-label data is needed for confirmation.
+Proposed future runs, not approved: `v14_candidate_res320_seed2026` and
+`v14_reference_res224_seed2026`, fresh ImageNet, frozen TRAIN 2,275/validation 525;
+350 calibration patients only after checkpoint freeze; historical final excluded.
+Same 25-epoch cosine/ratio-BCE settings and validation macro AUROC selection;
+no threshold/policy fit. A new shared T per checkpoint would use calibration only,
+never the old model's T. The original demo/calibration/thresholds remain unchanged;
+REVIEW REQUIRED stays default.
 
-H pooled recall0.1791→0.2537, FP25→76, FN55→50, F10.2308→0.2125 (67 positives/66 positive components). Its paired recall/F1 intervals include zero. O recall0.4450→0.6588, FP439→720, FN353→217, F10.4168→0.4721 (636 positives). G AP/F1 are worse; D/A/M have more missed positives at p≥.5. Keep these harms alongside aggregate gains. H/O source semantics and patient-derived per-eye targets remain limitations, without relabeling or clinical inference.
+Estimate 3.20 free GPU hours with allowance; propose strict 14,400s/four-hour cap,
+max 3 sessions including one optional compatible resume. Initial reservations
+7,800+4,200=12,000s; resume≤2,400s including overhead. Read-only observed free
+quota 14,673.105s, reserved 0, paid disabled. No quota reserved or GPU job submitted.
+Recheck actual counters, accelerator and full cap before any future approval/execution.
 
-Frozen approval identities remain unchanged:
+Next executable preparation: resolve permitted BRSET metadata/endpoint feasibility;
+recover existing 224 role inputs and construct only missing native 320 validation/
+calibration inputs (proposed CPU-only max 3,600s/one session), then implement/test
+and hash-freeze the new worker/registry. Current local disk ~276MiB free is
+insufficient; free private scratch/streaming recovery must be verified first.
+New input/worker hashes, external cohort/label agreement and execution approval
+are explicit blockers. No all-data refit or model promotion follows automatically.
 
-- Plan `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`
-- Worker/source `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`
-- Configuration `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`
-
-No image preparation, split generation, duplicate review, GPU smoke or historical final evaluation was repeated. All five factories, both loss implementations, frozen demo, calibration, thresholds and REVIEW REQUIRED behavior remain unchanged.
-
-CPU checks: two focused execution-guard/archive-verification tests passed; syntax/diff checks and CPU dependency consistency passed. All six real output audits replayed fit-only weights, inner-only selection, strict reload evidence, frozen outer alignment and mean-eye prediction metrics. The bootstrap resumed from 1,580 saved replicates after its local process disappeared, using identical seeds/sources; no model rerun or analysis change. The frozen protocol, worker, controller and reporter bytes are unchanged. Implementation/results commit `c6a3932`: all seven required CI jobs passed in [run42776144015](https://github.com/Saisathwik045/Cv/actions/runs/42776144015). This final status-only update preserves those implementation bytes.
-
-PR: https://github.com/Saisathwik045/Cv/pull/25 (focused execution/results branch; not merged).
-
-Next executable action is CPU-only artifact recovery or independent review using [RECOVERY.md](../results/resolution-v13/RECOVERY.md). No GPU job is queued and no monitoring is promised after closeout. Further training, refit, threshold/calibration work or demo replacement requires a separate scoped decision. Private exact receipts and TASK_RESUME.json preserve recovery; historical preparation is preserved [here](../results/resolution-v13/README.md) and [prior status](history/STATUS-through-v13-preparation.md).
+Seven focused plan guard tests and compile/diff checks pass. The plan checker
+returns valid proposal=true, execution_ready=false, GPU jobs authorized=0.
+Private resume: artifacts/candidate-v14/RESUME.md and TASK_RESUME.json.
+No background monitoring. Reviewable PR/CI are recorded with the planning branch.

@@ -1,0 +1,38 @@
+{
+  "arms": [
+    {
+      "maximum_observed_non_epoch_worker_seconds": 119.71103351600004,
+      "observed_epoch_median_seconds": 53.31705809500005,
+      "observed_epochs": 36,
+      "proposed_full25_estimate_seconds": 3052.1492287410033,
+      "resolution": 224
+    },
+    {
+      "maximum_observed_non_epoch_worker_seconds": 148.30936751299987,
+      "observed_epoch_median_seconds": 104.49025093799997,
+      "observed_epochs": 38,
+      "proposed_full25_estimate_seconds": 5895.2731691029985,
+      "resolution": 320
+    }
+  ],
+  "estimated_charged_seconds_using_historical_ratio": 9226.270780809045,
+  "estimated_full25_worker_seconds": 8947.422397844002,
+  "gpu_jobs_submitted_now": 0,
+  "historical_charged_to_worker_ratio": 1.0311652194974315,
+  "initial_reservations": [
+    7800,
+    4200
+  ],
+  "maximum_sessions": 3,
+  "optional_resume_reservation": 2400,
+  "scale_reason": "TRAIN2275/old_fit1137 is2.0009; selection525/old_inner379..380 is1.38. Factor2.2 is conservative mixed-workload extrapolation, not measured full-role throughput.",
+  "source": "actual six v13 private stage-report histories; metadata only, no inference or fits",
+  "strict_proposed_cap_seconds": 14400,
+  "uncertainties": [
+    "No guarantee of T4 availability,charging multiplier or constant throughput.",
+    "Post-checkpoint/calibration feature inference overhead is unmeasured for full320 roles; session cap includes it.",
+    "Free quota is an observation, not a reservation or authorization."
+  ],
+  "with25percent_allowance_seconds": 11532.838476011308,
+  "workload_scale": 2.2
+}

@@ -1,5 +1,7 @@
 # TrustRetina
 
+[Next-stage candidate/freezing plan](results/candidate-v14/README.md): retain 320 ConvNeXt-Tiny ratio BCE and the 224 reference. Independent all-eight confirmation remains blocked by dataset/label compatibility. No new training or fitting is authorized.
+
 All six authorized [v13 matched resolution fits](results/resolution-v13/RESULTS.md)
 completed using **1.924 free Kaggle GPU-quota hours**, within the six-hour/six-session cap.
 Mean outer macro AUROC was **0.83273 at224 → 0.85108 at320**; macro F1

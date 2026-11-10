@@ -1,0 +1,113 @@
+{
+  "all_eight_independent_cohort_identified": false,
+  "any_external_patient_files_downloaded": false,
+  "automatic_label_mapping_approved": false,
+  "odir_exclusion": {
+    "reason": "OIA-ODIR is the same5000-patient source, not independent. Official creator description uses patient diabetes/hypertension and broad other abnormalities. Mirrors, new crops and previously exposed ODIR final cohorts cannot provide fresh confirmation. Creator repository read; challenge page403.",
+    "sources": [
+      "https://github.com/nkicsl/OIA-ODIR",
+      "https://odir2019.grand-challenge.org/dataset/"
+    ]
+  },
+  "options": [
+    {
+      "access": "No PhysioNet entitlement verified; no restricted files downloaded. Do not upload restricted data to Kaggle without the applicable license/security permission.",
+      "files_accessed": false,
+      "full_eight_compatible_verified": false,
+      "id": "BRSET",
+      "images": 16266,
+      "labels": "Native DR, AMD, myopic fundus, hypertensive retinopathy and other retinal findings; no documented cataract target. Increased cup-disc is not glaucoma. Other is not the ODIR residual taxonomy; normal anatomy is not all-eight N.",
+      "license": "PhysioNet Credentialed Health Data License1.5.0 and DUA; credentialing and CITI training required. Not an unrestricted redistribution license.",
+      "limitations": "Version1.0.2 explicitly reviews eye laterality; use this version, not an older mirror. Actual column spelling must be checked against the downloaded version.",
+      "overlap": "Separate Brazilian acquisition described, unlike Chinese ODIR; actual patient/image non-overlap not established. Related BRSET/mBRSET project links do not establish independent cohorts.",
+      "pairing": "patient_id and exam_eye (1 right,2 left); one paired exam described. Actual complete-pair count unknown; image total is less than twice patient total.",
+      "patients": 8524,
+      "recommended_use": "First partial-label feasibility candidate after access and blinded endpoint review; not full eight-label confirmation.",
+      "sources": [
+        "https://physionet.org/content/brazilian-ophthalmological/1.0.2/",
+        "https://physionet.org/content/brazilian-ophthalmological/view-license/1.0.2/",
+        "https://github.com/luisnakayama/BRSET"
+      ],
+      "verified_documentation": "Public official release, data dictionary, release notes and license read directly.",
+      "version": "1.0.2"
+    },
+    {
+      "access": "Public Figshare release documented; actual download not attempted. No entitlement or file integrity claimed.",
+      "files_accessed": false,
+      "full_eight_compatible_verified": false,
+      "id": "PAPILA",
+      "images": 488,
+      "labels": "Glaucoma endpoint only. Suspects are indeterminate, not negative; healthy for glaucoma does not establish N or absence of seven other ODIR labels.",
+      "license": "Author institution records dataset GPL3.0+; do not substitute the article license. Confirm exact release terms before use/distribution.",
+      "overlap": "Spanish clinical collection described in the primary article; no content-level overlap audit with ODIR performed.",
+      "pairing": "Both eyes and patient identifier documented; OD/OS filenames link eyes. Diagnosis0 healthy,1 glaucoma,2 suspect in primary article indexed text.",
+      "patients": 244,
+      "recommended_use": "Possible small paired-eye G-only transport study; not all-eight confirmation.",
+      "sources": [
+        "https://doi.org/10.6084/m9.figshare.14798004.v2",
+        "https://portalinvestigacion.upct.es/documentos/668fc47cb9e7c03b01bdee3a?lang=en",
+        "https://www.nature.com/articles/s41597-022-01388-1"
+      ],
+      "verified_documentation": "Author-institution dataset record read directly; primary article indexed text confirms244 patients,488 eyes and identifiers. Direct Nature/PMC/Figshare opens were blocked or challenged; actual files not verified.",
+      "version": "2 (2022-05-06)"
+    },
+    {
+      "access": "Challenge-hosted release; public page blocked in this review. Registration/terms and archive version remain unverified; do not replace with an unverified mirror.",
+      "files_accessed": false,
+      "full_eight_compatible_verified": false,
+      "id": "RFMiD",
+      "images": 3200,
+      "labels": "46 conditions reported; DR/ARMD and findings such as media haze and optic-disc cupping. Media haze is not cataract; cupping is not glaucoma. No complete ODIR N/D/G/C/A/H/M/O mapping verified.",
+      "license": "Dataset descriptor explicitly states CC-BY4.0; verify downloaded release and attribution requirements.",
+      "overlap": "Original Nanded,India acquisition described; byte/content checks against ODIR remain pending.",
+      "pairing": "Descriptor defines an image ID; no verified patient/laterality linkage for the public release. Do not infer pairs from consecutive image numbers.",
+      "patients": null,
+      "recommended_use": "Possible separately labeled image-level partial study only if access/labels verified; unsuitable for the fixed paired-patient primary endpoint without curator-supplied linkage.",
+      "sources": [
+        "https://www.mdpi.com/2306-5729/6/2/14",
+        "https://riadd.grand-challenge.org/download-all-classes/"
+      ],
+      "verified_documentation": "Original dataset descriptor read directly; challenge download page403.",
+      "version": "Original2021 release; exact downloadable archive version pending"
+    },
+    {
+      "access": "No restricted data access verified; no files downloaded or uploads authorized.",
+      "files_accessed": false,
+      "full_eight_compatible_verified": false,
+      "id": "mBRSET",
+      "images": 5164,
+      "labels": "ICDR DR and edema; systemic_hypertension is self-reported systemic disease, not a verified ODIR H match. Missing grades occur; other ODIR targets unavailable.",
+      "license": "PhysioNet Credentialed Health Data License1.5.0; credentialing, required training and DUA.",
+      "overlap": "Itabuna,Brazil2022 acquisition documented; non-overlap with ODIR/BRSET is not proved by geography or date.",
+      "pairing": "patient and laterality documented; multiple macula/disc-centered views. Exact complete-eye pairs and one-view selection need metadata audit.",
+      "patients": 1291,
+      "recommended_use": "Optional later DR/mobile-domain study; not the first full-eight evaluation and not an H confirmation cohort.",
+      "sources": [
+        "https://physionet.org/content/mbrset/1.0/"
+      ],
+      "verified_documentation": "Public official description, dictionary, methods and access requirements read directly.",
+      "version": "1.0"
+    },
+    {
+      "access": "Existing Kaggle token does not prove competition acceptance or data entitlement. No download, enrollment or terms acceptance performed.",
+      "files_accessed": false,
+      "full_eight_compatible_verified": false,
+      "id": "EyePACS_Kaggle2015",
+      "images": null,
+      "labels": "DR grade only. Grade0 means no DR, not N or absence of G/C/A/H/M/O. ODIR D semantic compatibility needs review.",
+      "license": "Subject to competition rules, not a generic open-data license; official indexed page restricts sharing outside Kaggle. Verify current terms/acceptance before access.",
+      "overlap": "Separate EyePACS source is described; copied/repackaged images and patient overlap remain untested.",
+      "pairing": "Subject ID and left/right names documented; complete labeled pairs must be audited after permitted access.",
+      "patients": null,
+      "recommended_use": "DR-only fallback if permitted; no full-eight validation.",
+      "sources": [
+        "https://www.kaggle.com/competitions/diabetic-retinopathy-detection/data",
+        "https://www.kaggle.com/competitions/diabetic-retinopathy-detection/rules"
+      ],
+      "verified_documentation": "Official indexed data-page text confirms subject IDs, left/right suffixes and0..4 clinician DR grades. Direct pages rendered no readable body; full current rules not inspected.",
+      "version": "2015 competition release; archive version pending"
+    }
+  ],
+  "review_date": "2026-11-10",
+  "scope": "Bounded review of five external options plus ODIR original-source exclusion; not a proof no other dataset exists."
+}

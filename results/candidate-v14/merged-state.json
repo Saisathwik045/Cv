@@ -1,0 +1,16 @@
+{
+  "PR25_final_CI_conclusion": "success",
+  "PR25_final_CI_run_id": 42776568639,
+  "PR25_head_is_ancestor": true,
+  "base_main_sha": "fe808b24c438503ba89462a3ed206fb7f3ae484d",
+  "merge_commit_CI_status": "Not established by the legacy status connector; not treated as passed. PR25 head CI was verified, and this planning branch must pass its own CI.",
+  "merge_commit_combined_statuses_returned": 0,
+  "merge_commit_subject": "Merge pull request #25 from Saisathwik045/phase/13-resolution-results",
+  "merge_parents": [
+    "35ccc5adb497dd64f4650b0c2a1e46a4b879493f",
+    "26e74bac853f6adaebaeb3e7386d1a5fd4536745"
+  ],
+  "prior_scientific_source_sha256": "e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c",
+  "protected_scientific_and_historical_paths_unchanged": true,
+  "verification_kind": "git fetched origin/main and merge ancestry; prior head CI read through authenticated GitHub tools"
+}
