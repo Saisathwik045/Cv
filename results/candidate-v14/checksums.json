@@ -1,0 +1,17 @@
+{
+  "execution_ready": false,
+  "files": {
+    "docs/CANDIDATE_FREEZE_V14.md": "169adb9d4047f717a7aab5fe27b8b598f5c40c7ca5ccb72018842b8d2153d6ce",
+    "docs/INDEPENDENT_DATASETS_V14.md": "e6569a46a6377ca62e410108ba98e497d684caf7d9b486b4ef2f5470711f04cd",
+    "results/candidate-v14/compute-estimate.json": "3444d1681ba7d10cfcc83a9cbc56439aece8209806f18e9ec3f6a3df1baf202b",
+    "results/candidate-v14/dataset-options.json": "51ce40dde8af772cec468f55dc837c4517c3baa34ec2d269443445bdc6c69319",
+    "results/candidate-v14/merged-state.json": "65fc3307659ad8d143a868970053f1667bd56b495a8124326ef6a33660c8dd1a",
+    "results/candidate-v14/proposed-plan.json": "3f82735606933fec20edbd6e3719e7f25138adf3d64327de28e26a8ec12f504d",
+    "results/candidate-v14/recovery-verification.json": "680b684b701944cedb7ab5414bdace604574a33bb16c02c2e6befd14e66d1712",
+    "scripts/check_candidate_plan.py": "2b1f6813da7a13ecf7c9e5bc95359f53f391b072d0eaedf66a4c36788ea7b4ef",
+    "scripts/verify_candidate_recovery.py": "482d860f7cb3786f358b52d283cb0df8823a1332eb4407ee8c76049a8fd192c8",
+    "tests/test_candidate_plan.py": "28c46a3a3097f6ce210a3fcbb7ef3133d9777bd80fe67223d188f3139e25f3f1"
+  },
+  "kind": "review snapshot, not GPU execution approval",
+  "new_worker_sha256": null
+}

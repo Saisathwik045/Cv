@@ -1,0 +1,92 @@
+{
+  "all_six_recoverable_at_observation": true,
+  "fitting_performed": false,
+  "limitation": "Remote inventories and report bytes verified; full checkpoint bytes checked in existing local copies. Future access/retention not guaranteed; no clinical or scientific audit rerun.",
+  "new_jobs_submitted": 0,
+  "observed_utc": "2026-11-10T08:21:23.064635+00:00",
+  "prior_plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+  "quota_snapshot": {
+    "free_seconds": 14673.105,
+    "observed_unix": 1794298905.4873648,
+    "paid_disabled": true,
+    "refresh_time": "2026-11-14T00:00:00.000Z",
+    "reserved_seconds": 0.0,
+    "used_seconds": 6926.895
+  },
+  "remote_checked": true,
+  "runs": [
+    {
+      "best_sha256": "e5c16770332ab14900da2d42d2573cd8d845fe1baf02910fce6eb1f4d20af771",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1",
+      "last_sha256": "a9432980784242b96a734878ed77117be26cc475c26b0d84d81d44130f1191b3",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "fa9b574ae35fe48e0ab84904128dedce57fc3dc41e4b495ea1d0a153523a0a2c",
+      "run_id": "fold0_res224"
+    },
+    {
+      "best_sha256": "5e04758daf18065ad237f33bf9247550c4c8973dd8418190fe3f96911771a1c1",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-320-e7853320/1",
+      "last_sha256": "af8719d28fbc2c8026835ee07b38bdc0bff1e8672aba8ed435757fec420fa682",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "51afa0b800bf1aa1011553f40581853f40a66116430d75f839ef047e1d9a426b",
+      "run_id": "fold0_res320"
+    },
+    {
+      "best_sha256": "ace02ca056da64cde9ade04bbae6819887d7e38d756ad8043f74a6e0ed93164d",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1",
+      "last_sha256": "8bf486e65c5c40b139a660bb578c40bbb3d68a138da2736f27896d04e5f2eead",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "a998c5472aa316a073b65739341bc76772bb2ff4682462abe91a7fdbe2377fc4",
+      "run_id": "fold1_res224"
+    },
+    {
+      "best_sha256": "b1332f17b0d41eaba74b3906af45bad03a66117c2069487dfe198efaab962f19",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+      "last_sha256": "bce032b04e6b35bf0c2ea0532a638bae8b58ab3679e41b69054102476205b696",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "57e4ecfbfc0538cad8a0ea968eb71dcb2e0ec108d86f909ad5bfeba3f92264a0",
+      "run_id": "fold1_res320"
+    },
+    {
+      "best_sha256": "14b1f151c429bfda77bd191746ec734972f3a4a3844466dbd23d167fbc528792",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463/1",
+      "last_sha256": "94f045f189bf7f85f263de5df7003c4eb1e081caf9f4214723a838c21457e533",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "39add0855d644e5c7bbe42a8a7794cecf630b63ee5d2fa606fcfbc7f9146622f",
+      "run_id": "fold2_res224"
+    },
+    {
+      "best_sha256": "1c8fce4ce614510a33f987cb4d6b8097aa7e201b4115451b30e4157dce85519b",
+      "fresh_remote_report_sha256_verified": true,
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-320-2958393a/1",
+      "last_sha256": "9121123034ccbbd3c70f8d96de68c2187bc563d11b85416121aba3755444a4c9",
+      "local_all_outputs_sha256_verified": true,
+      "remote_checkpoint_range_access_verified": true,
+      "remote_output_inventory_verified": 13,
+      "remote_status": "COMPLETE",
+      "report_sha256": "3f2fdf3652411687d665386e17ca729c43079b60f275de59387f680029c9aa98",
+      "run_id": "fold2_res320"
+    }
+  ],
+  "verification_scope": "Existing receipt/source/report/output hashes locally; remote completed-version inventory plus fresh report bytes. Large checkpoints checked locally in full; one remote byte and total length checked per checkpoint, not full redownload."
+}

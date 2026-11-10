@@ -1,3 +1,7 @@
+# V14 candidate/freezing plan — research only
+
+[Prospective candidate protocol](CANDIDATE_FREEZE_V14.md) separates fitting, reused validation checkpoint selection, new shared-temperature fitting and independently registered evaluation. [Dataset review](INDEPENDENT_DATASETS_V14.md) found no verified all-eight match. No new jobs or parameter fitting authorized. Historical protocols below remain as written.
+
 # Matched resolution study v13 — prepared, approval required
 
 [Frozen v13 protocol](RESOLUTION_V13.md) and [verified preparation](../results/resolution-v13/README.md) define six matched training-only fits. Exact native224 parity and native320 construction passed. No training authorization or GPU submission; full six-hour free quota is not currently available. Clinical H/O semantics remain limited to source dataset targets.
