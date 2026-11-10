@@ -100,6 +100,8 @@ def run(spec,*,input_root,output,nonce,source_commit):
                 shutil.copyfile(old/name,out/name)
             restored=load_checkpoint(out/'last.pt',model,optimizer,expected_sha256=state['hashes']['last.pt'],expected_provenance=provenance,generator=generator,scheduler=scheduler)
             first_epoch=restored['next_epoch'];step=restored['global_step'];selection=state['selection'];history=json.loads((out/'history.json').read_text());report.update(history=history,resumed_from=prior)
+            if first_epoch!=len(history):raise ValueError('Resume epoch/history boundary differs')
+            for filename in ('best.pt','last.pt'):(out/(filename+'.sha256')).write_text(file_hash(out/filename))
         complete=bool(selection.get('early_stopped')) or first_epoch==25
         for epoch in range(first_epoch,25):
             if complete:break
@@ -132,11 +134,15 @@ def run(spec,*,input_root,output,nonce,source_commit):
             logits,p,patient,passes,ordered=result
             payload={'logits':logits,'probabilities':p,'image_ids':np.asarray([r['path'] for r in ordered]),'patient_ids':np.asarray([r['patient_id'] for r in ordered]),'eyes':np.asarray([r['eye'] for r in ordered])}
             if role=='validation':payload['labels']=np.asarray([r['labels'] for r in ordered])
+            if role=='validation':
+                targets={r['patient_id']:r['labels'] for r in ordered};patient['labels']=np.asarray([targets[i] for i in patient['patient_ids']])
             np.savez_compressed(out/f'{role}-images.npz',**payload);np.savez_compressed(out/f'{role}-patients.npz',**patient)
             np.savez_compressed(out/f'{role}-passes.npz',probabilities=passes,patient_ids=patient['patient_ids'],seeds=np.arange(62026 if role=='validation' else 72026,(62026 if role=='validation' else 72026)+20))
             if role=='validation':
                 targets={r['patient_id']:r['labels'] for r in roles[role]};y=np.asarray([targets[i] for i in patient['patient_ids']]);m=comparison_metrics(y,patient['probabilities']);m['confusion']=summarize(y,patient['probabilities']>=.5)['per_class'];atomic_json(out/'metrics.json',m);report['metrics']=m
         quality={r:np.stack([canonical_quality(x) for x in np.load(images[r],mmap_mode='r',allow_pickle=False)]) for r in ('train','validation','calibration')}
+        for role in ('train','validation','calibration'):
+            for field in ('path','patient_id','eye','component_id'):quality[role+'_'+field]=np.asarray([r[field] for r in roles[role]])
         np.savez_compressed(out/'quality-features.npz',**quality)
         if any(not torch.equal(before[k],v.cpu()) for k,v in model.state_dict().items()):raise ValueError('Inference mutated frozen model state')
         report.update(model_state_invariance=True,calibration_inference_after_freeze=True,calibration_labels_accessed=False,selection=selection,completed_epochs=len(history))
