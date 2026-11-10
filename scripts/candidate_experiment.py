@@ -142,6 +142,7 @@ def advance(p,api,submit=False,approval=None):
     receipt['submission_attempted']=True;run['status']='submitting';a['status']='submitting';write(bundle/'submission.json',receipt);write(BASE/'registry.json',p);export(p)
     try:
         with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):result=api.kernels_push(str(bundle),timeout=str(timeout),acc='NvidiaTeslaT4')
+        receipt['provider_response_version']=result.version_number;write(bundle/'submission.json',receipt)
         if result.version_number!=1:raise ValueError('Unexpected/ambiguous GPU version; reconcile, never resubmit')
         version=receipt['kernel_id']+'/'+str(result.version_number);receipt.update(kernel_version=version,submission_verified=True);a.update(kernel_version=version,status='running');run['status']='running';p['execution_authorized']=True;write(bundle/'submission.json',receipt)
     except Exception as e:
@@ -153,6 +154,7 @@ def reconcile(p,api,run_id,version):
     run=next((r for r in p['runs'] if r['id']==run_id),None)
     if not run or not run['attempts']:raise ValueError('Only an already-reserved attempt can be recovered')
     a=run['attempts'][-1];bundle=ROOT/a['bundle'];receipt=json.loads((bundle/'submission.json').read_text())
+    if receipt.get('provider_response_version') not in (None,1):raise ValueError('Unexpected multiple provider versions; stop and reconcile accounting/session count')
     if version!=receipt['kernel_id']+'/1':raise ValueError('Only the recorded unique kernel version1 may be reconciled')
     target=bundle/'reconciled-source';target.mkdir(exist_ok=True)
     with contextlib.redirect_stdout(io.StringIO()),contextlib.redirect_stderr(io.StringIO()):api.kernels_pull(version,path=str(target),metadata=True)

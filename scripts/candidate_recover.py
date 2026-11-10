@@ -30,6 +30,8 @@ def main():
     registry=c.BASE/'registry.json'
     if registry.exists():
         current=json.loads(registry.read_text());c.verify_plan(current)
+        if current['plan_sha256']!=p['plan_sha256']:raise ValueError('Private/public plan differs; preserve both for reconciliation')
+        p=current
         if Path(current['local']['train_folder']).joinpath('inputs.json').exists() and Path(current['local']['roles_folder']).joinpath('inputs.json').exists():
             print('Existing private inputs preserved; no download, approval or job. Use status.');return
     scratch=Path('/tmp/trustretina-v14-private/recovered');scratch.mkdir(parents=True,exist_ok=True);scratch.chmod(0o700)
@@ -53,12 +55,14 @@ def main():
     c.BASE.mkdir(parents=True,exist_ok=True)
     if registry.exists():
         prior=json.loads(registry.read_text())
-        if prior['plan_sha256']!=p['plan_sha256'] or any(r['attempts'] for r in prior['runs']):raise ValueError('Preserve newer registry/attempts; recover paths manually, never overwrite')
+        if prior['plan_sha256']!=p['plan_sha256']:raise ValueError('Preserve newer registry: plan identity differs')
+        prior['local']=p['local'];p=prior
     transport.write(registry,p)
     for relative,receipt in saved['receipts'].items():
         path=(ROOT/relative).resolve()
         if not path.is_relative_to(c.BASE.resolve()):raise ValueError('Receipt outside execution directory')
-        path.mkdir(parents=True,exist_ok=True);transport.write(path/'submission.json',receipt)
+        path.mkdir(parents=True,exist_ok=True)
+        if not (path/'submission.json').exists():transport.write(path/'submission.json',receipt)
     print('Pinned actual TRAIN224/TRAIN320 and development224/320 inputs restored. No jobs or approval created.')
 
 
