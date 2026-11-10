@@ -49,4 +49,7 @@ are explicit blockers. No all-data refit or model promotion follows automaticall
 Seven focused plan guard tests and compile/diff checks pass. The plan checker
 returns valid proposal=true, execution_ready=false, GPU jobs authorized=0.
 Private resume: artifacts/candidate-v14/RESUME.md and TASK_RESUME.json.
-No background monitoring. Reviewable PR/CI are recorded with the planning branch.
+No background monitoring. [PR #26](https://github.com/Saisathwik045/Cv/pull/26) is ready for review, not merged.
+All seven CI jobs passed on planning commit43c72e2 in
+[run42786433487](https://github.com/Saisathwik045/Cv/actions/runs/42786433487).
+This final status-only update leaves the reviewed proposal/source snapshot unchanged.

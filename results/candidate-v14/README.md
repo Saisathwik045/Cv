@@ -95,3 +95,5 @@ Private evidence and resume state live under ignored `artifacts/candidate-v14/`.
 Original v13 RESUME.md/TASK_RESUME.json/approval/registry were read and preserved.
 New proposal file identities are in checksums.json. These identify this review
 snapshot, not a new training authorization. No background monitoring is active.
+
+[PR #26](https://github.com/Saisathwik045/Cv/pull/26) is ready for review. All seven CI jobs passed on planning commit43c72e2 in [run42786433487](https://github.com/Saisathwik045/Cv/actions/runs/42786433487). Execution remains blocked and unapproved.
