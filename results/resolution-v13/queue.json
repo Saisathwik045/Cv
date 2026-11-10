@@ -1,5 +1,96 @@
 {
-  "receipts": {},
+  "receipts": {
+    "artifacts/resolution-v13/experiment/fold0_res224/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 2700,
+      "execution_timeout_seconds": 2400,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1",
+      "nonce": "fb0c42fb938741a49b7dd70c9dd81333",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "4377e60fd7ea85b49c0312484fa5ea42acdc38df8e617ced7364a57ba5a2afba",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold0_res320/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 4500,
+      "execution_timeout_seconds": 4200,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f0-320-e7853320",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f0-320-e7853320/1",
+      "nonce": "e78533206c6a425c87ea87bed716afba",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "0f0edab5d95f0dd70e1c16614b8c007a22862ea9c2145318705ef155b76a4af1",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold1_res224/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 2700,
+      "execution_timeout_seconds": 2400,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1",
+      "nonce": "19e7d4a3be464623b2eb708832b4c50e",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "58cb2d38f38eb0a455f76581b90f2902bc3eac066c4cf18a1a512245d78ac142",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold1_res320/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 4500,
+      "execution_timeout_seconds": 4200,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f1-320-597875b0",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+      "nonce": "597875b002ad495f985582d295e70e47",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "49e8e654cbfc8a436f3da5483de4c0db98c1d0168ae7afabf68c385b1fffeb22",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold2_res224/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 2700,
+      "execution_timeout_seconds": 2400,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463/1",
+      "nonce": "beb4e463cbff4973989e4884d03f03d6",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "621f6d02aba3919c997e05b21f13ce297d5a8201a86b03a833a93de2a7c36aa2",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    },
+    "artifacts/resolution-v13/experiment/fold2_res320/attempt-1": {
+      "approval_record_sha256": "4befbb0b9e5cc55cae01fde963ff251691d096e7430f5841e72625f160c0b1eb",
+      "budget_reservation_seconds": 4500,
+      "execution_timeout_seconds": 4200,
+      "gpu_requested": true,
+      "kernel_id": "saisathwikregula/trustretina-res-v13-f2-320-2958393a",
+      "kernel_version": "saisathwikregula/trustretina-res-v13-f2-320-2958393a/1",
+      "nonce": "2958393a81b845b8b19e0c8431c3243e",
+      "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
+      "source_commit": "781e4a9d1a17743bf0a7e9adbf6596711dd8667c",
+      "source_sha256": "a623c070438a9ad1136321766e756a0abb03d0b9598e6ec01e7ff1b5d6105a16",
+      "submission_attempted": true,
+      "submission_verified": true,
+      "training": true
+    }
+  },
   "registry": {
     "cache": {
       "bundle": "artifacts/resolution-v13/preparation",
@@ -88,7 +179,7 @@
     "config_sha256": "fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4",
     "controller_sha256": "ba8edfc73b037941055b825f7bf369fe817359b15ffda0f6b96306ff3d49641a",
     "docker_image": "gcr.io/kaggle-private-byod/python@sha256:9a6bcfda6d03b2cd9aa347ee8c1bae62043328ed0f4afe9bda014e4f8bbf9435",
-    "execution_authorized": false,
+    "execution_authorized": true,
     "expected_dependencies": {
       "Pillow": "13.0.0",
       "cuda": "12.8",
@@ -101,52 +192,123 @@
     },
     "experiment_source_sha256": "e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c",
     "fold_manifest_sha256": "e8f3e7a6e44880c2a5d09dac08619df029d650658d720b26b15352721ca844a5",
+    "last_advance_unix": 1794288379.0582545,
     "plan_sha256": "0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a",
     "protocol_sha256": "04bb5d9885bea00f3a0148310d1340db9fc6286a7e497682d2a6e4b9c8119775",
-    "queue_blocker": "New exact training approval required",
+    "queue_blocker": null,
+    "quota_baseline": {
+      "refresh_time": "2026-11-14T00:00:00.000Z",
+      "used_seconds": 0.0
+    },
     "reporter_sha256": "fb21c730fcef0e1b250ecaff8976cd72dbcee29a499ea31f2add5f7a68c06016",
     "runs": [
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold0_res224/attempt-1",
+            "elapsed_seconds": 795.7761684929999,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f0-224-fb0c42fb/1",
+            "quota_used_before": 0.0,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2700,
+            "status": "complete"
+          }
+        ],
         "id": "fold0_res224",
         "image_size": 224,
         "outer_fold": 0,
-        "status": "queued"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold0_res320/attempt-1",
+            "elapsed_seconds": 1263.004541228,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f0-320-e7853320",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f0-320-e7853320/1",
+            "quota_used_before": 842.35,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 4500,
+            "status": "complete"
+          }
+        ],
         "id": "fold0_res320",
         "image_size": 320,
         "outer_fold": 0,
-        "status": "queued"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold1_res224/attempt-1",
+            "elapsed_seconds": 826.7174325810001,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f1-224-19e7d4a3/1",
+            "quota_used_before": 2137.812,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2700,
+            "status": "complete"
+          }
+        ],
         "id": "fold1_res224",
         "image_size": 224,
         "outer_fold": 1,
-        "status": "queued"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold1_res320/attempt-1",
+            "elapsed_seconds": 1824.0367026239999,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f1-320-597875b0",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f1-320-597875b0/1",
+            "quota_used_before": 2989.626,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 4500,
+            "status": "complete"
+          }
+        ],
         "id": "fold1_res320",
         "image_size": 320,
         "outer_fold": 1,
-        "status": "queued"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold2_res224/attempt-1",
+            "elapsed_seconds": 633.1620088249999,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f2-224-beb4e463/1",
+            "quota_used_before": 4840.86,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 2700,
+            "status": "complete"
+          }
+        ],
         "id": "fold2_res224",
         "image_size": 224,
         "outer_fold": 2,
-        "status": "queued"
+        "status": "complete"
       },
       {
-        "attempts": [],
+        "attempts": [
+          {
+            "bundle": "artifacts/resolution-v13/experiment/fold2_res320/attempt-1",
+            "elapsed_seconds": 1374.844495613,
+            "kernel_id": "saisathwikregula/trustretina-res-v13-f2-320-2958393a",
+            "kernel_version": "saisathwikregula/trustretina-res-v13-f2-320-2958393a/1",
+            "quota_used_before": 5520.431,
+            "remote_status": "COMPLETE",
+            "reserved_seconds": 4500,
+            "status": "complete"
+          }
+        ],
         "id": "fold2_res320",
         "image_size": 320,
         "outer_fold": 2,
-        "status": "queued"
+        "status": "complete"
       }
     ],
     "schema_version": 13,

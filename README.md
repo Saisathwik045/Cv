@@ -1,14 +1,19 @@
 # TrustRetina
 
-[Matched 224/320 study preparation](results/resolution-v13/README.md) is complete:
-all original training-image hashes and exact 224-cache parity passed; 320 inputs
-come directly from originals. Six fits await separate approval and sufficient
-free quota. No training was launched.
+All six authorized [v13 matched resolution fits](results/resolution-v13/RESULTS.md)
+completed using **1.924 free Kaggle GPU-quota hours**, within the six-hour/six-session cap.
+Mean outer macro AUROC was **0.83273 at224 → 0.85108 at320**; macro F1
+**0.53758 → 0.57156**. H/O recall gains came with more false positives;
+H F1 declined. [All-eight results, conditional intervals and plots](results/resolution-v13/DISCUSSION.md)
+retain those harms.320 is nominated for future research only, without independent
+confirmation, full-data refit or demo replacement. The original frozen demo,
+historical evaluation, calibration and thresholds are unchanged.
+[Status and recovery](docs/STATUS.md) · [Verified inputs and historical preparation](results/resolution-v13/README.md).
 
 [Consolidated development audit](results/development-audit-v12/REPORT.md) is complete.
 Square-root weighting did not establish improvement; retain ratio BCE as the
-development reference and preserve the frozen demo. A single resolution ablation
-is proposed with prerequisites and a new budget; no training is authorized.
+development reference and preserve the frozen demo. Its proposed resolution ablation
+was subsequently prepared and authorized as the bounded v13 study above.
 
 All six authorized [training-only nested loss fits](results/nested-v11/RESULTS.md)
 completed using 1.143 free Kaggle GPU-quota hours within the four-hour cap.

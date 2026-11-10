@@ -1,65 +1,39 @@
-# V13 matched resolution study prepared — training not authorized
+# V13 matched resolution study — completed
 
-PR #23 is already merged at `d94fbda`; CI41311898604 passed all seven jobs.
-[Preparation/approval target](../results/resolution-v13/README.md),
-[frozen protocol](RESOLUTION_V13.md), [configuration](../configs/resolution-v13.toml),
-[verified native/parity evidence](../results/resolution-v13/prerequisites.json).
+All six authorized training-only fits completed and were retrieved/source/nonce/output-hash verified. The complete paired analysis and 2,000 fixed-seed component bootstrap replicates are finished. [Results](../results/resolution-v13/RESULTS.md), [all-eight findings and plots](../results/resolution-v13/DISCUSSION.md), [registry](../results/resolution-v13/queue.json), and [accounting/artifact hashes](../results/resolution-v13/execution-provenance.json).
 
-One GPU-disabled private CPU job, `saisathwikregula/trustretina-res-v13-inputs-767673ae/1`,
-completed and was retrieved/source/nonce/checksum verified. All4550 original TRAIN
-images matched frozen raw hashes; local independent archive rehash also passed.
-All4550 rebuilt224 inputs matched the saved cache exactly (zero differing uint8
-channel values). The320 tensor was built directly from originals; original source,
-rows and old cache remain immutable. Native tar, both arrays, receipts and ImageNet
-weights are durable in that pinned private output; patient data stays outside Git.
-No new raw source upload or GPU smoke. CPU worker763.25s; GPU-quota charge0s.
+| Run | Status | Epochs / best (one-based) |
+|---|---|---:|
+| fold0_res224 | verified complete | 13 / 7 |
+| fold0_res320 | verified complete | 11 / 5 |
+| fold1_res224 | verified complete | 13 / 7 |
+| fold1_res320 | verified complete | 15 / 9 |
+| fold2_res224 | verified complete | 10 / 4 |
+| fold2_res320 | verified complete | 12 / 6 |
 
-Authoritative ODIR material confirms patient-level H=hypertension and O=other
-abnormalities/diseases, using both-eye information. Precise H criteria, O taxonomy
-and eye-localized truth remain unresolved; benchmark-target ablation is not a
-clinical claim. No relabeling. See the source-access limitations in readiness.
+Settled free Kaggle charge: **6926.895s (1.924138h)** against 21,600s. Exactly 6 submitted sessions; zero failures/resubmitted GPU sessions, zero final reserved time, paid scaling disabled. Worker elapsed time is separately 6717.541s. Owned remote inventory matches the six registered version1 jobs. No seventh session, additional training or refit is authorized.
 
-Six queued runs: fold0/1/2 × res224/res320, fresh ImageNet ConvNeXt-Tiny, ratio BCE,
-seed2026, same fixed training-only inner/outer containment folds. Common8-image
-microbatches with2-step accumulation, effective16, FP32 AdamW/cosine, max25 epochs,
-AUROC inner checkpoint selection and patience6/min delta1e-4. V11 reference runs
-cannot substitute because their16-image/no-accumulation execution differs. All
-five factories and both historical losses are preserved. Outer assessment occurs
-only after complete fit and strict best reload; fixed mean-eye sigmoid p≥.5.
+| Mean outer metric | 224 | 320 |
+|---|---:|---:|
+| Macro AUROC | 0.83273 | 0.85108 |
+| Macro AP | 0.57279 | 0.59412 |
+| Macro F1 | 0.53758 | 0.57156 |
+| Micro F1 | 0.53534 | 0.57509 |
 
-Plan: `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`.
-Worker/source: `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`.
-Configuration: `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`.
-Exact matrix, all-eight support and remaining identities are in preparation README.
+Primary paired macro AUROC difference (320−224): **+0.01835**, conditional 95% interval **[+0.01036,+0.02655]**. Macro AP and F1 differences are positive on this cohort. The frozen numerical rule nominates 320 for future research only; no fold checkpoint is promoted globally. These intervals condition on fitted models and omit training/selection variability; prior adaptive same-source development and one seed limit independence. Fresh compatible independent paired-eye eight-label data is needed for confirmation.
 
-Proposed strict cap21600 free GPU-quota seconds / max6 sessions, including every
-failure/resume/overhead; reservations2700s for224 and4500s for320. Estimate4.23
-worker-hours,5.50 with allowance, not a new measured throughput/memory guarantee.
-Observed free quota12670.775s (3.5197h), GPU reserved0, paid scaling disabled.
-**First-job gate is blocked** until the full six-hour reservation is actually free.
-Provider reports refresh7Nov2026 at05:30IST; recheck, do not assume future quota.
-SDK does not expose guaranteed per-shape billing. Counter-based/rate guards and
-bounded sequential reconciliation stop rather than use paid resources or exceed
-caps. Zero training submissions; no approval record or background monitor.
+H pooled recall0.1791→0.2537, FP25→76, FN55→50, F10.2308→0.2125 (67 positives/66 positive components). Its paired recall/F1 intervals include zero. O recall0.4450→0.6588, FP439→720, FN353→217, F10.4168→0.4721 (636 positives). G AP/F1 are worse; D/A/M have more missed positives at p≥.5. Keep these harms alongside aggregate gains. H/O source semantics and patient-derived per-eye targets remain limitations, without relabeling or clinical inference.
 
-225 CPU tests:216 passed, nine optional skips. Accumulation/remainder, stochastic
-checkpoint resume, source/archive integrity, approval/budget/recovery guards and
-both resolution tensors are covered. Synthetic official-ImageNet CPU forwards
-were finite at224/320; no new patient inference or GPU memory experiment. Compiler
-and diff checks pass. New PR CI is reported separately, never inferred from local
-checks or earlier commits.
+Frozen approval identities remain unchanged:
 
-**Next action:** review preparation PR and approve the exact six-fit plan/source,
-run IDs and21600-second/six-session cap if desired; wait for verified full free
-quota before any training. Do not refit all data, deploy thresholds, transfer the
-old temperature, change demo or access historical final evaluation/calibration.
-The original demo/temperature/normalizer/contract hashes and old worker source
-match prior records; REVIEW REQUIRED remains default.
+- Plan `0fa597609d0390e7414865ed9507cd97e214c99945abd4c1cc095a9924b1cf2a`
+- Worker/source `e8a8df1bbca95b14109f4e16ca31080e9dd9afe4746d42af5e228b96c0a5e80c`
+- Configuration `fcc8c73b752551a5d5b860b3d134e2828b78ea7a4a5aa41c48549b3a717ae0b4`
 
-Private state: `artifacts/resolution-v13/TASK_RESUME.json`, `PRIVATE_INDEX.md`,
-preparation receipts/artifacts and experiment registry. Fresh-task recovery uses
-`python scripts/restore_resolution_state.py` with existing secure Kaggle access;
-it retrieves pinned outputs and original fold metadata, creates no approval and
-submits no jobs. Conflicting/newer state is never overwritten. No new dataset,
-partition search, duplicate review or historical evaluation was performed.
-[Prior audit](history/STATUS-through-v12-audit.md) is preserved.
+No image preparation, split generation, duplicate review, GPU smoke or historical final evaluation was repeated. All five factories, both loss implementations, frozen demo, calibration, thresholds and REVIEW REQUIRED behavior remain unchanged.
+
+CPU checks: two focused execution-guard/archive-verification tests passed; syntax/diff checks and CPU dependency consistency passed. All six real output audits replayed fit-only weights, inner-only selection, strict reload evidence, frozen outer alignment and mean-eye prediction metrics. The bootstrap resumed from 1,580 saved replicates after its local process disappeared, using identical seeds/sources; no model rerun or analysis change. The frozen protocol, worker, controller and reporter bytes are unchanged. Implementation/results commit `c6a3932`: all seven required CI jobs passed in [run42776144015](https://github.com/Saisathwik045/Cv/actions/runs/42776144015). This final status-only update preserves those implementation bytes.
+
+PR: https://github.com/Saisathwik045/Cv/pull/25 (focused execution/results branch; not merged).
+
+Next executable action is CPU-only artifact recovery or independent review using [RECOVERY.md](../results/resolution-v13/RECOVERY.md). No GPU job is queued and no monitoring is promised after closeout. Further training, refit, threshold/calibration work or demo replacement requires a separate scoped decision. Private exact receipts and TASK_RESUME.json preserve recovery; historical preparation is preserved [here](../results/resolution-v13/README.md) and [prior status](history/STATUS-through-v13-preparation.md).
