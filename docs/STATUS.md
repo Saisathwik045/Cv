@@ -24,8 +24,9 @@ network transport disabled. Readiness/synthetic CLI, phase0/phase1 config,
 declarative plan, v3/v4 development checks, environment report, compilation,
 `pip check`, and `git diff --check` passed. Original V14 controller freeze
 verification passes byte-for-byte; `src/`, old scripts, configs, requirements,
-results and demo remain unchanged. PR CI is pending publication; see the PR for
-observed status. Synthetic fixture values are not research results.
+results and demo remain unchanged. PR CI outcomes are tracked in
+[PR #29](https://github.com/Saisathwik045/Cv/pull/29). Synthetic fixture values
+are not research results.
 Real-data execution remains blocked on separate explicit authorization, a reviewed
 hash-bound manifest and verified permitted private artifacts/role records. BRSET
 access and independent all-eight compatibility blockers persist. Existing optional

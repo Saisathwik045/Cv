@@ -339,6 +339,8 @@ class V15Tests(unittest.TestCase):
             np.testing.assert_array_equal(p >= .5, temperature_probabilities(p, t) >= .5)
 
     def test_complete_fixture_separate_fits_retains_regressions_and_reproducibility(self):
+        # V14 records source_commit in stage-report, not experiment-spec.
+        self.assertNotIn('source_commit', json.loads((self.path.parent/RUNS[0]/'experiment-spec.json').read_text()))
         first = analyze(self.path, self.digest, PROTOCOL, self.approval, fixture=True)
         second = analyze(self.path, self.digest, PROTOCOL, self.approval, fixture=True)
         self.assertEqual(json.dumps(first, default=lambda v: v.tolist(), sort_keys=True),

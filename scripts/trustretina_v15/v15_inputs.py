@@ -198,6 +198,7 @@ def load_bundle(manifest_path, manifest_digest, protocol_digest, approval, *, fi
         selected = read_json(paths['selected-checkpoint.json'])
         spec = read_json(paths['experiment-spec.json'])
         if (stage.get('status') != 'complete' or stage.get('run_id') != run_id
+                or stage.get('source_commit') != fit['source_commit']
                 or stage.get('strict_best_reload') is not True
                 or stage.get('model_state_invariance') is not True
                 or stage.get('calibration_inference_after_freeze') is not True
@@ -213,7 +214,6 @@ def load_bundle(manifest_path, manifest_digest, protocol_digest, approval, *, fi
                 or selected['patient_aggregation'] != 'mean_left_right_sigmoid_before_threshold'
                 or spec['run_id'] != run_id or spec['config']['class_order'] != CLASSES
                 or spec['role_manifest_sha256'] != parents
-                or spec['source_commit'] != fit['source_commit']
                 or selected['provenance']['run_id'] != run_id
                 or selected['provenance']['image_size'] != (320 if run_id == RUNS[0] else 224)
                 or spec['image_size'] != selected['provenance']['image_size']):

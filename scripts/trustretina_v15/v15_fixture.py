@@ -36,7 +36,7 @@ def create_fixture(root, protocol_sha256):
                    'provenance': provenance,
                    'patient_aggregation': 'mean_left_right_sigmoid_before_threshold'})
         write_json(runroot/'experiment-spec.json', {'run_id': run_id, 'image_size': provenance['image_size'],
-                   'config': {'class_order': CLASSES}, 'role_manifest_sha256': parents, 'source_commit': 'fixture-source'})
+                   'config': {'class_order': CLASSES}, 'role_manifest_sha256': parents})
         quality = {}
         for role in ROLES:
             rows = roles[role]
@@ -63,6 +63,7 @@ def create_fixture(root, protocol_sha256):
         hashes = {p.name: sha256(p) for p in runroot.iterdir()}
         write_json(runroot/'stage-report.json', {
             'status': 'complete', 'run_id': run_id, 'strict_best_reload': True,
+            'source_commit': 'fixture-source',
             'model_state_invariance': True, 'calibration_inference_after_freeze': True,
             'final_evaluation_access': False, 'calibration_labels_accessed': False,
             'output_hashes': hashes, 'selected_checkpoint_sha256': checkpoint,
