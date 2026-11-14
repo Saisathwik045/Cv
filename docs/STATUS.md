@@ -1,3 +1,44 @@
+# V15 selective recovery infrastructure — preparation only
+
+Continued from merged PR #29/main `e29c4641d17ffb5cafd9e1c8af5c29abb20744f6`
+on `phase/15-recovery-readiness`. [Recovery protocol/readiness](V15_RECOVERY_READINESS.md)
+adds public planning and separately approved, selective CPU recovery for the two
+pinned V14 output versions. No private recovery or credential access occurred.
+
+The existing analysis `.venv` is preserved. A separate Python 3.12 recovery
+virtualenv at `/workspace/.venvs/trustretina-recovery` installs the unchanged
+artifact-recovery.lock exactly: Kaggle2.2.5/kagglesdk0.1.38, pip check passed.
+SDK imports/CLI help/version-label compatibility passed in an empty child
+HOME/config with authentication replaced before package initialization and
+network disabled. Public Kaggle web200/API401/root404, PyPI200 and GitHub200
+confirm connectivity only; account/private-version/redirect access is unverified.
+
+Default metadata profile selects32 exact files and excludes checkpoint binaries.
+Analysis profile selects36 files, including the four opaque best/last checkpoint
+bytes required by the unchanged V15 validator. Neither profile includes datasets,
+image tensors, ImageNet weights, final data or logs. Public inventory/nonce/source/
+report/artifact SHA256 pins, exact recovery approval, approved private0700 root,
+private0600 partial/state files, locks, bounded selective HTTP transfers,
+interruption recovery, rehash/reuse and sanitized errors are implemented.
+Recovery never creates or accepts fitting authorization. Original role-manifest
+and label recovery remain separate, source-verified blockers; completion never
+asserts patient alignment or V15 fitting readiness.
+
+Validation: all28 new synthetic recovery tests passed. Full local CPU suite:
+305 run,296 passed,nine optional photographic skips,zero failures/errors. Tests
+ran in a temporary source snapshot with CUDA hidden and test-process networking
+disabled. Both Python environments pass pip check; analysis CPU/app/report locks
+still match. Isolated installed-SDK/CLI/no-netrc checks, public metadata/analysis
+plans, compilation, configuration/declarative-plan/v3/v4 checks and whitespace
+checks passed. Frozen V14 controller identity verification still passes. An
+additional credential-free recovery CI job validates installation and SDK/CLI
+compatibility; actual remote outcomes will be recorded in the PR. No test values
+are research results. No Kaggle jobs, real fitting/inference,
+private files or credentials were accessed. Frozen demo, prior results,
+thresholds, models, old source and dependency locks remain unchanged.
+
+---
+
 # V15 calibration/reliability software — synthetic verification only
 
 V15 source development starts from remote main

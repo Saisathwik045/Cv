@@ -6,6 +6,20 @@ on:
 permissions:
   contents: read
 jobs:
+  v15-recovery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements/artifact-recovery.lock
+      - run: python -m pip check
+      - run: python -B scripts/check_recovery_environment.py
+      - run: python -B scripts/recover_v15_artifacts.py plan --profile metadata > /tmp/v15-recovery-plan.json
+      - run: python -B scripts/recover_v15_artifacts.py plan --profile analysis > /tmp/v15-recovery-analysis-plan.json
+      - run: python -m compileall -q scripts/check_recovery_environment.py scripts/recover_v15_artifacts.py scripts/trustretina_v15/recovery.py
+
   phase2-cpu:
     runs-on: ubuntu-latest
     strategy:
