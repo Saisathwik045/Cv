@@ -1,0 +1,37 @@
+{
+  "CUDA_hidden": true,
+  "app_and_report_lock_pins_verified": 61,
+  "base_main_commit": "dd8f281ac9786fecca25a46a1a081e15a063fc6c",
+  "dependency_consistency": "PASS",
+  "deployment_default": "REVIEW REQUIRED",
+  "durable_private_backup_verified": false,
+  "frozen_V14_identity": "PASS",
+  "historical_final_cohort_accessed": false,
+  "independent_validation_complete": false,
+  "local_CPU_tests": {
+    "errors": 0,
+    "failures": 0,
+    "new_documentation_tests": 4,
+    "new_synthetic_UI_tests": 3,
+    "passed": 350,
+    "run": 350,
+    "skipped": 0
+  },
+  "native_Mac_execution_verified": false,
+  "optional_photo_dependencies_isolated": {
+    "imageio": "2.37.0",
+    "lazy_loader": "0.4",
+    "opencv-python-headless": "4.11.0.86",
+    "scikit-image": "0.25.2",
+    "tifffile": "2025.5.10"
+  },
+  "private_patient_data_accessed": false,
+  "python": "3.12.14",
+  "real_scientific_fitting_training_inference_performed": false,
+  "remote_CI": "Tracked by the pull request; local record does not claim a future CI outcome",
+  "schema": "academic_submission_verification_v1",
+  "test_credentials_removed": true,
+  "test_log_sha256": "d8a8c602691d0976afd40efe023d0256c3e90bcd5520c8d1663a4d1040e45446",
+  "test_networking_disabled": true,
+  "test_private_research_access_denied": true
+}

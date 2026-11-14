@@ -15,8 +15,8 @@ Intel Macs, Rosetta Python and Python 3.13+ are not supported by this package.
    even when Finder has a limited PATH; it never installs Homebrew/Python itself.
 2. **Download this repository** to a normal writable folder, not inside a ZIP or
    read-only disk image. Use GitHub **Code → Download ZIP**, then extract it, or
-   clone it with Git. While the packaging PR is open, select its
-   `phase/08-macos-launcher` branch first. Keep the complete folder structure.
+   clone it with Git from current `main`; launcher packaging is merged.
+   Keep the complete folder structure.
 3. **Double-click `Setup_TrustRetina.command` once.** It creates a separate small
    recovery environment, installs its exact pinned dependencies, and prompts for
    a Kaggle API token without showing or saving it. Get your token from your
@@ -38,16 +38,16 @@ If the bundle is already available privately, copy the entire verified
 Start verifies all five required files itself. Never obtain weights from an
 untrusted public mirror or copy any dataset/prediction folders into the app.
 
-These launch files are on the packaging PR branch until it is merged. A clone:
+The merged launch files are available from current `main`:
 
 ```sh
-git clone --branch phase/08-macos-launcher https://github.com/Saisathwik045/Cv.git
+git clone --branch main https://github.com/Saisathwik045/Cv.git
 cd Cv
 ```
 
 Git may prompt to install Apple's command-line tools if unavailable; downloading
-and extracting the ZIP avoids needing Git. Once the packaging PR is merged, a
-normal `main` clone/ZIP contains the same launch files.
+and extracting the ZIP avoids needing Git. A normal `main` clone/ZIP contains the launch files.
+This documentation update performs no private bundle recovery.
 
 ## First-run macOS approval and certificates
 
