@@ -1,3 +1,68 @@
+# V15 real CPU calibration and reliability — completed development analysis
+
+Continued from merged PR #31/main
+`b60ccf81044c2904f82e6a40e11efc4728c4bf5a` on
+`phase/15-public-research-report`. The separately authorized real V15 CPU analysis
+completed once for both frozen V14 candidates. This documentation task publishes
+only [verified aggregate results and reviewed reliability diagrams](../results/calibration-v15/RESULTS.md);
+it does not repeat fitting, inference or training. Prospective protocols, scientific
+code, checkpoints, original calibration/thresholds, historical results and demo
+remain unchanged. All research decisions remain **REVIEW REQUIRED**.
+
+All three reconstructed original V4 manifest hashes and all 36 restored V14
+artifact hashes/provenance passed. Original/derived patient, both-eye, role,
+component and class alignment, saved 20-pass MC seeds/order and resolution-specific
+technical quality inputs passed. One component-equal shared temperature per
+checkpoint was fitted on 350 calibration patients / 331 components:
+**320 px T=1.105496125613; 224 px T=1.002532561130**. Both optimizers succeeded
+without boundary solutions. All p>=0.5 binary decisions and classification metrics
+remained unchanged. Calibration is in sample; the 525-patient / 518-component
+validation cohort was reused for selection and supports descriptive results only.
+
+NLL and Brier decreased slightly; ten-bin ECE increased in both roles/resolutions.
+Shared NLL optimization did not establish uniform class calibration improvement.
+The fixed quality factor worsened Hamming risk-coverage AURC throughout; all
+prespecified strategies and class regressions are retained. Paired 320-minus-224
+AURC intervals from 200 whole-component bootstrap replicates all include zero;
+they are conditional descriptive intervals, not independent confirmation.
+
+The public report and curated aggregate JSON were checked against the recorded
+private aggregate source, detailed/aggregate output digests and provenance.
+Four original saved reliability PNGs were reviewed visually and for metadata,
+then copied byte-for-byte; no patient records, row predictions, original manifests,
+private inventories, approvals, checkpoints, credentials or operational storage
+paths are published. Public consistency tests check data schema, negative findings,
+table values, frozen identities, links and reviewed figure digests. Their success
+does not independently authenticate unavailable private data.
+
+Independent validation remains incomplete: a prospectively registered untouched
+cohort/endpoint, compatible authoritative all-eight labels, adequate class/component
+support and required data-access/ethics/DUA approval remain necessary. BRSET
+credentialing/CITI/DUA and label compatibility remain unresolved. No new inference,
+historical-final access, GPU job, deployment or further fitting is authorized here.
+
+Private preservation assessment verified 98 research files and 384 execution-source
+files. No verified durable encrypted backup exists; destination/recipient approval,
+encrypted transfer, a full-hash authenticated restore drill and a second durable
+copy remain outstanding. No private backup payload is committed or transferred by
+this documentation update.
+
+Validation: all nine new public-report tests pass. The isolated CPU source-snapshot
+suite ran 343 tests: 334 passed, nine optional photographic tests skipped, zero
+failures/errors; CUDA was hidden, credentials removed and test networking disabled.
+Every exported number was compared with its recorded aggregate source. Frozen V14
+controller identity, package consistency, configuration/declarative-plan/v3/v4,
+compilation and whitespace checks pass. Remote CI outcomes are tracked in this
+documentation PR; local fixtures are software checks, not additional real analysis.
+
+---
+
+## Historical implementation and readiness records
+
+The following sections preserve the scope and observations of earlier software
+PRs. Their statements about unperformed recovery or real fitting refer to those
+earlier tasks; the completed real execution above supersedes them as current status.
+
 # V15 original manifest reconciliation — synthetic software only
 
 Continued from merged PR #30/main `6c33e8c` on

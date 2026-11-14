@@ -1,9 +1,14 @@
 # TrustRetina
 
-[V15 CPU calibration/reliability software](docs/CALIBRATION_RELIABILITY_V15.md)
-adds synthetic-tested post-freeze analysis for both V14 candidates.
-[Execution readiness](docs/V15_EXECUTION_READINESS.md): no real V15 analysis or
-new research result is claimed; the frozen demo remains unchanged.
+[Real V15 CPU calibration/reliability analysis is complete](results/calibration-v15/RESULTS.md).
+Shared temperatures are **1.105496125613 at 320 px** and **1.002532561130 at 224 px**.
+NLL/Brier decreased slightly, but ten-bin ECE worsened in both cohorts at both
+resolutions; classification decisions stayed unchanged and quality fusion worsened
+risk-coverage AURC. Calibration diagnostics are in sample; validation was reused.
+**Independent validation is incomplete; all decisions remain REVIEW REQUIRED.**
+The [prospective protocol](docs/CALIBRATION_RELIABILITY_V15.md), frozen models,
+thresholds and original demo remain unchanged. The earlier
+[software readiness](docs/V15_EXECUTION_READINESS.md) records its historical scope.
 
 [V14 two-fit execution is complete](results/candidate-v14/RESULTS.md):320/224 validation macro AUROC 0.8596/0.8480 and macro F1 0.5371/0.5332, with important C/A/G/H regressions. These are reused-validation development results, not independent confirmation. Two free Kaggle sessions used 3826.407 quota seconds; original demo, calibration, thresholds and historical evaluation are unchanged.
 
@@ -125,8 +130,8 @@ PyTorch CUDA device is usable. Configuration errors exit 2. `plan` prints a
 Dataset validation/splitting, the five-backbone training/evaluation modules and
 prediction-derived reports are implemented. The Phase 0 `plan` command remains
 declarative; the completed experiment uses the dedicated resumable runner linked
-in the current status. Clinical deployment and fitted reliability/calibration
-claims are not established.
+in the current status. Clinical deployment and independent reliability/calibration
+improvement are not established; V15 reports development-only fitting diagnostics.
 
 For a preinstalled managed environment with unavailable package downloads, the
 verified offline installation is:
