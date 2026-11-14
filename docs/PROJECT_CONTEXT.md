@@ -12,12 +12,18 @@ that limitation and patient clustering honestly; future patient-level aggregatio
 must be separately specified before inspecting final results.
 
 Configuration separates data location, artifacts, partition fractions, seeds,
-training settings and reliability ablations. Phase 0 builds checks and designs the
-execution contract; Phase 1 implements data validation, grouped split bundles and runner checks with
-synthetic-only validation. Remaining phases implement model execution. No medical result
-or superiority claim is supported yet.
+training settings and reliability ablations. The initial foundation/data contracts
+were followed by the contained v4 release,
+completed five-backbone comparison, original reliability/evaluation/demo and
+later development experiments through real V15 CPU calibration. The current
+[final report](FINAL_RESEARCH_REPORT.md) and [phase audit](PHASE_COMPLETION_AUDIT.md)
+separate historical planning from observed completion. Independent clinical
+validation and broad superiority/safety claims remain unsupported.
 
-Validation selects model weights and disease thresholds. Calibration fits
-probability calibration and the acceptance policy under a prespecified budget.
-Final evaluation is isolated until model, thresholds, calibration and policy freeze.
-Official test images without ground truth are prediction-only inputs.
+Validation performed phase-specific checkpoint/backbone selection. Exploratory
+v10 threshold CV was not deployed. Calibration fits a shared scalar on its reserved
+role; no validated acceptance policy is fitted and all decisions remain REVIEW
+REQUIRED. Historical final evaluation was frozen and executed once, is now used,
+and cannot provide fresh confirmation for later candidates. Official-test images
+without ground truth cannot provide evaluation metrics. Current submission scope
+uses public aggregates and synthetic software checks, not private cohort access.

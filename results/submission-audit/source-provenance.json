@@ -1,0 +1,27 @@
+{
+  "base_main_commit": "dd8f281ac9786fecca25a46a1a081e15a063fc6c",
+  "deployment_default": "REVIEW REQUIRED",
+  "historical_final_cohort_accessed": false,
+  "independent_validation_complete": false,
+  "new_research_fitting_or_inference": false,
+  "private_patient_data_accessed": false,
+  "schema": "academic_submission_public_source_audit_v1",
+  "sources": {
+    "docs/CALIBRATION_RELIABILITY_V15.md": "c5ceb198af76e9963832238710cbb15205f1b45673fe220b1831d6c92a08b3fb",
+    "docs/CANDIDATE_FREEZE_V14.md": "169adb9d4047f717a7aab5fe27b8b598f5c40c7ca5ccb72018842b8d2153d6ce",
+    "docs/FULL_EXPERIMENT_V5.md": "50e48f1d88e70006affcec39d3eaa117583c2a1941b1dc26b41538f9c955ba46",
+    "results/calibration-v15/RESULTS.md": "6e32c11ae12a21af1a0b7bae6eb164c6b53bb441b61f0dff7fb56d0152a2dee4",
+    "results/calibration-v15/aggregate-results.json": "f9f3ed43a53d53b8b77d6f415b5fc35406a1dc67cb8989f6009edbfb96c89469",
+    "results/candidate-v14/RESULTS.md": "14592480462eafa202bfbb5c7b23253adc068dcbeeb8a98cf0d85676df3215ab",
+    "results/candidate-v14/execution-results.json": "b75f0dc0b1af6a932e7d9b9a5de3bfb5e6e47f94e33f774473a2b64fda6af4b0",
+    "results/development-audit-v12/REPORT.md": "dba73a667d2ae7db3b15b069551cc891ef221023d69cbc448d08aa10925da3a6",
+    "results/full-v5/README.md": "edb9cc5a4ba48cfd0dfbb1cb0554cf39f6818d29884880a529595f1d3c3745bd",
+    "results/full-v5/comparison.json": "034cbda40b254b2a104877d7ab8c69386887b1a4c3002d2591ccc1ea4aa96620",
+    "results/nested-v11/DISCUSSION.md": "d47fb4970c8e39345e2050ce6ed70a393a24dfae9778759bdb3c6189c3c936fd",
+    "results/reliability-v6/README.md": "fed4b45418097f0be9c3fd3e13660ffbd16d997317d7421135255fc6fff65f7f",
+    "results/resolution-v13/DISCUSSION.md": "62414f624f5cfab818bcc9d45fee4c4ef87d702bed8a43d19a5fe67415446af0",
+    "results/resolution-v13/comparison.json": "9af9706c3831e99b09e100dbb939a388662bdacaf88dbf8073560b8050a7cd63",
+    "results/round2-v9/RESULTS.md": "7da02cbc7748fabf9746e25a8386c21471fb25ab23a335a53fa37951fcd92bd0",
+    "results/threshold-v10/RESULTS.md": "b6dd649fd289e91e9a4d85ad81ab20ae3d99c678849d0c1ae9f96d32d7ab888c"
+  }
+}

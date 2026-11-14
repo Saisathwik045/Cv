@@ -1,3 +1,47 @@
+# Final academic submission documentation — development research through V15
+
+Continued from merged PR #32/main `dd8f281` on
+`phase/15-final-academic-submission`. The [final research report](FINAL_RESEARCH_REPORT.md),
+[phase audit](PHASE_COMPLETION_AUDIT.md), [presentation outline](FINAL_PRESENTATION_OUTLINE.md)
+and [submission/reproduction checklist](FINAL_SUBMISSION_CHECKLIST.md) consolidate
+public committed evidence only. Architecture, datasets/target semantics,
+preprocessing, training/model comparisons, calibration, evaluation, MC/quality,
+Grad-CAM, negative findings and research limitations are documented. All phases
+through V15 are audited without opening private patient data or replaying the
+historical final cohort. No research fitting, inference, training or GPU job ran.
+
+The original demo remains the v5/Phase6 frozen candidate, separate from later
+V14/V15 results. Three new synthetic Streamlit tests use generated PNGs and a fake
+service for paired/invalid-input gating, eight-class presentation, REVIEW REQUIRED,
+download-control presence, explanation-target selection, reset and bundle failure.
+They do not load private weights or establish clinical performance, external browser
+download/Cloud access or native Mac runtime. Four documentation/source consistency
+tests verify the public report, phase coverage, source digests and links. Stale
+README implementation claims and Mac branch instructions were corrected.
+
+Local verification: **350 CPU tests run, 350 passed, zero skips/failures/errors**.
+Optional photographic dependencies were installed in an isolated temporary target;
+the original app/report environment still matches all 61 unique lock pins and
+passes pip check. Test credentials were removed, CUDA hidden, networking disabled,
+and access to the private shared research root denied by the test harness.
+Frozen V14 identity, configuration/declarative-plan/v3/v4, shell syntax, compilation,
+sterile recovery/public-plan and whitespace checks pass. Recorded evidence is in
+[the submission verification record](../results/submission-audit/verification.json);
+remote CI outcomes are tracked by this PR. Synthetic fixtures are software checks,
+not repeated real scientific execution.
+
+**Ready for academic review as development research**, conditional on current
+checks/reviewer approval and student-supplied author/institution/supervisor details,
+institutional PDF/slides formatting, citation review and sign-off. Independent
+all-eight clinical confirmation, a supported clinical acceptance policy, native
+Mac hands-on verification and durable encrypted private backup remain incomplete.
+BRSET access/DUA/label compatibility and prospective cohort/support/overlap design
+remain separate blockers. No private artifacts are published; no automatic merge,
+model/demo promotion, backup transfer or new external evaluation is authorized.
+All research decisions remain **REVIEW REQUIRED**.
+
+---
+
 # V15 real CPU calibration and reliability — completed development analysis
 
 Continued from merged PR #31/main

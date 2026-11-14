@@ -1,5 +1,13 @@
 # TrustRetina
 
+[Final academic report](docs/FINAL_RESEARCH_REPORT.md) ·
+[Phase audit](docs/PHASE_COMPLETION_AUDIT.md) ·
+[Submission/reproduction checklist](docs/FINAL_SUBMISSION_CHECKLIST.md) ·
+[Presentation outline](docs/FINAL_PRESENTATION_OUTLINE.md).
+The development project through V15 is documented for academic review; author-specific
+formatting/sign-off, independent validation, native Mac verification and durable
+private backup remain explicit outstanding work.
+
 [Real V15 CPU calibration/reliability analysis is complete](results/calibration-v15/RESULTS.md).
 Shared temperatures are **1.105496125613 at 320 px** and **1.002532561130 at 224 px**.
 NLL/Brier decreased slightly, but ten-bin ECE worsened in both cohorts at both
@@ -167,12 +175,12 @@ orchestrator entry point without manual cell execution.
 
 ## Project map and current scope
 
-`src/trustretina/` contains the implemented configuration, planning and capability
-checks. The data subpackage implements workbook/image validation and immutable patient
-manifests; the runner subpackage implements connectivity and smoke checks. Remaining
-subpackages reserve ownership for preprocessing, models, training,
-evaluation, reliability, calibration, Grad-CAM, inference and the upload app;
-their module docstrings explicitly mark future implementation.
+`src/trustretina/` implements configuration, data validation/containment,
+preprocessing, the five classifiers, guarded training/resume, evaluation,
+calibration/reliability, Grad-CAM, inference and Streamlit session handling.
+Dedicated controllers implement the completed historical experiments. The
+[phase audit](docs/PHASE_COMPLETION_AUDIT.md) separates implemented software,
+completed development execution and incomplete independent/clinical validation.
 
 - [Phase 0 review and merge](docs/PHASE0_REVIEW.md)
 - [Phase 1 data pipeline](docs/DATA_PIPELINE.md)
@@ -185,29 +193,14 @@ their module docstrings explicitly mark future implementation.
 - [Status and next action](docs/STATUS.md)
 - [Git workflow](docs/GIT_WORKFLOW.md)
 
-Mechanical data validation and historical conservative-group split audits are recorded
-in [Status](docs/STATUS.md), with patient-level artifacts kept private outside Git.
-The published splits are not approved for training/calibration; the giant weak-hash
-component and rare-class support require protocol review. The CUDA arithmetic smoke
-is verified; no disease metrics, trained checkpoints or
-calibration improvements are claimed. `trustretina check-runner` reports observed readiness and
-exits nonzero when authentication cannot be verified. Smoke preparation never
-submits a job; execution requires the separate `run-runner-smoke` command.
+Data validation and superseded early weak-hash grouping are preserved in the
+[historical status](docs/history/STATUS-through-phase4.md). Later approved v4
+containment supported the completed five-model comparison and later studies.
+Early blocked-readiness text describes its original phase, not the current
+absence of models or results. Patient-level artifacts remain outside Git.
 
-
-CPU implementation contracts and prospective protocol:
-[Phase 2 CPU modules](docs/PHASE2_CPU.md). Install the pinned CPU lock and run the
-non-fitting tests described there. Training remains blocked by duplicate/split and
-calibration protocol review; no training command is exposed.
-
-
-Current prospective development workflow: [protocol v3](docs/DEVELOPMENT_V3.md).
-`trustretina check-development --config configs/development-v3.toml` checks the
-four-role, shared-calibration and bounded-pilot contract without fitting anything.
-Actual readiness depends on verified private real-data evidence.
-
-
-Current contained development release and bounded execution evidence:
-[protocol v4](docs/DEVELOPMENT_V4.md) and [actual status](docs/STATUS.md).
-The fixed review is complete, v4 private splits are frozen and the sole authorized
-B0 pilot passed. Full five-model runs remain outside this execution scope.
+The [submission checklist](docs/FINAL_SUBMISSION_CHECKLIST.md) gives current
+software verification commands and distinguishes app, reporting and recovery
+requirements. Historical [v3](docs/DEVELOPMENT_V3.md)/[v4](docs/DEVELOPMENT_V4.md)
+protocols remain unchanged. Readiness checks do not authorize any new job,
+fitting, private recovery, inference or clinical deployment.
