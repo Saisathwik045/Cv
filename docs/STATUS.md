@@ -1,3 +1,38 @@
+# V15 original manifest reconciliation — synthetic software only
+
+Continued from merged PR #30/main `6c33e8c` on
+`phase/15-manifest-reconciliation`. The isolated stdlib-only offline utility and
+[reconciliation protocol](V15_MANIFEST_RECONCILIATION.md) implement exact V4
+publisher serialization, all-three source hash checks before parsing, strict
+patient/eye/label/component/role validation, original SHA256 acceptance, private
+permissions, record-free diagnostics and atomic three-file publication with disk
+readback hashing. Public planning binds the full authenticated V13/V6 versions,
+source hashes, original hashes and source/provenance identities. No private
+inputs, credentials, original manifests or historical final were recovered or
+opened; no real reconstruction, jobs, inference, fitting or training occurred.
+The previously recovered 36 V14 artifacts were not accessed by this workflow.
+V15 loader guards, frozen V14 code/artifacts/configuration/thresholds and demo
+remain unchanged. Frozen V14 controller identity verification passes.
+
+Validation: 29 new synthetic tests, including byte identity against the actual
+V4 publisher, source/output mismatch refusal, row order, duplicate patients,
+missing eyes, class order, labels, component membership/mixed labels, roles,
+missing inputs, symlinks, private permissions, failed writes and staged corruption.
+Full CPU source-snapshot suite: 334 run, 325 passed, nine optional photographic
+skips; CUDA hidden and test-process networking disabled. Configuration, declarative
+plan, v3/v4 checks, pip check, compilation and whitespace checks pass. Remote CI
+outcomes are tracked in the reconciliation PR. Synthetic values are not research
+results or proof of actual private source accessibility/hash reproduction.
+
+The method is technically ready for separately authorized verification; real
+success remains unproven. Next permission must explicitly authorize selective
+credential-backed recovery of only the three pinned derived-row objects, including
+patient-derived labels, and CPU reconstruction into named private storage under
+the reviewed plan/code hash. No approval is generated here. V15 analysis/fitting
+requires a further independent approval and verified real analysis manifest.
+
+---
+
 # V15 selective recovery infrastructure — preparation only
 
 Continued from merged PR #29/main `e29c4641d17ffb5cafd9e1c8af5c29abb20744f6`
