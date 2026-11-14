@@ -1,5 +1,10 @@
 # TrustRetina
 
+[V15 CPU calibration/reliability software](docs/CALIBRATION_RELIABILITY_V15.md)
+adds synthetic-tested post-freeze analysis for both V14 candidates.
+[Execution readiness](docs/V15_EXECUTION_READINESS.md): no real V15 analysis or
+new research result is claimed; the frozen demo remains unchanged.
+
 [V14 two-fit execution is complete](results/candidate-v14/RESULTS.md):320/224 validation macro AUROC 0.8596/0.8480 and macro F1 0.5371/0.5332, with important C/A/G/H regressions. These are reused-validation development results, not independent confirmation. Two free Kaggle sessions used 3826.407 quota seconds; original demo, calibration, thresholds and historical evaluation are unchanged.
 
 [Exact frozen inputs/protocol](results/candidate-v14/CPU_READINESS.md), [artifact recovery](results/candidate-v14/verified-artifact-registry.json), [status](docs/STATUS.md). No further GPU job is authorized by completion; BRSET/all-eight independent confirmation remains blocked.
