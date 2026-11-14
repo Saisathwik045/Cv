@@ -1,3 +1,38 @@
+# V15 calibration/reliability software — synthetic verification only
+
+V15 source development starts from remote main
+`badbf8af8ef3c0ac57a942f70e594e9b8634a419`, on
+`phase/15-calibration-reliability`. [Prospective protocol](CALIBRATION_RELIABILITY_V15.md)
+and [execution readiness](V15_EXECUTION_READINESS.md) define the separate real-data
+permission boundary. No real V15 scientific result is reported.
+
+Implemented CPU analysis for both frozen V14 candidates: trusted artifact/checkpoint
+SHA256 checks, original role-manifest and patient/component/eye/class alignment,
+separately gated shared-temperature fitting, NLL/Brier/10-bin ECE, per-class
+reliability diagrams/counts/support, saved 20-pass head-only MC and TRAIN-only
+resolution-specific technical quality, paired FP/FN/precision/recall/F1 differences
+and descriptive tied-score risk-coverage/component intervals. The unchanged shared
+algorithm is reused; no threshold or acceptance policy is fitted. All predictions
+remain REVIEW REQUIRED. No historical final access, demo change, private dataset
+or checkpoint access, model inference, Kaggle submission or real-data fitting.
+
+Validation: all 28 V15 synthetic tests passed. The complete CPU suite ran 277
+tests: 268 passed, nine optional photographic tests skipped, no failures/errors.
+This includes existing toy optimizer/resume fixtures, with no real-model training.
+Tests ran from a temporary source snapshot with CUDA hidden and test-process
+network transport disabled. Readiness/synthetic CLI, phase0/phase1 config,
+declarative plan, v3/v4 development checks, environment report, compilation,
+`pip check`, and `git diff --check` passed. Original V14 controller freeze
+verification passes byte-for-byte; `src/`, old scripts, configs, requirements,
+results and demo remain unchanged. PR CI is pending publication; see the PR for
+observed status. Synthetic fixture values are not research results.
+Real-data execution remains blocked on separate explicit authorization, a reviewed
+hash-bound manifest and verified permitted private artifacts/role records. BRSET
+access and independent all-eight compatibility blockers persist. Existing optional
+photographic dependencies and Kaggle recovery tooling remain absent locally.
+
+---
+
 # V14 two frozen fits complete — reused-validation development only
 
 Merged PR27/main3b07a7634f3e6530d66b2ec41c70d837893992c6; approved plan/source/config/
