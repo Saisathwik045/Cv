@@ -182,6 +182,13 @@ The central conclusion is that aggregate ranking/calibration gains do not guaran
 
 ## References and reproducibility sources
 
+For the examiner-facing question/evidence map, design decisions, ablation trail,
+failure hypotheses, contribution disclosure, reproducibility levels and viva,
+see [Research evidence and critical analysis](ACADEMIC_RESEARCH_DEFENCE.md).
+The [all-eight-class comparison](ALL_EIGHT_CLASS_COMPARISON.md) consolidates the
+recorded V14/V15 reused-validation class errors and raw/calibrated ECE. These are
+presentations of existing public evidence, not additional scientific computation.
+
 Primary project evidence: [five-model comparison](../results/full-v5/comparison.json), [original reliability](../results/reliability-v6/README.md), [v9](../results/round2-v9/RESULTS.md), [v10](../results/threshold-v10/RESULTS.md), [v11](../results/nested-v11/DISCUSSION.md), [v12](../results/development-audit-v12/REPORT.md), [v13](../results/resolution-v13/DISCUSSION.md), [v14](../results/candidate-v14/RESULTS.md), [V15 public aggregates](../results/calibration-v15/aggregate-results.json). [Source digest index](../results/submission-audit/source-provenance.json) binds the public records used; no private evidence is read or republished by this submission.
 
 Method background (not external performance comparators):
