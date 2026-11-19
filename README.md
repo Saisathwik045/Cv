@@ -1,5 +1,11 @@
 # TrustRetina
 
+[Research evidence and viva defence](docs/ACADEMIC_RESEARCH_DEFENCE.md) ·
+[All-eight-class development comparison](docs/ALL_EIGHT_CLASS_COMPARISON.md).
+The dashboard's **Research study & viva** workspace presents hash-verified public
+V15 aggregates, reviewed reliability diagrams, negative findings and examiner
+questions. It runs no fitting/inference and does not replace the original live demo.
+
 [Final academic report](docs/FINAL_RESEARCH_REPORT.md) ·
 [Phase audit](docs/PHASE_COMPLETION_AUDIT.md) ·
 [Submission/reproduction checklist](docs/FINAL_SUBMISSION_CHECKLIST.md) ·

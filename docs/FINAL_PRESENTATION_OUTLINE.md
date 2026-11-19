@@ -43,6 +43,18 @@ incomplete; every research decision remains **REVIEW REQUIRED**.
 
 ## Viva questions and accurate answers
 
+Use the [research defence chapter](ACADEMIC_RESEARCH_DEFENCE.md) as an examiner
+appendix and the [all-eight-class table](ALL_EIGHT_CLASS_COMPARISON.md) for the
+class-harm slide. The **Research study & viva** dashboard page shows the questions,
+recorded V15 metrics and reviewed reliability figures without running models.
+
+Suggested appendix slides: research question→evidence→limitation matrix;
+experiment/ablation map with selection exposure; all-eight-class FP/FN and ECE;
+observation versus causal hypothesis; contribution/assistance disclosure;
+reproduction levels and native-Mac/cloud-lifetime limitations. Complete author
+contribution details truthfully before submission. These additions do not extend
+the scientific claims or authorize private inference.
+
 - Why no independent validation? Validation informed selection and calibration is
   in sample; a compatible untouched external cohort has not been established.
 - Why can NLL improve while ECE worsens? The scalar optimizes component-equal NLL,

@@ -1,3 +1,41 @@
+# Academic evidence hub and research defence — reporting extension
+
+Continued from merged PR #33/main `60d0957` on
+`phase/16-academic-evidence-hub`. Adds the public-only **Research study & viva**
+dashboard workspace with research-question mapping, both V15 temperatures,
+recorded NLL/Brier/ECE, all-eight-class errors/supports, fixed risk-ranking
+strategies, reviewed reliability figures, critical analysis and viva questions.
+The aggregate JSON and figures are checksum verified before display. Missing or
+tampered evidence fails closed. No original inference implementation, checkpoint,
+preprocessing, calibration, threshold, research protocol or recorded output changed.
+Presentation code lives in `dashboard`, outside the frozen all-`src` V14 worker
+snapshot; the original scientific source-integrity guard remains unchanged.
+
+The [research defence chapter](ACADEMIC_RESEARCH_DEFENCE.md) adds an evidence
+matrix, design justification, ablation/decision trail, failure hypotheses with
+falsifiable follow-up, truthful contribution/AI-assistance template, reproduction
+levels and deployment assessment. The [all-eight-class table](ALL_EIGHT_CLASS_COMPARISON.md)
+copies public recorded values; it is not new scientific evaluation. All decisions
+remain REVIEW REQUIRED. Independent validation, author sign-off, native Mac
+rehearsal and durable backup remain incomplete.
+
+The user requested a cloud preview remain running. This means an observed
+loopback process in the current workspace, not permanent hosting, an external
+preview URL or a public deployment. It stops when the environment stops. No
+patient data, private result arrays, new fitting/inference or Kaggle job is needed
+for the evidence hub. The private model bundle and prepared Mac archive are not
+published or rewritten. Local verification: **355 CPU tests passed**, zero skips,
+failures or errors, in an isolated source snapshot with networking and private
+research-storage access blocked. All201 checked local documentation links resolve;
+pip consistency and whitespace checks pass. The research-demo CI matrix now runs
+both the paired synthetic submission tests and academic-page tests. Remote CI
+outcomes and rendered-browser review are recorded in the PR.
+Chromium inspection observed the new navigation, question/evidence map, V15
+metric view, reviewed reliability panels and viva expanders without a visible
+application error. No real-model inference was run for this reporting extension.
+
+---
+
 # Final academic submission documentation — development research through V15
 
 Continued from merged PR #32/main `dd8f281` on

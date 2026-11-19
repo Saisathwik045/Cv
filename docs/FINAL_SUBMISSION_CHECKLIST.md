@@ -7,6 +7,13 @@ The original demo, models, thresholds and all calibration results remain frozen.
 
 ## Public submission contents
 
+- [Research defence chapter](ACADEMIC_RESEARCH_DEFENCE.md): research questions,
+  decision trail, failure analysis, contributions, reproduction and examiner walkthrough.
+- [All-eight-class comparison](ALL_EIGHT_CLASS_COMPARISON.md): recorded class
+  errors, support and ECE; no independent winner or new outcome computation.
+- Dashboard **Research study & viva** page; distinguish its saved V14/V15 evidence
+  from the original frozen live predictor. Complete the authorship/assistance table.
+
 - Report: abstract, architecture, data/label semantics, leakage control,
   preprocessing/training, five-model/later studies, V15, limitations and references.
 - Completed phases through V15 audited against linked public evidence.
