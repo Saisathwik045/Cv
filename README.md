@@ -64,6 +64,12 @@ calibration and historical holdout remain unchanged.
 
 ## Apple-silicon Mac
 
+For direct recovery from the original private Kaggle sources, use
+[the bounded one-command setup](docs/MACOS_BOUNDED_RECOVERY.md):
+`bash Setup_and_Start_TrustRetina.command`. It verifies the exact original bundle
+and starts the existing dashboard; no archive export, new model, fitting or GPU
+job is needed. Requires native Mac Python and your permitted Kaggle account.
+
 [Mac quickstart](docs/MACOS_QUICKSTART.md): install native Python 3.11/3.12 once,
 download/extract this checkout, double-click **Setup_TrustRetina.command** once,
 then **Start_TrustRetina.command**. The launcher installs/reuses locked app

@@ -271,7 +271,7 @@ def bundle_location(root):
     return (path if path.is_absolute() else Path(root) / path).resolve()
 
 
-def start(root, *, port=8501, open_browser=True):
+def start(root, *, port=8501, open_browser=True, generate_demo_images=False):
     root = Path(root).resolve()
     child = None
     state = root / '.trustretina/server.json'
@@ -289,6 +289,10 @@ def start(root, *, port=8501, open_browser=True):
                     browser_open(port)
                 return 'reused'
             python = prepare_environment(root)
+            if generate_demo_images:
+                run_checked(root, [str(python), str(root / 'scripts/generate_demo_images.py'),
+                                  '--destination', str(bundle.parent / 'demo-images')],
+                            'Preparing labelled synthetic non-patient images')
             args = [str(python), '-m', 'streamlit', 'run', str(root / 'streamlit_app.py'), '--server.address', '127.0.0.1', '--server.port', str(port), '--server.headless', 'true', '--server.enableCORS', 'true', '--server.enableXsrfProtection', 'true', '--server.baseUrlPath', '', '--browser.gatherUsageStats', 'false']
             # Raw server output may contain user-supplied exception messages.
             # Keep controlled lifecycle logs only, never raw app/server logs.
@@ -349,7 +353,7 @@ def setup_artifacts(root):
         else:
             check_credential_permissions()
         try:
-            run_checked(root, [str(python), str(root / 'scripts/install_inference_bundle.py'), '--download', '--destination', str(bundle)], 'Restoring pinned private inference artifacts', env=env)
+            run_checked(root, [str(python), str(root / 'scripts/recover_inference_bundle.py'), '--allow-recovery', '--destination', str(bundle)], 'Restoring bounded pinned private inference artifacts', env=env)
         finally:
             env.pop('KAGGLE_API_TOKEN', None)
             token = None
@@ -361,6 +365,7 @@ def setup_artifacts(root):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--setup-artifacts', action='store_true')
+    parser.add_argument('--setup-and-start', action='store_true')
     parser.add_argument('--no-browser', action='store_true')
     parser.add_argument('--port', type=int, default=8501)
     args = parser.parse_args()
@@ -372,10 +377,11 @@ def main():
         for name in ('SIGINT', 'SIGTERM', 'SIGHUP'):
             if hasattr(signal, name):
                 signal.signal(getattr(signal, name), lambda signum, frame: (_ for _ in ()).throw(KeyboardInterrupt()))
-        if args.setup_artifacts:
+        if args.setup_artifacts or args.setup_and_start:
             setup_artifacts(ROOT)
-        else:
-            start(ROOT, port=args.port, open_browser=not args.no_browser)
+        if not args.setup_artifacts or args.setup_and_start:
+            start(ROOT, port=args.port, open_browser=not args.no_browser,
+                  generate_demo_images=args.setup_and_start)
     except KeyboardInterrupt:
         print('\nTrustRetina stopped. No training or calibration occurred.', flush=True)
         return 0

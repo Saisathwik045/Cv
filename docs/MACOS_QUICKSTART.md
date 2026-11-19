@@ -7,6 +7,18 @@ Intel Macs, Rosetta Python and Python 3.13+ are not supported by this package.
 
 ## Minimum steps
 
+**Recommended direct private Kaggle method:** use
+[bounded Mac recovery](MACOS_BOUNDED_RECOVERY.md). After installing native Python
+and obtaining this source revision, run **Setup_and_Start_TrustRetina.command**.
+It recovers the four exact original files directly onto your Mac, verifies all
+five bundle hashes and starts the existing app. The default model location is
+your private `~/Library/Application Support/TrustRetina/inference-v8`, outside
+the checkout. No cloud archive or Dropbox transfer is needed.
+
+The older separate Setup and Start steps below remain supported. Their setup
+transport now uses the same bounded downloader; the historical broad installer
+download path is no longer called by the Mac launcher.
+
 1. **Install compatible Python once**, if you do not already have it. If you use
    Homebrew, run `brew install python@3.12`. Otherwise use a compatible signed
    Python 3.12 macOS universal2 installer from
