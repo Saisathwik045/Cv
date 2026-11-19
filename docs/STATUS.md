@@ -1,3 +1,40 @@
+# Bounded direct-to-Mac original demo recovery — preparation
+
+Continued from merged PR #34/main `7861da9` on
+`phase/17-bounded-mac-recovery`. The user chose direct private Kaggle recovery on
+their own Mac instead of cloud archive export or Dropbox. Adds
+[one-command Mac setup](MACOS_BOUNDED_RECOVERY.md), strict four-object recovery,
+local approval/plan/transfer receipts, private external bundle storage and
+setup-before-start integration with the existing launcher. The original
+checkpoint, temperature, quality normalizer, contract and inference code are
+unchanged. The prepared cloud model archive is not modified or transferred.
+
+Recovery pins both original `/1` versions and recorded hashes, exact per-file
+lengths, 334,241,994 expected bytes, 668,483,988 cumulative charged bytes, a 2 GiB
+free-space gate, HTTPS `www.kaggleusercontent.com` only, no redirects, no automatic
+retries and at most two per-object requests across invocations. Read reservations
+are persisted before body consumption; partials count toward the ceiling. Failed
+integrity/security gates block publication and retries. Reuse requires hashing;
+existing files are not overwritten. No broad SDK download or log writes occur.
+
+The combined command defaults to a user-only Application Support directory on
+the Mac, prompts for a token without showing/storing it and starts the unchanged
+app after recovery. Generated, visibly labelled non-patient PNGs are created locally for
+an operational rehearsal, never clinical performance claims. All decisions remain
+REVIEW REQUIRED. Native Mac execution/account access, local recovery and browser
+behavior still require the user's local action; this cloud preparation activates
+no Kaggle account, downloads no model and runs no inference or jobs.
+
+Local verification: **376 CPU tests passed**, zero skips/failures/errors, in an
+isolated public-source snapshot with credentials removed, networking disabled
+and private research storage blocked. Recovery-specific tests cover19 cases;
+the isolated SDK environment passes17 and skips the two Pillow-only generator
+checks, which pass in the app environment. All208 checked documentation links
+resolve; shell syntax, public no-auth plan, pip consistency and whitespace checks
+pass. Native Mac execution and real recovery are not claimed by these fixtures.
+
+---
+
 # Academic evidence hub and research defence — reporting extension
 
 Continued from merged PR #33/main `60d0957` on

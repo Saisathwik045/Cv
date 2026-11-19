@@ -159,11 +159,38 @@ class MacLauncherTests(unittest.TestCase):
             def run(root, args, phase, *, env):
                 self.assertEqual(env['KAGGLE_API_TOKEN'], 'test-private-token')
                 self.assertNotIn('test-private-token', ' '.join(args))
+                self.assertIn(str(Path(tmp) / 'scripts/recover_inference_bundle.py'), args)
+                self.assertIn('--allow-recovery', args)
+                self.assertNotIn('--download', args)
             with patch.object(launcher, 'run_checked', side_effect=run):
                 launcher.setup_artifacts(tmp)
             logs = (Path(tmp) / '.trustretina/launcher.jsonl').read_text()
             self.assertNotIn('test-private-token', logs)
             self.assertNotIn('KAGGLE_API_TOKEN', os.environ)
+
+    def test_combined_setup_then_start_uses_existing_lifecycle(self):
+        order = []
+        with patch.object(launcher, 'require_mac'), patch.object(launcher, 'log_event'), \
+             patch.object(launcher.signal, 'signal'), \
+             patch.object(launcher, 'setup_artifacts', side_effect=lambda root: order.append('setup')), \
+             patch.object(launcher, 'start', side_effect=lambda root, **kwargs: order.append(('start', kwargs))), \
+             patch.object(launcher.sys, 'argv', ['macos_launcher.py', '--setup-and-start', '--port', '8502', '--no-browser']):
+            self.assertEqual(launcher.main(), 0)
+        self.assertEqual(order, ['setup', ('start', {'port': 8502, 'open_browser': False, 'generate_demo_images': True})])
+
+    def test_combined_command_preserves_quoted_bundle_path_and_arguments(self):
+        import subprocess
+        import shutil
+        with tempfile.TemporaryDirectory(prefix='Mac demo with spaces ') as td:
+            root = Path(td)
+            script = root / 'Setup_and_Start_TrustRetina.command'
+            shutil.copyfile(ROOT / script.name, script)
+            (root / 'scripts').mkdir()
+            (root / 'scripts/macos_bootstrap.sh').write_text('printf \'%s\\n\' "$TRUSTRETINA_BUNDLE" "$@"\n')
+            env = dict(os.environ, TRUSTRETINA_BUNDLE=str(root / 'private bundle'))
+            result = subprocess.run(['bash', str(script), '--port', '8502'], env=env,
+                                    capture_output=True, text=True, check=True)
+            self.assertEqual(result.stdout.splitlines(), [env['TRUSTRETINA_BUNDLE'], '--setup-and-start', '--port', '8502'])
 
     def test_health_must_succeed_before_browser_opens(self):
         order = []
