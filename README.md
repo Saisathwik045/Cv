@@ -1,5 +1,11 @@
 # TrustRetina
 
+For a cloud-only academic walkthrough, use **Guided synthetic demo** and
+**Cloud readiness** in the dashboard. [Cloud demonstration guide](docs/CLOUD_DEMONSTRATION.md)
+explains the generated non-patient inputs, original CPU model, integrity checks,
+synthetic JSON export and the separate unverified viewing/uptime limits.
+No Mac installation, new fitting or public deployment is required.
+
 [Research evidence and viva defence](docs/ACADEMIC_RESEARCH_DEFENCE.md) ·
 [All-eight-class development comparison](docs/ALL_EIGHT_CLASS_COMPARISON.md).
 The dashboard's **Research study & viva** workspace presents hash-verified public

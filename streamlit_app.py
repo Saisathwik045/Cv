@@ -17,7 +17,7 @@ st.markdown('''<style>
 </style>''', unsafe_allow_html=True)
 st.sidebar.title('◉ TrustRetina')
 st.sidebar.caption('Frozen ConvNeXt-Tiny · Research demo')
-page = st.sidebar.radio('Workspace', ['Paired-eye prediction', 'Research results', 'Research study & viva'])
+page = st.sidebar.radio('Workspace', ['Paired-eye prediction', 'Research results', 'Research study & viva', 'Guided synthetic demo', 'Cloud readiness'])
 st.sidebar.divider()
 st.sidebar.write('**REVIEW REQUIRED** for every prediction.')
 st.sidebar.caption('No automatic acceptance policy. No uploaded image storage or patient data in logs. Reset clears this session’s inputs and results; close the tab to end the session.')
@@ -56,7 +56,13 @@ def results_page():
         st.image(str(Path(__file__).resolve().parent / 'results/final-v7' / name))
 
 
-if page == 'Research study & viva':
+if page == 'Guided synthetic demo':
+    from dashboard.guided import render_guided_page
+    render_guided_page()
+elif page == 'Cloud readiness':
+    from dashboard.readiness import render_readiness_page
+    render_readiness_page()
+elif page == 'Research study & viva':
     from dashboard.academic import render_academic_page
     render_academic_page()
 elif page == 'Research results':

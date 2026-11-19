@@ -95,6 +95,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_submission_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_academic_hub.py' -v
+      - run: python -m unittest discover -s tests -p 'test_cloud_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_mac_launcher.py' -v
       - run: bash -n Start_TrustRetina.command Setup_TrustRetina.command scripts/macos_bootstrap.sh
       - run: python -m compileall -q src scripts tests dashboard streamlit_app.py

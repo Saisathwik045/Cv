@@ -1,3 +1,40 @@
+# Guided cloud demo and local readiness — cloud-only workflow
+
+Continued from merged PR #34/main `7861da9` on
+`phase/18-cloud-demo-readiness`. The user chose cloud-only operation and approved
+the guided synthetic demonstration plus cloud readiness recommendation. This
+branch is independent of the optional, unmerged Mac recovery work.
+
+Adds a generated-image guided workspace: explicit CPU predict/initial Grad-CAM,
+eight original-model probabilities, REVIEW REQUIRED, experimental signals,
+synthetic-context JSON export, selectable explanation, replacement invalidation
+and scoped reset. Images are generated in session, never read from patient
+storage or committed. The original manual predictor and scientific source remain
+unchanged; V14/V15 results are not substituted for the original demo.
+
+Adds on-demand hash-only bundle checks, exact dependency pins, public-evidence
+hashes, bounded nonredirecting loopback health and server-protection checks. The
+snapshot distinguishes local preflight from unverified external viewing, model
+execution not run by readiness, unavailable uptime guarantees and incomplete
+clinical validation. No automatic recovery, tunnel, public deployment, training,
+calibration, private patient-data access or Kaggle job is introduced. See
+[the cloud demonstration guide](CLOUD_DEMONSTRATION.md).
+
+Verification: **368 CPU tests passed**, zero skips/failures/errors, from an
+isolated source snapshot with networking and private research storage blocked.
+All 204 checked local documentation links resolve; dependency consistency and
+whitespace checks pass. Live Chromium inspection observed local preflight PASS
+(all five bundle identities, 50 dependency pins and public evidence), while external
+viewing remains NOT VERIFIED. One explicitly triggered original-model CPU
+prediction on the generated pair and initial D-target Grad-CAM completed. All
+eight outputs, both explanation overlays, both JSON downloads, replacement
+invalidation and reset were inspected; downloaded exports were verified privately.
+This is operational evidence only, not a medical or V15 research evaluation.
+Remote CI outcomes are tracked in the feature PR. The loopback preview remains
+running in the current runtime; availability ends if the environment stops.
+
+---
+
 # Academic evidence hub and research defence — reporting extension
 
 Continued from merged PR #33/main `60d0957` on
