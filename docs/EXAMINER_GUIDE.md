@@ -74,6 +74,10 @@ development-only academic project if the institution accepts that scope.
 
 ## Proposed follow-up, not executed
 
+For measured implementation cost, use the [CPU performance report](CPU_PERFORMANCE.md).
+It records a bounded original-model run on generated non-patient images, not
+clinical accuracy, browser latency, concurrency capacity or native Mac performance.
+
 The most valuable scientific extension is compatible independent confirmation,
 not more interface decoration. It requires data access and a prospective design.
 A clinical-quality annotation study could test whether technical proxies measure

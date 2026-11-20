@@ -7,6 +7,9 @@ The original demo, models, thresholds and all calibration results remain frozen.
 
 ## Public submission contents
 
+- [CPU performance report](CPU_PERFORMANCE.md): observed original-model synthetic
+  latency and process peak memory, separate from clinical performance and browser timing.
+
 - [Examiner guide](EXAMINER_GUIDE.md): proposed rubric, timed evidence walkthrough,
   failure rehearsal and remaining human sign-off; dashboard **Examiner rehearsal**
   provides reasoning feedback without models, patient data or awarded grades.

@@ -1,5 +1,9 @@
 # TrustRetina
 
+[Measured CPU performance](docs/CPU_PERFORMANCE.md): original frozen backend,
+generated non-patient inputs, observed timing/memory and reproduction boundaries.
+The development architecture is implemented; independent clinical validation is incomplete.
+
 [Examiner guide and proposed assessment rubric](docs/EXAMINER_GUIDE.md): evidence-led
 walkthrough, failure rehearsal and submission sign-off. The **Examiner rehearsal**
 dashboard workspace offers public-only reasoning practice; it awards no grade.

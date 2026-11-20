@@ -1,0 +1,101 @@
+{
+  "schema": "synthetic_cpu_performance_v1",
+  "status": "PASS",
+  "input_kind": "generated_geometric_non_patient",
+  "research_evaluation": false,
+  "clinical_validation": false,
+  "decision": "REVIEW REQUIRED",
+  "observed_utc": "2026-11-20T04:50:42.516950+00:00",
+  "environment": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "logical_cpus": 3,
+    "affinity_cpus": 3,
+    "cgroup_cpu_max": "200000 100000",
+    "cgroup_memory_max": "8589934592"
+  },
+  "torch_threads": 2,
+  "torch_interop_threads": 1,
+  "dependencies": {
+    "torch": "2.7.1+cpu",
+    "torchvision": "0.22.1+cpu",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0"
+  },
+  "initial_five_file_verification_seconds": 0.5117762049999328,
+  "dependency_import_seconds": 3.4662983309999618,
+  "measurement_wall_seconds": 1.7518984870002896,
+  "memory": {
+    "process_peak_rss_before_model_bytes": 361304064,
+    "process_peak_rss_after_measurement_bytes": 811536384,
+    "interpretation": "Process lifetime high-water RSS including imports, verification, temporary copies and Grad-CAM; not isolated model size or current RSS"
+  },
+  "measurements": {
+    "load_including_internal_bundle_verification_seconds": {
+      "samples_seconds": [
+        0.8068349209997905
+      ],
+      "count": 1,
+      "minimum_seconds": 0.8068349209997905,
+      "median_seconds": 0.8068349209997905,
+      "maximum_seconds": 0.8068349209997905
+    },
+    "first_prediction_seconds": {
+      "samples_seconds": [
+        0.20847767099985504
+      ],
+      "count": 1,
+      "minimum_seconds": 0.20847767099985504,
+      "median_seconds": 0.20847767099985504,
+      "maximum_seconds": 0.20847767099985504
+    },
+    "repeated_prediction_seconds": {
+      "samples_seconds": [
+        0.1742687300002217,
+        0.1514570360000107,
+        0.14468998800020927
+      ],
+      "count": 3,
+      "minimum_seconds": 0.14468998800020927,
+      "median_seconds": 0.1514570360000107,
+      "maximum_seconds": 0.1742687300002217
+    },
+    "paired_D_gradcam_seconds": {
+      "samples_seconds": [
+        0.17446892899988597
+      ],
+      "count": 1,
+      "minimum_seconds": 0.17446892899988597,
+      "median_seconds": 0.17446892899988597,
+      "maximum_seconds": 0.17446892899988597
+    },
+    "calls": {
+      "model_loads": 1,
+      "predictions": 4,
+      "paired_explanations": 1
+    },
+    "frozen_state_unchanged": true
+  },
+  "provenance": {
+    "source_commit": "72ab6f736cc79ff5fecbb1049e5975e9a760c9c6",
+    "bundle_hashes": {
+      "best.pt": "6871e49772543f3463f9d30dd6c758257022463bf562e21342fd154d7aa0eaf1",
+      "temperature.json": "184734207a15a57728fd5c887e2a44739d26f5613fa82330842d5193e20fc202",
+      "quality-normalizer.npz": "0ba2adff200e369bb4592f232f414a3b135e3f77e7cc7e6fc1dabfd1c5c810c2",
+      "candidate-pipeline.json": "4e1008bd0728e9ea21b21da8d5d45d5c0f96399b49c5f3b00d2d4efc707777a0",
+      "candidate-contract.json": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61"
+    },
+    "contract_sha256": "a80dce8f27f12645539a0312a3ed96af0b5d10b5d7e1cd522af53b9347409c61",
+    "harness_sha256": "db05851758a97a7510f902433c05d01ba6a1a6e10ea394868f751be6769655e5",
+    "measurement_module_sha256": "729dc92852d1cc16d7c11dd35a6a8bdb449ce6d9b4443d134187f9da4652b7c3"
+  },
+  "limits": [
+    "One process, one generated pair, no clinical interpretation",
+    "First prediction is not a cold OS-cache measurement; no cache flushing",
+    "Three repeated samples are not a p95, confidence interval or throughput benchmark",
+    "Includes decode/preprocessing, 20 head-only MC passes, quality and frozen temperature in predict",
+    "No browser, upload, download, concurrent-user, native Mac or independent clinical validation",
+    "No predictions, images or explanation arrays retained; network disabled; 180-second deadline"
+  ]
+}
