@@ -1,5 +1,7 @@
 """No real-model timing in CI: test bounds, identity refusal and output safety."""
 import importlib.util
+import hashlib
+import json
 from pathlib import Path
 import tempfile
 import unittest
@@ -15,6 +17,21 @@ spec.loader.exec_module(cli)
 
 
 class PerformanceContracts(unittest.TestCase):
+    def test_public_observation_matches_its_exact_harness_and_documented_values(self):
+        raw=(ROOT/'results/demo-cpu-performance/measurement.json').read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), '5830473786b52d697935927db9c39966ac091d16688a9e7074d4980550d6891f')
+        data=json.loads(raw);doc=(ROOT/'docs/CPU_PERFORMANCE.md').read_text()
+        self.assertFalse(data['clinical_validation']);self.assertFalse(data['research_evaluation'])
+        self.assertEqual(data['measurements']['calls'],{'model_loads':1,'predictions':4,'paired_explanations':1})
+        for key, path in (('harness_sha256','scripts/benchmark_demo_cpu.py'),
+                          ('measurement_module_sha256','dashboard/performance.py')):
+            self.assertEqual(data['provenance'][key],hashlib.sha256((ROOT/path).read_bytes()).hexdigest())
+        for values in data['measurements'].values():
+            if isinstance(values,dict) and 'median_seconds' in values:
+                self.assertIn(f"{values['median_seconds']:.6f}",doc)
+        for forbidden in ('/workspace/', '/home/', 'raw_probabilities', 'calibrated_probabilities'):
+            self.assertNotIn(forbidden,raw.decode())
+
     def test_statistics_do_not_invent_tail_percentiles(self):
         self.assertEqual(summarize([3., 1., 2.]), {'samples_seconds':[3.,1.,2.], 'count':3,
                          'minimum_seconds':1., 'median_seconds':2., 'maximum_seconds':3.})

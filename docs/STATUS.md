@@ -9,8 +9,30 @@ a 180-second deadline. Fresh owner-only aggregate output stays outside Git;
 predictions, input images and explanation arrays are not saved. All five bundle
 hashes are verified before and after, and model state/modes must remain frozen.
 No clinical evaluation, patient-data access, training, fitting, new threshold,
-GPU job or demo-model substitution is introduced. Synthetic contract tests passed;
-observed measurement and broader verification will be recorded after execution.
+GPU job or demo-model substitution is introduced.
+
+The authorized real run passed with the original CPU model: load 0.806835 s,
+first paired prediction 0.208478 s, three repeated predictions median 0.151457 s
+(range 0.144690–0.174269 s), paired D Grad-CAM 0.174469 s. Process-lifetime peak
+RSS reached 811,536,384 bytes (773.94 MiB), not isolated model memory or a RAM
+requirement. Two intra-op threads, one inter-op thread, Linux CPU-only runtime;
+cgroup quota is two CPU equivalents and memory limit 8 GiB. Read the
+[full performance report](CPU_PERFORMANCE.md) and
+[reviewed aggregate](../results/demo-cpu-performance/measurement.json) for exact
+samples, hashes, measured source commit, scope and limitations. No patient data,
+images, prediction arrays, private paths or secrets are published. The development
+architecture is implemented; independent clinical validation remains incomplete.
+These timings establish neither clinical performance nor browser/Mac/concurrency
+latency, cold-cache behavior, tail percentiles or service-level guarantees.
+
+Verification: 374 isolated CPU-suite tests passed without skips/failures/errors;
+the final four benchmark tests additionally passed, including public observation/
+harness hashes and documented timings. Network and private research access were
+blocked during the suite; no real benchmark runs in CI. All 223 checked local
+documentation links resolve. Pip consistency, compilation, environment/config/
+declarative-plan and whitespace checks passed. Frozen scientific source/configs,
+dependencies and prior result artifacts remain unchanged. Remote CI is tracked
+in the phase PR.
 
 ---
 
