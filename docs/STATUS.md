@@ -1,3 +1,46 @@
+# Final technical and academic governance audit
+
+Continued from merged PR #38/main `6fe5a0f` on
+`phase/21-submission-hardening`. Slides/poster remain deferred. The permitted
+scope is synthetic robustness, clean-install/software reproduction, public
+citation/claims/rights/ethics review, read-only private preservation verification
+and a supervisor review form. No frozen scientific source, model, calibration,
+threshold, protocol or scientific result changes; no real-model inference,
+training, fitting, GPU/Kaggle job, private patient parsing or historical-final access.
+
+Five new generated robustness cases passed: truncated/unsupported image refusal,
+pixel limit before decode, grayscale/alpha/EXIF handling, finite extreme-aspect
+preparation without a model, and twenty replacement/removal/reset cycles. Existing
+byte/missing-eye/UI/reset controls remain covered. See the
+[robustness matrix](DEMO_ROBUSTNESS_AUDIT.md). A fresh no-system-site-packages Linux
+venv and separate source copy passed all **380 CPU tests**, zero skips/failures/
+errors, using unchanged core locks and explicit build tools/optional photographic
+dependencies. Tests blocked network and private research-storage access. The documented no-build-
+isolation recipe now provisions setuptools/wheel explicitly. Observed results
+are recorded in the [clean reproduction report](CLEAN_REPRODUCTION.md).
+
+All 98 private research files and exact 384-file historical source snapshot
+again passed their anchored byte/set checks; nine handover files match their
+existing checksum list. Private research permissions/symlink checks passed.
+The original five demo-bundle hashes and private permissions also passed without
+loading weights. No encryption, key creation, transfer or restore drill occurred;
+[backup readiness](PRIVATE_PRESERVATION_READINESS.md) records the exact boundary.
+
+Seven primary method references match their cited titles/attribution/identifiers.
+Official ODIR pages/rules could not be retrieved; applicable rights evidence
+remains pending. No tracked LICENSE/COPYING file was found; author/institution
+must decide licensing after rights review, not an assistant-selected grant.
+The [governance review](SUBMISSION_GOVERNANCE_REVIEW.md) provides citations,
+privacy/ethics/assistance requirements and a pending supervisor/author form.
+No institution, ethics approval/exemption, supervisor acceptance or authorship
+claim is invented. Development-only submission remains conditional on those
+human/institutional requirements; independent clinical validation is incomplete.
+All 245 checked local documentation links resolve; pip consistency, compilation,
+config/development/declarative-plan/environment and whitespace checks passed.
+Remote CI outcomes are tracked in the phase PR.
+
+---
+
 # Original frozen demo CPU performance — operational measurement
 
 Continued from merged PR #37/main `f249858` on `phase/20-cpu-performance`.
