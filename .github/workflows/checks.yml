@@ -95,6 +95,7 @@ jobs:
       - run: python -m unittest discover -s tests -p 'test_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_submission_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_demo_robustness.py' -v
+      - run: python -m unittest discover -s tests -p 'test_preprocessing_inspector.py' -v
       - run: python -m unittest discover -s tests -p 'test_academic_hub.py' -v
       - run: python -m unittest discover -s tests -p 'test_cloud_demo.py' -v
       - run: python -m unittest discover -s tests -p 'test_examiner.py' -v
