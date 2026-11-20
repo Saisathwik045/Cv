@@ -1,3 +1,19 @@
+# Original frozen demo CPU performance — operational measurement
+
+Continued from merged PR #37/main `f249858` on `phase/20-cpu-performance`.
+Adds a separately invoked, explicitly gated Linux CPU benchmark using only the
+original verified inference-v8 bundle and generated geometric non-patient images.
+The bounded workload is one load, four predictions (first plus three repeated)
+and one paired D-target explanation. Networking is disabled and the process has
+a 180-second deadline. Fresh owner-only aggregate output stays outside Git;
+predictions, input images and explanation arrays are not saved. All five bundle
+hashes are verified before and after, and model state/modes must remain frozen.
+No clinical evaluation, patient-data access, training, fitting, new threshold,
+GPU job or demo-model substitution is introduced. Synthetic contract tests passed;
+observed measurement and broader verification will be recorded after execution.
+
+---
+
 # Examiner rehearsal and academic assessment pack
 
 Continued from merged PR #36/main `57c7827` on
