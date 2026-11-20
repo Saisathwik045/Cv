@@ -7,6 +7,10 @@ The original demo, models, thresholds and all calibration results remain frozen.
 
 ## Public submission contents
 
+- [Robustness audit](DEMO_ROBUSTNESS_AUDIT.md), [fresh-environment reproduction](CLEAN_REPRODUCTION.md),
+  [citation/rights/ethics and supervisor review](SUBMISSION_GOVERNANCE_REVIEW.md),
+  and [private preservation readiness](PRIVATE_PRESERVATION_READINESS.md).
+
 - [CPU performance report](CPU_PERFORMANCE.md): observed original-model synthetic
   latency and process peak memory, separate from clinical performance and browser timing.
 
@@ -39,6 +43,7 @@ Use Python3.11 or3.12. From a clean checkout on a supported Linux CPU machine:
 ```sh
 python3.12 -m venv .venv-submission
 . .venv-submission/bin/activate
+python -m pip install setuptools==78.1.0 wheel==0.48.0
 python -m pip install -r requirements/full-v5-reports.lock -r requirements/app-cpu.lock
 python -m pip install --no-deps --no-build-isolation -e .
 python -m pip check

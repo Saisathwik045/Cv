@@ -1,5 +1,10 @@
 # TrustRetina
 
+[Final technical/submission audit](docs/DEMO_ROBUSTNESS_AUDIT.md) ·
+[Clean reproduction](docs/CLEAN_REPRODUCTION.md) ·
+[Rights, ethics and supervisor sign-off](docs/SUBMISSION_GOVERNANCE_REVIEW.md) ·
+[Private backup readiness](docs/PRIVATE_PRESERVATION_READINESS.md).
+
 [Measured CPU performance](docs/CPU_PERFORMANCE.md): original frozen backend,
 generated non-patient inputs, observed timing/memory and reproduction boundaries.
 The development architecture is implemented; independent clinical validation is incomplete.

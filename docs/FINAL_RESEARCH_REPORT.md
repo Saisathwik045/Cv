@@ -182,6 +182,12 @@ The central conclusion is that aggregate ranking/calibration gains do not guaran
 
 ## References and reproducibility sources
 
+The later [technical robustness audit](DEMO_ROBUSTNESS_AUDIT.md),
+[clean-environment reproduction](CLEAN_REPRODUCTION.md),
+[citation/rights/ethics review and supervisor form](SUBMISSION_GOVERNANCE_REVIEW.md)
+and [preservation readiness](PRIVATE_PRESERVATION_READINESS.md) record submission
+checks and unresolved human approvals without changing the scientific results.
+
 For the examiner-facing question/evidence map, design decisions, ablation trail,
 failure hypotheses, contribution disclosure, reproducibility levels and viva,
 see [Research evidence and critical analysis](ACADEMIC_RESEARCH_DEFENCE.md).
