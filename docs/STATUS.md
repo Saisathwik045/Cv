@@ -1,3 +1,39 @@
+# Frozen preprocessing inspector — functional dashboard extension
+
+Continued from merged PR #39/main `3e3031d` on
+`phase/22-preprocessing-inspector`. Adds **Preprocessing inspector**: four generated
+geometries and two fixture colours, source versus actual 224 px letterbox canvas,
+optional clearly separate content-boundary overlay, geometry/padding measurements,
+normalized float32 channel statistics, fingerprint verification and scoped reset.
+The default and replacement fixtures are synthetic non-patient shapes; no uploader,
+export, bundle access, model construction, inference or scientific evaluation.
+
+The page reuses the unchanged trusted decoder and shared inference preprocessing.
+It verifies original configuration identity, geometry agreement and canvas/tensor
+round-trip agreement within float32 tolerance. Tests compare all four shapes with
+actual service preparation without a model. Normalized padding is near, not exactly,
+zero because mean-colour bytes are rounded. Padding fraction is not a quality or
+clinical suitability score. No frozen scientific source/model/calibration/threshold/
+protocol/result changes, patient-data access, GPU/Kaggle job or public deployment.
+See [the inspector guide](PREPROCESSING_INSPECTOR.md).
+
+Four focused tests passed, covering parity, padding, orientation, identity/input
+refusal, separate overlays, model-free UI controls, safe failure and scoped reset.
+Native Chromium inspection confirmed the rendered source/canvas, geometry,
+normalization/statistics, fingerprint and square-frame change. A browser-observed
+stale-widget reset issue was fixed with new widget generations and the same browser
+sequence then restored landscape/left/no overlay correctly. The existing cloud
+loopback preview remains running; runtime availability and external viewing limits
+remain unchanged. All predictions remain REVIEW REQUIRED; independent clinical
+validation is incomplete. Final verification after the reset fix: **384 isolated
+CPU tests passed**, zero skips/failures/errors, with networking and private research
+storage blocked. All 250 checked local documentation links resolve. Compilation,
+pip consistency, config/declarative-plan/environment and whitespace checks pass;
+frozen source/config/dependency/result trees are unchanged. Remote CI is tracked
+in the feature PR.
+
+---
+
 # Final technical and academic governance audit
 
 Continued from merged PR #38/main `6fe5a0f` on

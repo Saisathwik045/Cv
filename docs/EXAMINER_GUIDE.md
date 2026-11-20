@@ -25,6 +25,10 @@ been assigned and no self-test result determines submission readiness.
 
 ## Ten-minute evidence-led demonstration
 
+The [preprocessing inspector](PREPROCESSING_INSPECTOR.md) provides an optional
+live explanation of source geometry, exact letterboxing and tensor normalization
+using generated images without model execution or patient data.
+
 | Time | Action | Examiner challenge |
 |---|---|---|
 | 0–1 min | State the research question and intended use | Why are eight outputs multi-label rather than eight mutually exclusive diagnoses? |

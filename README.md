@@ -1,5 +1,9 @@
 # TrustRetina
 
+Open **Preprocessing inspector** to compare generated source images with the
+actual frozen 224 px letterbox canvas, padding and normalized tensor statistics.
+[Inspector guide](docs/PREPROCESSING_INSPECTOR.md); no model or private data needed.
+
 [Final technical/submission audit](docs/DEMO_ROBUSTNESS_AUDIT.md) ·
 [Clean reproduction](docs/CLEAN_REPRODUCTION.md) ·
 [Rights, ethics and supervisor sign-off](docs/SUBMISSION_GOVERNANCE_REVIEW.md) ·
