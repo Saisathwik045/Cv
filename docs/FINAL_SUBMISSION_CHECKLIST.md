@@ -7,6 +7,10 @@ The original demo, models, thresholds and all calibration results remain frozen.
 
 ## Public submission contents
 
+- [Examiner guide](EXAMINER_GUIDE.md): proposed rubric, timed evidence walkthrough,
+  failure rehearsal and remaining human sign-off; dashboard **Examiner rehearsal**
+  provides reasoning feedback without models, patient data or awarded grades.
+
 - [Research defence chapter](ACADEMIC_RESEARCH_DEFENCE.md): research questions,
   decision trail, failure analysis, contributions, reproduction and examiner walkthrough.
 - [All-eight-class comparison](ALL_EIGHT_CLASS_COMPARISON.md): recorded class

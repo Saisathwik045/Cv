@@ -1,5 +1,9 @@
 # TrustRetina
 
+[Examiner guide and proposed assessment rubric](docs/EXAMINER_GUIDE.md): evidence-led
+walkthrough, failure rehearsal and submission sign-off. The **Examiner rehearsal**
+dashboard workspace offers public-only reasoning practice; it awards no grade.
+
 For a cloud-only academic walkthrough, use **Guided synthetic demo** and
 **Cloud readiness** in the dashboard. [Cloud demonstration guide](docs/CLOUD_DEMONSTRATION.md)
 explains the generated non-patient inputs, original CPU model, integrity checks,

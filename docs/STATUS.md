@@ -1,3 +1,33 @@
+# Examiner rehearsal and academic assessment pack
+
+Continued from merged PR #36/main `57c7827` on
+`phase/19-examiner-rehearsal`. Adds a public-only **Examiner rehearsal** workspace
+with six scenario questions, explicit unanswered/revisit/aligned feedback,
+repository evidence references, session-scoped reset and optional feedback export.
+This is teaching-key practice, not a grade, proof of mastery/authorship, scientific
+evaluation or clinical validation. No model, dataset or private research record is
+accessed by this feature; no inference, training, fitting or scientific result
+computation is added.
+
+The [examiner guide](EXAMINER_GUIDE.md) proposes an adaptable assessment rubric,
+ten-minute evidence-led defence, failure rehearsal and submission/sign-off map.
+It distinguishes implemented development research from independent confirmation,
+truthful student contributions, institutional formatting and durable preservation.
+Existing architecture/results/viva materials are reused rather than inventing
+new scientific findings. Cloud-only presentation remains supported; native Mac
+rehearsal is optional for that workflow. All decisions remain REVIEW REQUIRED.
+Frozen source, weights, thresholds, calibration, protocols and result artifacts
+are unchanged. Verification: **371 CPU tests passed**, zero skips/failures/errors,
+from an isolated source snapshot with networking/private research storage blocked.
+The new Streamlit AppTest exercises answer feedback, current-choice updates,
+export controls and reset isolation, with the model constructor forbidden.
+This is synthetic UI testing, not a new rendered-browser or real-model run.
+All 217 checked local documentation links resolve. Compilation, pip consistency,
+phase0 configuration/declarative-plan checks, environment probes and whitespace
+checks passed. Remote CI outcomes are recorded in the phase PR.
+
+---
+
 # Guided cloud demo and local readiness — cloud-only workflow
 
 Continued from merged PR #34/main `7861da9` on
