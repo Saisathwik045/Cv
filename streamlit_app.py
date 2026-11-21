@@ -89,6 +89,9 @@ else:
             try:
                 from trustretina.inference.service import decode_image
                 col.image(decode_image(data), caption=label, width=320)
+            except ImportError:
+                col.error('CPU dependencies are unavailable. Use Python 3.12 and requirements/app-cpu.lock, then rebuild.')
+                valid = False
             except ValueError as error:
                 col.error(str(error))
                 valid = False
@@ -101,6 +104,8 @@ else:
             with st.spinner('Preprocessing both eyes, predicting eight labels and running 20 trained-head passes…'):
                 st.session_state['prediction'] = service.predict(*contents)
             st.session_state.pop('explanation', None)
+        except ImportError:
+            st.error('CPU dependencies are unavailable. Use Python 3.12 and requirements/app-cpu.lock, then rebuild.')
         except (ValueError, OSError, RuntimeError) as error:
             st.error(f'Prediction unavailable: {error}')
     result = st.session_state.get('prediction')
@@ -131,6 +136,8 @@ else:
                     cam, overlays = service.explain(*contents, result['class_order'].index(target))
                     st.session_state['explanation'] = (overlays, cam['zero_maps'])
                     st.session_state['explanation_target'] = target
+            except ImportError:
+                st.error('CPU dependencies are unavailable. Rebuild the Python 3.12 CPU environment.')
             except (ValueError, OSError, RuntimeError) as error:
                 st.error(f'Explanation unavailable: {error}')
         if st.session_state.get('explanation_target') == target and st.session_state.get('explanation'):

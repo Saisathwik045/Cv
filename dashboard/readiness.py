@@ -52,8 +52,11 @@ def bundle_check(bundle):
     from trustretina.inference.bundle import verify_bundle
     try:
         c = verify_bundle(bundle)  # Hashes/contract JSON only; never torch.load.
+    except FileNotFoundError:
+        return {'status': 'FAIL', 'code': 'bundle_missing',
+                'detail': 'Original bundle is absent. On Community Cloud use deploy/community_cloud/app.py and its explicitly gated private setup. No fallback or automatic recovery.'}
     except (OSError, ValueError):
-        return {'status': 'FAIL', 'detail': 'Original bundle missing or invalid; no fallback or automatic recovery'}
+        return {'status': 'FAIL', 'code': 'bundle_invalid', 'detail': 'Original bundle is unreadable or failed identity verification; no overwrite, fallback or automatic recovery'}
     return {'status': 'PASS', 'verified_files': 5, 'model': c['selected_backbone'],
             'epoch': c['best_epoch'], 'resolution': c['preprocessing']['size'],
             'temperature': c['temperature'], 'threshold': c['threshold'],
@@ -116,6 +119,8 @@ def render_readiness_page():
         st.download_button('Download local readiness snapshot', json.dumps(report, indent=2),
                            file_name='trustretina-local-preflight.json', mime='application/json')
     st.subheader('Viewing and presentation checklist')
+    if os.environ.get('TRUSTRETINA_HOSTED_BACKEND') != '1':
+        st.info('If this is Streamlit Community Cloud, deploy deploy/community_cloud/app.py with Python 3.12. Launching streamlit_app.py directly does not configure the private original bundle.')
     st.write('External viewing route: NOT VERIFIED by this page. Open the app through your cloud Desktop viewer if your client supports it, and rehearse that route from the presenting screen. A cloud 127.0.0.1 address opened on your laptop points to your laptop, not this workspace.')
     st.write('Health replies alone do not authenticate a process or test proxy/WebSocket/upload access. This check never requests an arbitrary URL or follows a redirect. No tunnel or public deployment is created.')
     st.write('Use Guided synthetic demo for the current operational model check. Keep non-patient inputs visibly labelled, test export/reset, and present the recorded V15 findings separately. Native Mac behavior, durable backup and clinical validation are not checked here.')

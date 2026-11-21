@@ -1,0 +1,3 @@
+# Also install CPU dependencies when the root dashboard is selected by mistake.
+--only-binary=:all:
+-r requirements/app-cpu.lock

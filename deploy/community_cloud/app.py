@@ -41,6 +41,13 @@ def main():
         st.warning('Before model setup: verify Sharing → Only specific people can view this app. This setup screen is not authentication.')
         st.write('Deploy from the private source repository. Confirm owner-only platform access before adding private model credentials. Then set trustretina.owner_only_confirmed=true in Streamlit Secrets. Never put tokens or weights in GitHub or chat.')
         st.stop()
+    from dashboard.runtime import cpu_runtime_check
+    runtime = cpu_runtime_check()
+    if runtime['status'] != 'PASS':
+        st.title('TrustRetina CPU environment needs repair')
+        st.error(runtime['detail'])
+        st.json(runtime)
+        st.stop()
     from deploy.community_cloud.recovery import private_directory
     root=private_directory(Path.home()/'.trustretina-streamlit')
     bundle=root/'inference-v8'
