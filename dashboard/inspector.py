@@ -85,7 +85,7 @@ def render_inspector_page():
     show_boundary = st.checkbox('Show educational content-boundary overlay', key=f'inspector_boundary_{generation}')
     try:
         data = inspect(fixture(shape, eye))
-    except (OSError, ValueError, RuntimeError, KeyError, TypeError):
+    except (ImportError, OSError, ValueError, RuntimeError, KeyError, TypeError):
         st.error('The verified original preprocessing could not be inspected. No substitute canvas or assumed tensor is displayed.')
         return
     source_col, canvas_col = st.columns(2)

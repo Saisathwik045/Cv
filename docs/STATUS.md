@@ -1,3 +1,33 @@
+# Dashboard CPU startup repair
+
+Continued from merged PR #41/main `504f12a` on
+`phase/24-dashboard-runtime-repair`. Owner screenshots established direct root
+startup under Python 3.14 with missing torch; another showed requirements
+installation failure without its complete cause. A top-level requirements file
+now references the unchanged CPU lock; both hosting install paths require wheels.
+The hosted wrapper checks Python 3.11/3.12 and CPU imports before recovery.
+Missing imports no longer escape the guided, manual-upload or inspector pages.
+Readiness separates missing from invalid bundles without exposing private paths.
+No frozen scientific source, checkpoint, calibration, threshold or result changes.
+
+An authorized bounded local CPU check used only generated non-patient inputs.
+All five original bundle hashes passed before and after. All seven pages rendered;
+real original-model predictions, eight classes, saved-temperature use, 20-pass
+uncertainty, both-eye Grad-CAM, export controls, replacement and reset passed.
+No network, patient storage, fitting, training, GPU or Kaggle jobs were used.
+Private receipts remain outside Git; outputs remain REVIEW REQUIRED. This is
+local Streamlit AppTest evidence, not a rendered hosted-browser or clinical test.
+
+The private Saisathwik045 source mirror is accessible, but actual Streamlit
+settings/logs, owner-only sharing, model provisioning and live hosted execution
+remain unverified. Codespaces billing/quota returned permission denied; no instance
+was started. Validation: seven new regression checks passed; the isolated full suite ran
+401 tests, with 392 passed, nine optional photographic skips, and no failures or
+errors. Root requirements dry-run, pip consistency, compilation and whitespace
+checks passed. CI outcomes are tracked with the phase PR.
+
+---
+
 # Private Streamlit Community Cloud deployment preparation
 
 Continued from merged PR #40/main `7956844` on

@@ -42,6 +42,10 @@ From the owner's Streamlit dashboard select **Create app → Deploy from GitHub*
 | App URL | Choose an available name; use the actual URL returned by Streamlit |
 
 The entry-point-local requirements file reuses the exact Linux CPU app lock.
+A root requirements.txt also references that same lock if the root dashboard is
+selected accidentally; it does not configure private model storage. Both install
+paths require binary wheels, so an unsupported interpreter fails instead of
+attempting to build NumPy/PyTorch from source. Select Python 3.12 explicitly.
 The entry-point-local Streamlit configuration binds the **hosted backend** to
 `0.0.0.0` with CORS/XSRF enabled and telemetry disabled. The platform's private
 authentication gateway must protect it. The original local loopback configuration
@@ -151,3 +155,29 @@ Primary documentation checked 21 November 2026:
 [deployment](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app),
 [account setup](https://docs.streamlit.io/deploy/streamlit-community-cloud/get-started/create-your-account),
 [permissions/configuration limits](https://docs.streamlit.io/deploy/streamlit-community-cloud/status).
+
+
+## Troubleshooting observed hosted failures
+
+A rendered upload form does not establish that PyTorch or the model is available.
+Observed owner screenshots showed Python 3.14 and direct streamlit_app.py startup
+with no torch. A later screenshot showed source builds and dependency-install
+failure; its exact underlying installer error was not visible. The root CPU
+requirements reference fixes dependency discovery for an accidentally selected
+root entry point. Python must still be selected as 3.12 on each new app.
+
+Deploy **deploy/community_cloud/app.py**, not streamlit_app.py, from
+**Saisathwik045/trustretina-streamlit-private**. That private source mirror was
+created from the public original main; no private artifacts belong in Git.
+The wrapper now checks supported Python and CPU imports before any model setup.
+Its runtime PASS means imports only, not model verification or clinical validity.
+The manual predictor, guided demo and inspector handle missing CPU imports without
+printing raw import exceptions. Readiness distinguishes an absent bundle from
+one that cannot pass identity verification, without printing private paths.
+
+Do not respond to a missing bundle by using the broad historical installer,
+changing model candidates or silently redownloading. Verify owner-only sharing
+and use the existing explicit bounded setup. Local model verification cannot
+certify the hosted install, private gateway, WebSocket route or available memory.
+Codespaces remains an optional alternative, not a deployed service: billing/quota
+access was denied, so no potentially paid instance was started.

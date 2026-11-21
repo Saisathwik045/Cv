@@ -97,7 +97,7 @@ def render_guided_page():
             st.session_state['guided_result'] = result
             st.session_state['guided_cam'] = overlays
             st.session_state['guided_cam_target'] = 'D'
-        except (KeyError, TypeError, ValueError, OSError, RuntimeError):
+        except (ImportError, KeyError, TypeError, ValueError, OSError, RuntimeError):
             st.error('The original frozen CPU demonstration could not complete. No substitute model or invented result is displayed. Check Cloud readiness; no artifacts are downloaded automatically.')
     result = st.session_state.get('guided_result')
     if not result:
@@ -125,7 +125,7 @@ def render_guided_page():
                 _, overlays = service(bundle).explain(*pair, CLASSES.index(target))
             st.session_state['guided_cam'] = overlays
             st.session_state['guided_cam_target'] = target
-        except (KeyError, TypeError, ValueError, OSError, RuntimeError):
+        except (ImportError, KeyError, TypeError, ValueError, OSError, RuntimeError):
             st.error('Synthetic explanation unavailable. No substitute heatmap is displayed.')
     if st.session_state.get('guided_cam_target') == target and st.session_state.get('guided_cam') is not None:
         for col, overlay, eye in zip(st.columns(2), st.session_state['guided_cam'], ('Left', 'Right')):
