@@ -1,3 +1,27 @@
+# Hosted package-index resolution repair
+
+Continued from merged PR #42/main `b1b3438` on
+`phase/25-hosted-package-resolution`. The owner's Python 3.12.16 screenshot
+showed uv rejecting frozen certifi==2026.10.23 during an update even though
+the app later displayed its missing-token screen. Metadata checks confirmed
+the release on PyPI and only an older certifi on the PyTorch CPU index.
+The default first-index uv resolver reproduces that conflict.
+
+Adds a hosted transport variant with exactly the original 50 package pins.
+PyPI supplies the package index and package-specific CPU wheel pages supply
+torch/torchvision via find-links. Root and wrapper requirements use this variant
+with binary-only installation. No unsafe-best-match setting, dependency upgrades,
+frozen-lock edits, private downloads, checkpoint loads, fitting or inference.
+Regression checks enforce pin parity and both entry-point references. Real uv resolution reproduced the old failure and resolved exactly the same
+50 pins with wheels on Python 3.11 and 3.12 using the corrected transport.
+Two new regression tests passed. The isolated full suite ran 403 tests: 394
+passed, nine optional photographic skips, zero failures/errors. Root pip
+dry-run and whitespace checks passed; CI outcomes are tracked in the phase PR. A clean hosted rebuild and
+private model provisioning remain separate unverified steps. All research
+outputs remain REVIEW REQUIRED; independent clinical validation is incomplete.
+
+---
+
 # Dashboard CPU startup repair
 
 Continued from merged PR #41/main `504f12a` on

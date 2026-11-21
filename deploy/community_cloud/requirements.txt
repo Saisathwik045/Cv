@@ -1,2 +1,2 @@
 --only-binary=:all:
--r ../../requirements/app-cpu.lock
+-r ../../requirements/app-community-cloud.lock

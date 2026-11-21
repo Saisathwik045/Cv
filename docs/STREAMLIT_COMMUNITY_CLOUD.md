@@ -181,3 +181,22 @@ and use the existing explicit bounded setup. Local model verification cannot
 certify the hosted install, private gateway, WebSocket route or available memory.
 Codespaces remains an optional alternative, not a deployed service: billing/quota
 access was denied, so no potentially paid instance was started.
+
+
+## uv index priority and frozen package pins
+
+An owner screenshot on Python 3.12.16 showed uv rejecting
+certifi==2026.10.23 despite that release existing on PyPI. The PyTorch CPU
+package index also contains certifi, at an older release. uv defaults to the
+first index containing a package; pip's cross-index lookup behaved differently.
+A partially updated running environment is not evidence of a clean installation.
+Do not change the certifi pin or begin private recovery to work around this.
+
+Both hosting requirements now use requirements/app-community-cloud.lock. Its
+complete package-pin list must equal the frozen app-cpu.lock exactly. Only
+discovery changes: PyPI is the index; the two package-specific PyTorch CPU
+wheel pages are find-links sources. This avoids a competing general CPU package
+index without broadening uv's index strategy. Binary-only installation stays
+required. The original local/Mac locks and scientific results are unchanged.
+A successful package resolution still does not verify private sharing, the
+original bundle, actual hosted memory capacity or inference.
