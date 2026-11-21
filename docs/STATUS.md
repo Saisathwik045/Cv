@@ -1,3 +1,46 @@
+# Private Streamlit Community Cloud deployment preparation
+
+Continued from merged PR #40/main `7956844` on
+`phase/23-private-streamlit-deployment`. User selected Streamlit Community Cloud
+and authorized private deployment preparation. The Mac screenshot confirms that
+cloud loopback was being opened on the Mac; it is not an external app URL.
+Adds a separate hosted entry point/config/requirements, preserving local loopback
+and all frozen scientific implementation/results. Setup is gated by operator
+private-access attestation; this is explicitly not an authentication mechanism.
+
+The exact four original objects can be recovered only by an explicit owner action
+into owner-only storage outside source. SDK dependencies run in a separate venv;
+credentials go to recovery via stdin, not arguments/files/package installation.
+Recovery validates pinned metadata/file identities, approved HTTPS host, exact
+content length/encoding/status, bounded raw reads and all five original hashes.
+Redirects are disabled, no broad installer is called, cumulative full-file budget
+reservations are durable/locked, failed staging is not published, and retries are
+never automatic. Existing verified assets are reused, never overwritten.
+Private approval/receipt records remain outside Git. No model transfer, download,
+inference, training, fitting, GPU/Kaggle job or deployment was executed here.
+
+The original local readiness binding stays loopback-only. The explicit hosted
+entry point supports a platform backend binding while still reporting platform
+access control, external reachability and uptime NOT VERIFIED. See the
+[private Community Cloud guide](STREAMLIT_COMMUNITY_CLOUD.md).
+
+GitHub denied private repository creation: `Resource not accessible by integration
+(createRepository)`. No private source repository or hosted app was created.
+Owner account/repository/OAuth actions and actual private-host tests remain
+required; no Streamlit URL is invented. Deploy from an owner-created private
+source copy after reviewing the phase code; the public original source repository
+must not acquire checkpoints, credentials or patient artifacts.
+
+Validation: ten focused synthetic deployment tests passed. The isolated full CPU
+suite passed **394 tests**, zero skips/failures/errors, with networking and private
+research-storage access blocked. CPU app requirements dry-run and pip consistency
+passed; 251 local documentation links resolve. Frozen source/config/dependency
+locks/prior result artifacts remain unchanged. CI outcomes are tracked in the PR.
+Hosted installation/recovery/authentication/resource capacity are not yet observed.
+All outputs remain REVIEW REQUIRED; independent clinical validation is incomplete.
+
+---
+
 # Frozen preprocessing inspector — functional dashboard extension
 
 Continued from merged PR #39/main `3e3031d` on

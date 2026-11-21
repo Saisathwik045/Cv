@@ -60,7 +60,7 @@ def bundle_check(bundle):
             'decision': c['deployment_default']}
 
 
-def collect_readiness(bundle, *, root=ROOT, port=8501, address='127.0.0.1', cors=True, xsrf=True):
+def collect_readiness(bundle, *, root=ROOT, port=8501, address='127.0.0.1', cors=True, xsrf=True, platform_backend=False):
     from dashboard.academic import load_academic_evidence
     try:
         load_academic_evidence(root)
@@ -70,7 +70,8 @@ def collect_readiness(bundle, *, root=ROOT, port=8501, address='127.0.0.1', cors
     checks = {'python': {'status': 'PASS' if sys.version_info[:2] in ((3, 11), (3, 12)) else 'FAIL', 'version': platform.python_version()},
               'dependencies': dependency_check(root), 'bundle': bundle_check(bundle),
               'public_evidence': evidence, 'loopback_health': loopback_health(port),
-              'server_binding': {'status': 'PASS' if address == '127.0.0.1' else 'FAIL', 'detail': 'Configured loopback-only address required'},
+              'server_binding': {'status': 'PASS' if address == ('0.0.0.0' if platform_backend else '127.0.0.1') else 'FAIL',
+                                 'detail': 'Hosted backend binding; platform authentication is NOT verified here' if platform_backend else 'Configured loopback-only address required'},
               'cors': {'status': 'PASS' if cors is True else 'FAIL'},
               'xsrf': {'status': 'PASS' if xsrf is True else 'FAIL'}}
     passed = all(c['status'] == 'PASS' for c in checks.values())
@@ -79,6 +80,7 @@ def collect_readiness(bundle, *, root=ROOT, port=8501, address='127.0.0.1', cors
             'free_disk_bytes': shutil.disk_usage(root).free,
             'checkpoint_loading': 'NOT RUN', 'inference': 'NOT RUN',
             'external_viewing_route': 'NOT VERIFIED', 'uptime': 'NOT GUARANTEED',
+            'platform_access_control': 'NOT VERIFIED',
             'live_demonstration_readiness': 'CONDITIONAL' if passed else 'BLOCKED',
             'clinical_validation': False, 'decision': 'REVIEW REQUIRED'}
 
@@ -98,7 +100,8 @@ def render_readiness_page():
                 st.session_state['readiness_report'] = collect_readiness(
                     os.environ.get('TRUSTRETINA_BUNDLE', str(DEFAULT_BUNDLE)),
                     port=st.get_option('server.port'), address=st.get_option('server.address'),
-                    cors=st.get_option('server.enableCORS'), xsrf=st.get_option('server.enableXsrfProtection'))
+                    cors=st.get_option('server.enableCORS'), xsrf=st.get_option('server.enableXsrfProtection'),
+                    platform_backend=os.environ.get('TRUSTRETINA_HOSTED_BACKEND') == '1')
         except (OSError, ValueError):
             st.error('Local checks could not complete. No readiness result is assumed; inspect the local setup without sharing credentials or private data.')
     report = st.session_state.get('readiness_report')

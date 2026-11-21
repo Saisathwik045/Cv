@@ -1,5 +1,9 @@
 # TrustRetina
 
+[Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md):
+separate gated entry point and bounded original-model recovery. A real hosted URL
+is available only after owner account/repository setup and successful deployment.
+
 Open **Preprocessing inspector** to compare generated source images with the
 actual frozen 224 px letterbox canvas, padding and normalized tensor statistics.
 [Inspector guide](docs/PREPROCESSING_INSPECTOR.md); no model or private data needed.

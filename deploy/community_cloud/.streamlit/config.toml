@@ -1,0 +1,9 @@
+# The hosting platform's private authentication gateway must protect this backend.
+[server]
+address = "0.0.0.0"
+headless = true
+maxUploadSize = 20
+enableCORS = true
+enableXsrfProtection = true
+[browser]
+gatherUsageStats = false
