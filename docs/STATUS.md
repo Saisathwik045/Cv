@@ -1,3 +1,34 @@
+# Presentation scope and readiness guidance
+
+Continued from merged PR #43/main `dbe5abd` on
+`phase/26-demo-readiness-guidance`. Codespaces is optional, not a required
+component of the model or existing dashboard. The readiness page remains present:
+removing a diagnostic cannot resolve its failed checks. Added a short presentation
+verification guide and hosted-page explanation separating functional predictions,
+strict environment readiness and clinical validity.
+
+Official Community Cloud configuration documentation, checked 22 November 2026,
+overrides XSRF protection to false and usage telemetry to true. Contrary repository
+configuration cannot guarantee either effective value. The strict readiness
+contract remains unchanged and XSRF remains FAIL on that platform; no hidden
+override, security waiver, migration, public exposure or model substitution.
+The owner's uploaded snapshot also reports certifi and pyarrow pin mismatches.
+Its five-file bundle check passes, but it does not establish inference or platform
+authentication. Uploaded prediction records and paired Grad-CAM screenshots
+support observed operation, not independently verified clinical correctness.
+Private input records and verification notes remain outside Git.
+
+Validation: the isolated CPU suite ran 403 tests: 394 passed, nine optional
+photographic skips, zero failures/errors. Network and private research/model
+storage were blocked during the suite. The uploaded prediction record passed
+19 identity/internal-consistency checks against the original public contract;
+maximum recomputed calibration error was 5.56e-17. That record review is not a
+fresh hosted model execution. Scientific source, configs, locks and recorded
+research results are unchanged. No new Codespace, model transfer, training,
+fitting, GPU job, budget change or live deployment was performed in this phase.
+
+---
+
 # Hosted package-index resolution repair
 
 Continued from merged PR #42/main `b1b3438` on

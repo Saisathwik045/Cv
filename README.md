@@ -1,5 +1,10 @@
 # TrustRetina
 
+[Presentation verification](docs/PRESENTATION_VERIFICATION.md): use the existing
+dashboard; Codespaces is optional. Operational predictions and strict deployment
+readiness are separate checks, and Community Cloud cannot satisfy the current
+XSRF requirement because of a platform override.
+
 [Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md):
 separate gated entry point and bounded original-model recovery. A real hosted URL
 is available only after owner account/repository setup and successful deployment.

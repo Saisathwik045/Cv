@@ -1,5 +1,24 @@
 # Private Streamlit Community Cloud deployment
 
+## Current platform limitation — checked 22 November 2026
+
+Codespaces is optional, not a prerequisite for the existing dashboard. See the
+[presentation verification guide](PRESENTATION_VERIFICATION.md) before creating
+another environment or repeating deployment.
+
+The official [configuration limits](https://docs.streamlit.io/deploy/streamlit-community-cloud/status#configuration)
+state that Community Cloud overrides `server.enableXsrfProtection=false` and
+`browser.gatherUsageStats=true`, regardless of contrary config.toml values.
+The configuration below requests protections; it cannot guarantee their effective
+hosted values. The project's strict XSRF check must remain FAIL on that platform.
+Do not remove this check, change it to PASS, or claim that a working upload form
+establishes full readiness. This is a platform compatibility limitation, not
+evidence of a particular attack or an assessment of the platform gateway.
+Use a separately verified controlled private host only if strict readiness is
+required. Dependency mismatches must also be resolved there; moving hosts alone
+does not establish a passing environment. Existing private demonstration evidence
+can be reviewed with these limitations recorded, without claiming full readiness.
+
 This is a separate deployment entry point for a stable browser URL, not a change
 to the original frozen scientific pipeline. Local `127.0.0.1` points to whichever
 machine opens it; the cloud workspace's loopback address cannot be used directly
