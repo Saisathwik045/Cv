@@ -49,10 +49,9 @@ class ExaminerPageTests(unittest.TestCase):
         service = Mock()
         service.InferenceService.side_effect = AssertionError('No private model access')
         with patch.dict(sys.modules, {'trustretina.inference.service': service}):
-            app = AppTest.from_file(str(ROOT / 'streamlit_app.py')).run(timeout=30)
-            app.sidebar.radio[0].set_value('Examiner rehearsal').run(timeout=30)
+            app = AppTest.from_string('from dashboard.examiner import render_examiner_page\nrender_examiner_page()\n').run(timeout=30)
             self.assertFalse(app.exception)
-            self.assertEqual(len(app.radio), 7)  # Six scenarios plus navigation.
+            self.assertEqual(len(app.radio), 6)  # Six standalone scenarios.
             self.assertTrue(any('Not a grade' in w.value for w in app.warning))
             self.assertFalse(app.expander)
             next(b for b in app.button if b.label == 'Check reasoning').click().run()

@@ -1,3 +1,29 @@
+# Two-page evaluation dashboard
+
+Continued from merged PR #44/main `1021cdd` on
+`phase/27-two-page-dashboard`. The owner requested only **Paired-eye prediction**
+and **Research results**. Removed the other five workspace choices and their
+dispatch branches from the application. No alternate/administrator routes were
+added. Supporting modules, public documentation and historical evidence remain
+in source for offline verification; their tests now render those modules in
+isolation instead of navigating the production dashboard.
+
+The two retained pages preserve upload validation, original frozen inference,
+eight labels, confidence/uncertainty/quality, paired Grad-CAM, JSON/report export,
+session reset and recorded research results. Navigation simplification does not
+resolve the previously documented hosting dependency/XSRF limitations or establish
+clinical validity. Private bundle startup checks remain intact.
+
+Validation: 403 isolated CPU tests ran: 394 passed, nine optional photographic
+skips, zero failures/errors, with network and private research/model storage
+blocked. The existing application test now requires exactly the two requested
+navigation options and still verifies results rendering/reset; synthetic paired
+inference/explanation workflow coverage remains passing. Scientific source,
+configurations, dependency locks and research artifacts are unchanged. No model
+transfer, new fitting, training, GPU job or budget change.
+
+---
+
 # Presentation scope and readiness guidance
 
 Continued from merged PR #43/main `dbe5abd` on

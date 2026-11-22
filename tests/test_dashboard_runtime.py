@@ -45,8 +45,9 @@ class MissingDependencyPages(unittest.TestCase):
 
     def app(self,page):
         from streamlit.testing.v1 import AppTest
-        app=AppTest.from_file(str(ROOT/'streamlit_app.py')).run(timeout=30)
-        return app.sidebar.radio[0].set_value(page).run(timeout=30)
+        module, render = {'Guided synthetic demo': ('guided', 'render_guided_page'),
+                          'Preprocessing inspector': ('inspector', 'render_inspector_page')}[page]
+        return AppTest.from_string(f'from dashboard.{module} import {render}\n{render}()\n').run(timeout=30)
 
     def test_guided_missing_import_clears_old_outputs_without_traceback(self):
         def unavailable(bundle):

@@ -71,8 +71,7 @@ class AcademicPageTests(unittest.TestCase):
         service = Mock()
         service.InferenceService.side_effect = AssertionError('No model access')
         with patch.dict(sys.modules, {'trustretina.inference.service': service}):
-            app = AppTest.from_file(str(ROOT / 'streamlit_app.py')).run(timeout=30)
-            app.sidebar.radio[0].set_value('Research study & viva').run(timeout=30)
+            app = AppTest.from_string('from dashboard.academic import render_academic_page\nrender_academic_page()\n').run(timeout=30)
             self.assertEqual(len(app.exception), 0)
             self.assertEqual(len(app.tabs), 5)
             self.assertTrue(any('REVIEW REQUIRED' in w.value for w in app.warning))

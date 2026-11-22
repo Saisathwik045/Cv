@@ -96,6 +96,7 @@ class DemoPage(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         app = AppTest.from_file(str(root / 'streamlit_app.py')).run(timeout=30)
         self.assertEqual(len(app.exception), 0)
+        self.assertEqual(app.sidebar.radio[0].options, ['Paired-eye prediction', 'Research results'])
         self.assertTrue(app.button[0].label == 'Analyze paired images' or any(x.label == 'Analyze paired images' for x in app.button))
         self.assertTrue(next(x for x in app.button if x.label == 'Analyze paired images').disabled)
         app.sidebar.radio[0].set_value('Research results').run(timeout=30)

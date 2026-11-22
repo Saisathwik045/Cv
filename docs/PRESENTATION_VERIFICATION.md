@@ -4,31 +4,34 @@ Codespaces is an optional development environment. It is not part of the trained
 model, prediction algorithm or required dashboard workflow. Do not create another
 app or migrate models merely to open the existing Streamlit app.
 
-The **Cloud readiness** page remains useful: it reports environment failures and
-does not load the checkpoint or evaluate model accuracy. Removing it would not
-fix those failures. The private model setup screen is needed only when the
-original bundle is absent; it is not a page to repeat after a successful setup.
+The dashboard now contains only **Paired-eye prediction** and **Research results**.
+The five supporting pages were removed from navigation and routing at the owner's
+request. Historical diagnostic modules and records remain available in source;
+removing their routes does not fix recorded dependency or security failures.
+The private model setup screen is still needed when the original bundle is absent;
+it is a startup requirement, not an additional dashboard workspace.
 
 ## A short demonstration
 
 1. Open the existing app from Streamlit **My apps** under `Saisathwik045`.
-   Keep the app private. Do not change budgets, recreate the deployment or paste
-   credentials into chat.
-2. Open **Guided synthetic demo** and run the CPU demonstration. Confirm eight
-   label probabilities and the unchanged **REVIEW REQUIRED** decision. These
-   generated images test software operation and have no medical meaning.
-3. Generate the selected target's Grad-CAM for both eyes. Confirm that both
-   overlays render; their appearance does not verify lesion localization.
-4. Export the result JSON. Replace an input and confirm stale predictions and
-   explanations disappear; reset the session and confirm results clear.
-5. Open **Research study & viva** for recorded research findings. Keep these
-   aggregate evaluation results separate from a single demonstration prediction.
+   Keep the app private; do not recreate it or paste credentials into chat.
+2. On **Paired-eye prediction**, upload original matching left/right files from
+   one eligible development/demo patient and select **Analyze paired images**.
+   Confirm eight probabilities and the unchanged **REVIEW REQUIRED** decision.
+3. Generate the selected target's Grad-CAM for both eyes. Confirm both overlays
+   render; their appearance does not verify lesion localization.
+4. Download the research result JSON. Replace an input and confirm stale results
+   disappear, then use **Reset patient session** to clear uploads and outputs.
+5. Open **Research results** for recorded model comparisons, held-out evaluation,
+   reliability figures and the downloadable research report. Keep those findings
+   separate from a single demonstration prediction.
 
-For manual uploads, use the original matching left/right files for one eligible
-development/demo patient. Do not use screenshots, unrelated eye pairs, or the
-historical final cohort. Ten example pairs test interaction across inputs; they
-do not measure accuracy without authoritative labels and an approved evaluation
+Use original files, not screenshots or unrelated eye pairs. Do not use the
+historical final cohort for further testing. Ten example pairs test interactions;
+they do not measure accuracy without authoritative labels and an approved
 protocol. Different images can legitimately produce the same positive label.
+Generated non-patient fixtures may test upload mechanics but have no medical
+meaning. No new fitting or model download is part of this walkthrough.
 
 ## What can be concluded
 

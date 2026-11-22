@@ -17,7 +17,7 @@ st.markdown('''<style>
 </style>''', unsafe_allow_html=True)
 st.sidebar.title('◉ TrustRetina')
 st.sidebar.caption('Frozen ConvNeXt-Tiny · Research demo')
-page = st.sidebar.radio('Workspace', ['Paired-eye prediction', 'Research results', 'Research study & viva', 'Guided synthetic demo', 'Cloud readiness', 'Examiner rehearsal', 'Preprocessing inspector'])
+page = st.sidebar.radio('Workspace', ['Paired-eye prediction', 'Research results'])
 st.sidebar.divider()
 st.sidebar.write('**REVIEW REQUIRED** for every prediction.')
 st.sidebar.caption('No automatic acceptance policy. No uploaded image storage or patient data in logs. Reset clears this session’s inputs and results; close the tab to end the session.')
@@ -56,22 +56,7 @@ def results_page():
         st.image(str(Path(__file__).resolve().parent / 'results/final-v7' / name))
 
 
-if page == 'Preprocessing inspector':
-    from dashboard.inspector import render_inspector_page
-    render_inspector_page()
-elif page == 'Examiner rehearsal':
-    from dashboard.examiner import render_examiner_page
-    render_examiner_page()
-elif page == 'Guided synthetic demo':
-    from dashboard.guided import render_guided_page
-    render_guided_page()
-elif page == 'Cloud readiness':
-    from dashboard.readiness import render_readiness_page
-    render_readiness_page()
-elif page == 'Research study & viva':
-    from dashboard.academic import render_academic_page
-    render_academic_page()
-elif page == 'Research results':
+if page == 'Research results':
     results_page()
 else:
     st.caption('RESEARCH DEMONSTRATION / PAIRED-EYE INFERENCE')
