@@ -95,6 +95,10 @@ def render_readiness_page():
     from trustretina.inference.bundle import DEFAULT_BUNDLE
     st.title('Cloud readiness')
     st.warning('Local software checks are not clinical validation, proof of external access or an uptime guarantee.')
+    st.info('Codespaces is optional and is not required to use an existing Streamlit dashboard. This page diagnoses the environment; it does not run the prediction model. For an operational check, open Guided synthetic demo, run the CPU demo, then test both-eye Grad-CAM, export and reset.')
+    if os.environ.get('TRUSTRETINA_HOSTED_BACKEND') == '1':
+        st.warning('Streamlit Community Cloud overrides server.enableXsrfProtection to false. Its XSRF check therefore remains FAIL under this project’s strict readiness contract; editing config.toml or restarting cannot resolve that platform override. A working prediction does not turn this report into PASS. Keep the app private; a different controlled host is needed only if strict readiness is required.')
+        st.markdown('[Community Cloud configuration limits](https://docs.streamlit.io/deploy/streamlit-community-cloud/status#configuration) · [Presentation verification guide](https://github.com/Saisathwik045/Cv/blob/main/docs/PRESENTATION_VERIFICATION.md)')
     st.write('Check the original five-file bundle, exact dependency pins, public V15 evidence, local health response and server protections before a presentation. This reads model bytes for hashing only; it never loads weights, fits, runs inference or downloads missing artifacts.')
     if st.button('Run local readiness checks', type='primary'):
         st.session_state.pop('readiness_report', None)
@@ -112,7 +116,7 @@ def render_readiness_page():
         if report['local_preflight'] == 'PASS':
             st.success('Local preflight PASS. Live demonstration remains CONDITIONAL on a working viewing route and current runtime.')
         else:
-            st.error('Local preflight FAIL. Resolve the failed checks before the live demonstration.')
+            st.error('Local preflight FAIL. Full readiness is BLOCKED. Inspect the failed checks; do not describe this environment as fully verified. Platform overrides require a compatible controlled host, not repeated setup.')
         st.dataframe(pd.DataFrame([{'Check': name, 'Status': value['status']} for name, value in report['checks'].items()]), hide_index=True, width='stretch')
         st.caption('Snapshot time (UTC): ' + report['observed_utc'] + '. Conditions can change after this check.')
         st.json(report)
