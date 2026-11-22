@@ -101,7 +101,7 @@ class DemoPage(unittest.TestCase):
         self.assertTrue(next(x for x in app.button if x.label == 'Analyze paired images').disabled)
         app.sidebar.radio[0].set_value('Research results').run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.assertEqual(len(app.dataframe), 1)
+        self.assertEqual(len(app.dataframe), 2)
         app.session_state['prediction'] = {'private': 'session'}
         next(x for x in app.button if x.label == 'Reset patient session').click().run(timeout=30)
         self.assertNotIn('prediction', app.session_state.filtered_state)

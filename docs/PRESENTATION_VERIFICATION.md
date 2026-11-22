@@ -22,9 +22,19 @@ it is a startup requirement, not an additional dashboard workspace.
    render; their appearance does not verify lesion localization.
 4. Download the research result JSON. Replace an input and confirm stale results
    disappear, then use **Reset patient session** to clear uploads and outputs.
+   For a full presentation copy, first generate both maps for the chosen target
+   and select **Download complete demonstration report**. Open the downloaded
+   HTML file locally, then Print → Save as PDF. It embeds both RGB input previews,
+   raw/calibrated probabilities and chart, reliability explanations, current
+   Grad-CAM overlays and the model/runtime record. It has no external scripts,
+   fonts or image requests. This explicit export contains images and must be
+   kept private; resetting the session cannot revoke a downloaded report.
 5. Open **Research results** for recorded model comparisons, held-out evaluation,
    reliability figures and the downloadable research report. Keep those findings
    separate from a single demonstration prediction.
+   The methodology expander explains dataset roles and selection; the per-class
+   table reports precision, recall, F1 and positive/negative support from the
+   existing evaluation. These are not metrics for the currently uploaded pair.
 
 Use original files, not screenshots or unrelated eye pairs. Do not use the
 historical final cohort for further testing. Ten example pairs test interactions;

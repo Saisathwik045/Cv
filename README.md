@@ -5,10 +5,17 @@ The dashboard has two pages:
 - **Paired-eye prediction** — upload both eyes, view eight-label probabilities,
   compare raw/calibrated probability bars against the 0.5 threshold, view
   confidence, uncertainty, quality, paired Grad-CAM and download the result JSON.
+  Full research-label names and signal explanations aid interpretation. After
+  generating both current-target Grad-CAM maps, download a self-contained HTML
+  demonstration report with input previews, probability chart/table, signals,
+  overlays and model/runtime record. Open it locally and print to PDF. This
+  explicit download contains your images; keep it private.
 - **Research results** — recorded model comparisons, held-out evaluation,
   per-label confusion matrices, reliability figures, limitations and the
   downloadable research report. Matrices describe the recorded evaluation,
   not unlabeled uploads.
+  A methodology/data-partition summary and per-class precision/recall/F1/support
+  table explain what was evaluated and how the model was selected.
 
 [Presentation verification](docs/PRESENTATION_VERIFICATION.md) ·
 [Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md).

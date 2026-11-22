@@ -1,5 +1,26 @@
 # Two-page evaluation dashboard
 
+The next owner-requested presentation improvements add full research-label names,
+plain-language confidence/uncertainty/quality help, methodology and historical
+data-role/selection explanations, and a per-label precision/recall/F1/support
+table from the existing verified patient-equal evaluation record. Export tests
+verify four embedded images, metadata removal, escaping, no script elements,
+complete result retention and refusal of missing pairs/maps. Synthetic UI tests
+verify report availability follows the current target and clears on reset. Responsive
+previews and print styles reduce clipping; a separate self-contained HTML export
+provides the full report independently of Streamlit's scroll viewport.
+
+The complete export is enabled only for the current input pair and selected
+target's existing two Grad-CAM maps. It embeds re-encoded RGB input previews,
+both overlays (including zero-map annotations), a static probability chart,
+table, signal explanations, model identities and the original prediction record.
+No export files are written on the host, no source filenames/EXIF metadata are
+embedded, and no external scripts/image/font requests are required. The UI
+explicitly warns that the downloaded copy contains images and reset cannot revoke
+it. Changing inputs clears old results; changing target disables complete export
+until matching maps exist. The deployed model and scientific calculations remain
+unchanged. Browser print behaviour and actual hosted rendering remain unverified.
+
 The owner's follow-up adds a grouped raw/calibrated probability chart beneath
 each prediction, with fixed [0,1] scale, original class order and 0.5 threshold.
 Research results adds a selectable binary confusion matrix for each label from
@@ -23,7 +44,7 @@ session reset and recorded research results. Navigation simplification does not
 resolve the previously documented hosting dependency/XSRF limitations or establish
 clinical validity. Private bundle startup checks remain intact.
 
-Validation: 406 isolated CPU tests ran: 397 passed, nine optional photographic
+Validation: 408 isolated CPU tests ran: 399 passed, nine optional photographic
 skips, zero failures/errors, with network and private research/model storage
 blocked. Chart tests check confusion orientation, count conservation, rejection
 of fractional/impossible patient counts, fixed probability scale and class order.
