@@ -49,6 +49,13 @@ def results_page():
     st.caption('525 validation patients. Selection: patient macro AUROC. Best checkpoint: validation loss. Labelwise binary accuracy is the fraction of correct label bits, not diagnostic accuracy.')
     st.subheader('Frozen held-out evaluation · 350 patients')
     st.metric('Patient macro AUROC', f"{final['primary_estimate']:.4f}")
+    st.subheader('Recorded evaluation · confusion matrix')
+    st.caption('Historical 350-patient evaluation, not the current uploaded pair. Each label has its own binary matrix; this is a multilabel model.')
+    from dashboard.charts import confusion_rows, confusion_chart
+    label = st.selectbox('Evaluation label', final['class_order'], key='evaluation_matrix_label')
+    counts = final['results']['metrics']['calibrated']['patient_equal']['classification']['per_class'][label]
+    st.altair_chart(confusion_chart(confusion_rows(counts)), use_container_width=True)
+    st.caption('Counts use patient-equal weighting and recorded patient-derived reference labels. Rows: reference absent/present; columns: predicted absent/present. TN/FP are the top row; FN/TP are the bottom row. These are research labels, not verified eye diagnoses.')
     # The generated report contains actual per-class, pooled and paired interval tables.
     st.markdown(report.partition('\n')[2].split('## Provenance and next phase')[0])
     st.download_button('Download verified research report', report, file_name='trustretina-final-research-report.md', mime='text/markdown')
@@ -102,6 +109,10 @@ else:
         probabilities = pd.DataFrame({'Label': result['class_order'], 'Raw probability': list(result['raw_probabilities'].values()), 'Calibrated probability': list(result['calibrated_probabilities'].values())})
         st.dataframe(probabilities, hide_index=True, width='stretch', column_config={'Raw probability': st.column_config.ProgressColumn(min_value=0, max_value=1, format='%.4f'), 'Calibrated probability': st.column_config.ProgressColumn(min_value=0, max_value=1, format='%.4f')})
         st.caption('Both-eye sigmoid outputs are averaged first; the saved shared temperature acts on the logit of that mean. The fixed 0.5 rule preserves the same raw/calibrated positive labels.')
+        st.subheader('Prediction profile')
+        from dashboard.charts import probability_chart
+        st.altair_chart(probability_chart(result), use_container_width=True)
+        st.caption('Light bars: raw probabilities. Dark bars: calibrated probabilities. Dashed line: fixed 0.5 positive-label threshold. The eight independent probabilities need not sum to 100%; they are not accuracy scores. A confusion matrix for this uploaded pair requires verified reference labels; see Research results for the recorded evaluation matrices.')
         a, b, c = st.columns(3)
         sig = result['signals']['calibrated']
         a.metric('Confidence score', f"{sig['confidence']:.4f}")

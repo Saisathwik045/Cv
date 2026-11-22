@@ -1,5 +1,14 @@
 # Two-page evaluation dashboard
 
+The owner's follow-up adds a grouped raw/calibrated probability chart beneath
+each prediction, with fixed [0,1] scale, original class order and 0.5 threshold.
+Research results adds a selectable binary confusion matrix for each label from
+the existing hash-verified 350-patient, patient-equal evaluation aggregates.
+TP/FP/TN are derived from saved positive/negative/FN/predicted-positive counts;
+no new cohort inference, labels or metrics are generated. Matrices are explicitly
+historical evaluation evidence, never a confusion matrix of unlabeled uploads.
+The model, thresholds and exported result values are unchanged.
+
 Continued from merged PR #44/main `1021cdd` on
 `phase/27-two-page-dashboard`. The owner requested only **Paired-eye prediction**
 and **Research results**. Removed the other five workspace choices and their
@@ -14,9 +23,11 @@ session reset and recorded research results. Navigation simplification does not
 resolve the previously documented hosting dependency/XSRF limitations or establish
 clinical validity. Private bundle startup checks remain intact.
 
-Validation: 403 isolated CPU tests ran: 394 passed, nine optional photographic
+Validation: 406 isolated CPU tests ran: 397 passed, nine optional photographic
 skips, zero failures/errors, with network and private research/model storage
-blocked. The existing application test now requires exactly the two requested
+blocked. Chart tests check confusion orientation, count conservation, rejection
+of fractional/impossible patient counts, fixed probability scale and class order.
+The existing application test now requires exactly the two requested
 navigation options and still verifies results rendering/reset; synthetic paired
 inference/explanation workflow coverage remains passing. Scientific source,
 configurations, dependency locks and research artifacts are unchanged. No model

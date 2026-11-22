@@ -3,9 +3,12 @@
 The dashboard has two pages:
 
 - **Paired-eye prediction** — upload both eyes, view eight-label probabilities,
+  compare raw/calibrated probability bars against the 0.5 threshold, view
   confidence, uncertainty, quality, paired Grad-CAM and download the result JSON.
 - **Research results** — recorded model comparisons, held-out evaluation,
-  reliability figures, limitations and the downloadable research report.
+  per-label confusion matrices, reliability figures, limitations and the
+  downloadable research report. Matrices describe the recorded evaluation,
+  not unlabeled uploads.
 
 [Presentation verification](docs/PRESENTATION_VERIFICATION.md) ·
 [Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md).
