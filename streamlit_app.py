@@ -33,8 +33,8 @@ st.sidebar.title('◉ TrustRetina')
 st.sidebar.caption('Frozen ConvNeXt-Tiny · Research demo')
 page = st.sidebar.radio('Workspace', ['Paired-eye prediction', 'Research results'])
 st.sidebar.divider()
-st.sidebar.write('**REVIEW REQUIRED** for every prediction.')
-st.sidebar.caption('No automatic acceptance policy. No uploaded image storage or patient data in logs. Reset clears this session’s inputs and results; close the tab to end the session.')
+st.sidebar.caption('Research use only. Predictions need human interpretation.')
+st.sidebar.caption('No uploaded image storage or patient data in logs. Reset clears this session’s inputs and results; close the tab to end the session.')
 if st.sidebar.button('Reset patient session', width='stretch'):
     reset_streamlit_session(st.session_state)
     st.rerun()
@@ -94,28 +94,46 @@ else:
     st.caption('RESEARCH DEMONSTRATION / PAIRED-EYE INFERENCE')
     st.title('Two eyes. One patient-level prediction.')
     st.write('Upload the left and right fundus images of the same patient. This frozen research model returns eight independent label probabilities, not a clinical diagnosis.')
-    st.caption('Use the original JPG/PNG files rather than screenshots. Keep left and right matched to the same patient; filenames alone do not verify that match.')
+    st.caption('Use original JPG/PNG files from the same patient. Left/right refers to the patient’s eye, not its position on your screen. Filename checks cannot verify anatomy; confirm the source laterality before analysing.')
     left_column, right_column = st.columns(2)
     generation = st.session_state.get('upload_generation', 0)
     left = left_column.file_uploader('Left eye', type=['jpg', 'jpeg', 'png'], key=f'left_{generation}')
     right = right_column.file_uploader('Right eye', type=['jpg', 'jpeg', 'png'], key=f'right_{generation}')
     contents = [x.getvalue() if x is not None else None for x in (left, right)]
-    reconcile_uploads(st.session_state, *contents)
+    signature = reconcile_uploads(st.session_state, *contents)
+    from dashboard.uploads import reconcile_confirmation
+    reconcile_confirmation(st.session_state, signature)
     valid = True
+    decoded = []
     for col, data, label in zip((left_column, right_column), contents, ('Left eye', 'Right eye')):
         if data is not None:
             try:
                 from trustretina.inference.service import decode_image
-                col.image(decode_image(data), caption=label, use_container_width=True)
+                image = decode_image(data)
+                decoded.append(image)
+                col.image(image, caption=label, use_container_width=True)
             except ImportError:
                 col.error('CPU dependencies are unavailable. Use Python 3.12 and requirements/app-cpu.lock, then rebuild.')
+                decoded.append(None)
                 valid = False
             except ValueError as error:
                 col.error(str(error))
+                decoded.append(None)
                 valid = False
+        else:
+            decoded.append(None)
+    from dashboard.uploads import pair_errors
+    issues = pair_errors(getattr(left, 'name', ''), getattr(right, 'name', ''), contents, decoded)
+    for issue in issues:
+        st.error(issue)
+    valid = valid and not issues
+    confirmed = st.checkbox('I confirm these are the left and right eyes of the same patient.', key='pair_confirmed', disabled=None in contents or not valid)
+    if not valid or not confirmed:
+        for key in ('prediction', 'explanation', 'explanation_target'):
+            st.session_state.pop(key, None)
     if None in contents:
         st.info('Both eyes are required for the evaluated patient-level predictor. A single image is never duplicated to create a pair.')
-    if st.button('Analyze paired images', type='primary', disabled=None in contents or not valid):
+    if st.button('Analyze paired images', type='primary', disabled=None in contents or not valid or not confirmed):
         try:
             from trustretina.inference.bundle import DEFAULT_BUNDLE
             service = get_service(os.environ.get('TRUSTRETINA_BUNDLE', str(DEFAULT_BUNDLE)))
@@ -128,7 +146,6 @@ else:
             st.error(f'Prediction unavailable: {error}')
     result = st.session_state.get('prediction')
     if result:
-        st.warning('REVIEW REQUIRED · No validated automatic acceptance policy is fitted.')
         st.subheader('All predicted-positive labels')
         st.write('Labels above threshold: ' + (', '.join(label_name(k) for k in result['positive_labels']) or 'None at the fixed p ≥ 0.5 rule. This does not establish a healthy retina.'))
         st.caption('N: normal label · D: diabetes · G: glaucoma · C: cataract · A: age-related macular degeneration · H: hypertension · M: pathological myopia · O: other abnormalities. Patient-derived research labels are not verified eye diagnoses.')

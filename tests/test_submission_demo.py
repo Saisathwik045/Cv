@@ -18,6 +18,9 @@ class SyntheticSubmissionDemoTests(unittest.TestCase):
         content = io.BytesIO()
         Image.new('RGB', (32, 24), (90, 100, 110)).save(content, format='PNG')
         self.image = content.getvalue()
+        other = io.BytesIO()
+        Image.new('RGB', (32, 24), (110, 90, 100)).save(other, format='PNG')
+        self.other = other.getvalue()
         codes = list('NDGCAHMO')
         scores = {k: .7 if k == 'D' else .1 for k in codes}
         self.service = Mock()
@@ -57,11 +60,12 @@ class SyntheticSubmissionDemoTests(unittest.TestCase):
         import numpy as np
         self.service.explain.return_value = ({'zero_maps': [False, False]},
                                              [np.zeros((24, 32, 3), dtype=np.uint8)] * 2)
-        app = self.app((self.image, self.image))
+        app = self.app((self.image, self.other))
+        app.checkbox[0].check().run(timeout=30)
         next(b for b in app.button if b.label == 'Analyze paired images').click().run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.service.predict.assert_called_once_with(self.image, self.image)
-        self.assertTrue(any('REVIEW REQUIRED' in w.value for w in app.warning))
+        self.service.predict.assert_called_once_with(self.image, self.other)
+        self.assertFalse(any('No validated automatic acceptance policy' in w.value for w in app.warning))
         self.assertTrue(any('Diabetes (D)' in x.value for x in app.markdown))
         self.assertFalse(any(x.label == 'Download complete demonstration report' for x in app.get('download_button')))
         self.assertEqual(app.dataframe[0].value['Label'].tolist(), list('NDGCAHMO'))
@@ -69,7 +73,7 @@ class SyntheticSubmissionDemoTests(unittest.TestCase):
         app.selectbox[0].set_value('H').run(timeout=30)
         next(b for b in app.button if b.label == 'Generate per-eye Grad-CAM').click().run(timeout=30)
         self.assertEqual(len(app.exception), 0)
-        self.service.explain.assert_called_once_with(self.image, self.image, 5)
+        self.service.explain.assert_called_once_with(self.image, self.other, 5)
         self.assertTrue(any(x.label == 'Download complete demonstration report' for x in app.get('download_button')))
         app.selectbox[0].set_value('D').run(timeout=30)
         self.assertFalse(any(x.label == 'Download complete demonstration report' for x in app.get('download_button')))
@@ -78,8 +82,21 @@ class SyntheticSubmissionDemoTests(unittest.TestCase):
         self.assertNotIn('explanation', app.session_state.filtered_state)
         self.assertFalse(any(x.label == 'Download complete demonstration report' for x in app.get('download_button')))
 
+    def test_duplicate_upload_and_missing_confirmation_block_prediction(self):
+        app = self.app((self.image, self.image))
+        self.assertEqual(len(app.exception), 0)
+        self.assertTrue(any('same image was uploaded twice' in e.value for e in app.error))
+        self.assertTrue(next(b for b in app.button if b.label == 'Analyze paired images').disabled)
+        self.service.predict.assert_not_called()
+        self.model_patch.stop()
+        self.upload_patch.stop()
+        app = self.app((self.image, self.other))
+        self.assertTrue(next(b for b in app.button if b.label == 'Analyze paired images').disabled)
+        self.assertFalse(app.checkbox[0].value)
+
     def test_missing_bundle_error_is_visible_without_random_fallback(self):
-        app = self.app((self.image, self.image), failure=FileNotFoundError('Synthetic bundle unavailable'))
+        app = self.app((self.image, self.other), failure=FileNotFoundError('Synthetic bundle unavailable'))
+        app.checkbox[0].check().run(timeout=30)
         next(b for b in app.button if b.label == 'Analyze paired images').click().run(timeout=30)
         self.assertEqual(len(app.exception), 0)
         self.assertTrue(any('Prediction unavailable' in e.value for e in app.error))

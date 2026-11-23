@@ -1,3 +1,26 @@
+# Upload-pair checks and presentation notice update
+
+Owner-requested follow-up within phase 27: removed the repeated yellow
+"No validated automatic acceptance policy is fitted" banner and replaced the
+sidebar repetition with a concise research-use note. The inference result and
+export policy still record REVIEW REQUIRED; no acceptance rule, model parameter,
+threshold or numerical evidence changed.
+
+The UI now blocks byte-identical and decoded-pixel-identical duplicates, explicit
+left/right filename suffixes in the opposite upload slot, and conflicting declared
+patient/pair filename IDs. Unknown filenames are not treated as anatomical proof.
+The operator must confirm the same-patient left/right assignment before analysis;
+replacing the image bytes clears that confirmation and stale outputs. These are
+input-integrity checks, not a trained laterality or patient-identity classifier.
+A swapped genuine pair has unchanged mean-eye scores but incorrect eye captions.
+
+Five generated-fixture pair-validation tests and four synthetic Streamlit workflow
+tests pass. Full suite: 414 tests, 405 passed, nine optional photographic skips,
+zero failures/errors; git diff --check passed. Frozen worker/source identity checks
+remain unchanged and pass. Hosted browser behaviour has not been independently
+verified; deployment source is updated separately after these checks.
+No real patient images, model weights, training, new calibration or GPU jobs used.
+
 # Two-page evaluation dashboard
 
 The next owner-requested presentation improvements add full research-label names,
