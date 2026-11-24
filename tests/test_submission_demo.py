@@ -65,6 +65,10 @@ class SyntheticSubmissionDemoTests(unittest.TestCase):
         next(b for b in app.button if b.label == 'Analyze paired images').click().run(timeout=30)
         self.assertEqual(len(app.exception), 0)
         self.service.predict.assert_called_once_with(self.image, self.other)
+        self.assertEqual([metric.label for metric in app.metric], ['Confidence score'])
+        displayed_text = ' '.join(x.value for x in list(app.markdown) + list(app.caption))
+        for hidden in ('Head-only variance', 'Technical quality proxy', '20 trained-head', 'Uncertainty =', 'Quality ='):
+            self.assertNotIn(hidden, displayed_text)
         self.assertFalse(any('No validated automatic acceptance policy' in w.value for w in app.warning))
         self.assertTrue(any('Diabetes (D)' in x.value for x in app.markdown))
         self.assertFalse(any(x.label == 'Download complete demonstration report' for x in app.get('download_button')))

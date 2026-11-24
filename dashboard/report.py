@@ -41,7 +41,7 @@ def demonstration_report(result, inputs, overlays, target, *, zero_maps=(False, 
     threshold_x = 40 + result.get('threshold', .5) * 500
     chart = '<svg viewBox="0 0 600 410" role="img" aria-label="Raw and calibrated label probabilities">' + ''.join(bars) + f'<path d="M{threshold_x} 15 V385" stroke="#9b5b20" stroke-dasharray="5 4"/><text x="40" y="405">0%</text><text x="510" y="405">100%</text></svg>'
     positive = ', '.join(label_name(k) for k in result['positive_labels']) or 'None at the fixed threshold; this does not establish a healthy retina.'
-    signals = ''.join(f'<p><strong>{esc(name.title())}: {result["signals"]["calibrated"][name]:.6f}</strong><br>{esc(detail)}</p>' for name, detail in SIGNALS.items())
+    confidence = f'<p><strong>Confidence: {result["signals"]["calibrated"]["confidence"]:.6f}</strong><br>{esc(SIGNALS["confidence"])}</p>'
     metadata = {k: result.get(k, 'Not recorded') for k in ('model', 'best_epoch', 'device', 'temperature', 'threshold', 'mc_passes', 'inference_seconds', 'contract_sha256', 'checkpoint_sha256', 'preprocessing_sha256', 'temperature_sha256', 'quality_normalizer_sha256')}
     metadata['input_display'] = 'EXIF-oriented RGB previews, resized only for this report; model preprocessing is 224 px letterbox'
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -53,7 +53,7 @@ def demonstration_report(result, inputs, overlays, target, *, zero_maps=(False, 
 <h2>Labels above threshold</h2><p>{esc(positive)}</p><p>Independent patient-derived research labels; confidence and class probabilities are not accuracy scores.</p>
 {figures[0]}<section><h2>Prediction probabilities</h2>{chart}<p>Light: raw. Dark: calibrated. Dashed line: threshold {result.get('threshold', .5)}. Probabilities need not sum to 100%.</p>
 <table><thead><tr><th>Research label</th><th>Raw</th><th>Calibrated</th><th>Threshold result</th></tr></thead><tbody>{''.join(rows)}</tbody></table></section>
-<h2>Reliability signals</h2>{signals}{figures[1]}<p>Grad-CAM describes target sensitivity on the model canvas, not verified lesion localization or proof of correctness. Explanation target: {esc(label_name(target))}; it is separate from the complete positive-label list.</p>
+<h2>Confidence score</h2>{confidence}{figures[1]}<p>Grad-CAM describes target sensitivity on the model canvas, not verified lesion localization or proof of correctness. Explanation target: {esc(label_name(target))}; it is separate from the complete positive-label list.</p>
 <h2>Method</h2><p>{esc(WORKFLOW)}</p><p>The deployed research model uses 224 px preprocessing. No reference labels were supplied for this pair; no confusion matrix or accuracy is computed for it. Historical evaluation belongs on Research results. Clinical validity and full deployment readiness are not established by this export.</p>
 <h2>Model and runtime record</h2><pre>{esc(json.dumps(metadata, indent=2, allow_nan=False))}</pre>
 <h2>Complete exported prediction record</h2><pre>{esc(json.dumps(result, indent=2, allow_nan=False))}</pre></body></html>'''

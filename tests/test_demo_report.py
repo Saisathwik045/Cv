@@ -44,6 +44,10 @@ class DemonstrationReportTests(unittest.TestCase):
         self.assertIn('zero activation map', report)
         self.assertIn('Complete exported prediction record', report)
         self.assertIn('not accuracy scores', report)
+        presentation = report.split('<h2>Model and runtime record</h2>')[0]
+        self.assertIn('<h2>Confidence score</h2>', presentation)
+        for hidden in ('Uncertainty:', 'Quality:', 'head-only MC uncertainty', 'technical quality'):
+            self.assertNotIn(hidden, presentation)
         self.assertEqual(report.count('<rect '), 16)
         self.assertIn("default-src 'none'", report)
 

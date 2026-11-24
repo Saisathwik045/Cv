@@ -9,7 +9,7 @@ SIGNALS = {
     'uncertainty': 'Largest per-label variance across 20 trained-head dropout passes. Lower variance means less variation in those passes, not proven diagnostic reliability; backbone uncertainty is not measured.',
     'quality': 'Technical training-feature rank, taking the lower of the two eye scores. It is not a clinical image-quality grade, and a larger value does not guarantee a correct prediction.',
 }
-WORKFLOW = 'Image pair → EXIF/RGB + 224 px letterbox + normalization → frozen ConvNeXt-Tiny → mean-eye sigmoid probabilities → saved shared temperature → confidence / head-only MC uncertainty / technical quality → REVIEW REQUIRED → selected-target Grad-CAM'
+WORKFLOW = 'Image pair → EXIF/RGB + 224 px letterbox + normalization → frozen ConvNeXt-Tiny → mean-eye sigmoid probabilities → saved shared temperature → confidence → selected-target Grad-CAM. Predictions require human interpretation.'
 
 
 def label_name(code):

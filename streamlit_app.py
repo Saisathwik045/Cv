@@ -137,7 +137,7 @@ else:
         try:
             from trustretina.inference.bundle import DEFAULT_BUNDLE
             service = get_service(os.environ.get('TRUSTRETINA_BUNDLE', str(DEFAULT_BUNDLE)))
-            with st.spinner('Preprocessing both eyes, predicting eight labels and running 20 trained-head passes…'):
+            with st.spinner('Preprocessing both eyes and predicting eight labels…'):
                 st.session_state['prediction'] = service.predict(*contents)
             st.session_state.pop('explanation', None)
         except ImportError:
@@ -157,15 +157,11 @@ else:
         from dashboard.charts import probability_chart
         st.altair_chart(probability_chart(result), use_container_width=True)
         st.caption('Light bars: raw probabilities. Dark bars: calibrated probabilities. Dashed line: fixed 0.5 positive-label threshold. The eight independent probabilities need not sum to 100%; they are not accuracy scores. A confusion matrix for this uploaded pair requires verified reference labels; see Research results for the recorded evaluation matrices.')
-        a, b, c = st.columns(3)
         sig = result['signals']['calibrated']
-        a.metric('Confidence score', f"{sig['confidence']:.4f}", help=SIGNALS['confidence'])
-        b.metric('Head-only variance', f"{sig['uncertainty']:.6f}", help=SIGNALS['uncertainty'])
-        c.metric('Technical quality proxy', f"{sig['quality']:.4f}", help=SIGNALS['quality'])
-        with st.expander('What do these signals mean?'):
-            for name, detail in SIGNALS.items():
-                st.write(f'**{name.title()}** — {detail}')
-        st.caption('Confidence = minimum certainty across the eight labels. Uncertainty = maximum label variance across 20 trained-head dropout passes; backbone and normalization stay in evaluation mode. Quality = frozen training-feature ranks, taking the lower eye score. These are experimental signals, not reliability percentages or clinical quality grades.')
+        st.metric('Confidence score', f"{sig['confidence']:.4f}", help=SIGNALS['confidence'])
+        with st.expander('What does the confidence score mean?'):
+            st.write(SIGNALS['confidence'])
+        st.caption('Confidence = minimum certainty across the eight labels. It is an experimental signal, not an accuracy or reliability percentage.')
         st.caption(f"{result['device']} · paired inference {result['inference_seconds']:.3f}s · frozen ConvNeXt-Tiny epoch 2")
         st.download_button('Download research result JSON', json.dumps(result, indent=2, allow_nan=False), file_name='trustretina-research-result.json', mime='application/json')
         st.divider()
@@ -191,7 +187,7 @@ else:
             st.caption('Grad-CAM explains the selected raw mean-eye probability on the 224-pixel letterbox canvas. A heatmap is not verified lesion localization and does not validate the prediction.')
         st.divider()
         st.subheader('Complete demonstration report')
-        st.caption('Includes both input previews, full prediction table, probability chart, signal explanations, current-target Grad-CAM, model details and the prediction record. Export is generated in memory. It contains your images: keep the downloaded copy private; reset cannot erase it.')
+        st.caption('Includes both input previews, full prediction table, probability chart, confidence explanation, current-target Grad-CAM, model details and the prediction record. Export is generated in memory. It contains your images: keep the downloaded copy private; reset cannot erase it.')
         current_maps = st.session_state.get('explanation_target') == target and st.session_state.get('explanation')
         if current_maps:
             try:

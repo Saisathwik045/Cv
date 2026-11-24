@@ -4,7 +4,9 @@ The dashboard has two pages:
 
 - **Paired-eye prediction** — upload both eyes, view eight-label probabilities,
   compare raw/calibrated probability bars against the 0.5 threshold, view
-  confidence, uncertainty, quality, paired Grad-CAM and download the result JSON.
+  confidence, paired Grad-CAM and download the result JSON. The head-only variance
+  and technical quality proxy are not displayed in the prediction view; the
+  complete research JSON retains the unchanged backend record.
   Full research-label names and signal explanations aid interpretation. After
   generating both current-target Grad-CAM maps, download a self-contained HTML
   demonstration report with input previews, probability chart/table, signals,

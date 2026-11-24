@@ -1,3 +1,21 @@
+# Confidence-only prediction display
+
+Owner-requested follow-up within phase 27: removed head-only variance and
+technical quality proxy cards, their live-result explanations, and the dropout
+pass count in the loading message. Confidence remains, with a dedicated help
+expander. The human-readable demonstration report also presents confidence
+only, and the displayed methodology no longer lists the removed signals.
+Historical research findings remain intact. The complete JSON and embedded
+prediction record retain backend values and provenance; this is a presentation
+change, not model retraining or a change to calibration, thresholds, uncertainty
+sampling, quality calculation or review policy.
+
+Validation: 414 tests run, 405 passed and nine optional photographic checks
+skipped; no failures/errors. Updated synthetic UI/export checks verify that
+confidence is the only prediction metric and removed help is absent from the
+human-readable report. git diff --check passed. No hosted browser verification
+is claimed by these local tests.
+
 # Upload-pair checks and presentation notice update
 
 Owner-requested follow-up within phase 27: removed the repeated yellow
