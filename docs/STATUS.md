@@ -1,3 +1,102 @@
+# Confidence-only prediction display
+
+Owner-requested follow-up within phase 27: removed head-only variance and
+technical quality proxy cards, their live-result explanations, and the dropout
+pass count in the loading message. Confidence remains, with a dedicated help
+expander. The human-readable demonstration report also presents confidence
+only, and the displayed methodology no longer lists the removed signals.
+Historical research findings remain intact. The complete JSON and embedded
+prediction record retain backend values and provenance; this is a presentation
+change, not model retraining or a change to calibration, thresholds, uncertainty
+sampling, quality calculation or review policy.
+
+Validation: 414 tests run, 405 passed and nine optional photographic checks
+skipped; no failures/errors. Updated synthetic UI/export checks verify that
+confidence is the only prediction metric and removed help is absent from the
+human-readable report. git diff --check passed. No hosted browser verification
+is claimed by these local tests.
+
+# Upload-pair checks and presentation notice update
+
+Owner-requested follow-up within phase 27: removed the repeated yellow
+"No validated automatic acceptance policy is fitted" banner and replaced the
+sidebar repetition with a concise research-use note. The inference result and
+export policy still record REVIEW REQUIRED; no acceptance rule, model parameter,
+threshold or numerical evidence changed.
+
+The UI now blocks byte-identical and decoded-pixel-identical duplicates, explicit
+left/right filename suffixes in the opposite upload slot, and conflicting declared
+patient/pair filename IDs. Unknown filenames are not treated as anatomical proof.
+The operator must confirm the same-patient left/right assignment before analysis;
+replacing the image bytes clears that confirmation and stale outputs. These are
+input-integrity checks, not a trained laterality or patient-identity classifier.
+A swapped genuine pair has unchanged mean-eye scores but incorrect eye captions.
+
+Five generated-fixture pair-validation tests and four synthetic Streamlit workflow
+tests pass. Full suite: 414 tests, 405 passed, nine optional photographic skips,
+zero failures/errors; git diff --check passed. Frozen worker/source identity checks
+remain unchanged and pass. Hosted browser behaviour has not been independently
+verified; deployment source is updated separately after these checks.
+No real patient images, model weights, training, new calibration or GPU jobs used.
+
+# Two-page evaluation dashboard
+
+The next owner-requested presentation improvements add full research-label names,
+plain-language confidence/uncertainty/quality help, methodology and historical
+data-role/selection explanations, and a per-label precision/recall/F1/support
+table from the existing verified patient-equal evaluation record. Export tests
+verify four embedded images, metadata removal, escaping, no script elements,
+complete result retention and refusal of missing pairs/maps. Synthetic UI tests
+verify report availability follows the current target and clears on reset. Responsive
+previews and print styles reduce clipping; a separate self-contained HTML export
+provides the full report independently of Streamlit's scroll viewport.
+
+The complete export is enabled only for the current input pair and selected
+target's existing two Grad-CAM maps. It embeds re-encoded RGB input previews,
+both overlays (including zero-map annotations), a static probability chart,
+table, signal explanations, model identities and the original prediction record.
+No export files are written on the host, no source filenames/EXIF metadata are
+embedded, and no external scripts/image/font requests are required. The UI
+explicitly warns that the downloaded copy contains images and reset cannot revoke
+it. Changing inputs clears old results; changing target disables complete export
+until matching maps exist. The deployed model and scientific calculations remain
+unchanged. Browser print behaviour and actual hosted rendering remain unverified.
+
+The owner's follow-up adds a grouped raw/calibrated probability chart beneath
+each prediction, with fixed [0,1] scale, original class order and 0.5 threshold.
+Research results adds a selectable binary confusion matrix for each label from
+the existing hash-verified 350-patient, patient-equal evaluation aggregates.
+TP/FP/TN are derived from saved positive/negative/FN/predicted-positive counts;
+no new cohort inference, labels or metrics are generated. Matrices are explicitly
+historical evaluation evidence, never a confusion matrix of unlabeled uploads.
+The model, thresholds and exported result values are unchanged.
+
+Continued from merged PR #44/main `1021cdd` on
+`phase/27-two-page-dashboard`. The owner requested only **Paired-eye prediction**
+and **Research results**. Removed the other five workspace choices and their
+dispatch branches from the application. No alternate/administrator routes were
+added. Supporting modules, public documentation and historical evidence remain
+in source for offline verification; their tests now render those modules in
+isolation instead of navigating the production dashboard.
+
+The two retained pages preserve upload validation, original frozen inference,
+eight labels, confidence/uncertainty/quality, paired Grad-CAM, JSON/report export,
+session reset and recorded research results. Navigation simplification does not
+resolve the previously documented hosting dependency/XSRF limitations or establish
+clinical validity. Private bundle startup checks remain intact.
+
+Validation: 408 isolated CPU tests ran: 399 passed, nine optional photographic
+skips, zero failures/errors, with network and private research/model storage
+blocked. Chart tests check confusion orientation, count conservation, rejection
+of fractional/impossible patient counts, fixed probability scale and class order.
+The existing application test now requires exactly the two requested
+navigation options and still verifies results rendering/reset; synthetic paired
+inference/explanation workflow coverage remains passing. Scientific source,
+configurations, dependency locks and research artifacts are unchanged. No model
+transfer, new fitting, training, GPU job or budget change.
+
+---
+
 # Presentation scope and readiness guidance
 
 Continued from merged PR #43/main `dbe5abd` on

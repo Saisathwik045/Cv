@@ -66,8 +66,7 @@ class InspectorPage(unittest.TestCase):
         # The real preprocessing imports the service decoder. Patch only its constructor.
         with patch('trustretina.inference.service.InferenceService',side_effect=AssertionError('No model constructor')) as ctor, \
              patch('torch.load',side_effect=AssertionError('No checkpoint loading')):
-            app=AppTest.from_file(str(ROOT/'streamlit_app.py')).run(timeout=30)
-            app.sidebar.radio[0].set_value('Preprocessing inspector').run(timeout=30)
+            app = AppTest.from_string('from dashboard.inspector import render_inspector_page\nrender_inspector_page()\n').run(timeout=30)
             self.assertFalse(app.exception)
             self.assertTrue(any('SYNTHETIC NON-PATIENT' in w.value for w in app.warning))
             self.assertEqual(app.dataframe[0].value.iloc[1]['Width'],224)

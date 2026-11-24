@@ -1,17 +1,28 @@
 # TrustRetina
 
-[Presentation verification](docs/PRESENTATION_VERIFICATION.md): use the existing
-dashboard; Codespaces is optional. Operational predictions and strict deployment
-readiness are separate checks, and Community Cloud cannot satisfy the current
-XSRF requirement because of a platform override.
+The dashboard has two pages:
 
-[Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md):
-separate gated entry point and bounded original-model recovery. A real hosted URL
-is available only after owner account/repository setup and successful deployment.
+- **Paired-eye prediction** — upload both eyes, view eight-label probabilities,
+  compare raw/calibrated probability bars against the 0.5 threshold, view
+  confidence, paired Grad-CAM and download the result JSON. The head-only variance
+  and technical quality proxy are not displayed in the prediction view; the
+  complete research JSON retains the unchanged backend record.
+  Full research-label names and signal explanations aid interpretation. After
+  generating both current-target Grad-CAM maps, download a self-contained HTML
+  demonstration report with input previews, probability chart/table, signals,
+  overlays and model/runtime record. Open it locally and print to PDF. This
+  explicit download contains your images; keep it private.
+- **Research results** — recorded model comparisons, held-out evaluation,
+  per-label confusion matrices, reliability figures, limitations and the
+  downloadable research report. Matrices describe the recorded evaluation,
+  not unlabeled uploads.
+  A methodology/data-partition summary and per-class precision/recall/F1/support
+  table explain what was evaluated and how the model was selected.
 
-Open **Preprocessing inspector** to compare generated source images with the
-actual frozen 224 px letterbox canvas, padding and normalized tensor statistics.
-[Inspector guide](docs/PREPROCESSING_INSPECTOR.md); no model or private data needed.
+[Presentation verification](docs/PRESENTATION_VERIFICATION.md) ·
+[Private Streamlit Community Cloud setup](docs/STREAMLIT_COMMUNITY_CLOUD.md).
+Codespaces is optional. Simplifying navigation does not resolve the documented
+Community Cloud dependency/XSRF readiness limitations or establish clinical validity.
 
 [Final technical/submission audit](docs/DEMO_ROBUSTNESS_AUDIT.md) ·
 [Clean reproduction](docs/CLEAN_REPRODUCTION.md) ·
@@ -22,21 +33,13 @@ actual frozen 224 px letterbox canvas, padding and normalized tensor statistics.
 generated non-patient inputs, observed timing/memory and reproduction boundaries.
 The development architecture is implemented; independent clinical validation is incomplete.
 
-[Examiner guide and proposed assessment rubric](docs/EXAMINER_GUIDE.md): evidence-led
-walkthrough, failure rehearsal and submission sign-off. The **Examiner rehearsal**
-dashboard workspace offers public-only reasoning practice; it awards no grade.
-
-For a cloud-only academic walkthrough, use **Guided synthetic demo** and
-**Cloud readiness** in the dashboard. [Cloud demonstration guide](docs/CLOUD_DEMONSTRATION.md)
-explains the generated non-patient inputs, original CPU model, integrity checks,
-synthetic JSON export and the separate unverified viewing/uptime limits.
-No Mac installation, new fitting or public deployment is required.
-
+[Examiner guide and proposed assessment rubric](docs/EXAMINER_GUIDE.md) ·
 [Research evidence and viva defence](docs/ACADEMIC_RESEARCH_DEFENCE.md) ·
 [All-eight-class development comparison](docs/ALL_EIGHT_CLASS_COMPARISON.md).
-The dashboard's **Research study & viva** workspace presents hash-verified public
-V15 aggregates, reviewed reliability diagrams, negative findings and examiner
-questions. It runs no fitting/inference and does not replace the original live demo.
+These are supporting documents. The former study/viva, guided synthetic demo,
+cloud readiness, examiner rehearsal and preprocessing inspector pages are no
+longer part of the dashboard. Their supporting modules and historical evidence
+remain in source for offline verification; there are no alternate dashboard routes.
 
 [Final academic report](docs/FINAL_RESEARCH_REPORT.md) ·
 [Phase audit](docs/PHASE_COMPLETION_AUDIT.md) ·

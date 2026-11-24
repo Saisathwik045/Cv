@@ -137,8 +137,9 @@ class CloudDemoPages(unittest.TestCase):
 
     def app(self, page):
         from streamlit.testing.v1 import AppTest
-        app = AppTest.from_file(str(ROOT / 'streamlit_app.py')).run(timeout=30)
-        app.sidebar.radio[0].set_value(page).run(timeout=30)
+        module, render = {'Guided synthetic demo': ('guided', 'render_guided_page'),
+                          'Cloud readiness': ('readiness', 'render_readiness_page')}[page]
+        app = AppTest.from_string(f'from dashboard.{module} import {render}\n{render}()\n').run(timeout=30)
         self.assertEqual(len(app.exception), 0)
         return app
 
